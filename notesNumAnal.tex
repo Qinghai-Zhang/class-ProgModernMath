@@ -1,0 +1,297 @@
+\documentclass[letterpaper,oneside]{book}
+%\documentclass[letterpaper,twoside]{book}
+% the two-column setup looks better for letter paper with a larger width.
+\usepackage{geometry}
+\geometry{margin=1.5cm, vmargin={0pt,1cm}}
+\setlength{\topmargin}{-1cm}
+\setlength{\paperheight}{29.7cm}
+\setlength{\textheight}{25.1cm}
+
+% auto adjust the marginals
+\usepackage{marginfix}
+
+\usepackage[algo2e,lined,boxed,linesnumbered]{algorithm2e}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{CJKutf8}
+\usepackage{enumerate}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{layout}
+\usepackage{lineno}
+\usepackage{makeidx}
+\usepackage{mathrsfs}
+\usepackage[version=4]{mhchem}
+\usepackage{lipsum}
+\usepackage{multicol,caption}
+\usepackage{natbib}
+\usepackage{subfigure}
+\usepackage{tcolorbox} % this package is needed for \voidenvironment below
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata,backgrounds,cd}
+\usetikzlibrary{shapes,snakes}
+
+\newcommand{\Rx}[1]{\mathrm{R}[#1]}
+\newcommand{\Lx}[1]{\mathrm{L}[#1]}
+\newcommand{\Ux}[1]{\mathrm{U}[#1]}
+\newcommand{\Dx}[1]{\mathrm{D}[#1]}
+\newcommand{\Cx}[1]{\mathrm{C}[#1]}
+\newcommand{\Sx}[1]{\mathrm{S}[#1]}
+
+\newcommand{\ccg}[1]{\overline{#1}}
+\newcommand{\dif}{\mathrm{d}}
+\newcommand{\Dim}{\mathrm{D}}
+\newcommand{\avg}[1]{\left\langle #1 \right\rangle}
+\newcommand{\innerProd}[1]{\left\langle #1 \right\rangle}
+\newcommand{\cond}{\mathrm{cond}}
+\newcommand{\Cond}[2]{\mathrm{cond}_{#1}\left(#2\right)}
+\newcommand{\difFrac}[2]{\frac{\dif #1}{\dif #2}}
+\newcommand{\gen}[1]{\left\langle #1 \right\rangle}
+\newcommand{\ii}{\mathbf{i}}
+\newcommand{\Imz}{\mathrm{Im}\,}
+\newcommand{\Int}{\mathrm{Int}}
+\newcommand{\Ext}{\mathrm{Ext}}
+\newcommand{\Cl}{\mathrm{Cl}}
+\newcommand{\Fr}{\mathrm{Fr}}
+\newcommand{\Ker}{\mathrm{ker}}
+\newcommand{\pdfFrac}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\Rez}{\mathrm{Re}\,}
+\newcommand{\sgn}{\mathrm{sgn}}
+\newcommand{\Span}{\mathrm{span}}
+\newcommand{\OFL}{\mathrm{OFL}}
+\newcommand{\UFL}{\mathrm{UFL}}
+\newcommand{\fl}{\mathrm{fl}}
+%\newcommand{\op}{\mathrm{op}}
+\newcommand{\op}{\odot}
+\newcommand{\Eabs}{E_{\mathrm{abs}}}
+\newcommand{\Erel}{E_{\mathrm{rel}}}
+\newcommand{\dom}{\mathrm{dom}}
+\newcommand{\Null}{\mathrm{null}}
+\newcommand{\Range}{\mathrm{range}}
+\newcommand{\Supp}{\mathrm{supp}}
+\newcommand{\Arity}{\mathrm{arity}}
+
+\newenvironment{Figure}
+{\par\medskip\noindent\minipage{\linewidth}}
+{\endminipage\par\medskip}
+
+% this environment is for solutions of examples and exercises
+\newenvironment{solution}%
+{\noindent\textbf{Solution.}}%
+{\qedhere}
+% the following command is for disabling environments
+%  so that their contents do not show up in the pdf.
+\makeatletter
+\newcommand{\voidenvironment}[1]{%
+  \expandafter\providecommand\csname env@#1@save@env\endcsname{}%
+  \expandafter\providecommand\csname env@#1@process\endcsname{}%
+  \@ifundefined{#1}{}{\RenewEnviron{#1}{}}%
+}
+\makeatother
+
+
+
+%----------------------------------------
+% theorem and theorem-like environments %
+%----------------------------------------
+\numberwithin{equation}{chapter}
+\theoremstyle{definition}
+
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{alg}[thm]{Algorithm}
+\newtheorem{asm}[thm]{Assumption}
+\newtheorem{axm}[thm]{Axiom}
+\newtheorem{coro}[thm]{Corollary}
+\newtheorem{defn}[thm]{Definition}
+%\newtheorem{exm}{Example}[chapter]
+%\newtheorem{exc}[exm]{Exercise}
+% number examples and exercises with thms.
+\newtheorem{exm}[thm]{Example}
+\newtheorem{exc}[thm]{Exercise}
+\newtheorem{frm}[thm]{Formula}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{ntn}{Notation}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{rem}{Remark}[chapter]
+\newtheorem{rul}[thm]{Rule}
+
+
+%%%%%%%%%%%%%% for INSE %%%%%%%%%%%%%
+\usepackage{bm}
+\usepackage[sans]{dsfont}
+\usepackage{url}
+\newcommand{\ibold}{{\mathbf{i}}}
+\newcommand{\jbold}{{\mathbf{j}}}
+\newcommand{\kbold}{{\mathbf{k}}}
+\newcommand{\ebold}{{\mathbf{e}}}
+\newcommand{\ubold}{{\mathbf{u}}}
+\newcommand{\xbold}{{\mathbf{x}}}
+\newcommand{\pbold}{{\mathbf{p}}}
+\newcommand{\etabold}{\bm{\eta}}
+\newcommand{\unitV}{\mathds{1}}
+\newcommand{\zerobold}{{\mathbf{0}}}
+\newcommand{\dt}{{\Delta t}}
+\newcommand{\avgI}[1]{\langle #1 \rangle_{\ibold}}
+\newcommand{\iphed}{{\ibold+\frac{1}{2}\ebold^d}}
+\newcommand{\imhed}{{\ibold-\frac{1}{2}\ebold^d}} %new
+% i plus fractional e^d
+\newcommand{\ipfed}[1]{\ibold+\frac{#1}{2}\ebold^d}
+% i minus fractional e^d
+\newcommand{\imfed}[1]{\ibold-\frac{#1}{2}\ebold^d}
+\newcommand{\ipmfed}[1]{\ibold\pm\frac{#1}{2}\ebold^d}
+\newcommand{\half}{\frac{1}{2}}
+\newcommand{\Lapl}{{\mathbf{L}}}
+\newcommand{\Div}{{\mathbf{D}}}
+\newcommand{\Grad}{{\mathbf{G}}}
+\newcommand{\Iden}{{\mathbf{I}}}
+\newcommand{\nref}{n_{\text{ref}}}
+\newcommand{\phio}{\phi^{\circ}}
+\newcommand{\eq}[1]{(\ref{#1})}
+\newcommand{\Proj}{{\mathbf{P}}}
+\newcommand{\cProj}{{\mathcal{P}}}
+\newcommand{\cProjLH}{{\mathscr{P}}}
+\newcommand{\ProjAux}{{\mathbf{Q}}}
+\newcommand{\exOp}{{\mathbf{X}}^{[\text{E}]}}
+\newcommand{\imOp}{{\mathbf{X}}^{[\text{I}]}}
+\newcommand{\nStages}{n_{\tiny \textsf{s}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\fYear}{2024}
+
+
+%\makeindex
+  
+\begin{document}
+\pagenumbering{roman}
+
+%\thispagestyle{empty}
+\begin{small}
+\tableofcontents
+\end{small}
+
+% --------------------------------------------------------
+% uncomment the following to remove these environments 
+%  to generate handouts for students.
+% --------------------------------------------------------
+\begingroup
+%\voidenvironment{rem}%
+%\voidenvironment{proof}%
+%\voidenvironment{solution}%
+% \input{sec/methodsOfStudy}
+
+%\setcounter{chapter}{-1}
+\pagenumbering{arabic}
+
+\setcounter{page}{1}
+
+%\clearpage
+
+% This page has been intentionally left blank.
+
+% \clearpage
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{Qinghai Zhang}
+\chead{Numerical Analysis}
+\rhead{\fYear}
+
+% \input{sec/part-I}
+
+% \pagestyle{fancy}
+% \fancyhead{}
+% \lhead{Qinghai Zhang}
+% \chead{Numerical Solutions of Differential Equations}
+% \rhead{\fYear}
+
+% \input{sec/part-II}
+
+% \input{sec/part-III}
+
+\appendix
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{Qinghai Zhang}
+\chead{Sets, Logic, and Functions}
+\rhead{\fYear}
+
+\chapter{Sets, Logic, and Functions}
+\label{cha:sets-logic-functions}
+
+\begin{multicols}{2}
+\setlength{\columnseprule}{0.2pt}  
+
+\input{sec/A-SetsAndLogic}
+
+\end{multicols}
+
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{Qinghai Zhang}
+\chead{Linear Algebra}
+\rhead{\fYear}
+
+\chapter{Linear Algebra}
+\label{cha:linear-algebra}
+
+\begin{multicols}{2}
+\setlength{\columnseprule}{0.2pt}  
+
+\input{sec/B-LinearAlgebra}
+
+\end{multicols}
+
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{Qinghai Zhang}
+\chead{Basic Analysis}
+\rhead{\fYear}
+
+\chapter{Basic Real Analysis}
+\label{cha:basic-analysis}
+
+\begin{multicols}{2}
+\setlength{\columnseprule}{0.2pt}  
+
+\input{sec/C-BasicAnalysis}
+
+\end{multicols}
+
+\pagestyle{fancy}
+\fancyhead{}
+\lhead{}
+\chead{Bibliography}
+\rhead{\fYear}
+
+\bibliography{bib/numericalAnalysis}
+%\bibliographystyle{abbrv}
+\bibliographystyle{abbrvnat}
+\setcitestyle{authoryear,open={[},close={]}}
+
+\printindex
+
+\end{document}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: t
+%%% End: 
+
+% LocalWords:  FPN underflows denormalized FPNs matlab eps IEEE iff
+% LocalWords:  cardinality significand quadratically bijection unary
+%  LocalWords:  contractive bijective postcondition invertible arity
+%  LocalWords:  subspaces surjective injective monomials additivity
+%  LocalWords:  nullary Abelian abelian finitary eigenvectors adjoint
+%  LocalWords:  eigenvector nullspace Hermitian unitarily multiset
+%  LocalWords:  nonsingular nonconstant homomorphism homomorphisms
+%  LocalWords:  isomorphically indeterminates subfield isomorphism
+%  LocalWords:  nondefective diagonalizable contrapositive cofactor
+%  LocalWords:  submatrix nilpotent positivity orthonormal extremum
+%  LocalWords:  Jacobian nonsquare semidefinite nonnegative RHS LLS
+%  LocalWords:  roundoff

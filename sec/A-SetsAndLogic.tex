@@ -1,0 +1,779 @@
+% \textbf{Nomenclature}
+
+% \begin{itemize}
+% \item $\mathbb{R}, \mathbb{N}$: the sets of real and natural numbers.
+% \item calligraphic uppercase letters ${\cal S}, {\cal U}, {\cal P}$: sets,
+% \item sans serif uppercase letters $\mathsf{U}$, $\mathsf{E}$:
+%   statements,
+% \item uppercase letters $A, B, P$: points,
+% \item lowercase boldfaced letters $\mathbf{a}, \mathbf{v}$: vectors,
+% \item lowercase letters $x,y,c,d$: scalars, or set elements,
+% \item lowercase letters $m, n$: natural numbers
+% \end{itemize}
+
+
+%We start from the first three items of Section \ref{sec:sets}.
+
+% \begin{rem}
+%   Math is the science of patterns.
+%   These patterns are useful in science and engineering.
+%   In addition, sometimes these patterns are also useful
+%   for the very process of math learning.
+%   This chapter concerns the footprint of subsequent chapters
+%   in sets and logic, in basic analysis,
+%   in linear algebra and in abstract algebra.
+%   We also emphasize some key ideas behind
+%   a number of common notions.
+% \end{rem}
+
+
+\section{First-order logic}
+\label{sec:logic}
+
+\begin{rem}
+The main ingredients of snacks are sugar and fat.
+The main ingredients of math are logic and set theory.
+\end{rem}
+
+\begin{defn}
+  \label{def:setNotation}
+  A \emph{set} ${\cal S}$
+  is a collection of \emph{distinct} objects
+   that share a common quality; 
+   it is often denoted with the following notation
+   \begin{equation}
+     \label{eq:setNotation}
+     {\cal S} = \{ x\ |\ \text{ the conditions that $x$ satisfies. } \}.
+   \end{equation}
+\end{defn}
+
+\begin{ntn}
+$\mathbb{R}, \mathbb{Z}, \mathbb{N}, \mathbb{Q}, \mathbb{C}$
+ denote 
+ the sets of real numbers, integers, natural numbers,
+ rational numbers and complex numbers, respectively.
+$\mathbb{R}^+, \mathbb{Z}^+, \mathbb{N}^+, \mathbb{Q}^+$
+the sets of positive such numbers.
+In particular, $\mathbb{N}$ contains the number zero while
+ $\mathbb{N}^+$ does not.
+\end{ntn}
+
+\begin{defn}
+  \label{def:subsets}
+  ${\cal S}$ is a \emph{subset} of ${\cal U}$,
+  written ${\cal S}\subseteq {\cal U}$,
+  if and only if (iff) $x\in {\cal S}$ $\Rightarrow$ $x\in {\cal U}$.
+  ${\cal S}$ is a \emph{proper subset} of ${\cal U}$,
+  written ${\cal S}\subset {\cal U}$,
+  if ${\cal S}\subseteq {\cal U}$
+  and $\exists x\in {\cal U}$ s.t. $x\not\in{\cal S}$.
+\end{defn}
+
+\begin{defn}[Statements of first-order logic]
+\label{def:uni_exist}
+A \emph{universal statement} is a logical statement 
+ of the form
+\begin{equation}
+  \mathsf{U} = (\forall x\in {\cal S},\ \mathsf{A}(x) ).
+\end{equation}
+An \emph{existential statement} has the form
+\begin{equation}
+  \mathsf{E} = (\exists x\in {\cal S},\text{ s.t. } \mathsf{A}(x)),
+\end{equation}
+ where 
+ $\forall$ (``for each'') and $\exists$ (``there exists'')
+ are the \emph{quantifiers}, ${\cal S}$ is a set,
+ ``s.t.'' means ``such that,''
+ and $\mathsf{A}(x)$ is the \emph{formula}.\\
+A statement of \emph{implication/conditional}
+ has the form
+ \begin{equation}
+   \mathsf{A}\Rightarrow \mathsf{B}.
+ \end{equation}
+\end{defn}
+
+ \begin{exm}
+   Universal and existential statements:\\
+   $\forall x\in[2,+\infty)$, $x>1$;\\
+   $\forall x\in \mathbb{R}^+$, $x>1$;\\
+   $\exists p,q\in \mathbb{Z}, \text{ s.t. } p/q = \sqrt{2}$;\\
+   $\exists p,q\in \mathbb{Z}, \text{ s.t. } \sqrt{p} = \sqrt{q}+1$.
+ \end{exm}
+
+\begin{defn}
+  \emph{Uniqueness quantification}
+   or \emph{unique existential quantification},
+   written $\exists!$ or $\exists_{=1}$, 
+   indicates that exactly one object with a certain property exists.
+\end{defn}
+
+\begin{exc}
+  Express the logical statement $\exists! x, \text{ s.t. } \mathsf{A}(x)$
+   with $\exists$, $\forall$, and $\Leftrightarrow$.
+\end{exc}
+\begin{solution}
+  $\exists x \text{ s.t. }\forall y, \mathsf{A}(y) \Leftrightarrow x=y.$
+\end{solution}
+
+ \begin{rem}
+A logical statement is either true or false.
+There is no such thing that
+ a logical statement is sometimes true and sometimes false.
+To prove a universal statement,
+ conceptually we have to verify the statement
+ for all elements in the set.
+To deny a universal statement,
+ we only need to show a counterexample.
+To prove an existential statement,
+ we only need to show an instance.
+To deny an existential statement,
+ conceptually we have to show that the statement holds
+ for none of the elements.
+ \end{rem}
+
+ \begin{rem}
+   \label{rem:firstOrderLogicAndPropLogic}
+   Propositional logic is the study
+   of the propositional connectives
+   \emph{not}, \emph{or}, \emph{and},
+   \emph{if $\cdots$ then},
+   and \emph{if and only if},
+   respectively denoted by $\neg$,
+   $\vee$, $\wedge$, $\Rightarrow$,
+   and $\Leftrightarrow$.
+   Propositional logic is not sufficient
+   for all math courses,
+   so we need a more advanced branch
+   of logic, called
+   \emph{first-order logic},
+   which includes proposition logic,
+   but in addition uses the quantifiers
+   $\forall$ and $\exists$ in Definition \ref{def:uni_exist}.
+   See the book by \cite{hodel13:_introd_mathem_logic}
+   for more on mathematical logic.
+ \end{rem}
+ 
+ \begin{rem}
+   In Definition \ref{def:uni_exist},
+    the formula $\mathsf{A}(x)$ itself
+    might also be a logical statement.
+   Hence universal and existential statements
+    might be nested.
+   This observation leads to the next definition.
+ \end{rem}
+
+ \begin{defn}
+   A \emph{universal-existential statement} is a logical statement 
+   of the form
+   \begin{equation}
+     \mathsf{U}_E =
+     (\forall x\in {\cal S},\ \exists y\in {\cal T}
+     \text{ s.t. } \mathsf{A}(x,y)).
+   \end{equation}
+   An \emph{existential-universal statement} has the form
+   \begin{equation}
+     \mathsf{E}_U =
+     (\exists y\in {\cal T},\text{ s.t. } \forall x\in {\cal S},\ 
+     \mathsf{A}(x,y)).
+   \end{equation}
+ \end{defn}
+
+ \begin{exm}
+   True or false:\\
+   $\forall x\in[2,+\infty)$, $\exists y\in \mathbb{Z}^+$ s.t. $x^y<10^5$;\\
+   $\exists y\in \mathbb{R}$ s.t.
+   $\forall x\in[2,+\infty)$, $x>y$;\\
+   $\exists y\in \mathbb{R}$ s.t.
+   $\forall x\in[2,+\infty)$, $x<y$.
+ \end{exm}
+
+\begin{exm}
+  [Translating an English statement into a logical statement]
+  Goldbach's conjecture states
+   \emph{every even natural number greater than 2
+     is the sum of two primes}.
+  Let $\mathbb{P}\subset \mathbb{N}^+$
+   denote the set of prime numbers.
+  Then Goldbach's conjecture is
+  $\forall a\in 2\mathbb{N}^++2,
+   \exists p,q\in \mathbb{P}$, s.t. $a=p+q$.
+ \end{exm}
+ 
+ \begin{thm}
+   \label{thm:existUnivImpliesUnivExist}
+   The existential-universal statement
+    implies the corresponding universal-existential statement,
+    but not vice versa.
+ \end{thm}
+
+ \begin{exm}[Translating a logical statement to an English statement]
+   Let ${\cal S}$ be the set of all human beings.\\
+   $U_E=$($\forall p\in{\cal S}, \exists q\in{\cal S}$ s.t. $q$ is $p$'s mom.)
+   \\
+   $E_U$=( $\exists q\in{\cal S}$ s.t.
+   $\forall p\in{\cal S}, $ $q$ is $p$'s mom.)\\
+   $U_E$ is probably true, but $E_U$ is certainly false. \\
+   If $E_U$ were true, then $U_E$ would be true. Why?
+ \end{exm}
+
+\begin{axm}[First-order negation of logical statements]
+  The negations of the statements in Definition \ref{def:uni_exist}
+  are
+  \begin{align}
+  \neg \mathsf{U} &= (\exists x\in {\cal S},\text{ s.t. }
+  \neg \mathsf{A}(x)).
+  \\
+  \neg \mathsf{E} &= (\forall x\in {\cal S},\ 
+  \neg \mathsf{A}(x)).
+  \end{align}
+\end{axm}
+
+\begin{rul}
+  The negation of a more complicated logical statement
+   abides by the following rules:
+\begin{itemize}\itemsep0em
+\item switch the type of each quantifier until
+  you reach the last formula without quantifiers;
+\item negate the last formula.
+\end{itemize}
+In particular, the negation of an implication formula
+$P \Rightarrow Q$,
+ is $P \wedge \neg Q$.
+\end{rul}
+
+\begin{rem}
+  An $n$-ary \emph{truth function} is a function
+  $H: \{T, F\}^n \rightarrow \{T,F\}$
+  where $T$ and $F$ stand for ``true'' and ``false,'' respectively.
+  To each connective in Remark \ref{rem:firstOrderLogicAndPropLogic},
+  we assign a truth function as its characterization.
+  The truth functions for ``$\neg, \vee, \wedge, \Leftrightarrow$''
+  are straightforward while that for ``$\Rightarrow$''
+  needs some explanation.
+  \begin{center}
+    \begin{tabular}{cc|c}
+      $A$ & $B$ & $A \Rightarrow B$
+      \\ \hline
+      T & T & T
+      \\ \hline
+      T & F & F
+      \\ \hline
+      F & T & T
+      \\ \hline
+      F & F & T
+      \\ \hline
+    \end{tabular}
+  \end{center}
+  In the above truth table, 
+  values of $H_{\Rightarrow}$
+  for the first two cases follow directly from
+  the meaning of the connective \emph{if $\ldots$ then}; 
+  it is only these two cases that involve
+  the proof of $A \Rightarrow B$
+  under the condition of $A$ being true.
+  But what if $A$ is false?
+  We have four possibilities
+  for the last two cases
+  and the choices of the values of $H_{\Rightarrow}$
+  in the above truth table
+  are inevitable because any other choice
+  would coincide with that of $\wedge$, $\Rightarrow$,
+  or $B$.
+
+  It follows from the above discussions that
+  the negation of $P \Rightarrow Q$
+  is $P \wedge \neg Q$.
+\end{rem}
+
+\begin{rem}
+  We prefer to write logic statements in symbols
+  instead of words, 
+  as this facilitates mathematical reasoning
+  and helps memorization.
+  Also, one might need to group quantifiers of the same type.
+\end{rem}
+
+\begin{exm}
+  [The negation of Goldbach's conjecture]
+  $\exists a\in 2\mathbb{N}^++2$ s.t. $\forall p,q \in \mathbb{P}$, 
+   $a\ne p+q$.
+\end{exm}
+
+\begin{rem}
+ Goldbach's conjecture has been shown to hold up through $4\times10^{18}$,
+   but no proofs and disproofs have been found.
+\end{rem}
+
+\begin{exc}
+ Negate the logical statement in Definition \ref{def:RiemannIntegrable}.
+\end{exc}
+   % \begin{exc}
+   %   A weaker version of Goldbach's conjecture states
+   %   \emph{Goldbach's conjecture has
+   %     at most a finite number of of counterexamples}.
+   %   Formulate it into a logical statement
+   %    with explicit quatifiers.
+   % \end{exc}
+
+   % \begin{exc}
+   %   The only even prime is 2.\\
+   %   Multiplication of integers is associative. \\
+   %   Every positive integer has a unique prime factorization.
+   % \end{exc}
+
+\begin{axm}[Contraposition]
+  \label{axm:contrapositive}
+  A conditional statement is logically equivalent to its
+  contrapositive.
+  \begin{equation}
+    \label{eq:contraposition}
+    (\mathsf{A}\Rightarrow \mathsf{B}) \Leftrightarrow
+    (\neg \mathsf{B}\Rightarrow \neg \mathsf{A})
+  \end{equation}
+\end{axm}
+
+\begin{exm}
+  \label{exm:contrapositive}
+  ``If Jack is a man, then Jack is a human being.''
+  is equivalent to ``If Jack is not a human being,
+  then Jack is not a man.''
+\end{exm}
+
+\begin{exc}
+  Draw an Euler diagram of subsets to illustrate Example \ref{exm:contrapositive}.
+\end{exc}
+
+\begin{exc}
+  Rewrite each of the following
+  statements and its \emph{negation}
+  into \emph{logical statements}
+  using symbols, quantifiers, and formulas.
+  \begin{enumerate}[(a)]\itemsep0em
+  \item The only even prime is 2.
+  \item Multiplication of integers is associative.
+  \item Goldbach's conjecture has
+    at most a finite number of counterexamples.
+  \end{enumerate}  
+\end{exc}
+\begin{solution}
+\begin{enumerate}[(a)]
+\item Let $\mathbb{P}$ denote the set of all prime numbers.
+
+\[
+\mathcal{G}=(\mathbb{P}\cap 2\mathbb{Z}=\{2\});
+\]
+\[
+\neg\mathcal{G}=(\mathbb{P}\cap 2\mathbb{Z}\ne\{2\}).
+\]
+
+\item\[
+\mathcal{G}=(\forall x,y,z \in \mathbb{Z},\  x(yz)=(xy)z);
+\]
+\[
+\neg\mathcal{G}=(\exists x,y,z \in \mathbb{Z}\text{ s.t. } x(yz)\neq(xy)z).
+\]
+\item Let $\mathbb{E}= 2\mathbb{N^+}\setminus \{2\}$.
+
+Let $\mathbb{P}$ be the set of all prime numbers.
+\begin{align*}
+\mathcal{G} =\bigl(&\exists n\in\mathbb{N}^+\text{ s.t. }
+ \forall x\in\mathbb{E},\\  
+ &(x>n)\ \Rightarrow\ (\exists p,k\in\mathbb{P}\text{ s.t. } x= p+k)
+ \bigr);  \\
+\neg\mathcal{G} =\bigl(&\forall n\in\mathbb{N}^+,
+ \exists x\in\mathbb{E}\text{ s.t. } \\
+ &(x>n)\ \Rightarrow\ (\forall p,k\in\mathbb{P},\  x\ne p+k)
+ \bigr).
+\end{align*}
+\end{enumerate}
+\end{solution}
+
+\section{Ordered sets}
+\label{sec:sets}
+
+\begin{defn}
+  \label{def:CartesianProduct}
+  The \emph{Cartesian product} ${\cal X}\times {\cal Y}$
+   between two sets ${\cal X}$ and ${\cal Y}$
+   is the set of all possible ordered pairs with first element
+   from ${\cal X}$ and second element from ${\cal Y}$:
+   \begin{equation}
+     {\cal X}\times {\cal Y} = \{(x,y)\ |\ x\in {\cal X},\ y\in {\cal Y}\}.
+   \end{equation}
+\end{defn}
+
+\begin{axm}[Fundamental principle of counting]
+  \label{axm:multiplicationPrinciple}
+  Consider a task that consists of a sequence of $k$ independent steps.
+  Let $n_i$ denote the number of different choices for the $i$-th step,
+   the total number of distinct ways to complete the task
+   is 
+   \begin{equation}
+     \prod_{i=1}^{k} n_i = n_1n_2\cdots n_k.
+   \end{equation}
+ \end{axm}
+
+ \begin{exm}
+   \label{exm:dinnerCombos}
+   Let $A, E, D$ be the set of appetizers,
+    main entrees, desserts in a restaurant.
+   $A\times E\times D$
+    is the set of possible dinner combos.
+   If $\#A=10$, $\#E=5$, $\#D=6$,
+    $\#(A\times E\times D)=300$.
+ \end{exm}
+
+ \begin{rem}
+   After being seated at a restaurant table,
+   you will feel weird if the waiter
+   show you a menu consisting of all the combos
+   explicitly spelled out.
+   % Some people would even regard it as an insult of their
+   % intelligence.
+   This illustrates that we should employ Cartesian product
+    in a functional way to increase the utility
+    of the math knowledge we learned in a hard way.
+ \end{rem}
+ 
+\begin{defn}[Maximum and minimum]
+  Consider ${\cal S}\subseteq \mathbb{R}$,
+   ${\cal S}\ne \emptyset$.
+  If $\exists s_m\in{\cal S}$
+   s.t. $\forall x\in {\cal S}$, $x\le s_m$,
+   then $s_m$ is the \emph{maximum} of ${\cal S}$
+   and denoted by $\max {\cal S}$.
+  If $\exists s_m\in{\cal S}$
+   s.t. $\forall x\in {\cal S}$, $x\ge s_m$,
+   then $s_m$ is the \emph{minimum} of ${\cal S}$
+   and denoted by $\min {\cal S}$.
+\end{defn}
+
+\begin{defn}[Upper and lower bounds]
+  Consider ${\cal S}\subseteq \mathbb{R}$,
+   ${\cal S}\ne \emptyset$.
+  $a$ is an \emph{upper bound} of ${\cal S}\subseteq \mathbb{R}$
+  if $\forall x\in {\cal S}$, $x\le a$;
+   then the set ${\cal S}$ is said to be \emph{bounded above}.
+  $a$ is a \emph{lower bound} of ${\cal S}$
+   if $\forall x\in {\cal S}$, $x\ge a$;
+   then the set ${\cal S}$ is said to be \emph{bounded below}.
+  ${\cal S}$ is \emph{bounded}
+   if it is bounded above and bounded below.
+\end{defn}
+
+\begin{rem}
+One difference between a maximum and an upper bound
+ is that the former belongs to the set
+ while the latter might not.
+Another difference is that,
+ for a bounded interval,
+ the upper bound always exists
+ while the maximum might not exist.
+\end{rem}
+
+\begin{defn}[Supremum and infimum]
+  Consider a nonempty set \mbox{${\cal S}\subseteq \mathbb{R}$}.
+  If ${\cal S}$ is bounded above and ${\cal S}$
+   has a least upper bound 
+   then we call it the \emph{supremum}
+   of ${\cal S}$
+   and denote it by $\sup {\cal S}$.
+  If ${\cal S}$ is bounded below and ${\cal S}$
+   has a greatest lower bound,
+   then we call it the \emph{infimum}
+   of ${\cal S}$
+   and denote it by $\inf {\cal S}$.
+\end{defn}
+
+\begin{exm}
+  If a set ${\cal S}\subset \mathbb{R}$ has a maximum,
+   we have \mbox{$\max{\cal S}=\sup {\cal S}$}.
+\end{exm}
+
+\begin{exm}
+  $\sup[a,b]=\sup[a,b)=\sup(a,b]=\sup(a,b)$.
+\end{exm}
+
+\begin{thm}[Existence and uniqueness of least upper bound]%[Completeness of $\mathbb{R}$]
+  \label{thm:completenessOfR}
+  Every nonempty subset of $\mathbb{R}$ %${\cal S}\subseteq \mathbb{R}$
+   that is bounded above has exactly one least upper bound.
+\end{thm}
+
+\begin{rem}
+  Theorem \ref{thm:completenessOfR} states that, 
+  for any nonempty ${\cal S}\subseteq \mathbb{R}$ bounded above,
+  $\sup {\cal S}$ exists and is a real number.
+\end{rem}
+
+\begin{coro}
+  Every nonempty subset of $\mathbb{R}$ %${\cal S}\subseteq \mathbb{R}$
+  that is bounded below has a greatest lower bound.
+\end{coro}
+
+\begin{defn}
+  A \emph{binary relation between two sets} ${\cal X}$ and ${\cal Y}$
+  is an ordered triple
+  (${\cal X}, {\cal Y}, {\cal G}$)
+  where ${\cal G}\subseteq{\cal X}\times{\cal Y}$.\\
+  % or equivalently, a map
+  % $R: {\cal X}\times{\cal Y}\rightarrow {\cal G}$.\\
+  A \emph{binary relation on} ${\cal X}$
+  is the relation between ${\cal X}$ and ${\cal X}$.\\
+  The statement $(x,y)\in R$ is read
+  ``$x$ is $R$-related to $y$,'' and
+  denoted by $xRy$ or $R(x,y)$.
+\end{defn}
+
+\begin{defn}
+  An \emph{equivalence relation} ``$\sim$'' on ${\cal A}$ is 
+  a binary relation on ${\cal A}$ 
+  that satisfies
+  $\forall a,b,c\in{\cal A}$,
+  \begin{itemize}
+    \itemsep0em
+  \item $a\sim a$ (reflexivity);
+  \item $a\sim b$ implies $b\sim a$ (symmetry);
+  \item $a\sim b$ and $b\sim c$ imply $a\sim c$ (transitivity).
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  \label{defn:totalOrder}
+  A binary relation ``$\le$'' on some set ${\cal S}$
+  is a \emph{total order} or \emph{linear order} on ${\cal S}$
+  iff,
+  $\forall a,b,c\in{\cal S}$,
+  \begin{itemize}
+  \item $a\le b$ and $b\le a$ imply $a=b$ (antisymmetry);
+  \item $a\le b$ and $b\le c$ imply $a\le c$ (transitivity);
+  \item $a\le b$ or $b\le a$ (totality).
+  \end{itemize}
+  A set equipped with a total order
+  is a \emph{chain} or \emph{totally ordered set}.
+\end{defn}
+
+\begin{exm}
+  The real numbers with less or equal.
+\end{exm}
+
+\begin{exm}
+  The English letters of the alphabet with dictionary order.
+\end{exm}
+
+\begin{exm}
+  The Cartesian product of a set of totally ordered sets
+  with the \emph{lexicographical order}.
+\end{exm}
+
+\begin{exm}
+  Sort your book in lexicographical order
+  and save a lot of time.
+  $\log_{26}N \ll N$!
+\end{exm}
+
+\begin{defn}
+  \label{def:partialOrderAndPoset}
+  A binary relation ``$\le$'' on some set ${\cal S}$
+  is a \emph{partial order} on ${\cal S}$
+  iff, $\forall a,b,c\in{\cal S}$,
+  antisymmetry, transitivity, and reflexivity ($a\le a$)
+  hold.\\
+  A set equipped with a partial order
+  is called a \emph{poset}.
+\end{defn}
+
+\begin{exm}
+  The set of subsets of a set ${\cal S}$
+  ordered by inclusion ``$\subseteq$.''
+\end{exm}
+
+\begin{exm}
+  The natural numbers equipped with the relation of divisibility.
+\end{exm}
+
+\begin{exm}
+  \label{exm:stuffToPutOn}
+  The set of stuff you will put on your body every morning
+  with the time ordered:
+  undershorts, pants, belt, shirt, tie, jacket,
+  socks, shoes, watch.
+\end{exm}
+
+\begin{rem}
+  To learn something new essentially means
+  to associate the new concept to certain firmly established concepts.
+  These established fixture can be our daily experience.
+  As a joke about Example \ref{exm:stuffToPutOn},
+  common people put on undershorts first and then pants,
+  but superman put on pants first and then undershorts.
+\end{rem}
+
+\begin{exm}
+   \label{exm:inheritance}
+  Inheritance (``is-a'' relation) is a partial order.
+  $A \rightarrow B$ reads ``$B$ is a special type of $A$''.
+\end{exm}
+
+\begin{exm}
+   \label{exm:composition}
+  Composition (``has-a'' relation) is also a partial order.
+  $A \leadsto B$ reads
+  ``B \emph{has an} instance/object of A.''
+\end{exm}
+
+\begin{exm}
+  Implication ``$\Rightarrow$''
+  is a partial order on the set of logical statements.
+\end{exm}
+
+\begin{exm}
+  The set of definitions, axioms,
+  propositions, theorems, lemmas, etc., 
+  is a poset with inheritance, composition, and implication.
+  It is helpful to relate them with these partial orderings.
+\end{exm}
+
+\begin{defn}
+  \label{def:UpperBoundAndMaximalElementOfPoset}
+  An \emph{upper bound} of a subset $W$ of a poset $M$
+  is an element $u\in M$ such that
+  $x\le u$ for each $x\in W$.
+  A \emph{maximal element} of a poset $M$
+  is an $m\in M$ such that
+  \begin{equation}
+    \label{eq:maximalElementOfPoset}
+    \forall x\in M,\ x\ge m \ \Rightarrow\ x=m.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  Depending on $M$ and $W$,
+  an upper bound of $W$ may or may not exist.
+  Also,
+  a poset may or may not have maximal elements.
+\end{rem}
+
+\begin{axm}[Zorn's lemma]
+  \label{axm:ZornLemm}
+  For a nonempty poset $M$,
+  if every chain in $M$ has an upper bound,
+  then $M$ has at least one maximal element.
+\end{axm}
+
+\begin{rem}
+  One common saying in computer science is 
+  ``If syntax sugar does not count, there is nothing left.''
+  This is also true for mathematics. 
+  All high-level mathematical concepts
+  can be considered as syntax sugars
+  of logic and set theory.
+\end{rem}
+
+\begin{lem}[The Union Lemma]
+  \label{lem:UnionLemma}
+  Let $X$ be a set and $\mathcal{C}$ be a collection of subsets of $X$.
+  Assume that for each $x\in X$,
+  there is a set $A_x$ in $\mathcal{C}$
+  such that $x\in A_x$. Then $\cup_{x\in X}A_x=X$. 
+\end{lem}
+
+
+\section{Functions}
+\label{sec:functions}
+
+\begin{defn}
+  A \emph{function}/\emph{map}/\emph{mapping} $f$
+  from ${\cal X}$ to ${\cal Y}$,
+  written $f: {\cal X}\rightarrow {\cal Y}$ or ${\cal X}\mapsto {\cal Y}$,
+  is a subset of the Cartesian product ${\cal X} \times {\cal Y}$
+  satisfying that
+  $\forall x\in {\cal X}$,
+  there is exactly one $y\in {\cal Y}$
+  s.t. $(x,y)\in {\cal X}\times {\cal Y}$.
+  ${\cal X}$ and ${\cal Y}$ are
+  the \emph{domain} and \emph{codomain} of $f$,
+  respectively.
+\end{defn}
+
+\begin{rem}
+The important thing in the above definition
+ is the uniqueness of the pair $(x,y)$.
+Why?
+\end{rem}
+
+\begin{defn}
+  A \emph{binary function} or a \emph{binary operation} on a set ${\cal S}$
+  is a map \mbox{${\cal S}\times{\cal S} \rightarrow {\cal S}$}.
+\end{defn}
+
+\begin{defn}
+  A function $f:{\cal X}\rightarrow {\cal Y}$ is said to be
+  \emph{injective} or \emph{one-to-one} iff
+   \begin{equation}
+     \forall x_1\in {\cal X},\, \forall x_2\in {\cal X},\ \ 
+     x_1\ne x_2 \ \Rightarrow\ f(x_1)\ne f(x_2).
+   \end{equation}
+  It is \emph{surjective} or \emph{onto} iff
+   \begin{equation}
+     \forall y\in {\cal Y},\ \exists x\in {\cal X}, \text{ s.t. }
+     y=f(x).
+   \end{equation}
+  It is \emph{bijective} iff it is both injective and surjective.
+\end{defn}
+
+%draw some diagrams.
+
+\section{Countable and uncountable sets}
+\label{sec:count-unco-sets}
+
+\begin{defn}
+  \label{def:countability}
+  A set ${\cal S}$ is \emph{countably infinite}
+   iff there exists a bijective function
+   $f:{\cal S}\rightarrow \mathbb{N}^+$
+   that maps ${\cal S}$ to $\mathbb{N}^+$.
+  A set is \emph{countable}
+  if it is either finite or countably infinite;
+  it is \emph{uncountable}
+  if it is not countable.
+\end{defn}
+
+\begin{exc}
+  Are the integers countable?
+  Are the rationals countable?
+  Are the real numbers countable?
+\end{exc}
+
+\begin{defn}
+  \label{def:CantorSet}
+  The \emph{Cantor set} is a subset of $\mathbb{R}$
+  given by $C:=\cap_{n=1}^{+\infty} F_n$
+  where $F_1=[0,1]$
+  and each $F_{n+1}$ is obtained
+  by deleting from $F_n$ the open middle third
+  of each closed interval. % of $F_n$
+\end{defn}
+
+\begin{rem}
+  As a very intricate mathematical object, 
+  the Cantor set is uncountable.
+\end{rem}
+
+\begin{thm}
+  \label{thm:coutableSequenceUnion}
+  Let $(E_n)_{n\in\mathbb{N}}$ be a sequence of countable sets.
+  Then $S:=\cup_{n\in\mathbb{N}}E_n$ is countable.
+\end{thm}
+
+\begin{thm}
+  \label{thm:uncountableSequenceOf0and1}
+  Let $A$ be the set of all sequences whose elements
+  are either 0 or 1.
+  Then $A$ is uncountable. 
+\end{thm}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../numPDEs"
+%%% End:

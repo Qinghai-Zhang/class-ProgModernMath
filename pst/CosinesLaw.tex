@@ -1,0 +1,35 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{pstricks,pst-eps,pst-plot}
+
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+
+  \begin{pspicture}(-1.5,-1.2)(3.9,1.8)
+    \newrgbcolor{lightgray}{0.7 0.7 0.7}
+    \psset{linewidth=1pt,arrowsize=3pt}
+    
+    \pspolygon(-1,-1)(3.5,-1)(0,1.4)
+    
+
+    \psarc(0,1.4){0.45}{-112}{-33}
+    \psarc(-1,-1){0.45}{0}{67}
+    \psarc(3.5,-1){0.45}{144}{180}
+
+    \footnotesize
+    \uput[u](0,1.4){$A$}
+    \uput[l](-1,-1){$B$}
+    \uput[r](3.5,-1){$C$}
+    \uput[d](1.25,-0.9){$a$}
+    \uput[r](1.75,.25){$b$}
+    \uput[l](-0.45,.2){$c$}
+    \uput[d](0.2,1){$\alpha$}
+    \uput[r](-0.6,-0.7){$\beta$}
+    \uput[l](3.1,-0.8){$\gamma$}
+
+  \end{pspicture}
+
+\end{TeXtoEPS}
+\end{document}

@@ -1,0 +1,1947 @@
+% \begin{rem}
+%   In this section we review major results in basic analysis
+%   that are relevant to numerical analysis.
+% \end{rem}
+
+\section{Sequences}
+\label{sec:sequences}
+
+\begin{defn}
+  A \emph{sequence} is a function on $\mathbb{N}$.
+%   or $\mathbb{N}$.
+   % or a countable set
+   % $\{a_n\ |\ n\in \mathbb{N}^+\}$.
+\end{defn}
+
+\begin{rem}
+  Whether the sequence starts from 0 or some $m\in \mathbb{N}^+$
+   is a matter of convention and convenience
+   according to the context.
+\end{rem}
+
+\begin{defn}
+  The \emph{extended real number system}
+  is the real line $\mathbb{R}$ with two additional elements
+  $-\infty$ and $+\infty$: 
+  \begin{equation}
+    \label{eq:extendedReals}
+    \mathbb{R}^* := \mathbb{R} \cup \{-\infty, + \infty\}.
+  \end{equation}
+  An extended real number $x\in \mathbb{R}^*$
+  is \emph{finite} if $x\in \mathbb{R}$
+  and it is \emph{infinite} otherwise.
+\end{defn}
+
+\begin{defn}
+  The \emph{supremum of a sequence} $(a_n)_{n=m}^{\infty}$ is
+  \begin{equation}
+    \label{eq:supSequence}
+    \sup(a_n)_{n=m}^{\infty}
+    := \sup \{a_n: n\ge m\},
+  \end{equation}
+  and the \emph{infimum of a sequence} $(a_n)_{n=m}^{\infty}$ is 
+  \begin{equation}
+    \label{eq:infSequence}
+    \inf(a_n)_{n=m}^{\infty}
+    := \inf \{a_n: n\ge m\}.
+  \end{equation}
+\end{defn}
+
+
+\subsection{Convergence and limits}
+\label{sec:convergenceOfSequence}
+
+\begin{defn}[Limit of a sequence]
+  \label{def:limitOfSequence}
+  A sequence $(a_n)$ in $\mathbb{R}$
+  is said to \emph{converge} in $\mathbb{R}$ iff
+  \begin{equation}
+    \label{eq:limitOfSequence}
+    \exists L\in \mathbb{R} \text{ s.t. }  
+    \forall \epsilon>0,\ \exists N\in \mathbb{N}, \text{ s.t. }\ 
+    \forall n>N, \ |a_n-L| < \epsilon, 
+  \end{equation}
+  where $L$ is called the \emph{limit} of $(a_n)$, 
+  written $\lim_{n\rightarrow \infty} a_n = L$,
+  or 
+  \mbox{$a_n\rightarrow L \text{ as } n\rightarrow\infty$}.
+  We also say that $(a_n)$ \emph{converges} to $L$.
+\end{defn}
+
+\begin{exm}[A story of $\pi$]
+  A famous estimation of $\pi$ in ancient China
+  is given by Zu, ChongZhi 1500 years ago,
+  \begin{equation*}
+    \pi\approx \frac{355}{113}\approx 3.14159292.
+  \end{equation*}
+  In modern mathematics,
+   we approximate $\pi$ with a sequence
+   for increasing accuracy, e.g. 
+   \begin{equation}
+     \label{eq:pi}
+     \pi \approx 3.14159 26535 89793 \ldots
+   \end{equation}
+  As of March 2019, we human beings have more than 31 trillion digits
+  of $\pi$.
+  However, real world applications
+  never use even a small fraction of the 31 trillion digits:
+  \begin{itemize}\itemsep0em
+  \item If you want to build a fence over your backyard swimming pool,
+    several digits of $\pi$ is probably enough;
+  \item in NASA, calculations involving $\pi$
+    use 15 digits for Guidance Navigation and Control;
+  \item if you want to compute the circumference of the entire universe
+    to the accuracy of less than the diameter of a hydrogen atom,
+    you need only 39 decimal places of $\pi$.
+  \end{itemize}
+  
+ %  is good enough for estimating the length of the
+ % perimeter of your backyard foundation
+ % and many other common geometric calculations.
+
+ On one hand, computational mathematics
+ is judged by a metric that is different
+ from that of pure mathematics;
+ this may cause a huge gap
+ between what needs to be done and what has been done.
+%
+On the other hand,
+a computational mathematician cannot assume
+that a fixed accuracy is good enough
+for all applications.
+In the approximation a number or a function, 
+ she must develop theory and algorithms
+ to provide the user the choice of an ever-increasing amount of accuracy, 
+ so long as the user is willing
+ to invest an increasing amount of computational resources.
+This is one of the main motivations of infinite sequence and series.
+\end{exm}
+% We will derive the following example later this week.
+
+% \begin{equation*}
+%   \label{eq:pi1}
+%   \pi = 4(1-\frac{1}{3}+\frac{1}{5}-\frac{1}{7}+ \cdots)
+%       = 4\sum_{k=0}^{\infty}(-1)^k\frac{1}{2k+1}.
+% \end{equation*}
+
+\begin{lem}
+  \label{lem:seqLimitIsUnique}
+  A convergent sequence has a unique limit.
+\end{lem}
+
+\begin{defn}
+  \label{def:CauchySequence}
+  A sequence $\{a_n\}$ is \emph{Cauchy} if
+  \begin{equation}
+    \label{eq:CauchySequence}
+    \forall \epsilon>0, \exists N\in \mathbb{N}
+    \text{ s.t. } m,n>N\ \Rightarrow\ |a_n-a_m| < \epsilon.
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:convergentSeqIsCauchy}
+  Every convergent sequence in $\mathbb{R}$
+  is Cauchy.
+\end{lem}
+\begin{proof}
+  Since $(x_n)$ converges to some $L\in \mathbb{R}$,
+  for any given $\epsilon>0$,
+  there exists $N\in \mathbb{N}$ such that
+  for all $n>N$ we have $|x_n-L|<\frac{\epsilon}{2}$.
+  It follows that
+  \begin{align*}
+    \forall n,m>N,\  |x_n-x_m|
+    &\le |x_n-L+L-x_m|
+    \\
+    &\le |x_n-L| + |x_m-L| \le \epsilon.\qedhere
+  \end{align*}
+%  The proof is completed by Definition \ref{def:CauchySequence}. 
+\end{proof}
+
+\begin{lem}
+  \label{lem:CauchySubseqConvergence}
+  If a Cauchy sequence contains a convergent subsequence,
+  then the entire sequence converges to the same limit.
+\end{lem}
+\begin{proof}
+  Suppose $\{a_n\}$ is a Cauchy sequence
+  %in a normed space $V$
+  and $\{a_{n_j}\}$ is a subsequence converging to some $a\in \mathbb{R}$.
+  It follows that
+  \begin{displaymath}
+    \begin{array}{l}
+    \forall \epsilon>0, \exists n_0 \text{ s.t. }
+    \forall m,n\ge n_0,\quad |a_m-a_n|\le \frac{\epsilon}{2};
+    \\
+    \forall \epsilon>0, \exists j_0 \text{ s.t. }
+    \forall j\ge j_0,\quad |a_{n_j}-a|\le \frac{\epsilon}{2}.
+    \end{array}
+  \end{displaymath}
+  Set $N=\max\{n_0, n_{j_0}\}$ and we have
+  \begin{displaymath}
+    \forall \epsilon>0, \forall n\ge N, 
+    |a_{n}-a|\le |a_{n}-a_N|+ |a_{N}-a|
+    \le \epsilon,
+  \end{displaymath}
+  which completes the proof.
+\end{proof}
+
+\begin{lem}
+  \label{lem:CauchySeqIsBounded}
+  Every Cauchy sequence is bounded.
+\end{lem}
+
+\begin{lem}
+  \label{lem:monotoneSubsequence}
+  Every real sequence has a monotone subsequence.
+\end{lem}
+
+\begin{rem}
+  The idea to prove Lemma \ref{lem:monotoneSubsequence} is as follows.
+  Imagine that there is an infinite chain of hotels
+  along the real line,
+  where the $n$th hotel has height $x_n$.
+  There is a sea at $+\infty$.
+  A hotel is said to have the \emph{seaview property}
+  if it is higher than all hotels to the right of it.
+  There are only two possibilities:
+  infinitely many hotels have the seaview property
+  or finitely many hotels have the seaview property.
+  The former case corresponds to a monotonically decreasing sequence
+  while
+  the latter case corresponds to a monotonically increasing sequence.
+\end{rem}
+
+\begin{thm}
+  \label{thm:boundedMonotoneSeqIsConvergent}
+  A bounded monotone sequence is convergent.
+\end{thm}
+
+\begin{thm}[Bolzano-Weierstrass]
+  \label{thm:Bolzano-Weierstrass}
+  Every bounded sequence in $\mathbb{R}$
+  has a convergent subsequence.
+\end{thm}
+
+\begin{rem}
+  The Bolzano-Weierstrass theorem generalizes
+  to finite-dimensional Euclidean spaces.
+  Its generalization to infinite-dimensional metric spaces
+  leads to the concept of sequential compactness
+  in Section \ref{sec:sequentialCompactness}. 
+\end{rem}
+
+\begin{thm}%[Cauchy criterion]
+  \label{thm:realCauchySeqConverges}
+  Every Cauchy sequence in $\mathbb{R}$
+  converges to a limit in $\mathbb{R}$.
+\end{thm}
+\begin{proof}
+  By Lemma \ref{lem:CauchySeqIsBounded},
+  the Cauchy sequence $(a_n)$ is bounded.
+  Theorem \ref{thm:Bolzano-Weierstrass}
+  implies that $(a_n)_{n\in \mathbb{N}}$ has a convergent
+  subsequence $(a_{n_k})_{k\in \mathbb{N}}$.
+  Then Lemma \ref{lem:CauchySubseqConvergence}
+  completes the proof.
+\end{proof}
+
+\begin{thm}[Completeness of $\mathbb{R}$]
+  \label{thm:completenessOfRealNumbers}
+  A sequence of real numbers is Cauchy
+  if and only if it is convergent.
+\end{thm}
+\begin{proof}
+  This is a summary of
+  Lemma \ref{lem:convergentSeqIsCauchy}
+  and Theorem \ref{thm:realCauchySeqConverges}.
+\end{proof}
+
+\begin{thm}
+  \label{thm:interchangeOfLimits}
+  Consider $b_{ij}\ge 0$ in
+  $\mathbb{R}^*:=\mathbb{R}\cup\{+\infty, -\infty\}$.
+  If $b_{ij}$ is monotone increasing in $i$ for each $j$
+  and is monotone increasing in $j$ for each $i$,
+  then we have
+  \begin{equation}
+    \label{eq:interchangeOfLimits}
+    \lim_{i=0}^{\infty} \lim_{j=0}^{\infty} b_{ij}
+    = \lim_{j=0}^{\infty} \lim_{i=0}^{\infty} b_{ij}
+  \end{equation}
+  with all the indicated limits existing in $\mathbb{R}^*$.
+\end{thm}
+
+
+\begin{defn}
+  Let $\epsilon>0$ be a real number.
+  Two real numbers $x,y$ are said to be \emph{$\epsilon$-close}
+  iff $|x-y|\le \epsilon$.
+\end{defn}
+
+\begin{defn}
+  A real number $x$ is said to be \emph{$\epsilon$-adherent}
+  to a sequence $(a_n)_{n=m}^{\infty}$ of real numbers
+  iff there exists an $n\ge m$ such that
+  $a_n$ is $\epsilon$-close to $x$.
+  $x$ is \emph{continually $\epsilon$-adherent} to
+  $(a_n)_{n=m}^{\infty}$
+  iff it is $\epsilon$-adherent to $(a_n)_{n=N}^{\infty}$
+  for every $N\ge m$.
+\end{defn}
+
+\begin{defn}
+  \label{def:limitPointInR}
+  A real number $x$ is a \emph{limit point} or \emph{adherent point}
+  of a sequence $(a_n)_{n=m}^{\infty}$ of real numbers
+  if it is continually $\epsilon$-adherent to
+  $(a_n)_{n=m}^{\infty}$ for every $\epsilon\ge 0$.
+\end{defn}
+
+\begin{rem}
+  Two special types of limit points are the limit superior
+  and the limit inferior.
+\end{rem}
+
+\begin{defn}
+  The \emph{limit superior} of a sequence $(a_n)_{n=m}^{\infty}$ of
+  real numbers
+  is
+  \begin{equation}
+    \label{eq:limsup}
+    \lim \sup_{n\rightarrow \infty} a_n := \inf (a_N^+)_{N=m}^{\infty}, 
+  \end{equation}
+  where $a_N^+=\sup(a_n)_{n=N}^{\infty}$.
+  The \emph{limit inferior} of $(a_n)_{n=m}^{\infty}$ is
+  \begin{equation}
+    \label{eq:liminf}
+    \lim \inf_{n\rightarrow \infty} a_n := \sup (a_N^-)_{N=m}^{\infty}, 
+  \end{equation}
+  where $a_N^-=\inf(a_n)_{n=N}^{\infty}$.
+\end{defn}
+
+\begin{rem}
+  Informally, $a_N^+$ and $a_N^-$ are the supremum and infimum
+  of all elements in the sequence from $a_N$ onwards.
+  Each of them yields a sequence with respect to $N$.
+\end{rem}
+
+\begin{exm}
+  Let $(a_n)_{n=m}^{\infty}$ be the sequence
+  \begin{displaymath}
+    1.1, -1.01, 1.001, -1.0001, 1.00001, \ldots
+  \end{displaymath}
+  Then $(a_n^+)_{n=N}^{\infty}$ is the sequence
+  \begin{displaymath}
+    1.1, 1.001, 1.001, 1.00001, 1.00001, \ldots
+  \end{displaymath}
+  and $(a_n^-)_{n=N}^{\infty}$ is the sequence
+  \begin{displaymath}
+    -1.01, -1.01, -1.0001, -1.0001, -1.000001, -1.000001, \ldots
+  \end{displaymath}
+  Hence we have
+  \begin{displaymath}
+    \lim \sup_{n\rightarrow \infty} a_n = 1, \qquad
+    \lim \inf_{n\rightarrow \infty} a_n = -1.
+  \end{displaymath}
+\end{exm}
+
+\begin{lem}
+  Let $(a_n)_{n=m}^{\infty}$ be a sequence of real numbers.
+  For $L^+=\lim\sup a_n$ and $L^-=\lim\inf a_n$,
+  we have
+  \begin{enumerate}[(a)]
+  \item For every $x>L^+$,
+    elements of the sequence are eventually less than $x$:
+    \begin{displaymath}
+      \forall x>L^+, \exists N\ge m \text{ s.t. }
+      \forall n\ge N, a_n<x.
+    \end{displaymath}
+    Similarly, for every $x<L^-$,
+    elements of the sequence are eventually greater than $x$:
+    \begin{displaymath}
+      \forall x<L^-, \exists N\ge m \text{ s.t. }
+      \forall n\ge N, a_n>x.
+    \end{displaymath}
+  \item For every $x<L^+$,
+    there are an infinite number of elements in the sequence
+    that are greater than $x$:
+    \begin{displaymath}
+      \forall x<L^+, \forall N\ge m,
+      \exists n\ge N \text{ s.t. } a_n>x.
+    \end{displaymath}
+    Similarly,
+    for every $x>L^-$,
+    there are an infinite number of elements in the sequence
+    that are less than $x$:
+    \begin{displaymath}
+      \forall x>L^-, \forall N\ge m,
+      \exists n\ge N \text{ s.t. } a_n < x.
+    \end{displaymath}
+  \item $\inf(a_n)_{n=m}^{\infty}\le L^- \le L^+ \le
+    \sup(a_n)_{n=m}^{\infty}$.
+  \item Any limit point $c$ of $(a_n)_{n=m}^{\infty}$
+    satisfies $L^-\le c \le L^+$.
+  \item If $L^+$ (or $L^-$) is finite,
+    then it is a limit point
+    of $(a_n)_{n=m}^{\infty}$.
+  \item $\lim_{n\rightarrow \infty} a_n = c$
+    if and only if $L^+=L^-=c$.
+    
+  \end{enumerate}
+\end{lem}
+
+\begin{thm}[Squeeze test or the Sandwich Theorem]
+  \label{thm:squeezeTest}
+  Let $(a_n)_{n=m}^{\infty}$, $(b_n)_{n=m}^{\infty}$,
+  and $(c_n)_{n=m}^{\infty}$ be sequences of real numbers
+  that satisfy
+  \begin{displaymath}
+    \exists M\in \mathbb{N} \text{ s.t. }
+    \forall n\ge M, a_n\le b_n \le c_n.
+  \end{displaymath}
+  Suppose $(a_n)_{n=m}^{\infty}$ and $(c_n)_{n=m}^{\infty}$
+  both converge to the same limit $L$.
+  Then $(b_n)_{n=m}^{\infty}$ also converges to $L$.
+\end{thm}
+
+\begin{rem}
+  Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
+  be two convergent sequences of real numbers
+  that satisfy
+  \begin{displaymath}
+    \exists M\in \mathbb{N} \text{ s.t. }
+    \forall n\ge M, a_n< b_n.
+  \end{displaymath}
+  Then we have
+  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
+  where ``$\le$'' cannot be strengthened to ``$<$.''
+  In addition, replace ``$a_n< b_n$''
+  with ``$a_n\le b_n$'' and we get the same conclusions.
+  This is deeply connected to the difference between
+  open and closed sets.
+\end{rem}
+
+\begin{ntn}[Asymptotic notation]
+  \label{ntn:asymptoticNtn}
+  For $g:\mathbb{R}^+\rightarrow\mathbb{R}^+$, 
+  $f:\mathbb{R} \rightarrow\mathbb{R}$, 
+  and $a\in [0,+\infty]$, 
+  we write
+  \begin{displaymath}
+    f(x) = O(g(x)) \text{ as } x\to a %\in [0,+\infty]
+  \end{displaymath}
+  % iff there exist constants $C,C'>0$
+  % and $x_0>0$ such that
+  iff %if and only if
+  \begin{displaymath}
+    \lim\sup_{x\rightarrow a} \frac{|f(x)|}{g(x)} < \infty.
+  \end{displaymath}
+  In particular, we have
+  \begin{displaymath}
+    f(x) = o(g(x)) \text{ as } x\to a
+    \ \Leftrightarrow\
+    \lim_{x\rightarrow a} \frac{|f(x)|}{g(x)} = 0.
+  \end{displaymath}
+  We also write
+  \begin{displaymath}
+    f(x)=\Theta(g(x)) \text{ as } x\to a %\in [0,+\infty]
+  \end{displaymath}
+  iff
+  \begin{displaymath}
+    0< \lim\sup_{x\rightarrow a} \frac{|f(x)|}{g(x)} < \infty.
+  \end{displaymath}
+  When there is no danger of ambiguity,
+  we often write $f(x)=O(g(x))$,
+  $f(x)=o(g(x))$, and $f(x)=\Theta(g(x))$
+  without the conditional $x \rightarrow a$
+  in the above equations.
+\end{ntn}
+
+\begin{rem}
+  Two typical cases of Notation \ref{ntn:asymptoticNtn}
+  are $a=0$ and $a=+\infty$.
+\end{rem}
+
+\subsection{Series}
+\label{sec:series}
+
+\begin{defn}[Finite series]
+  Let $m,n$ be integers
+  and let $(a_i)_{i=m}^n$ be a finite sequence of real numbers.
+  The \emph{finite series} or \emph{finite sum} associated with the sequence
+  $(a_i)_{i=m}^n$ is the number $\sum_{i=m}^n a_i$
+  given by the recursive formula
+  \begin{equation}
+    \label{eq:finiteSeries}
+    \sum_{i=m}^n a_i :=
+    \begin{cases}
+      0 & \text{if } n< m;
+      \\
+      a_n + \sum_{i=m}^{n-1} a_i & \text{otherwise}.
+    \end{cases}
+  \end{equation}
+\end{defn}
+
+\begin{defn}[Formal infinite series]
+  \label{def:seriesFromSequence}
+  A (formal) \emph{infinite series} associated with an infinite sequence $\{a_n\}$
+   is the expression $\sum_{n=0}^{\infty} a_n$.
+%   the sum of all terms of the sequence.
+\end{defn}
+
+\begin{defn}
+  The \emph{sequence of partial sums} $(S_n)_{n=0}^{\infty}$ associated
+  with a formal infinite series
+  $\sum_{i=0}^{\infty} a_i$
+  is defined for each $n$ as the sum of the sequence $\{a_i\}$
+  from $a_0$ to $a_n$
+  \begin{equation}
+    \label{eq:partialSum}
+    S_n = \sum_{i=0}^{n} a_i.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  A formal infinite series is said to be \emph{convergent}
+  and \emph{converge} to $L$
+  if its sequence of partial sums converges to some limit $L$.
+  In this case we write $L=\sum_{n=0}^{\infty} a_n$
+  and call $L$ the \emph{sum of the infinite series}.
+\end{defn}
+
+\begin{defn}
+  A formal infinite series is said to be \emph{divergent}
+  if its sequence of partial sums diverges.
+  In this case we do not assign any real number value to this series.
+\end{defn}
+
+\begin{lem}[Cauchy criterion]
+  \label{lem:seriesConvergeCauchy}
+  An infinite series $\sum_{n=0}^{\infty} a_n$ of real numbers
+  is convergent if and only if
+  \begin{equation}
+    \label{eq:seriesConvergeCauchy}
+    \forall \epsilon>0,\ \exists N\in \mathbb{N} \text{ s.t. }
+    \forall p,q\ge N, \ \left|\sum_{n=p}^q a_n\right| \le \epsilon.
+  \end{equation}
+\end{lem}
+
+\begin{thm}[Comparison test]
+  \label{thm:comparisonTest}
+  Let $\sum a_n$ be a series where $a_n\ge 0$ for all $n$.
+  \begin{enumerate}[(i)]\itemsep0em
+  \item If $\sum a_n$ converges and $|b_n|\le a_n$ for all $n$,
+    then $\sum b_n$ converges.
+  \item If $\sum a_n=+\infty$ and $b_n \ge a_n$ for all $n$,
+    then \mbox{$\sum b_n=+\infty$}.
+  \end{enumerate}
+\end{thm}
+
+\begin{defn}
+  \label{def:absoluteConvergence}
+  An infinite series $\sum_{n=0}^{\infty} a_n$
+  is \emph{absolutely convergent}
+  iff the series $\sum_{n=0}^{\infty} |a_n|$ is convergent.
+\end{defn}
+
+\begin{lem}
+  \label{lem:absolutelyConvergenceSeriesConverge}
+  An infinite series that is absolutely convergent
+  is convergent.
+\end{lem}
+
+\begin{thm}[Ratio test]
+  \label{thm:ratioTest}
+  A series $\sum a_n$ of nonzero terms
+  \begin{enumerate}[(i)]\itemsep0em
+  \item converges absolutely if ${\lim\sup}_{n\rightarrow\infty}|a_{n+1}/a_n|<1$;
+  \item diverges if ${\lim\inf}_{n\rightarrow\infty}|a_{n+1}/a_n|>1$,
+  \end{enumerate}
+  Otherwise, this test gives no information
+  about the convergence of $\sum a_n$.
+\end{thm}
+
+\begin{thm}[Root test]
+  \label{thm:rootTest}
+  Let $\sum a_n$ be a series and $\alpha={\lim\sup}_{n\rightarrow\infty}|a_n|^{1/n}$.
+  The series $\sum a_n$
+  \begin{enumerate}[(i)]\itemsep0em
+  \item converges absolutely if $\alpha<1$;
+  \item diverges if $\alpha>1$,
+  \end{enumerate}
+  Otherwise, this test gives no information
+  about the convergence of $\sum a_n$.
+\end{thm}
+\begin{proof}
+  Choose $\epsilon>0$ such that $\alpha+\epsilon\in (0,1)$.
+  Then 
+  \begin{displaymath}
+    \exists N\in \mathbb{N}^+ \text{ s.t. }
+    \forall n\ge N, \ \sup_{n\ge N}\{ a_n^{\frac{1}{n}}\} < \alpha+\epsilon.
+  \end{displaymath}
+  Hence $a_n<(\alpha+\epsilon)^n$ for all $n\ge N$.
+  The comparison test with the geometric series yields (i).
+  (ii) can be shown via proof by contradiction.
+\end{proof}
+
+\begin{rem}
+  The root test applies whenever the ratio test applies.
+  However, the converse is not true.
+\end{rem}
+
+\begin{thm}[Integral test]
+  \label{thm:integralTest}
+  Let $f:[0, \infty)\rightarrow \mathbb{R}$
+   be a monotone decreasing function 
+   which is non-negative.
+%   such that $f(x)\ge 0$ for all $x\ge 0$.
+  Then the series $\sum_{n=0}^{\infty}f(n)$ is convergent if and only if
+   $\sup_{N>0}\int_0^N f$ is finite.
+\end{thm}
+
+
+\section{Scalar functions
+  $\mathbb{R}\rightarrow\mathbb{R}$}
+\label{sec:cont-funct-on-R}
+
+\begin{defn}
+  A \emph{scalar function} is a function
+   whose range is a subset of $\mathbb{R}$.
+\end{defn}
+
+\begin{defn}[Limit of a scalar function]
+  \label{def:limitOfAScalarFunc}
+  Consider a function $f: I\rightarrow \mathbb{R}$
+   with $I(c,r)=(c-r,c)\cup (c,c+r)$.
+  The \emph{limit} of $f(x)$  exists
+   as $x$ approaches $c$, written
+     $\lim_{x\rightarrow c} f(x) = L$,
+  iff 
+  \begin{equation}
+ \forall \epsilon>0, \exists \delta>0, \text{ s.t. }
+    \forall x\in I(c,\delta),\ |f(x)-L|<\epsilon.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  The notation in Definition \ref{def:limitOfAScalarFunc}
+  reads ``as $x$ gets closer to $c$,
+ $f(x)$ gets closer to $L$.''
+How close is close?
+As close as you wish.
+This idea is packaged in the $\epsilon-\delta$ technique.
+\end{rem}
+
+\begin{exm}
+  \label{exm:limitForShowingEpsDelta}
+   We show $\lim_{x\rightarrow 2}\frac{1}{x}= \frac{1}{2}$ as follows.
+   If $\epsilon\ge \frac{1}{2}$,
+   choose $\delta=1$.
+   Then $x\in(1,3)$ implies
+   $\left|\frac{1}{x}-\frac{1}{2}\right|<\frac{1}{2}$
+   since $\frac{1}{x}-\frac{1}{2}$
+   is a monotonically decreasing function
+   with its supremum at $x=1$.
+
+  If $\epsilon\in (0,\frac{1}{2})$,
+   choose $\delta=\epsilon$.
+  Then $x\in (2-\epsilon,2+\epsilon)\subset
+  (\frac{3}{2},\frac{5}{2})$.
+  Hence
+  $\left|\frac{1}{x}-\frac{1}{2}\right|=\frac{|2-x|}{|2x|}<|2-x|<\epsilon$.
+  The proof is completed by Definition \ref{def:limitOfAScalarFunc}.
+\end{exm}
+
+\begin{rem}
+  The philosophy in Example \ref{exm:limitForShowingEpsDelta}
+  is that two functions have the same limit
+  if their difference can be shown to be as small as you wish.
+\end{rem}
+
+% \begin{defn}
+%   The \emph{open ball} centered at $P_0\in \mathbb{R}^n$
+%    with radius $r>0$
+%    is the point set
+%    \begin{equation}
+%      \label{eq:unitBall}
+%      {\cal B}(P_0, r) = 
+%      \left\{P \ \bigl|\ |P-P_0| < r\bigr.\right\}.
+%    \end{equation}
+%   It is an \emph{open interval} in 1D
+%    and an \emph{open disk} in 2D.
+
+%   The open ball without the center is denoted by
+%    \begin{equation}
+%      {\cal B}_0(P_0, r) = {\cal B}(P_0, r) \setminus
+%      \{P_0\}.
+%    \end{equation}
+% \end{defn}
+
+% \begin{defn}
+%   \label{def:extremum}
+%   $f: \mathbb{R}^n\rightarrow\mathbb{R}$ has a
+%   \emph{local maximum} at $P_0\in \mathbb{R}^n$
+%   iff
+%   \begin{equation}
+%     \label{eq:localMax}
+%     \exists r>0, \text{ s.t. } \forall P \in{\cal B}(P_0, r),
+%     \qquad f(P)\le f(P_0).
+%   \end{equation}
+%   Changing $\le$ to $\ge$ in (\ref{eq:localMax})
+%    yields a \emph{local minimum}.\\
+%   An \emph{extremum} is either a maximum or minimum.
+% \end{defn}
+
+% \begin{defn}
+%   $P_0$ is
+%   a \emph{boundary point} of a point set ${\cal U}$
+%   iff $\forall r>0$, $\exists P\in {\cal B}(P_0,r)$
+%   s.t. $P\not\in {\cal U}$.
+%  \end{defn}
+
+%  \begin{defn}
+%   A set is an \emph{open set} if it contains
+%    none of its boundary points.
+%  \end{defn}
+
+%  \begin{defn}
+%    A set is a \emph{closed set} if it contains
+%     all of its boundary points.
+%  \end{defn}
+
+%  \begin{defn}
+%    A point set ${\cal U}\subseteq \mathbb{R}^n$
+%     is \emph{bounded}
+%     iff ${\cal U}\subseteq {\cal B}(P_0, r)$
+%     for some $P_0\in \mathbb{R}^n$ and $r>0$.
+%  \end{defn}
+
+% \begin{defn}[Limit of a scalar function with multiple variables]
+% \label{def:limit}
+%   The \emph{limit} of a function
+%   $f: {\cal B}_0(P_0,r)\rightarrow \mathbb{R}$
+%   exists
+%   as $P$ approaches $P_0$, written
+% $     \lim_{P\rightarrow P_0} f(P) = L$,
+%   iff
+%    \begin{equation}
+%      \begin{split}
+%    \forall \epsilon>0,\ 
+%    \forall \text{ paths } P\rightarrow P_0,\ 
+%    \exists \delta>0, \text{ s.t. }\\
+%    \forall P\in {\cal B}(P_0,\delta),\qquad
+%    |f(P)-L|<\epsilon.
+%      \end{split}
+%    \end{equation}
+% \end{defn}
+
+% \begin{frm}
+%   The limit of $f: {\cal B}_0(P_0,r)\rightarrow \mathbb{R}$
+%    does not exist at $P_0$
+%    if there exists two different paths $P\rightarrow P_0$
+%    and $P \leadsto P_0$ s.t.
+%    \begin{equation}
+%      \bigl(\lim_{P\rightarrow P_0} f(P) = L_1\bigr)
+%      \ne \bigl(L_2 = \lim_{P\leadsto P_0} f(P)\bigr).
+%    \end{equation}
+% \end{frm}
+
+% \begin{thm}[The squeeze theorem]
+%   If $\exists r>0$ s.t.\\
+%   $\forall P\in{\cal B}_0(P_0,r)$,
+%    $f(P)\le g(P)\le h(P)$,
+%    then
+%    \begin{equation}
+%      \left(\lim_{P\rightarrow P_0}f(P)=\lim_{P\rightarrow P_0}h(P)=L\right)
+%      \ \Rightarrow \ 
+%      \lim_{P\rightarrow P_0} g(P) = L.
+%    \end{equation}
+% \end{thm}
+
+% \begin{defn}
+%   \emph{Big O notation} describes the limiting behavior
+%   of a function
+%   in terms of another function.
+%   Given  $f,g: \mathbb{R}\rightarrow \mathbb{R}$,
+%   \begin{subequations}
+%     \begin{align}
+%       f(h) = O(g(h))\ &\Leftrightarrow\ 
+%       \lim_{h\rightarrow 0}\frac{f(h)}{g(h)} = L \ne 0
+%       \\
+%       f(h) = o(g(h))\ &\Leftrightarrow\ 
+%       \lim_{h\rightarrow 0}\frac{f(h)}{g(h)} = 0
+%     \end{align}
+%   \end{subequations}
+% \end{defn}
+
+% \begin{exm}
+%   We will be dealing with polynomial of $h$
+%   and determining convergence is very easy in this case.
+% \end{exm}
+
+\subsection{Continuous scalar functions}
+\label{sec:cont-scal-funct}
+
+\begin{defn}
+  \label{def:continuousScalarFunc}
+  $f: \mathbb{R}\rightarrow \mathbb{R}$
+  is \emph{continuous} at $c$
+  iff
+   \begin{equation}
+     \label{eq:continuous}
+     \lim_{x\rightarrow c} f(x) = f(c).
+   \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:continuousFuncOnR}
+  A scalar function $f$ is \emph{continuous on} $(a,b)$,
+     written \mbox{$f\in{\cal C}(a,b)$}, 
+     if (\ref{eq:continuous}) holds  $\forall x\in (a,b)$.
+\end{defn}
+
+% \begin{defn}
+%   $f: \mathbb{R}^n\rightarrow \mathbb{R}$
+%   is \emph{continuous} at $Q$
+%   iff
+%    \begin{equation}
+%      \label{eq:continuous}
+%      \lim_{P\rightarrow Q} f(P) = f(Q).
+%    \end{equation}
+%    $f$ is \emph{continuous on} a point set ${\cal U}$
+%     if (\ref{eq:continuous}) holds  $\forall Q\in {\cal U}$.
+% \end{defn}
+
+\begin{thm}[Extreme values]
+  \label{thm:extremeValues}
+  A continuous function $f:[a,b]\rightarrow\mathbb{R}$
+  attains its maximum at some point \mbox{$x_{\max}\in [a,b]$}
+  and its minimum at some point $x_{\min}\in [a,b]$.
+\end{thm}
+
+\begin{thm}[Intermediate value]
+  \label{thm:intermediateValue}
+  A scalar function $f\in {\cal C}[a,b]$ satisfies
+  \begin{equation}
+    \label{eq:intermediateValue}
+    \forall y\in \left[m, M \right],\ 
+    \exists \xi\in[a,b], \text{ s.t. }
+    y=f(\xi)
+  \end{equation}
+  where  $m=\inf_{x\in[a,b]} f(x)$ and
+   $M=\sup_{x\in[a,b]} f(x)$.
+\end{thm}
+
+\begin{rem}
+Theorem \ref{thm:intermediateValue}
+ states that a continuous function assumes
+ all values between $f(a)$ and $f(b)$
+ on a closed interval $[a,b]$.
+\end{rem}
+
+\begin{defn}
+  \label{def:uniformlyContinuousScalar}
+  Let $I=(a,b)$. A function $f: I\rightarrow \mathbb{R}$
+  is \emph{uniformly continuous} on $I$
+  iff
+   \begin{equation}
+     \label{eq:uniformlyContinuous}
+     \begin{array}{l}
+     \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
+     \\
+     \forall x,y\in I,\ 
+     |x-y|<\delta \Rightarrow |f(x)-f(y)|<\epsilon.
+     \end{array}
+   \end{equation}
+\end{defn}
+
+\begin{exc}
+  Show that, on $(a,\infty)$,
+  $f(x)=\frac{1}{x}$ is uniformly continuous
+   if $a>0$ 
+   and is not so if $a=0$.
+\end{exc}
+\begin{proof}
+  If $a>0$, then
+  $|f(x)-f(y)|=\frac{|x-y|}{xy} %< \frac{\delta}{xy}\
+  <\frac{|x-y|}{a^2}$.\\
+  Hence 
+  $\forall \epsilon>0, \exists \delta=a^2 \epsilon$,
+  s.t. \\$|x-y|<\delta \Rightarrow
+  |f(x)-f(y)|<\frac{|x-y|}{a^2}<\frac{a^2 \epsilon}{a^2}=\epsilon$.
+
+  If $a=0$, negating the condition
+   of uniform continuity,
+   i.e. eq. (\ref{eq:uniformlyContinuous}), yields
+  $\exists \epsilon>0$ s.t. $\forall\delta>0$
+   $\exists x,y>0$ s.t.
+   $(|x-y|<\delta) \wedge (|\frac{1}{x}-\frac{1}{y}|\ge \epsilon)$.
+
+   We prove a stronger version:
+  $\forall \epsilon>0$, $\forall\delta>0$
+   $\exists x,y>0$ s.t.
+   $(|x-y|<\delta) \wedge (|f(x)-f(y)|\ge \epsilon)$.
+
+%  Set $\epsilon=\frac{1}{3}$.
+  If $\delta\ge \frac{1}{2\epsilon}$,
+   choose $x=\frac{1}{2\epsilon}$, $y=\frac{1}{4\epsilon}$.
+  This choice satisfies $|x-y|<\delta$
+   since $x-y=\frac{1}{4\epsilon}<\frac{1}{2\epsilon}\le \delta$.
+  However, $|f(x)-f(y)|=\frac{|x-y|}{xy}=2\epsilon>\epsilon$.
+
+  If $\delta< \frac{1}{2\epsilon}$,
+   then $2\epsilon\delta<1$.
+  Choose $x\in (0, \epsilon\delta^2)$
+   and $y\in (2\epsilon\delta^2, \delta)$.
+  This choice satisfies $|x-y|<\delta$
+   and $|x-y|>\epsilon\delta^2$.
+  However, 
+   $|f(x)-f(y)|=\frac{|x-y|}{xy}>\frac{\epsilon\delta^2}{xy}
+   > \frac{1}{y} > \frac{1}{\delta} > 2\epsilon> \epsilon$.
+\end{proof}
+
+\begin{exc}
+  On $(a,\infty)$,
+  $f(x)=\frac{1}{x^2}$ is uniformly continuous
+   if $a>0$ 
+   and is not so if $a=0$.
+\end{exc}
+\begin{solution}
+  Case 1 ($a>0$):
+  The function $f(x)=\frac{1}{x^2}$ is uniformly continuous
+  on $(a,\infty)$ iff
+  \begin{align*}
+    \forall\epsilon>0,&\exists\delta>0\text{ s.t. }
+                        \forall x,y \in(a,\infty),\\
+    &|x-y|<\delta\Rightarrow|f(x)-f(y)|<\epsilon.
+  \end{align*}
+
+  Since $a>0$ and $x,y \in (a,\infty)$,
+  we have $|x|=x>0$ and $|y|=y>0$.  Thus,
+\[
+|f(x)-f(y)|
+=|x-y|\left(\frac{1}{x^2y}+\frac{1}{xy^2}\right).
+\]
+
+For any given $\epsilon>0$,
+choose $\delta=\frac{a^3\epsilon}{2}$.
+Then we have
+\begin{displaymath}
+  x>a\Rightarrow\frac{1}{x}<\frac{1}{a};\ \ 
+  y>a\Rightarrow\frac{1}{y}<\frac{1}{a}.
+\end{displaymath}
+
+It follows that
+\[
+ |x-y|<\delta \ \Rightarrow\ 
+|f(x)-f(y)|
+<\delta\left(\frac{1}{a^3}+\frac{1}{a^3}\right)
+=\frac{2\delta}{a^3}=\epsilon.
+\]
+Hence $f(x)=\frac{1}{x^2}$ is uniformly continuous on $(a,\infty)$ if
+$a>0$.
+
+Case 2 ($a=0$):
+The function $f(x)=\frac{1}{x^2}$ is not uniformly continuous
+on $(0,\infty)$ iff
+\begin{align*}
+  \exists\epsilon>0\text{ s.t. } & \forall\delta>0,
+  \exists x,y \in (0,\infty)\text{ s.t. }\\
+  &|x-y|<\delta\Rightarrow |f(x)-f(y)|\geq\epsilon.
+\end{align*}
+
+We prove a stronger statement:
+\begin{align*}
+  \forall\epsilon>0 & \forall\delta>0,\exists x,y \in (0,\infty)
+  \text{ s.t. } \\
+  &|x-y|<\delta\Rightarrow |f(x)-f(y)|\geq\epsilon.
+\end{align*}
+
+If $\delta\geq\frac{1}{2\sqrt{\epsilon}}$,
+ choose
+ $x=\frac{1}{\sqrt{4\epsilon}}=\frac{1}{2\sqrt{\epsilon}}$ and $y=\frac{1}{\sqrt{9\epsilon}}=\frac{1}{3\sqrt{\epsilon}}$.
+This choice satisfies $|x-y|< \delta$.
+However,
+\begin{align*}
+  |f(x)-f(y)| &=
+                \frac{|x-y|}{xy}\left(\frac{1}{x}+\frac{1}{y}\right)\\
+ &= \frac{\frac{1}{6\sqrt{\epsilon}}}{\left(\frac{1}{2\sqrt{\epsilon}}\right)\left(\frac{1}{3\sqrt{\epsilon}}\right)}(2\sqrt{\epsilon}+3\sqrt{\epsilon})
+  \\
+&= \frac{1}{\sqrt{\epsilon}}\,\epsilon(5\sqrt{\epsilon})
+= 5\epsilon >\epsilon
+\end{align*}
+
+If $\delta<\frac{1}{2\sqrt{\epsilon}}$,
+ choose $x$ and $y$ so that $0<x<\sqrt{\epsilon}\delta^2$
+ and $2\sqrt{\epsilon}\delta^2<y<\delta$.
+Then $0<x<y<\delta$ implies $\frac{1}{x^2y^2}>\frac{1}{\delta^4}$
+ and $x+y> 2\sqrt{\epsilon}\delta^2$.
+Also, $2\sqrt{\epsilon}\delta<1$ and
+ $2\sqrt{\epsilon}\delta^2-\sqrt{\epsilon}\delta^2<|x-y|<\delta \Rightarrow \sqrt{\epsilon}\delta^2<|x-y|<\delta$.
+Altogether, these imply
+\begin{align*}
+|f(x)-f(y)| = \frac{|x-y|(x+y)}{x^2y^2}
+> \frac{\sqrt{\epsilon}\delta^2 2\sqrt{\epsilon}\delta^2}{\delta^4}
+=2\epsilon>\epsilon.
+\end{align*}
+Hence $f(x)=\frac{1}{x^2}$ is not uniformly continuous on $(a,\infty)$ if
+$a=0$.
+\end{solution}
+
+\begin{thm}
+  Uniform continuity implies continuity
+   but the converse is not true.
+\end{thm}
+\begin{proof}
+  exercise.
+\end{proof}
+
+\begin{thm}
+  \label{thm:uniformContExtension}
+  $f: \mathbb{R}\rightarrow \mathbb{R}$
+  is uniformly continuous on $(a,b)$
+  iff it can be extended
+  to a continuous function $\tilde{f}$ on $[a,b]$.
+\end{thm}
+
+
+\subsection{Differentiation of scalar functions}
+\label{sec:diff-funct}
+
+\begin{defn}
+  \label{def:derivative}
+  The \emph{derivative}
+   of a function $f: \mathbb{R}\rightarrow \mathbb{R}$
+   at $a$ is the limit
+   \begin{equation}
+     \label{eq:derivative}
+     f'(a)=\lim_{h\rightarrow 0} \frac{f(a+h)-f(a)}{h}.
+   \end{equation}
+  If the limit exists, $f$ is \emph{differentiable} at $a$.
+\end{defn}
+
+\begin{exm}
+  For the power function \mbox{$f(x)=x^{\alpha}$}, 
+   we have $f'=\alpha x^{\alpha-1}$
+   due to
+   Newton's generalized binomial theorem, 
+  \begin{equation*}
+    (a+h)^{\alpha}=\sum_{n=0}^{\infty}{\alpha \choose n}a^{\alpha-n}h^n.
+  \end{equation*}
+\end{exm}
+
+\begin{rem}
+  Think about the three cases $\alpha=\frac{1}{2}$,
+  $\alpha=1$, $\alpha=2$.
+  If $x$ is time and $f(x)$ measures how knowledgeable you are.
+  You probably want to have $f(x)=x^2$ rather than
+  $f(x)=x^{\frac{1}{2}}$.
+  The reason $f(x)=x^2$ is much better is that
+  its rate of increase also increases.
+\end{rem}
+
+\begin{defn}
+  A function $f(x)$ is
+   $k$ times \emph{continuously differentiable}
+   on $(a,b)$
+   iff $f^{(k)}(x)$ exists on $(a,b)$ and is itself continuous.
+  The set or space of all such functions on $(a,b)$
+   is denoted by ${\cal C}^k(a,b)$.
+  In comparison,
+   ${\cal C}^k[a,b]$ is the space of functions $f$
+   for which $f^{(k)}(x)$ is bounded and uniformly continuous on $(a,b)$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:continuousImpliesBoundedness}
+  A scalar function $f$ is bounded on $[a,b]$
+   if $f\in {\cal C}[a,b]$.
+\end{thm}
+
+\begin{thm}
+  \label{thm:Fermat}
+  If $f:(a,b)\rightarrow\mathbb{R}$
+   assumes its maximum or minimum at $x_0\in(a,b)$
+   and $f$ is differentiable at $x_0$,
+   then $f'(x_0)=0$.
+\end{thm}
+\begin{proof}
+  Suppose $f'(x_0)>0$. Then we have
+  \begin{displaymath}
+    f'(x_0)=\lim_{x\rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}>0.
+  \end{displaymath}
+  The definition of a limit implies
+  \begin{displaymath}
+   \exists \delta>0 \text{ s.t. } 
+   a<x_0-\delta<x_0+\delta<b,
+  \end{displaymath}
+   which, together with $|x-x_0|<\delta$, 
+   implies
+   $\frac{f(x)-f(x_0)}{x-x_0}>0$.
+  This is a contradiction to $f(x_0)$ being a maximum
+  when we choose $x\in(x_0,x_0+\delta)$.
+\end{proof}
+
+\begin{thm}[Rolle's]
+  \label{thm:Rolles}
+  If a function $f:\mathbb{R}\rightarrow\mathbb{R}$
+   satisfies
+   \begin{enumerate}[(i)]\itemsep0em
+   \item $f\in {\cal C}[a,b]$ and $f'$ exists on $(a,b)$,
+   \item $f(a)=f(b)$,
+   \end{enumerate}
+  then $\exists x\in (a,b)$ s.t. $f'(x)=0$.
+\end{thm}
+\begin{proof}
+  % Theorem 18.1 in Ross states that
+  %  if $f$ is continuous on a closed interval,
+  %  then $f$ is bounded
+  %  and assumes its maximum and minimum values
+  %  on $[a,b]$.
+  % By Theorem \ref{thm:continuousImpliesBoundedness},
+  %  $f$ is bounded.
+  By Theorem \ref{thm:intermediateValue},
+   all values between $\sup f$ and $\inf f$
+   will be assumed.
+  If $f(a)=f(b)=\sup f=\inf f$,
+   then $f$ is a constant on $[a,b]$
+   and thus the conclusion holds.
+  Otherwise, Theorem \ref{thm:Fermat} completes the proof.
+\end{proof}
+
+\begin{rem}
+Theorem \ref{thm:intermediateValue} is about a closed interval
+ and Theorem \ref{thm:Fermat} an open interval.
+Thus in the proof of Theorem \ref{thm:Rolles}
+ we must treat the special case of $f$ being a constant.
+\end{rem}
+
+\begin{thm}[Mean value]
+  \label{thm:meanValue}
+  If $f\in {\cal C}[a,b]$ and if $f'$ exists on $(a,b)$,
+  then $\exists \xi\in(a,b)$
+  s.t. $f(b)-f(a)=f'(\xi)(b-a)$.
+\end{thm}
+\begin{proof}
+  Construct a linear function
+   $L:[a,b]\rightarrow\mathbb{R}$ such that
+   $L(a)=f(a)$, $L(b)=f(b)$,
+   then $\forall x\in (a,b)$,
+   we have $L'(x)=\frac{f(b)-f(a)}{b-a}$.
+  Consider $g(x)=f(x)-L(x)$ on $[a,b]$.
+   $g(a)=0$, $g(b)=0$.
+  By Theorem \ref{thm:Rolles}, $\exists \xi\in[a,b]$
+   such that $g'(\xi)=0$,
+   which completes the proof.
+\end{proof}
+
+
+\subsection{Taylor series}
+\label{sec:Taylorseries}
+
+\begin{defn}
+  \label{def:powerSeries}
+  A \emph{power series} centered at $c$
+   is a series of the form
+   \begin{equation}
+     \label{eq:powerSeries}
+     p(x)=\sum_{n=0}^{\infty} a_n (x-c)^n,
+   \end{equation}
+   where $a_n$'s are the \emph{coefficients}.
+  The \emph{interval of convergence}
+   is the set of values of $x$ for which the series converges:
+   \begin{equation}
+     \label{eq:intervalOfConvergence}
+     I_c(p) = \{x\ |\ p(x) \text{ converges} \}.
+   \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:TaylorPolynomial}
+  If the derivatives $f^{(i)}(x)$ with $i=1,2,\ldots,n$ exist for a function
+  $f: \mathbb{R}\rightarrow \mathbb{R}$ at $x=c$,
+   then
+   \begin{equation}
+     \label{eq:partialSumTaylor}
+     T_n(x) = \sum_{k=0}^{n}\frac{f^{(k)}(c)}{k!}(x-c)^k
+   \end{equation}
+   is called the $n$th \emph{Taylor polynomial} for $f(x)$ at $c$.
+\\  In particular, 
+the \emph{linear approximation} for $f(x)$ at $c$ is
+   \begin{equation}
+     \label{eq:linearTaylor}
+     T_1(x) = f(c) + f'(c)(x-c).
+   \end{equation}
+ \end{defn}
+
+ \begin{exm}
+   \label{exm:TaylorPoly}
+  If $f\in {\cal C}^{\infty}$, then $\forall n\in\mathbb{N}$,
+   we have
+  \begin{equation*}
+    T_n^{(m)}(x) = \left\{
+    \begin{array}{ll}
+      \sum_{k=m}^n\frac{f^{(k)}(c)}{(k-m)!}(x-c)^{k-m}, &
+      m\in\mathbb{N}, m\le n;
+      \\
+      0, & m\in\mathbb{N}, m> n.
+    \end{array}
+    \right.
+  \end{equation*}
+This can be proved by induction.
+In the inductive step, we regroup the summation
+ into a constant term and another shifted summation.
+\end{exm}
+
+\begin{defn}
+  \label{def:TaylorSeries}
+The \emph{Taylor series} (or Taylor expansion) 
+   for $f(x)$ at $c$ is
+ \begin{equation}
+     \label{eq:TaylorSeries}
+     %\lim_{n\rightarrow\infty}T_n(x)= 
+     \sum_{k=0}^{\infty}\frac{f^{(k)}(c)}{k!}(x-c)^k.
+   \end{equation}
+\end{defn}
+
+\begin{defn}
+The \emph{remainder} of the $n$th \emph{Taylor polynomial}
+ in approximating $f(x)$ is
+  \begin{equation}
+    \label{eq:TaylorSeriesRemainder}
+    E_n(x) = f(x) - T_n(x).
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{thm:limitTaylorRemainder}
+  Let $T_n$ be the $n$th Taylor polynomial for $f(x)$ at $c$.
+  \begin{equation}
+    \lim_{n\rightarrow\infty} E_n(x) = 0
+    \ \Leftrightarrow\
+%    f(x) = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k
+    \lim_{n\rightarrow\infty}T_n(x) = f(x).
+  \end{equation}
+\end{thm}
+
+\begin{lem}
+  \label{lem:remainder}
+  $\forall m=0,1,2,\ldots,n$, $E_n^{(m)}(c)=0$.
+\end{lem}
+\begin{proof}
+  This follows from Definition \ref{def:TaylorPolynomial}
+   and Example \ref{exm:TaylorPoly}.
+\end{proof}
+
+ \begin{thm}[Taylor's theorem with Lagrangian form]
+   \label{thm:TaylorLagrangianForm}
+   Consider a function
+    $f: \mathbb{R} \rightarrow \mathbb{R}$.
+   If $f\in {\cal C}^n[c-d,c+d]$
+    and $f^{(n+1)}(x)$ exists on $(c-d, c+d)$,
+   then
+    $\forall x\in [c-d,c+d]$,
+    there exists some $\xi$ between $c$ and $x$
+    such that
+    \begin{equation}
+      \label{eq:TaylorTheorem}
+      E_n(x) = \frac{f^{(n+1)}(\xi)}{(n+1)!}(x-c)^{n+1}.
+    \end{equation}
+ \end{thm}
+ \begin{proof}
+   Fix $x\ne c$,
+    let $M$ be the unique solution of 
+   \begin{equation*}
+%     \label{eq:Mequality}
+     E_n(x) = f(x) - T_n(x) = \frac{M(x-c)^{n+1}}{(n+1)!}.
+   \end{equation*}
+   Consider the function
+   \begin{equation}
+     \label{eq:TaylorLagrangianFormProof1}
+     g(t) := E_n(t) - \frac{M(t-c)^{n+1}}{(n+1)!}.
+   \end{equation}
+   Clearly $g(x)=0$.
+   By Lemma \ref{lem:remainder},
+    $g^{(k)}(c)=0$ for each $k= 0,1,\ldots,n$.
+   Then Rolle's theorem implies that
+   \begin{equation*}
+    \exists x_1\in (c, x) \text{ s.t. } g'(x_1)=0. 
+   \end{equation*}
+   If $x<c$, change $(c,x)$ above to $(x,c)$.
+   Apply Rolle's theorem to $g'(t)$ on $(c,x_1)$
+   and we have
+   \begin{equation*}
+    \exists x_2\in (c, x_1) \text{ s.t. } g^{(2)}(x_2)=0. 
+   \end{equation*}
+   Repeatedly using Rolle's theorem,
+   \begin{equation}
+     \label{eq:TaylorLagrangianFormProof2}
+    \exists x_{n+1}\in (c, x_n) \text{ s.t. } g^{(n+1)}(x_{n+1})=0.
+  \end{equation}
+  Since $T_n$ is a polynomial of degree $n$,
+   we have $T_n^{(n+1)}(t)=0$, 
+   which, together with
+   (\ref{eq:TaylorLagrangianFormProof2})
+   and (\ref{eq:TaylorLagrangianFormProof1}),
+   yields 
+   \begin{equation*}
+     f^{(n+1)}(x_{n+1})-M=0.
+   \end{equation*}
+   The proof is completed
+    by identifying $\xi$ with $x_{n+1}$.
+\end{proof}
+
+\begin{exm}
+  \label{exm:approximatingExponentialFunction}
+  How many terms are needed to compute $e^2$ correctly to four decimal
+  places?
+
+  The requirement of four decimal places means
+  an accuracy of at least $\epsilon=10^{-5}$.
+By Definition \ref{def:TaylorSeries}, 
+   the Taylor series of $e^x$ at $c=0$ is
+  \begin{equation*}
+    e^x = \sum_{n=0}^{+\infty}\frac{x^n}{n!}.
+  \end{equation*}
+  By Theorem \ref{thm:TaylorLagrangianForm}, we have
+  \begin{equation*}
+    \exists \xi\in [0,2] \text{ s.t. }
+    E_n(2)=e^{\xi}2^{n+1}/(n+1)! < e^22^{n+1}/(n+1)!
+  \end{equation*}
+  Then $e^22^{n+1}/(n+1)!\le \epsilon$ yields $n\ge 12$, i.e., 13 terms.
+\end{exm}
+
+
+\subsection{Riemann integral}
+\label{sec:RiemannIntegral}
+
+\begin{defn}
+  \label{def:partitionOfInterval}
+  A \emph{partition of an interval} $I=[a, b]$
+  is a totally-ordered finite subset $P_n\subseteq I$ of the form
+  %a finite sequence of numbers of the form
+  \begin{equation}
+    \label{eq:partition}
+    P_n(a,b) = \{a=x_0 < x_1 < \cdots < x_n=b\}.
+  \end{equation}
+  The interval $I_i=[x_{i-1}, x_{i}]$ is the $i$th
+   \emph{subinterval} of the partition.
+%  The \emph{mesh} or 
+  The \emph{norm} of the partition
+  is the length of the longest subinterval,
+  \begin{equation}
+    h_n= h(P_n) = \max(x_i-x_{i-1}),\qquad i=1, 2, \ldots, n.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:RiemannSum}
+  The \emph{Riemann sum} of %a function
+  $f: \mathbb{R}\rightarrow \mathbb{R}$
+  over a partition $P_n$ is
+  \begin{equation}
+    \label{eq:RiemannSum}
+    S_n(f) = \sum_{i=1}^n f(x_i^*) (x_{i}-x_{i-1}),
+  \end{equation}
+  where $x_i^*\in I_i$ 
+%  $x_i^*\in [x_{i-1}, x_i]$ 
+  is a \emph{sample point} % or a \emph{tag}
+  of the $i$th subinterval.
+\end{defn}
+
+\begin{defn}
+  \label{def:RiemannIntegrable}
+  A function $f: \mathbb{R}\rightarrow \mathbb{R}$
+  is  %\emph{integrable} (or more precisely
+  \emph{Riemann integrable} on  $[a, b]$
+  iff %there exists $L\in \mathbb{R}$ such that
+% the limit of its Riemann sum exists as $n\rightarrow \infty$
+  \begin{align}
+    \nonumber
+    &\exists L\in\mathbb{R}, \text{ s.t. }
+      \forall \epsilon>0,\ \exists \delta>0 \text{ s.t. }
+    \\ \label{eq:RiemannIntegrable}
+    & \forall P_n(a,b) \text{ with } h(P_n)<\delta,\ 
+      |S_n(f)-L|<\epsilon.
+  \end{align}
+  In this case we write $L=\int_a^b f(x) \dif x$
+  and call it the \emph{Riemann integral} of $f$ on $[a,b]$.
+\end{defn}
+
+  % Bind each number to the picture that illustrates
+  % Riemann integral.
+
+\begin{rem}
+  A logical statement is either true or false.
+  As one way to prove it,
+   imagine that you are debating with someone
+   that believes it is false.
+  Your opponent will focus on the $\forall$ variables,
+   i.e. the variables quantified by the
+   $\forall$ quantifiers, 
+   and try to instantiate some combination of their values 
+   so that the formula fails.
+  Your job is to focus on the $\exists$ variables
+   so that for any possible combination value of the $\forall$ variables
+   you can name a corresponding combination value
+   for the $\exists$ variables so that the formula holds.
+  From this viewpoint, a proof is simply a formula
+   for generating values of the ``$\exists$'' variables
+   according to the ``$\forall$'' variables.
+
+  To show a logical statement is false,
+   we could first negate the logical statement
+   and then use the aforementioned method to show the negation holds.
+\end{rem}
+
+\begin{exm}
+  The following function $f:[a,b]\rightarrow \mathbb{R}$
+   is not Riemann integrable.
+   \begin{equation}
+     \label{eq:rationalVsIrr}
+     f(x)=
+     \begin{cases}
+       1 & \text{if $x$ is rational};
+       \\
+       0 & \text{if $x$ is irrational}.
+     \end{cases}
+   \end{equation}
+
+  To see this, we first
+   negate the logical statement in (\ref{eq:RiemannIntegrable})
+   to get
+  \begin{align*}
+    &\forall L\in\mathbb{R},
+      \exists \epsilon>0, \text{ s.t. } \forall \delta>0 
+    \\
+    & \exists P_n(a,b) \text{ with } h(P_n)<\delta,\ 
+      \text{ s.t. } |S_n(f)-L|\ge \epsilon.
+  \end{align*}
+  
+  If $|L|< \frac{b-a}{2}$,
+  we choose all $x_i^*$'s to be rational
+  so that $f(x_i^*)\equiv 1$;
+  then (\ref{eq:RiemannSum}) yields $S_n(f)=b-a$.
+  For $\epsilon=\frac{b-a}{4}$,
+   the formula $|S_n(f)-L|\ge \epsilon$ clearly holds.
+  
+  If $|L|\ge \frac{b-a}{2}$,
+  we choose all $x_i^*$'s to be irrational
+  so that $f(x_i^*)\equiv 0$;
+  then (\ref{eq:RiemannSum}) yields $S_n(f)=0$.
+  For $\epsilon=\frac{b-a}{4}$,
+   the formula $|S_n(f)-L|\ge \epsilon$ clearly holds.
+\end{exm}
+
+\begin{rem}
+  The difficulty in proving many statements of the $\epsilon$-$\delta$ type
+  lies in how to classify values of the $\forall$ variables
+  for instantiating values of the $\exists$ variables.
+\end{rem}
+
+\begin{defn}
+  \label{def:definiteIntegral}
+  If $f: \mathbb{R}\rightarrow \mathbb{R}$
+   is integrable on $[a, b]$,
+   then the limit of the Riemann sum of $f$
+   is called the \emph{definite integral}
+   of $f$ on $[a, b]$:
+%, written,
+   \begin{equation}
+     \label{eq:definiteIntegral}
+     \int_a^b f(x)\dif x
+     = \lim_{h_n\rightarrow 0} S_n(f).
+%\sum_{i=1}^n f(x_i^*) (x_{i}-x_{i-1}).
+   \end{equation}
+\end{defn}
+
+\begin{thm}
+  A scalar function $f$ is integrable on $[a, b]$
+   if $f\in {\cal C}[a,b]$.
+\end{thm}
+
+\begin{defn}
+  \label{def:monotonicFunctions}
+  A \emph{monotonic} function is a function between ordered sets
+   that either preserves or reverses the given order.
+  In particular,
+   $f:\mathbb{R}\rightarrow\mathbb{R}$
+   is \emph{monotonically increasing}
+   if $\forall x,y$, $x \le y \Rightarrow f(x)\le f(y)$;
+   $f:\mathbb{R}\rightarrow\mathbb{R}$
+   is \emph{monotonically decreasing}
+   if $\forall x,y$, $x \le y \Rightarrow f(x)\ge f(y)$.
+\end{defn}
+
+\begin{rem}
+  The ordered sets in Definition \ref{def:monotonicFunctions}
+  can be posets,
+  but we will limit our attention to chains.
+\end{rem}
+
+\begin{thm}
+  A scalar function is integrable on $[a, b]$
+   if it is monotonic on $[a, b]$.
+\end{thm}
+
+\begin{exc}
+  True or false:
+   a bijective function is either order-preserving
+    or order-reversing?
+\end{exc}
+\begin{solution}
+  False; missing continuity.
+  In other words,
+   a continuous bijective function is either order-preserving
+    or order-reversing.
+\end{solution}
+
+\begin{thm}[Integral mean value]
+  \label{thm:integralMeanValue}
+  Let $w:[a,b]\rightarrow \mathbb{R}^+$
+  be integrable on $[a,b]$. For $f\in {\cal C}[a,b]$,
+  $\exists \xi\in[a,b]$ s.t.
+  \begin{equation}
+    \label{eq:integralMeanValue}
+    \int_a^b w(x)f(x)\dif x = f(\xi) \int_a^b w(x)\dif x.
+  \end{equation}
+\end{thm}
+\begin{proof}
+%    see page 19 on the text.
+  Denote $m=\inf_{x\in[a,b]} f(x)$, $M=\sup_{x\in[a,b]} f(x)$,
+   and $I=\int_a^b w(x)\dif x$.
+  Then $m w(x)\le f(x)w(x) \le M w(x)$ and
+  \begin{equation*}
+    m I \le \int_a^b w(x) f(x) \dif x \le M I.
+  \end{equation*}
+  $w>0$ implies $I\ne 0$, hence
+  \begin{equation*}
+    m \le \frac{1}{I}\int_a^b w(x) f(x) \dif x \le M.
+  \end{equation*}
+  Applying Theorem \ref{thm:intermediateValue}
+   completes the proof.
+\end{proof}
+
+\begin{thm}[First fundamental theorem of calculus]
+  \label{thm:fundamentalThmCalculus1}
+  Let $a<b$ be real numbers.
+  For a continuous function $f: [a,b]\rightarrow \mathbb{R}$
+  that is Riemann integrable, 
+  define a function $F: [a,b]\rightarrow \mathbb{R}$ by
+  \begin{equation}
+    \label{eq:integralOfRiemannIntF}
+    F(x) := \int_a^x f(y) \dif y.
+  \end{equation}
+  Then $F$ is differentiable and
+  \begin{equation}
+    \label{eq:fundamentalThmCalculus1}
+    \forall x_0\in [a,b], \quad
+    F'(x_0) = f(x_0).
+  \end{equation}
+\end{thm}
+
+\begin{thm}[Second fundamental theorem of calculus]
+  \label{thm:fundamentalThmCalculus2}
+  Let $a<b$ be real numbers
+  and let $f: [a,b]\rightarrow \mathbb{R}$
+  be a Riemann integrable function.
+  If $F:[a,b]\rightarrow\mathbb{R}$ is the antiderivative of $f$,
+  i.e. $F'(x)=f(x)$,
+  then
+  \begin{equation}
+    \label{eq:fundamentalThmCalculus2}
+    \int_a^b f = F(b) - F(a).
+  \end{equation}
+\end{thm}
+
+
+\section{Vector calculus}
+\label{sec:sever-vari-diff}
+
+\begin{rem}
+  This section follows \emph{Analysis II} by Tao, Chapter 6.
+\end{rem}
+
+\begin{rem}
+  \label{rem:singleVarDiff2MultiVarDiff}
+  In single variable calculus,
+  the derivative of a function $f$ defined in (\ref{eq:derivative})
+  is equivalent to 
+  \begin{displaymath}
+    f'(x_0)=\lim_{x\rightarrow x_0, x\ne x_0} \frac{f(x)-f(x_0)}{x-x_0}.
+  \end{displaymath}
+  In the several variable case $f: E\rightarrow \mathbb{R}^m$
+  where $E$ is now a subset of $\mathbb{R}^n$,
+  the nominator $f(x)-f(x_0)$ is a vector in $\mathbb{R}^m$
+  and the denominator $x-x_0$ a vector in $\mathbb{R}^n$.
+  It does not make sense to divide the two vectors and
+   taking norms of the two vectors would also be pointless.
+  Therefore a straightforward generalization
+  of the above definition of $f'(x_0)$ would not work.
+
+  The solution is to rewrite the concept of derivative
+  in one dimension so that generalization to multiple dimensions
+  would be much easier.
+  The following lemma is the first step.
+\end{rem}
+
+\begin{lem}
+  \label{lem:derivativeEquiv}
+  For $E\subset \mathbb{R}$, $f: E\rightarrow \mathbb{R}$,
+  $x_0\in E$, and $L\in \mathbb{R}$,
+  the following two statements are equivalent,
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $f$ is differentiable at $x_0$ and $f'(x_0)=L$;
+  \item $\lim_{x\rightarrow x_0, x\in E\setminus\{x_0\}} \frac{|f(x)-
+      f(x_0) - L(x-x_0)|}{|x-x_0|}=0$.
+  \end{enumerate}
+\end{lem}
+
+\begin{exc}
+  Prove Lemma \ref{lem:derivativeEquiv}.
+\end{exc}
+
+\begin{rem}
+  By Lemma \ref{lem:derivativeEquiv},
+  the derivative can be interpreted as the number $L$
+  for which $|f(x)- f(x_0)-L(x-x_0)|$ is small when $x$ tends to $x_0$,
+  even if we divide it by the very small number $|x-x_0|$.
+  In other words, the derivative is the quantity $L$
+  that makes the approximation $f(x)-f(x_0) \approx L(x-x_0)$
+  very accurate.
+\end{rem}
+
+\begin{defn}[Total derivative]
+  \label{def:derivativeNdim}
+  For $E\subset \mathbb{R}^n$, $f: E\rightarrow \mathbb{R}^m$,
+  $x_0\in E$, $f$ is \emph{differentiable at $x_0$ with derivative}
+  $L: \mathbb{R}^n \rightarrow \mathbb{R}^m$
+  if
+  \begin{equation}
+    \label{eq:derivativeNdim}
+    \lim_{x\rightarrow x_0, x\in E\setminus\{x_0\}} \frac{\|f(x)-
+      f(x_0) - L(x-x_0)\|_2}{\|x-x_0\|_2}=0.
+  \end{equation}
+  We denote the derivative of $f$ with $f'(x_0)=L$
+  and also call it the \emph{total derivative of $f$}.
+\end{defn}
+
+\begin{rem}
+  Notice the similarity between (\ref{eq:derivativeNdim})
+  and the statement (b) in Lemma \ref{lem:derivativeEquiv}.
+  The differences are that the derivative is now a linear
+  transformation instead of a real number
+  and that the distance is now measured by the 2-norm of a vector
+  instead of the absolute value of a real number.  
+\end{rem}
+
+\begin{exm}
+  For $f: \mathbb{R}^2\rightarrow \mathbb{R}^2$
+  and $L: \mathbb{R}^2\rightarrow \mathbb{R}^2$,
+  \begin{equation}
+    \label{eq:fSqaureComp}
+    f(x,y):=(x^2, y^2), \ \ L(x,y):=(2x, 4y), 
+  \end{equation}
+  we claim that $f$ is differentiable at $(1,2)$
+  with \mbox{$f'(x_0)=L$} by computing
+  \begin{align*}
+    &\lim_{\stackrel{(x,y)\rightarrow (1,2)}{(x,y)\ne(1,2)}}
+    \frac{\|f(x,y)- f(1,2) - L((x,y)-(1,2))\|_2}{\|(x,y)-(1,2)\|_2}
+      \\
+    =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
+    \frac{\|f(1+a,2+b)- f(1,2) - L(a,b)\|_2}{\|(a,b)\|_2}
+      \\
+    =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
+    \frac{\|\left((1+a)^2,(2+b)^2\right)- (1,4) - (2a,4b)\|_2}{\|(a,b)\|_2}
+      \\
+    =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
+    \frac{\|(a^2, b^2)\|_2}{\|(a,b)\|_2}
+    \le \lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
+          \left(\frac{\|(a^2, 0)\|_2}{\|(a,b)\|_2}
+          +  \frac{\|(0, b^2)\|_2}{\|(a,b)\|_2}\right)
+      \\
+    = &\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
+        \sqrt{a^2 + b^2}
+    = 0.
+  \end{align*}
+\end{exm}
+
+\begin{lem}
+  \label{lem:uniquenessOfDerivatives}
+  Let $E$ be a subset of $\mathbb{R}^n$,
+  $f: E\rightarrow \mathbb{R}^m$ a function,
+  and $x_0\in E$ an interior point of $E$.
+  Suppose $f$ is differentiable at $x_0$ with derivative $L_1$
+  and also differentiable at $x_0$ with derivative $L_2$.
+  Then $L_1=L_2$.
+\end{lem}
+
+\begin{exc}
+  Prove Lemma \ref{lem:uniquenessOfDerivatives}.
+\end{exc}
+
+\begin{rem}
+  Thanks to Lemma \ref{lem:uniquenessOfDerivatives},
+  we have \emph{the} derivative of $f$ at an interior point $x_0$.
+  As another consequence of Lemma \ref{lem:uniquenessOfDerivatives},
+  if $f(x)=g(x)$ for all $x\in E$
+  and $f,g$ are both differentiable at an interior point $x_0$ of $E$,
+  then $f'(x_0)=g'(x_0)$.
+\end{rem}
+
+\begin{defn}[Directional derivative]
+  \label{def:directionalDerivative}
+  Let $E$ be a subset of $\mathbb{R}^n$,
+  $f: E\rightarrow \mathbb{R}^m$ a function,
+  $x_0\in E$ an interior point of $E$,
+  and $\mathbf{v}\in \mathbb{R}^n$ a vector.
+  If the limit
+  \begin{displaymath}
+    \lim_{t\rightarrow 0; t>0, x_0+t\mathbf{v}\in E} \frac{f(x_0+t\mathbf{v}) - f(x_0)}{t}
+  \end{displaymath}
+  exists, we say that $f$ is \emph{differentiable in the direction $\mathbf{v}$
+    at $x_0$},
+  and we denote this limit as
+  \begin{equation}
+    \label{eq:directionalDerivative}
+    D_\mathbf{v} f(x_0) := \lim_{t\rightarrow 0; t>0, x_0+t\mathbf{v}\in E}
+    \frac{f(x_0+t\mathbf{v}) - f(x_0)}{t}.
+  \end{equation}
+\end{defn}
+
+\begin{exm}
+  For $\mathbf{v}=(3,4)$ and $f: \mathbb{R}^2\rightarrow\mathbb{R}^2$ defined in
+  (\ref{eq:fSqaureComp}),
+  we have $D_{\mathbf{v}}f(1,2)=(6,16)$.
+\end{exm}
+
+\begin{exm}
+  For $f: \mathbb{R}\rightarrow\mathbb{R}$,
+  $D_{+1} f(x)$ is the right derivative of $f$ at $x$ (if it exists),
+  and similarly $D_{-1}f(x)$ is the left derivative of $f$ at $x$ (if it exists).
+\end{exm}
+
+\begin{rem}
+  The following lemma connects total derivatives and directional derivatives.
+\end{rem}
+
+\begin{lem}
+  \label{lem:totalDiffImpliesDirectionalDiff}
+  Let $E$ be a subset of $\mathbb{R}^n$,
+  $f: E\rightarrow \mathbb{R}^m$ a function,
+  $x_0\in E$ an interior point of $E$,
+  and $\mathbf{v}\in \mathbb{R}^n$ a vector.
+  If $f$ is differentiable at $x_0$,
+  then $f$ is also differentiable in the direction $\mathbf{v}$ at $x_0$, and
+  \begin{equation}
+    \label{eq:totalDiffImpliesDirectionalDiff}
+    D_\mathbf{v} f(x_0) = f'(x_0) \mathbf{v}.
+  \end{equation}
+\end{lem}
+
+\begin{rem}
+  The converse of Lemma \ref{lem:totalDiffImpliesDirectionalDiff} is
+  false.
+\end{rem}
+
+\begin{defn}[Partial derivative]
+  \label{def:partialDerivative}
+  Let $E$ be a subset of $\mathbb{R}^n$,
+  $f: E\rightarrow \mathbb{R}^m$ a function,
+  $x_0\in E$ an interior point of $E$,
+  and $1\le j \le n$.
+  The \emph{partial derivative of $f$ with respect to the $x_j$
+    variable at} $x_0$ is defined by
+  \begin{equation}
+    \label{eq:partialDerivative}
+    \begin{array}{ll}
+    \frac{\partial f}{\partial x_j}(x_0) &:=
+    \lim_{t\rightarrow 0; t>0, x_0+te_j\in E} \frac{f(x_0+te_j) -
+      f(x_0)}{t} \\
+      &= \frac{\dif}{\dif t} \left. f(x_0+te_j)\right|_{t=0}
+    \end{array}
+  \end{equation}
+  provided that the limit exists.
+  Here $e_j$ is the $j$th standard basis vector of $\mathbb{R}^n$.
+\end{defn}
+
+\begin{rem}
+  By Lemma \ref{lem:totalDiffImpliesDirectionalDiff},
+  one can write directional derivatives
+  in terms of partial derivatives
+  if the function is actually differentiable at that point.
+  More precisely, for the vector
+  $\mathbf{v}=(v_1, v_2, \ldots, v_n)^T=\sum_j v_j e_j$,
+  we have
+  \begin{displaymath}
+    D_{\mathbf{v}} f(x_0) = f'(x_0) \sum_j v_j e_j = \sum_j v_j
+    f'(x_0) e_j = \sum_j v_j \frac{\partial f}{\partial x_j}(x_0), 
+  \end{displaymath}
+  where the first step follows from Lemma
+  \ref{lem:totalDiffImpliesDirectionalDiff},
+  the second step from $f'(x_0)$ being a linear transformation,
+  and the last step from (\ref{eq:partialDerivative}),
+  (\ref{eq:totalDiffImpliesDirectionalDiff}), and
+  (\ref{eq:directionalDerivative}).
+  In particular, for $m=1$ we have the familar formula
+  \begin{displaymath}
+    D_{\mathbf{v}} f(x_0) = \mathbf{v}\cdot \nabla f(x_0),
+  \end{displaymath}
+  where the \emph{gradient} of the function
+  $f: \mathbb{R}^n\rightarrow \mathbb{R}$ is defined as
+  \begin{displaymath}
+    \nabla f := \left(
+      \frac{\partial f}{\partial x_1}, 
+      \frac{\partial f}{\partial x_2}, 
+      \ldots,
+      \frac{\partial f}{\partial x_n}
+      \right).
+  \end{displaymath}
+\end{rem}
+
+\begin{exc}
+  Show that the existence of partial derivatives at $x_0$
+  does not imply that the function is differentiable at $x_0$
+  by considering the differentiability of
+  the following function $f: \mathbb{R}^2\rightarrow \mathbb{R}$
+  at (0,0). 
+  \begin{displaymath}
+    f(x,y) =
+    \begin{cases}
+      \frac{x^3}{x^2+y^2} & \text{if } (x,y)\ne (0,0);
+      \\
+      0 & \text{if } (x,y)= (0,0).
+    \end{cases}
+  \end{displaymath}
+\end{exc}
+\begin{solution}
+The function is not differentiable at (0,0),
+  although it is differentiable in every direction $\mathbf{v}\in
+  \mathbb{R}^2$ at $(0,0)$.
+  Indeed, for $\mathbf{v}=(1,0)$, we have
+  \begin{displaymath}
+    D_{\mathbf{v}} f (0,0) = \lim \frac{f(t,0)-f(0,0)}{t}
+    = 1
+  \end{displaymath}
+  while for $\mathbf{u}=(0,1)$, we have
+  \begin{displaymath}
+    D_{\mathbf{u}} f (0,1) = \lim \frac{f(0,t)-f(0,0)}{t}
+    = 0.
+  \end{displaymath}
+  Hence the limit in (\ref{eq:derivativeNdim}) does not exist.
+\end{solution}
+
+
+\begin{thm}
+  \label{thm:continuousParitialDerivativesImplyDifferentiability}
+  Let $E$ be a subset of $\mathbb{R}^n$,
+  $f: E\rightarrow \mathbb{R}^m$ a function,
+  $F$ a subset of $E$,
+  and $x_0\in E$ an interior point of $F$.
+  If all the partial derivatives $\frac{\partial f}{\partial x_j}$
+  exist on $F$ and are continuous at $x_0$,
+  then $f$ is differentiable at $x_0$,
+  and the linear transformation
+  $f'(x_0): \mathbb{R}^n \rightarrow \mathbb{R}^m$ is defined by
+  \begin{equation}
+    \label{eq:continuousParitialDerivativesImplyDifferentiability}
+    f'(x_0) (\mathbf{v})
+    = \sum_{j=1}^n v_j \frac{\partial f}{\partial x_j} (x_0).
+  \end{equation}
+\end{thm}
+
+
+\begin{defn}
+  The \emph{derivative matrix} or \emph{differential matrix}
+  or \emph{Jacobian matrix} of a differentiable function
+  \mbox{$f: \mathbb{R}^n\rightarrow\mathbb{R}^m$}
+  is a $m\times n$ matrix,
+  \begin{equation}
+    \label{eq:JacobianMatrix}
+    Df :=
+    \begin{pmatrix}
+      \frac{\partial f_1}{\partial x_1}
+      &
+      \frac{\partial f_1}{\partial x_2}
+      & \cdots &
+      \frac{\partial f_1}{\partial x_n}
+      \\
+      \frac{\partial f_2}{\partial x_1}
+      &
+      \frac{\partial f_2}{\partial x_2}
+      & \cdots &
+      \frac{\partial f_2}{\partial x_n}
+      \\
+      \vdots & \vdots & \ddots & \vdots &
+      \\
+      \frac{\partial f_m}{\partial x_1}
+      &
+      \frac{\partial f_m}{\partial x_2}
+      & \cdots &
+      \frac{\partial f_m}{\partial x_n}
+    \end{pmatrix}.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  For a row vector $\mathbf{v}\in \mathbb{R}^n$,
+  we have
+  \begin{displaymath}
+%    \label{eq:relationsOfMatrixAndDerivatives}
+    (D_{\mathbf{v}} f(x_0))^T = (f'(x_0)\mathbf{v})^T = D f(x_0) \mathbf{v}^T.
+  \end{displaymath}
+  We can also write $D f$ as
+  \begin{align*}
+    Df(x_0) &= \left(
+      \frac{\partial f_1}{\partial x_1},
+      \frac{\partial f_1}{\partial x_2},
+      \ldots, 
+      \frac{\partial f_1}{\partial x_n}\right)
+    \\
+    &=
+      \begin{pmatrix}
+        \nabla f_1(x_0)
+        \\
+        \nabla f_2(x_0)
+        \\
+        \vdots
+        \\
+        \nabla f_m(x_0)
+      \end{pmatrix}.
+  \end{align*}
+\end{rem}
+
+\begin{thm}[Implicit function theorem]
+  \label{thm:implicitFunction}
+  Suppose a ${\cal C}^1$ function $\mathbf{g}: \mathbb{R}^m\times
+  \mathbb{R}^n\to \mathbb{R}^n$
+  satisfies
+  \begin{enumerate}[(i)]\itemsep0em
+  \item
+    $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$
+    where $(\mathbf{x}_0, \mathbf{y}_0)\in \mathbb{R}^m\times
+    \mathbb{R}^n$; 
+  % \item
+  %   $\mathbf{g}$ is $\mathcal{C}^r$ in a neighborhood of $(\mathbf{x}_0, \mathbf{y}_0)$;
+  \item
+    the Jacobian matrix $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
+  \end{enumerate}
+  Then there is a neighborhood $U$ of $\mathbf{x}_0$ and
+  a unique ${\cal C}^1$ function $\mathbf{f}: U\to \mathbb{R}^n$
+  such that
+  $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$
+  and $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$
+  for all $\mathbf{x}\in U$.
+  Furthermore, if $\mathbf{g}$ is analytic or ${\cal C}^p$,
+  then $\mathbf{f}$ is analytic or ${\cal C}^p$.
+\end{thm}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../numPDEs"
+%%% End:
+
+% LocalWords:  Lipschitz pointwise boundedness integrable bijective

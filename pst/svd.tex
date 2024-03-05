@@ -1,0 +1,46 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{pstricks,pst-eps,pst-tree}
+\usepackage{CJKutf8}
+
+\pagestyle{empty}
+\begin{document}
+\begin{CJK*}{UTF8}{gbsn}
+\begin{TeXtoEPS}
+
+  \begin{pspicture}(-5.6,-2.1)(5.5,2.1)
+    %grids
+    
+    \psset{linewidth=0.7pt}
+    \psline(-5.5,0)(-1.5,0)
+    \psline(-3.5,-2)(-3.5,2)
+    \pscircle(-3.5,0){1.5}
+    \psline[origin={-3.5,0}]{<->}(1.5;150)(0,0)(1.5;60)
+
+    \psline(5.5,0)(1.5,0)
+    \psline(3.5,-2)(3.5,2)
+    \pscustom[origin={3.5,0}]{
+      \rotate{45}
+      \psellipse(0,0)(2.5,1.2)}
+    \pscustom[origin={3.5,0}]{
+      \rotate{45}
+      \psline{<->}(2.5;180)(0,0)(1.2;90)}
+
+    \psline{->}(-0.3,0)(0.3,0)
+    
+%    \small
+
+    \uput[dl](-4.8,-0.65){$S$}
+    \uput[r](-4.35,.52){$\mathbf{u}_1$}
+    \uput[r](-3.12,.7){$\mathbf{u}_2$}
+    \uput[u](0,0){$A$}
+    \uput[dr](4.35,-0.65){$AS$}
+    \uput[r](2.4,-1.1){$\sigma_1\mathbf{v}_1$}
+    \uput[dl](3.2,0.5){$\sigma_2\mathbf{v}_2$}
+
+  \end{pspicture}
+
+\end{TeXtoEPS}
+\end{CJK*}
+\end{document}

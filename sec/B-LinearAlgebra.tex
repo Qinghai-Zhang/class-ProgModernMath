@@ -1,0 +1,5345 @@
+\begin{rem}
+  In this appendix, we follow
+  \cite{axler15:_linear_algeb_done_right}
+  for most contents.
+  % who advertises postponing the learning of determinants
+  % until the students get a solid grasp
+  % on linear spaces and inner product spaces.
+  % This compares drastically to the traditional pedagogy
+  % where determinant is the starting point. % of linear algebra.
+  See the book by \cite{strang16:_introd_linear_algeb}
+  for a more elementary text on linear algebra.
+\end{rem}
+
+
+\section{Vector spaces}
+\label{sec:vector-spaces}
+
+\begin{defn}
+  \label{def:field}
+  % A \emph{field} is a commutative division ring.
+  % More commonly,
+  A \emph{field} $\mathbb{F}$ is a set together with two binary operations,
+  usually called ``addition'' and ``multiplication''
+  and denoted by ``$+$'' and ``$*$'',
+  such that $\forall a,b,c\in\mathbb{F}$,
+  the following axioms hold,
+  \begin{itemize}\itemsep0em
+  \item commutativity: $a+b=b+a$, $ab=ba$;
+  \item associativity: $a+(b+c)=(a+b)+c$, $a(bc)=(ab)c$;
+  \item identity: $a+0=a$, $a1=a$; % $0\ne 1$;
+  \item invertibility: $a+(-a)=0$, $a a^{-1}=1$ ($a\ne 0$);
+  \item distributivity: $a(b+c)=ab+ac$.
+  \end{itemize}
+\end{defn}
+
+\begin{defn}
+  \label{def:vectorSpace}
+  A \emph{vector space} or \emph{linear space}
+  over a field $\mathbb{F}$ is a set ${\cal V}$
+  together with two binary operations
+  ``$+$'' and ``$\times$''
+  respectively called vector addition and scalar multiplication
+  that satisfy the following axioms:
+  \begin{enumerate}[({VSA}-1)]\itemsep0em
+  \item commutativity\\
+    $\forall \mathbf{u},\mathbf{v}\in {\cal V}$,\ 
+    $\mathbf{u}+\mathbf{v}=\mathbf{v}+\mathbf{u}$;
+  \item associativity\\
+    $\forall \mathbf{u},\mathbf{v}, \mathbf{w}\in {\cal V}$,\ 
+    $(\mathbf{u}+\mathbf{v})+\mathbf{w}
+    =\mathbf{u}+(\mathbf{v}+\mathbf{w})$;
+  \item compatibility\\
+    $\forall \mathbf{u}\in {\cal V}$, $\forall a,b\in \mathbb{F}$, 
+    $(ab)\mathbf{u} = a(b\mathbf{u})$;
+  \item additive identity\\
+    $\exists \mathbf{0}\in {\cal V}$,
+    $\forall \mathbf{u}\in{\cal V}$,
+    s.t. $\mathbf{u}+\mathbf{0}=\mathbf{u}$;
+  \item additive inverse\\
+    $\forall \mathbf{u}\in{\cal V}$,
+    $\exists \mathbf{v}\in {\cal V}$,
+    s.t. $\mathbf{u}+\mathbf{v}=\mathbf{0}$;
+  \item multiplicative identity\\
+    $\exists 1 \in \mathbb{F}$, s.t.
+    $\forall \mathbf{u}\in{\cal V}$,\ 
+    $1\mathbf{u}=\mathbf{u}$;
+  \item distributive laws\\
+    \begin{equation*}
+      \forall \mathbf{u},\mathbf{v}\in {\cal V},\ 
+      \forall a,b\in \mathbb{F},\ 
+      \left\{
+        \begin{array}{l}
+          (a+b)\mathbf{u}=a\mathbf{u}+b\mathbf{u}, \\
+          a(\mathbf{u}+\mathbf{v})=a\mathbf{u}+a\mathbf{v}.
+        \end{array}
+      \right.
+    \end{equation*}
+  \end{enumerate}
+  The elements of ${\cal V}$ are called \emph{vectors}
+  and the elements of $\mathbb{F}$ are called \emph{scalars}.
+\end{defn}
+
+\begin{defn}
+  \label{def:vectorSpacesRandC}
+  A \emph{real vector space}
+  or a \emph{complex vector space} is
+  a vector space with $\mathbb{F}=\mathbb{R}$
+  or $\mathbb{F}=\mathbb{C}$,
+  respectively.
+\end{defn}
+
+\begin{exc}
+  \label{exc:complexVecSpaceIsRealVecSpace}
+  Show that a complex vector space
+  always induces another real vector space.
+\end{exc}
+\begin{solution}
+  % By Definitions \ref{def:vectorSpace}
+  % and \ref{def:vectorSpacesRandC}, 
+  $\mathbb{R}$, as a subspace of $\mathbb{C}$, 
+  is closed under multiplication
+  and we can thus restrict the multiplication
+  in Definitions \ref{def:vectorSpace} to $\mathbb{R}$.
+\end{solution}
+
+\begin{rem}
+  Clearly the converse of Exercise
+  \ref{exc:complexVecSpaceIsRealVecSpace}
+  does not hold.
+  We will limit ourselves to these two vector spaces.
+\end{rem}
+
+\begin{exm}
+  The simplest vector space is $\{\mathbf{0}\}$.
+  Another simple example of a vector space over a field $\mathbb{F}$
+  is $\mathbb{F}$ itself,
+  equipped with its standard addition and multiplication.
+\end{exm}
+
+\begin{defn}
+  \label{def:algebra}
+  An \emph{algebra} is a vector space ${\cal V}$
+  with an associative and distributive multiplication
+  ${\cal V}\times {\cal V} \rightarrow {\cal V}$, 
+  \begin{align}\nonumber
+    &\forall u,v,w\in {\cal V},\ \forall \alpha\in \mathbb{F},
+    \\ \label{eq:algebra}
+    &\left\{
+      \begin{array}{l}
+        u(vw) = (uv)w,
+        \\
+        (u+v)w = uw + vw,\ \ 
+        u(v+w) = uv + uw,
+        \\
+        \alpha(uv) = u(\alpha v) = (\alpha u) v.
+      \end{array}
+    \right.
+  \end{align}
+  The \emph{multiplicative identity}
+  is the element $e\in {\cal V}$ such that
+  $\forall v\in {\cal V}$, $ev=v=ve$.
+\end{defn}
+
+\begin{rem}
+  Different from a normed space such as $\mathbb{R}^n$,
+  a linear spaces of functions has 
+  composition a natural \emph{vector} multiplication
+  with the identity function as the multiplicative identity.
+  In contrast to the vector addition,
+   this vector multiplication needs not be commutative.
+\end{rem}
+
+
+\subsection{Subspaces}
+
+\begin{defn}
+  A subset ${\cal U}$ of ${\cal V}$ is called a \emph{subspace}
+  of ${\cal V}$ if ${\cal U}$ is also a vector space
+  when equipped with the same addition and scalar multiplication on $V$.
+\end{defn}
+
+\begin{defn}
+  Suppose ${\cal U}_1, \ldots, {\cal U}_m$ are subsets of ${\cal V}$.
+  The \emph{sum} of ${\cal U}_1, \ldots, {\cal U}_m$
+  is the set of all possible sums of elements
+  of ${\cal U}_1, \ldots, {\cal U}_m$:
+  \begin{equation}
+    \label{eq:sumOfSubsets}
+    {\cal U}_1 + \ldots + {\cal U}_m
+    := \left\{
+      \sum_{j=1}^m\mathbf{u}_j : \mathbf{u}_j \in {\cal U}_j
+      \right\}.
+  \end{equation}
+\end{defn}
+
+\begin{exm}
+  For
+  ${\cal U}=\{(x,x,y,y)\in \mathbb{F}^4: x,y\in \mathbb{F}\}$
+  and 
+  ${\cal W}=\{(x,x,x,y)\in \mathbb{F}^4: x,y\in \mathbb{F}\}$,
+  we have
+  \begin{displaymath}
+    {\cal U}+{\cal W}=\{(x,x,z,y)\in \mathbb{F}^4: x,y,z\in \mathbb{F}\}.
+  \end{displaymath}
+\end{exm}
+
+\begin{lem}
+  Suppose ${\cal U}_1, \ldots, {\cal U}_m$ are subspaces of ${\cal V}$.
+  Then ${\cal U}_1 + \ldots + {\cal U}_m$ is the smallest
+  subspace of ${\cal V}$ that contains
+  ${\cal U}_1, \ldots, {\cal U}_m$.
+\end{lem}
+
+\begin{defn}
+  \label{def:directSum}
+  Suppose ${\cal U}_1, \ldots, {\cal U}_m$ are subspaces of ${\cal V}$.
+  The sum ${\cal U}_1 + \ldots + {\cal U}_m$
+  is called a \emph{direct sum}
+  if each element in ${\cal U}_1 + \ldots + {\cal U}_m$
+  can be written in only one way as a sum
+  $\sum_{j=1}^m\mathbf{u}_j$ with $\mathbf{u}_j \in {\cal U}_j$
+  for each $j=1, \ldots, m$.
+  In this case we write the direct sum as
+  ${\cal U}_1 \oplus \ldots \oplus {\cal U}_m$.
+\end{defn}
+
+\begin{exc}
+  Show that ${\cal U}_1 + {\cal U}_2 + {\cal U}_3$
+  is not a direct sum:
+  \begin{align*}
+    {\cal U}_1 &= \{(x,y,0)\in \mathbb{F}^3: x,y\in \mathbb{F}\},
+    \\
+    {\cal U}_2 &= \{(0,0,z)\in \mathbb{F}^3: z\in \mathbb{F}\},
+    \\
+    {\cal U}_3 &= \{(0,y,y)\in \mathbb{F}^3: y\in \mathbb{F}\}.
+  \end{align*}
+\end{exc}
+
+\begin{lem}
+  Suppose ${\cal U}_1, \ldots, {\cal U}_m$ are subspaces of ${\cal V}$.
+  Then ${\cal U}_1 + \ldots + {\cal U}_m$
+  is a direct sum if and only if
+  the only way to write $\mathbf{0}$ as a sum 
+  $\sum_{j=1}^m\mathbf{u}_j$,
+  where $\mathbf{u}_j \in {\cal U}_j$ for each $j=1, \ldots, m$,
+  is by taking each $\mathbf{u}_j$ equal to $\mathbf{0}$.
+\end{lem}
+
+\begin{thm}
+  \label{thm:directSumIFFintersection0}
+  Suppose ${\cal U}$ and ${\cal W}$ are subspaces of ${\cal V}$.
+  Then ${\cal U}+{\cal W}$ is a direct sum
+  if and only if ${\cal U}\cap {\cal W}=\{\mathbf{0}\}$.
+\end{thm}
+
+\subsection{Span and linear independence}
+\label{sec:span-line-indep}
+
+\begin{defn}
+  \label{def:listN}
+  % For $n\in\mathbb{N}$, 
+  A \emph{list of length $n$} or \emph{$n$-tuple}
+  is an ordered collection of $n$ elements
+  (which might be numbers, other lists, or more abstract entities)
+  separated by commas and surrounded by parentheses:
+  % \begin{equation*}
+  $\mathbf{x} = (x_1, x_2, \ldots, x_n)$.
+  % \end{equation*}
+\end{defn}
+
+\begin{rem}
+  According to Definition \ref{def:listN},
+  two lists are equal iff
+  they have the same length and the same elements in the same order.
+  Hence the two lists $(3,5)$ and $(5,3)$ are not equal
+  while the two sets $\{3,5\}$ and $\{5,3\}$ are equal.
+  Different from a set,
+  a list must have finite length and linear ordering;
+  in addition, elements of a list may be repeated.
+\end{rem}
+
+\begin{defn}
+  \label{def:coordinateSpace}
+  A vector space composed of all the $n$-tuples of a field
+  $\mathbb{F}$
+  is known as a \emph{coordinate space},
+  denoted by $\mathbb{F}^n$ ($n\in \mathbb{N}^+$).
+\end{defn}
+
+\begin{exm}
+  The properties of forces or velocities in the real world
+  can be captured by a coordinate space $\mathbb{R}^2$ or $\mathbb{R}^3$.
+\end{exm}
+
+\begin{exm}
+  The set of continuous real-valued functions
+  on the interval $[a,b]$ forms a real vector space.
+\end{exm}
+
+\begin{ntn}
+  \label{ntn:powerSetNotation}
+  For a set ${\cal S}$, define a vector space
+  \begin{equation*}
+    \mathbb{F}^{{\cal S}} := \{ f:{\cal S}\rightarrow \mathbb{F}\}.
+  \end{equation*}
+  $\mathbb{F}^n$ is a special case of $\mathbb{F}^{{\cal S}}$
+  because $n$ can be regarded as the set $\{1,2,\ldots,n\}$
+  and each element in $\mathbb{F}^n$
+  can be considered as a function $\{1,2,\ldots,n\}\mapsto \mathbb{F}$.
+\end{ntn}
+
+\begin{defn}
+  A \emph{linear combination} of a list
+  of vectors $\{\mathbf{v}_i\}$ is a vector of the form
+  $\sum_ia_i\mathbf{v}_i$ where $a_i\in \mathbb{F}$.
+\end{defn}
+
+\begin{exm}
+  $(17,-4,2)$ is a linear combination of $(2,1,-3),(1,-2,4)$ because
+  \begin{equation*}
+    (17,-4,2) = 6(2,1,-3)+5(1,-2,4).
+  \end{equation*}
+\end{exm}
+
+\begin{exm}
+  $(17,-4,5)$ is not a linear combination of $(2,1,-3),(1,-2,4)$
+  because there do not exist numbers $a_1, a_2$ such that
+  \begin{equation*}
+    (17,-4,5) = a_1(2,1,-3)+a_2(1,-2,4).
+  \end{equation*}
+  Solving from the first two equations yields
+  $a_1=6$, $a_2=5$, but $5\ne -3\times 6 + 4\times 5$.
+\end{exm}
+
+\begin{defn}
+  \label{def:span}
+  The \emph{span} of a list of vectors $(\mathbf{v}_i)$
+  is the set of all linear combinations of $(\mathbf{v}_i)$,
+  \begin{equation}
+    \label{eq:span}
+    \Span(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_m)
+    = \left\{\sum_{i=1}^m a_i\mathbf{v}_i :\  a_i\in \mathbb{F}\right\}.
+  \end{equation}
+  In particular, the span of the empty set is $\{\mathbf{0}\}$.
+  We say that $(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_m)$
+  \emph{spans} ${\cal V}$
+  if ${\cal V}=\Span(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_m)$.
+\end{defn}
+
+\begin{exm}
+  \begin{align*}
+    (17,-4,2) &\in \Span((2,1,-3), (1,-2,4)) \\
+    (17,-4,5) &\not\in \Span((2,1,-3), (1,-2,4))
+  \end{align*}
+\end{exm}
+
+\begin{defn}
+  A vector space ${\cal V}$ is called \emph{finite dimensional}
+  if some list of vectors span ${\cal V}$; otherwise
+  it is \emph{infinite dimensional}.
+\end{defn}
+
+\begin{exm}
+  \label{exm:polynomial-spaces}
+  Let $\mathbb{P}_m(\mathbb{F})$ denote the set of all polynomials
+  with coefficients in $\mathbb{F}$ and degree at most $m$,
+  \begin{equation}
+    \label{eq:polynomialSpace}
+    \mathbb{P}_m(\mathbb{F}) = \left\{
+      p:\mathbb{F}\rightarrow\mathbb{F};\ 
+      p(z) = \sum_{i=0}^m a_i z^i, a_i\in \mathbb{F} \right\}.
+  \end{equation}
+  Then $\mathbb{P}_m(\mathbb{F})$ is a finite-dimensional vector space
+  for each non-negative integer $m$.
+  The set of all polynomials with coefficients in $\mathbb{F}$,
+  % In particular,
+  denoted by $\mathbb{P}(\mathbb{F}):=\mathbb{P}_{+\infty}(\mathbb{F})$, 
+  is infinite-dimensional.
+  Both are subspaces of $\mathbb{F}^{\mathbb{F}}$
+  for $\mathbb{F}=\mathbb{R}$ or $\mathbb{C}$.
+  % 
+  % see Example \ref{ntn:powerSetNotation}.
+\end{exm}
+
+\begin{defn}
+  \label{def:linearIndependence}
+  A list of vectors $(\mathbf{v}_1, \mathbf{v}_2, \ldots,
+  \mathbf{v}_m)$
+  in ${\cal V}$ is called \emph{linearly independent}
+  iff
+  \begin{equation}
+    \label{eq:linearIndependent}
+    a_1 \mathbf{v}_1 +\ldots + a_m \mathbf{v}_m = \mathbf{0}
+    \ \Rightarrow\  a_1=\cdots=a_m=0.
+    % \forall a_i\in \mathbb{F},\ 
+    % \sum_{i=1}^m a_i \mathbf{v}_i = \mathbf{0}
+    % \ \Rightarrow\ \forall i, a_i=0.
+  \end{equation}
+  Otherwise the list of vectors is called \emph{linearly dependent}.
+\end{defn}
+
+\begin{exm}
+  The empty list is declared to be linearly independent.
+  A list of one vector ($\mathbf{v}$) is linearly independent
+  iff $\mathbf{v}\ne \mathbf{0}$.
+  A list of two vectors is linearly independent iff neither vector
+  is a scalar multiple of the other.
+\end{exm}
+
+\begin{exm}
+  The list $(1,z,\ldots,z^m)$ is linearly independent in 
+  $\mathbb{P}_{m}(\mathbb{F})$ for each $m\in \mathbb{N}$.
+\end{exm}
+
+\begin{exm}
+  $(2,3,1)$, $(1,-1,2)$, and $(7,3,8)$ is linearly dependent in
+  $\mathbb{R}^3$
+  because
+  \begin{equation*}
+    2(2,3,1)+3(1,-1,2)+(-1)(7,3,8)=(0,0,0).
+  \end{equation*}
+\end{exm}
+
+\begin{exm}
+  Every list of vectors containing the $\mathbf{0}$ vector
+  is linearly dependent.
+\end{exm}
+
+\begin{lem}[Linear dependence lemma]
+  Suppose \mbox{$V=(\mathbf{v}_1,\mathbf{v}_2,\cdots,\mathbf{v}_m)$}
+  is a linearly dependent list in ${\cal V}$.
+  Then there exists $j\in \{1,2,\ldots,m\}$ such that
+  \begin{itemize}\itemsep0em
+  \item $\mathbf{v}_j\in \Span(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_{j-1})$;
+  \item if the $j$th term is removed from $V$,
+    the span of the remaining list equals $\Span(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_{m})$.
+  \end{itemize}
+\end{lem}
+
+\begin{lem}
+  \label{lem:lengthOfIndependentAndSpanningLists}
+  In a finite-dimensional vector space, the length
+  of every linearly independent list of vectors
+  is less than or equal to the length of every
+  spanning list of vectors.
+\end{lem}
+
+
+\subsection{Bases}
+\label{sec:bases}
+
+\begin{defn}
+  \label{defn:basis}
+  A \emph{basis} of a vector space ${\cal V}$ 
+  is a list of vectors in ${\cal V}$ 
+  that is linearly independent
+  and spans ${\cal V}$.
+\end{defn}
+
+\begin{defn}
+  \label{def:standardBasis}
+  The \emph{standard basis} of $\mathbb{F}^n$ is the list of vectors
+  \begin{equation}
+    \label{eq:standardBasis}
+    (1,0,\cdots,0)^T,\  (0,1,0,\cdots,0)^T,\ 
+    \ldots,\ (0,\cdots,0, 1)^T.
+  \end{equation}
+\end{defn}
+
+\begin{exm}
+  $(z^0, z^1, \ldots, z^m)$ is
+  a basis of $\mathbb{P}_m(\mathbb{F})$
+  in (\ref{eq:polynomialSpace}).
+\end{exm}
+
+\begin{lem}
+  A list of vectors ($\mathbf{v}_1, \ldots, \mathbf{v}_n$) is
+  a basis of ${\cal V}$ iff every vector $\mathbf{u}\in {\cal V}$
+  can be written uniquely as
+  \begin{equation}
+    \label{eq:basis}
+    \mathbf{u} = \sum_{i=1}^n a_i \mathbf{v}_i,
+  \end{equation}
+  where $a_i\in \mathbb{F}$.
+\end{lem}
+
+\begin{lem}
+  Every spanning list in a vector space ${\cal V}$ can be reduced
+  to a basis of ${\cal V}$.
+\end{lem}
+
+\begin{lem}
+  \label{lem:linearIndependentListExtendableToBasis}
+  Every linearly independent list of vectors
+  in a finite-dimensional vector space
+  can be extended to a basis of that vector space.
+\end{lem}
+
+
+\subsection{Dimension}
+
+\begin{lem}
+  Any two bases of a finite-dimensional vector space
+  have the same length.
+\end{lem}
+\begin{proof}
+  Suppose $B_1$ and $B_2$ are two bases of $V$.
+  Then $B_1$ is linearly independent in $V$
+  and $B_2$ spans $V$.
+  By Lemma \ref{lem:lengthOfIndependentAndSpanningLists},
+  the length of $B_1$ is no greater than $B_2$.
+  The proof is completed by switching
+  the roles of $B_1$ and $B_2$.
+\end{proof}
+
+\begin{defn}
+  The \emph{dimension} of a finite-dimensional vector space
+  ${\cal V}$,
+  denoted $\dim {\cal V}$,
+  is the length of any basis of the vector space.
+\end{defn}
+
+\begin{rem}
+  The above definition is well defined because
+  any two bases of a finite-dimensional vector space
+  have the same length.
+\end{rem}
+
+\begin{lem}
+  \label{lem:spanningListAndDimImpliesBasis}
+  If ${\cal V}$ is finite-dimensional,
+  then every spanning list of vectors in ${\cal V}$
+  with length $\dim {\cal V}$
+  is a basis of ${\cal V}$.
+\end{lem}
+
+\begin{lem}
+  \label{lem:linearIndependenceAndDimImpliesBasis}
+  If ${\cal V}$ is finite-dimensional,
+  then every linearly independent list of vectors in ${\cal V}$
+  with length $\dim {\cal V}$
+  is a basis of ${\cal V}$.
+\end{lem}
+
+\begin{rem}
+  Why do we care so much about bases of a vector space?
+  Because a basis greatly reduces the complexity
+  of dealing with a vector space.
+  In fact, it reduces the $O(\infty)$ complexity
+  of the vector space
+  to the $O(N)$ complexity
+  of the basis.
+  As another example,
+  the Riesz representation theorem \ref{thm:RieszRep}
+  reduces the $O(\infty^2)$ complexity
+  (accoding to Axiom \ref{axm:multiplicationPrinciple})
+  to the $O(1)$ complexity of taking
+  inner product to a single element.
+\end{rem}
+
+
+\section{Linear maps}
+\label{sec:linear-maps}
+
+\begin{defn}
+  \label{def:linearMap}
+  A \emph{linear map} or \emph{linear transformation}
+  between two vector spaces ${\cal V}$ and ${\cal W}$
+  is a function $T: {\cal V}\rightarrow{\cal W}$
+  that satisfies
+  \begin{enumerate}[(LNM-1)]\itemsep0em
+    \itemsep0em
+  \item additivity\\
+    $\forall \mathbf{u}, \mathbf{v}\in {\cal V}$,\ 
+    $T(\mathbf{u}+\mathbf{v}) = T\mathbf{u} + T\mathbf{v}$;
+  \item homogeneity\\
+    $\forall a\in \mathbb{F}$, $\forall\mathbf{v}\in{\cal V}$,\ 
+    $T(a\mathbf{v})=a(T\mathbf{v})$,
+  \end{enumerate}
+  where $\mathbb{F}$ is a scalar field.
+%  of ${\cal V}$ and ${\cal W}$.
+  In particular, a linear map $T: {\cal V}\rightarrow{\cal W}$
+  is called a \emph{(linear) operator} if ${\cal W}={\cal V}$.
+\end{defn}
+
+\begin{ntn}
+  \label{ntn:spaceOfLinearMaps}  
+  The set of all linear maps from ${\cal V}$ to ${\cal W}$
+  is denoted by ${\cal L}({\cal V}, {\cal W})$.
+  The set of all linear operators from ${\cal V}$ to itself
+  is denoted by ${\cal L}({\cal V})$.
+\end{ntn}
+
+\begin{exm}
+  \label{exm:polynomialDiffIsLinearMap}
+  The differentiation map 
+  $D\in {\cal L}(\mathbb{P}(\mathbb{R}))$
+  given by $D p = p'$
+  is a linear map. 
+\end{exm}
+
+\begin{exm}
+  ${\cal L}(\mathbb{F}^n, \mathbb{F}^m)\simeq \mathbb{F}^{m\times n}$
+  is a vector space with the zero map $\mathbf{0}$
+  as the additive identity.
+\end{exm}
+
+% \begin{exm}
+%   \label{exm:homomorphismAsLinearMaps}
+%   For two groups $(G_1,+)$, $(G_2,+)$
+%   as described in Example \ref{exm:groupAsVectorSpace},
+%   a homomorphism $f:G_1\rightarrow G_2$
+%   can be considered as a linear map from $G_1$ to $G_2$.
+%   In this context,
+%   the homomorphism condition implies (LNM-1,2).
+% \end{exm}
+
+\begin{lem}
+  The set ${\cal L}({\cal V}, {\cal W})$,
+  equipped with
+  scalar multiplication
+  $(aT)\mathbf{v}= a(T\mathbf{v})$
+  and vector addition
+  \mbox{$(S+T)\mathbf{v} = S\mathbf{v}+ T\mathbf{v}$},
+  is a vector space.
+\end{lem}
+\begin{proof}
+  The scalar field $\mathbb{F}$ of ${\cal L}({\cal V}, {\cal W})$
+  is the same as that of ${\cal V}$ and ${\cal W}$.
+  So multiplicative identity is still 1,
+  the same as that of $\mathbb{F}$.
+  However, the additive identity is the zero map
+  $\mathbf{0} \in {\cal L}({\cal V}, {\cal W})$.
+\end{proof}
+
+\begin{defn}
+  The \emph{identity map}, denoted $I$,
+  is the function on a vector space
+  that assigns to each element the same element:
+  \begin{equation}
+    \label{eq:identityMap}
+    I\mathbf{v} = \mathbf{v}.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:linearFunctionals}
+  A \emph{complex linear functional} is
+  a linear map $T: {\cal V}\rightarrow \mathbb{C}$
+  with $\mathbb{C}$ being the underlying field of ${\cal V}$. 
+  A \emph{real linear functional}
+  is a map $T: {\cal V}\rightarrow \mathbb{R}$
+  such that (LNM-1) and (LNM-2) in Definition \ref{def:linearMap}
+  hold for $\mathbb{F}=\mathbb{R}$.
+\end{defn}
+
+\begin{rem}
+  By Definition \ref{def:linearFunctionals},
+  the domain ${\cal V}$ of a complex linear functional $T: {\cal V}\rightarrow \mathbb{C}$
+  must be a complex vector space. 
+  In contrast,
+  the domain ${\cal V}$ of a real linear functional
+  $T: {\cal V}\rightarrow \mathbb{R}$, 
+  can be a complex vector space
+  or a real vector space,
+  i.e., the underlying field of ${\cal V}$
+  can be $\mathbb{C}$ or $\mathbb{R}$.
+  This flexibility is a consequence of the fact
+  that a complex vector space is also a real vector space.
+\end{rem}
+
+\begin{lem}
+  \label{lem:complexLinearFuncRealPart}
+  Let $V$ be a complex vector space
+  and $f$ a complex linear functional on $V$.
+  Then the real part $\Rez f (x) = u(x)$ is related to $f$
+  by
+  \begin{equation}
+    \label{eq:complexLinearFuncRealPart}
+    \forall x\in V, \quad f(x) = u(x) - \ii u(\ii x).
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Any $\alpha,\beta\in \mathbb{R}$
+  and $z=\alpha+\ii \beta\in \mathbb{C}$ satisfy
+  \begin{displaymath}
+    z = \Rez z - \ii \Rez (\ii z).
+  \end{displaymath}
+  Set $z=f(x)$ and we have
+  \begin{align*}
+    f(x) &= \Rez f(x) - \ii \Rez (\ii f(x))
+    \\
+    &= u(x) - \ii \Rez (f(\ii x))
+    = u(x) - \ii u(\ii x). \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lem}
+  \label{lem:realLinearFuncToComplex}
+  Let $V$ be a complex vector space
+  and $u: V\rightarrow \mathbb{R}$
+  a real linear functional on $V$.
+  Then the function $f: V \rightarrow \mathbb{C}$
+  defined by (\ref{eq:complexLinearFuncRealPart})
+  is a complex linear functional. % on $V$.
+\end{lem}
+\begin{proof}
+  The additivity (LNM-1) of $f$ follows from
+  the additivity of $u$ and (\ref{eq:complexLinearFuncRealPart}).
+  For any $c\in \mathbb{R}$, we have
+  $f(cx)=cf(x)$ from
+  (\ref{eq:complexLinearFuncRealPart}).
+  The rest follows from the additivity of $f$
+  and 
+  \begin{align*}
+    f(\ii x) &= u(\ii x) - \ii u(\ii^2 x)
+    \\
+    &= u(\ii x) + \ii u( x)
+      = \ii (u(x) - \ii u(\ii x)) = \ii f(x).
+      \qedhere
+  \end{align*}
+\end{proof}
+
+\subsection{Null spaces and ranges}
+\label{sec:null-spaces-ranges}
+
+\begin{defn}
+  \label{def:nullSpace}
+  The \emph{null space} or \emph{kernel} of a linear map
+  \mbox{$T\in {\cal L}({\cal V}, {\cal W})$}
+  is the subset of ${\cal V}$ consisting of those vectors
+  that $T$ maps to the additive identity $\mathbf{0}$:
+  \begin{equation}
+    \label{eq:nullSpace}
+    \Null\,T = \{\mathbf{v}\in {\cal V} : T\mathbf{v}=\mathbf{0}\}.
+  \end{equation}
+\end{defn}
+
+\begin{exm}
+  The null space of the differentiation map
+  in Example \ref{exm:polynomialDiffIsLinearMap} is $\mathbb{R}$.
+\end{exm}
+
+% \begin{rem}
+%   The null space is a special type of kernel
+%   in Definition \ref{def:kernel}.
+% \end{rem}
+
+\begin{thm}
+  \label{thm:injectiveIsNull0}
+  A linear map $T\in {\cal L}(V,W)$ is injective
+  if and only if $\Null\,T=\{\mathbf{0}\}$.
+\end{thm}
+
+\begin{defn}
+  \label{def:range}
+  The \emph{range} of a linear map
+  \mbox{$T\in {\cal L}({\cal V}, {\cal W})$}
+  is the subset of ${\cal W}$ consisting of those vectors
+  that are of the form $T\mathbf{v}$ for some $\mathbf{v}\in{\cal V}$:
+  \begin{equation}
+    \label{eq:range}
+    \Range\ T = \{T\mathbf{v}: \mathbf{v}\in {\cal V}\}.
+  \end{equation}
+\end{defn}
+
+\begin{exm}
+  The range of $A\in \mathbb{C}^{m\times n}$
+  is the span of its column vectors.
+\end{exm}
+
+\begin{thm}
+  \label{thm:RangeIsAsubspace}
+  The range of a linear map $T\in {\cal L}(V,W)$
+  is a subspace of $W$.
+\end{thm}
+
+\begin{thm}[The counting theorem or the fundamental theorem of linear maps]
+  \label{thm:dimensionsOfNullAndRange}
+  If ${\cal V}$ is a finite-dimensional vector space
+  and $T\in {\cal L}({\cal V}, {\cal W})$,
+  then $\Range\ T$ is a finite-dimensional subspace of ${\cal W}$
+  and
+  \begin{equation}
+    \label{eq:dimensionsOfNullAndRange}
+    \dim {\cal V} = \dim \Null\ T + \dim \Range\ T.
+  \end{equation}
+\end{thm}
+
+\begin{thm}
+  \label{thm:finiteDimVecSpaceInjecSurjecInvert}
+  For an operator $T\in{\cal L}({\cal V})$ on a finite-dimensional vector
+  space ${\cal V}$,
+  the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $T$ is invertible;
+  \item $T$ is injective;
+  \item $T$ is surjective.
+  \end{enumerate}
+\end{thm}
+
+\subsection{The matrix of a linear map}
+\label{sec:matrices-linear-maps}
+
+\begin{defn}
+  \label{def:matrixOfLinearMap}
+  The \emph{matrix of a linear map
+    \mbox{$T\in {\cal L}({\cal V}, {\cal W})$}
+    with respect to the bases}
+  $(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n)$
+  of ${\cal V}$
+  and $(\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_m)$
+  of ${\cal W}$, denoted by
+  \begin{equation}
+    \label{eq:matrixOfLinearMap}
+    M_T:=M(T, (\mathbf{v}_1, \ldots, \mathbf{v}_n),
+    (\mathbf{w}_1, \ldots, \mathbf{w}_m)),
+  \end{equation}
+  is the $m\times n$ matrix $A(T)$
+  whose entries $a_{i,j}\in \mathbb{F}$
+  satisfy the linear system
+  \begin{equation}
+    \label{eq:matrixOfLinearMapRelation}
+    \forall j=1,2,\ldots,n, \qquad
+    T\mathbf{v}_j = \sum_{i=1}^m a_{i,j}\mathbf{w}_i.
+    % = a_{1,j}\mathbf{w}_1 %+ a_{2,j}\mathbf{w}_2
+    % + \cdots + a_{m,j}\mathbf{w}_m,
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  There are $m\times n$ equations and  $m\times n$ variables
+  in the linear system (\ref{eq:matrixOfLinearMap}).
+  In $\sum_{i=1}^m a_{i,j}\mathbf{w}_i$,
+  we index $a$ as $a_{i,j}$, not $a_{j,i}$, why?
+  Because when we write it in matrix product form,
+  $a_{i,j}$ naturally corresponds to the $(i,j)$ entry of the matrix.
+\end{rem}
+
+\begin{coro}
+  \label{coro:matrixOfLinearMap}
+  The matrix $M_T$ in (\ref{eq:matrixOfLinearMap})
+  of a linear map
+  \mbox{$T\in {\cal L}({\cal V}, {\cal W})$}
+  satisfies
+  \begin{equation}
+    \label{eq:relationOfLinearMapToItsMatrix}
+    T [\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n]
+    =[\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_m] M_T.
+    % =: W M_T.
+  \end{equation}
+\end{coro}
+\begin{proof}
+  This follows directly from (\ref{eq:matrixOfLinearMapRelation}).
+\end{proof}
+
+\begin{rem}
+  Definition \ref{def:matrixOfLinearMap} 
+  packages an essential idea:
+  if we express any vector as a linear combination
+  of the basis
+  and insist on the conditions in Definition \ref{def:linearMap},
+  the action of a linear map on an arbitrary vector 
+  can be characterized by the effects on the two bases
+  via the corresponding matrix of the linear map.
+  More precisely,
+  for $\mathbf{u}=\sum_i c_i\mathbf{v}_i$,
+  we have 
+  \begin{align*}
+    T\mathbf{u} = \sum_i c_iT\mathbf{v}_i = T [\mathbf{v}_1, \ldots, \mathbf{v}_n] \mathbf{c}
+    = [\mathbf{w}_1, \ldots, \mathbf{w}_m] M_T \mathbf{c}, 
+  \end{align*}
+  i.e., the matrix $M_T$ maps the coordinates of $\mathbf{u}$
+  with respect to  $(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n)$
+  in ${\cal V}$
+  to the coordinates of $T\mathbf{u}$
+  with respect to $(\mathbf{w}_1, \mathbf{w}_2, \ldots, \mathbf{w}_m)$
+  in ${\cal W}$.
+  Finally, the matrix of a linear map is dependent on
+  the choice of basis while the linear map itself is not.
+\end{rem}
+
+
+\subsection{Duality}
+\label{sec:duality}
+
+\subsubsection{Dual vector spaces}
+\label{sec:dual-space}
+
+\begin{defn}
+  \label{def:dualSpace}
+  The \emph{dual space} of a vector space $V$
+   is the vector space of all linear functionals on $V$,
+   \begin{equation}
+     \label{eq:dualSpace}
+     V'={\cal L}(V,\mathbb{F}).
+   \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:dualBasis}
+  For a basis $\mathbf{v}_1,\ldots, \mathbf{v}_n$ of a vector space $V$,
+   its \emph{dual basis}
+   is the list $\varphi_1, \ldots, \varphi_n$
+   where each $\varphi_j\in V'$ is
+   \begin{equation}
+     \label{eq:dualBasis}
+     \varphi_j(\mathbf{v}_k) = 
+     \begin{cases}
+       1 & \textrm{if } k=j,
+       \\
+       0 & \textrm{if } k\ne j.
+     \end{cases}
+   \end{equation}
+\end{defn}
+
+\begin{rem}
+  Equation (\ref{eq:dualBasis}) does not entirely define
+   the behavior of $\varphi_j$;
+   we have to add the fact of $\varphi_j$
+   being a linear functional
+   to complete graph of $\varphi_j$.
+\end{rem}
+
+\begin{rem}
+  \label{rem:standardProjections}
+  What is the dual basis of the standard basis
+   $(\mathbf{e}_1, \ldots, \mathbf{e}_n)$
+   of $\mathbb{F}^n$?
+%
+  By (\ref{eq:dualBasis}), we have
+  \begin{displaymath}
+     \varphi_j(\mathbf{e}_k) = 
+     \begin{cases}
+       1 & \textrm{if } k=j,
+       \\
+       0 & \textrm{if } k\ne j.
+     \end{cases}
+  \end{displaymath}
+  Hence we have
+  \begin{displaymath}
+    \forall \mathbf{v}=(v_1,\ldots,v_n)\in \mathbb{F}^n,\ \ 
+    \varphi_j(\mathbf{v}) = v_j,
+  \end{displaymath}
+  i.e., the dual basis of the standard basis
+   consists of standard projections.
+\end{rem}
+
+\begin{exc}
+  \label{exc:basicChainsCochainsAreBasis}
+  Show that the dual basis is a basis of the dual space.
+  % basic chains form a basis for the vector space $C_k$
+  % and basic cochains form a basis for the vector space $C^k$.
+\end{exc}
+\begin{solution}
+  This follows from the definition of linear independence
+   and Definition \ref{def:dualBasis}.
+\end{solution}
+ 
+\begin{lem}
+  \label{lem:dimV=dimV'}
+  A finite-dimensional vector space $V$ satisfies
+  \begin{equation}
+    \label{eq:dimV=dimV'}
+     \dim V' = \dim V.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  This follows from Definition \ref{def:dualSpace}
+  and the identity
+  $\dim {\cal L}(V,W) = \dim(V) \dim(W)$.
+\end{proof}
+
+\begin{defn}
+  \label{def:doubleDualSpace}
+  The \emph{double dual space} of a vector space $V$,
+   denoted by $V''$, 
+   is the dual space of $V'$.
+\end{defn}
+
+\begin{rem}
+  The signature of any linear map $\theta\in V''$ is
+   \mbox{$\theta: V'\rightarrow \mathbb{F}$}.
+\end{rem}
+
+\begin{lem}
+  \label{lem:dualDualAuxFunc}
+  The function $\Lambda: V\rightarrow V''$
+   defined as
+   \begin{equation}
+     \label{eq:dualDualAuxFunc}
+     \forall v\in V, \forall \varphi\in V',\qquad
+     (\Lambda v) (\varphi) = \varphi(v)
+   \end{equation}
+   is a linear bijection.
+%   and hence an isomorphism between $V$ and $V''$.
+\end{lem}
+\begin{proof}
+  It is easily verified that
+   $\Lambda$ is a linear map.
+  The rest follows from
+   Definitions \ref{def:dualSpace}, \ref{def:doubleDualSpace},
+   and Lemma \ref{lem:dimV=dimV'}.
+\end{proof}
+
+\begin{rem}
+  As a mnemonic device,
+   think of the triplet $v,\varphi, \Lambda$
+   as that of a bullet, a gun, and a cowboy:
+   the cowboy put the bullet into a gun and pull the trigger.
+\end{rem}
+
+\begin{rem}
+ If $V$ is finite-dimensional,
+  $V'$ and $V$ are isomorphic,
+  but finding an isomorphism from $V$ onto $V'$
+  generally requires choosing a basis of $V$.
+ In contrast, the isomorphism $\Lambda$ from $V$ onto $V''$
+  does not require a choice of basis and
+  is considered more natural.  
+\end{rem}
+
+
+\subsubsection{Dual linear maps}
+
+\begin{defn}
+  \label{def:dualMap}
+  The \emph{dual map} of a linear map 
+   \mbox{$T: V\rightarrow W$}
+   is the linear map $T': W'\rightarrow V'$
+   defined as
+   \begin{equation}
+     \label{eq:dualMap}
+     \forall\varphi\in W',\qquad
+     T'(\varphi) = \varphi\circ T.
+   \end{equation}
+\end{defn}
+
+\begin{exc}
+  % Denote by $D$ the linear map
+  %  in Example \ref{exm:polynomialDiffIsLinearMap}.
+   % of differentiation
+   % $D p = p'$ on 
+   % the vector space $\mathbb{P}(\mathbb{R})$
+   % of polynomials with real coefficients.
+  Under the dual map of the linear map $D$
+   in Example \ref{exm:polynomialDiffIsLinearMap}, 
+  what is the image of
+   the linear functional $\varphi(p)=\int_0^1 p$
+   on $\mathbb{P}(\mathbb{R})$?   
+\end{exc}
+\begin{solution}
+  The second fundamental theorems of calculus
+  (Theorem \ref{thm:fundamentalThmCalculus2}) yields
+  \begin{displaymath}
+     (D' \varphi)(p) = (\varphi\circ D)(p)
+     = \varphi(p') = \int_0^1 p' = p(1) - p(0).
+  \end{displaymath}
+\end{solution}
+
+\begin{thm}
+  \label{thm:matrixOfDualMap}
+  The matrix of $T'$ is the transpose of the matrix of $T$.
+\end{thm}
+\begin{proof}
+  Let $(\mathbf{v}_1, \cdots, \mathbf{v}_n)$,
+   $(\varphi_1, \cdots, \varphi_n)$,
+   $(\mathbf{w}_1, \cdots, \mathbf{w}_m)$,
+   $(\psi_1, \cdots, \psi_m)$,
+   be bases of $V$, $V'$, $W$, $W'$,
+   respectively.
+  Denote by $A$ and $C$ the matrices of $T: V\rightarrow W$
+   and $T': W'\rightarrow V'$,
+   respectively.
+  We have
+  \begin{displaymath}
+    \psi_j\circ T = T'(\psi_j) = \sum_{r=1}^n c_{r,j} \varphi_r.
+  \end{displaymath}
+  By Corollary \ref{coro:matrixOfLinearMap},
+   applying this equation to $\mathbf{v}_k$ yields
+  \begin{displaymath}
+    (\psi_j\circ T)(\mathbf{v}_k)
+    = \sum_{r=1}^n c_{r,j} \varphi_r (\mathbf{v}_k)
+    = c_{k,j}.
+  \end{displaymath}
+  On the other hand, we have
+  \begin{align*}
+    (\psi_j\circ T)(\mathbf{v}_k)
+    &= \psi_j(T \mathbf{v}_k)
+    = \psi_j\left(\sum_{r=1}^m a_{r,k} w_r \right)
+    \\
+    &= \sum_{r=1}^m a_{r,k} \psi_j(w_r)
+    = a_{j,k}. \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{defn}
+  \label{def:doubleDualMap}
+  The \emph{double dual map} of a linear map $T: V\rightarrow W$
+   is the linear map $T'': V''\rightarrow W''$
+   defined as $T'' = (T')'$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:doubleDualMapCommute}
+  For $T\in {\cal L}(V)$ and $\Lambda$ in (\ref{eq:dualDualAuxFunc}),
+   we have
+   \begin{equation}
+     \label{eq:doubleDualMapCommute}
+     T''\circ \Lambda = \Lambda\circ T.
+   \end{equation}
+\end{thm}
+\begin{proof}
+  Definition \ref{def:doubleDualMap} and
+   equation (\ref{eq:dualDualAuxFunc}) yields
+   \begin{align*}
+     \forall v\in V,&\ \ \forall \varphi\in V',
+     \\
+     (T''\circ \Lambda) v \varphi
+     &= ((T')' \Lambda v) \varphi
+     = (\Lambda v \circ T')\varphi
+     = \Lambda v ( T'\varphi)
+     \\
+     &= (T' \varphi) (v)
+     = \varphi(Tv)
+     = \Lambda(Tv)(\varphi)
+       \\
+     &= (\Lambda\circ T) v \varphi,
+   \end{align*}
+   where the third step is natural
+   since $T'$ send $V'$ to $V'$.
+\end{proof}
+
+\begin{coro}
+  \label{coro:doubleDualMapFiniteDim}
+  For $T\in {\cal L}(V)$ where $V$ is finite-dimensional,
+   the double dual map is
+   \begin{equation}
+     \label{eq:doubleDualMapFiniteDim}
+     T'' = \Lambda\circ T \circ \Lambda^{-1}.
+   \end{equation}
+\end{coro}
+\begin{proof}
+  This follows directly from Theorem \ref{thm:doubleDualMapCommute}
+   and Lemma \ref{lem:dualDualAuxFunc}.
+\end{proof}
+
+% \begin{exc}
+%   Draw commutative diagrams to illustrate
+%    Lemma \ref{lem:dualDualAuxFunc},
+%    Theorem \ref{thm:doubleDualMapCommute},
+%    and Corollary \ref{coro:doubleDualMapFiniteDim}.
+% \end{exc}
+
+\begin{rem}
+For $T\in {\cal L}(V)$,
+   the linear map $\Lambda$ in Lemma \ref{lem:dualDualAuxFunc}
+   can be used to construct a formula of $T''$.
+%   By the signature of $T'':V''\rightarrow V''$,
+%    the input of $T''$ is a linear functional
+%    $\pi:V''\rightarrow \mathbb{F}$.
+%   By sending $V$ to $V''$,
+%    $\Lambda$ satisfies
+%    $\varphi = \pi\circ \Lambda$, 
+%    as shown below.
+%    \begin{displaymath}
+%      \begin{tikzcd}[column sep=3em]
+%        V'' \ar{dr}{\pi} 
+%        & 
+%        \\
+%        V \ar{u}{\Lambda} \ar{r}{\varphi}
+%        & \mathbb{F}
+%      \end{tikzcd}
+%    \end{displaymath}
+  The commutative diagram for Theorem \ref{thm:doubleDualMapCommute}
+   is as follows.
+   \begin{displaymath}
+     \begin{tikzcd}[column sep=3em]
+       V'' \ar{r}{T''} 
+       & V''
+       \\
+       V \ar{u}{\Lambda} \ar{r}{T}
+       & V \ar{u}{\Lambda} 
+     \end{tikzcd}
+   \end{displaymath}
+  Flip the direction of the left arrow
+   and we have the diagram
+   for Corollary \ref{coro:doubleDualMapFiniteDim}.
+\end{rem}
+
+
+\subsubsection{The null space and range of the dual of a linear map}
+
+\begin{defn}
+  \label{def:annihilator}
+  For $U\subset V$,
+   the \emph{annihilator} of $U$, denoted $U^0$,
+   is defined by
+   \begin{equation}
+     \label{eq:annihilator}
+     U^0 := \{\varphi \in V':\ \forall \mathbf{u}\in U,\ 
+     \varphi(\mathbf{u})=0\}.
+   \end{equation}
+\end{defn}
+
+\begin{rem}
+  Clearly, the concept of annihilators depends on the space $V$.
+  So the complete notation would be $U_V^0$.
+  However, we use $U^0$ if $V$ is clear from the context.
+\end{rem}
+
+\begin{exc}
+  Let $\mathbf{e}_1, \mathbf{e}_2, \mathbf{e}_3, \mathbf{e}_4, \mathbf{e}_5$
+   denote the standard basis of $V=\mathbb{R}^5$,
+   and $\varphi_1, \varphi_2, \varphi_3, \varphi_4, \varphi_5$
+   its dual basis of $V'$.
+  Suppose 
+  \begin{displaymath}
+    U = \Span(\mathbf{e}_1, \mathbf{e}_2) = \{(x_1,x_2,0,0,0)\in
+    \mathbb{R}^5: x_1, x_2\in \mathbb{R}\}.
+  \end{displaymath}
+  Show that $U^0 = \Span(\varphi_3, \varphi_4, \varphi_5)$.
+\end{exc}
+\begin{solution}
+  First suppose $\varphi\in \Span(\varphi_3, \varphi_4, \varphi_5)$.
+  \begin{displaymath}
+    \forall u\in U, \exists c_1,c_2\in \mathbb{R} \text{ s.t. }
+    u=a_1\mathbf{e}_1 + a_2\mathbf{e}_2,
+  \end{displaymath}
+  Then $\varphi=\sum_{i=3}^5 c_i \varphi_i$ implies $\varphi(u)=0$,
+   i.e. $\varphi\in U^0$.
+
+  Conversely, for any $\varphi\in V'$ 
+   we have $\varphi=\sum_{i=1}^5 c_i \varphi_i$. 
+  Any $\varphi\in U^0$ satisfies
+  \begin{displaymath}
+    \forall a_1,a_2\in \mathbb{R}, u:=a_1\mathbf{e}_1 + a_2\mathbf{e}_2 \in U, 
+    \varphi(u) = 0,
+  \end{displaymath}
+  which implies $a_1=0$, $a_2=0$,
+  i.e., $\varphi\in \Span(\mathbf{e}_3, \mathbf{e_4}, \mathbf{e}_5)$.
+\end{solution}
+
+\begin{exc}
+  \label{exc:nullspaceOfInclusionDual}
+  Let $i: U\hookrightarrow V$ be an inclusion.
+  Show that $\Null i' = U^0$.
+\end{exc}
+\begin{solution}
+  The signature of $i'$ is $i': V'\rightarrow U'$.
+  Then we have
+  \begin{align*}
+    \Null i' &= \{\varphi\in V': i'(\varphi)= \varphi\circ i =0\}
+               \\
+             &= \{\varphi\in V': \forall u\in U,
+               \varphi(u) =0\} = U^0,
+  \end{align*}
+  where the first line follows
+  from Definitions \ref{def:nullSpace} and \ref{def:dualMap}.
+  % where the last line does not change the fact
+  %  that $\varphi$ acts on $V$.
+% \begin{CJK*}{UTF8}{gbsn}
+%   ``小样儿，你穿个马甲我就不认识你啦？''
+% \end{CJK*}
+\end{solution}
+
+\begin{lem}
+  \label{lem:annihilatorSubspace}
+  Suppose $U\subset V$.
+  Then $U^0$ is a subspace of $V'$.
+\end{lem}
+
+\begin{exc}
+  \label{exc:linearMapExtension}
+  Suppose $V$ is finite-dimensional.
+  Prove every linear map on a subspace of $V$
+   can be extended to a linear map on $V$.
+\end{exc}
+
+\begin{lem}
+  \label{lem:dimAnnihilator}
+  Suppose $V$ is finite-dimensional and $U$
+  is a subspace of $V$.
+  Then 
+  \begin{equation}
+    \label{eq:dimAnnihilator}
+    \dim U + \dim U^0 = \dim V.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Apply Theorem \ref{thm:dimensionsOfNullAndRange}
+   to the dual of an inclusion \mbox{$i': V'\rightarrow U'$}
+   and we have
+   \begin{align*}
+     &\dim \Range i' + \dim \Null i' = \dim V'
+       \\
+     \Rightarrow & 
+      \dim \Range i' + \dim U^0 = \dim V,
+   \end{align*}
+   where the second line follows from
+    Exercise \ref{exc:nullspaceOfInclusionDual}
+    and Lemma \ref{lem:dimV=dimV'}.
+   For any $\varphi\in U'$,
+    Exercise \ref{exc:linearMapExtension} states that
+%    and Lemma \ref{lem:annihilatorSubspace} 
+    $\varphi\in U'$ can be extended to $\psi\in V'$
+    such that $i'(\psi)= \varphi$.
+   Hence $i'$ is surjective
+    and we have $U'=\Range i'$.
+   The proof is then completed by 
+    Lemma \ref{lem:dimV=dimV'}.
+\end{proof}
+
+\begin{lem}
+  \label{lem:nullSpaceOfDualMap}
+  Any linear map $T\in {\cal L}(V, W)$
+  satisfies
+  \begin{equation}
+    \label{eq:nullSpaceOfDualMap}
+    \Null T' = (\Range T)^0.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Definitions \ref{def:nullSpace}, \ref{def:range},
+   \ref{def:dualMap}, and \ref{def:annihilator}
+   yield
+  \begin{align*}
+    \varphi\in \Null T' 
+    &\Leftrightarrow 0= T'(\varphi) = \varphi\circ T
+    \\
+    &\Leftrightarrow \forall v\in V, \varphi(Tv) = 0
+    \\
+    &\Leftrightarrow \varphi(\Range T) = 0
+    \\
+    &\Leftrightarrow \varphi\in (\Range T)^0.
+      \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lem}
+  \label{lem:nullSpaceOfDualMap3parts}
+  For finite-dimensional vector spaces $V$ and $W$,
+   any linear map $T\in {\cal L}(V, W)$
+   satisfies
+   \begin{equation}
+     \label{eq:nullSpaceOfDualMap3parts}
+     \dim \Null T' = \dim \Null T + \dim W -\dim V.
+   \end{equation}
+\end{lem}
+\begin{proof}
+  Lemma \ref{lem:nullSpaceOfDualMap} and 
+  Theorem \ref{thm:dimensionsOfNullAndRange}
+  yield
+  \begin{align*}
+    \dim \Null T' &= \dim (\Range T)^0
+    = \dim W - \dim (\Range T)
+    \\
+    &= \dim W - \dim V + \dim (\Null T)
+    \\
+    &=\dim \Null T + \dim W -\dim V.
+      \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{coro}
+  \label{coro:Tsurjective2dualTinjective}
+  For finite-dimensional vector spaces $V$ and $W$,
+   any linear map $T\in {\cal L}(V, W)$
+   is surjective if and only if
+   $T'$ is injective.
+\end{coro}
+\begin{proof}
+  $T$ is surjective $\Leftrightarrow$ $W=\Range T$
+  $\Leftrightarrow$ $(\Range T)^0 = \{0\}$
+  $\Leftrightarrow$ $\Null T' = \{0\}$
+  $\Leftrightarrow$ $T'$ is injective.
+  The second step follows from 
+   Lemma \ref{lem:dimAnnihilator} applied to $W$: 
+   \begin{displaymath}
+     \dim W =\dim (\Range T) + \dim (\Range T)^0.
+     \qedhere
+   \end{displaymath}
+\end{proof}
+
+\begin{lem}
+  \label{lem:dimRangeOfDualMap}
+  For finite-dimensional vector spaces $V$ and $W$,
+   any linear map $T\in {\cal L}(V, W)$ satisfies
+  \begin{equation}
+    \label{eq:dimRangeOfDualMap}
+    \dim \Range T' = \dim \Range T.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Theorem \ref{thm:dimensionsOfNullAndRange}, 
+  Lemma \ref{lem:nullSpaceOfDualMap},
+  and Lemma \ref{lem:dimAnnihilator}
+  yield
+  \begin{align*}
+    \dim \Range T' &= \dim W - \dim \Null T' 
+                     \\
+                    &= \dim W - \dim (\Range T)^0
+    \\
+                   &= \dim (\Range T).
+      \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lem}
+  \label{lem:rangeOfDualMap}
+  For finite-dimensional vector spaces $V$ and $W$,
+   any linear map $T\in {\cal L}(V, W)$ satisfies
+  \begin{equation}
+    \label{eq:rangeOfDualMap}
+    \Range T' = (\Null T)^0.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Theorem \ref{thm:dimensionsOfNullAndRange}, 
+  Lemma \ref{lem:nullSpaceOfDualMap},
+  and Lemma \ref{lem:dimAnnihilator}
+  yield
+  \begin{align*}
+    \varphi \in \Range T' 
+    &\Rightarrow
+      \exists \psi\in W' \text{ s.t }
+      T'(\psi) = \varphi
+    \\
+    &\Rightarrow 
+      \forall v\in \Null T, \varphi(v) = \psi(Tv) = 0
+    \\
+    &\Rightarrow 
+      \varphi \in (\Null T)^0.
+  \end{align*}
+  The proof is completed by
+  \begin{align*}
+    \dim \Range T' &= \dim (\Range T)
+    \\
+                   &= \dim V - \dim \Null T 
+    \\
+                   &= \dim (\Null T)^0.
+      \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{coro}
+  \label{coro:Tinjective2dualTsurjective}
+  For finite-dimensional vector spaces $V$ and $W$,
+   any linear map $T\in {\cal L}(V, W)$
+   is injective if and only if
+   $T'$ is surjective.
+\end{coro}
+\begin{proof}
+  $T$ is injective $\Leftrightarrow$ $\Null T=\{0\}$
+  $\Leftrightarrow$ $(\Null T)^0 = V'$
+  $\Leftrightarrow$ $\Range T' = V'$
+  $\Leftrightarrow$ $T'$ is surjective.
+  The second step follows from 
+   Lemmas \ref{lem:dimAnnihilator} and \ref{lem:dimV=dimV'},
+   and the third step follows from
+   Lemma \ref{lem:rangeOfDualMap}.
+\end{proof}
+
+
+\subsubsection{Matrix ranks}
+\label{sec:matrix-ranks}
+
+\begin{rem}
+  Each matrix $A\in \mathbb{F}^{m\times n}$
+   induces four fundamental subspaces.
+\end{rem}
+
+\begin{defn}
+  \label{def:columnAndRowSpaces}
+  For a matrix $A\in \mathbb{F}^{m\times n}:
+  \mathbb{F}^n\rightarrow \mathbb{F}^m$,
+  its \emph{column space} (or range or image)
+  consists of all linear combinations of its columns,
+  its \emph{row space} (or coimage) is the column space of $A^T$,
+  its \emph{null space} (or kernel) is the null space of $A$
+  as a linear operator, 
+  and the \emph{left null space} (or cokernel)
+  is the null space of $A^T$.
+\end{defn}
+
+\begin{defn}
+  \label{def:columnAndRowRanks}
+  The \emph{column rank} and \emph{row rank}
+   of a matrix $A\in \mathbb{F}^{m\times n}$
+   is the dimension of its column space
+   and row space, respectively.
+\end{defn}
+
+\begin{lem}
+  \label{lem:dimRangeTisColumnRankOfTmat}
+  Let $A_T$ denote the matrix of a linear operator $T\in {\cal L}(V,W)$.
+  Then the column rank of $A_T$ is the dimension of $\Range T$.
+\end{lem}
+\begin{proof}
+  For $\mathbf{u}=\sum_i c_i\mathbf{v}_i$,
+   Corollary \ref{coro:matrixOfLinearMap} yields
+   \begin{align*}
+     T\mathbf{u} = \sum_i c_iT\mathbf{v}_i = T [\mathbf{v}_1, \ldots, \mathbf{v}_n] \mathbf{c}
+     = [\mathbf{w}_1, \ldots, \mathbf{w}_m] A_T \mathbf{c}.
+   \end{align*}
+  Hence we have
+  \begin{displaymath}
+    \{T\mathbf{u}: \mathbf{c}\in \mathbb{F}^n\}
+    = \{[\mathbf{w}_1, \ldots, \mathbf{w}_m] A_T \mathbf{c}:
+    \mathbf{c}\in \mathbb{F}^n\}.
+  \end{displaymath}
+  The LHS is $\Range T$ while
+   $\{A_T \mathbf{c}: \mathbf{c}\in \mathbb{F}^n\}$
+   is the column space of $A_T$.
+  Since $(\mathbf{w}_1, \ldots, \mathbf{w}_m)$
+   is a basis,
+   by Definition \ref{def:columnAndRowRanks}
+   the column rank of the matrix 
+   $[\mathbf{w}_1, \ldots, \mathbf{w}_m]$ is $m$.
+  Taking $\dim$ to both sides of the above equation
+   yields the conclusion.
+  Note that the RHS is a subspace of $\mathbb{F}^m$ (why?)
+   and the dimension of it
+   does not depend on the special choice of its basis,
+   hence we can choose $(\mathbf{w}_1, \ldots, \mathbf{w}_m)$
+   to be the standard basis
+   and then $[\mathbf{w}_1, \ldots, \mathbf{w}_m]$ is
+   simply the identity matrix.
+\end{proof}
+
+\begin{thm}
+  \label{thm:rowRankIsColRank}
+  For any $A\in \mathbb{F}^{m\times n}$,
+   its row rank equals its column rank.
+\end{thm}
+\begin{proof}
+  Define a linear map
+   $T: \mathbb{F}^{n}\rightarrow\mathbb{F}^{m}$ as
+   $T \mathbf{x} = A \mathbf{x}$.
+   % \begin{displaymath}
+   %   T \mathbf{x} = A \mathbf{x},
+   % \end{displaymath}
+  Clearly, $A$ is the matrix of $T$
+   for the standard bases of $\mathbb{F}^n$
+   and $\mathbb{F}^m$.
+  Then we have,
+  \begin{align*}
+    \text{column rank of } A 
+    &= \dim \Range T
+    \\
+    &= \dim \Range T'
+    \\
+    &= \text{column rank of the matrix of } T'
+    \\
+    &=\text{column rank of } A^T
+    \\
+    &=\text{row rank of } A,
+  \end{align*}
+  where the first step follows
+  from Lemma \ref{lem:dimRangeTisColumnRankOfTmat},
+  the second from Lemma \ref{lem:dimRangeOfDualMap},
+  the third from Lemma \ref{lem:dimRangeTisColumnRankOfTmat},
+  the fourth from Theorem \ref{thm:matrixOfDualMap},
+  and the last from the definition of 
+  matrix transpose and matrix products.
+\end{proof}
+
+\begin{defn}
+  \label{def:matrixRank}
+  The \emph{rank} of a matrix is its column rank.
+\end{defn}
+
+\begin{rem}
+  Since we will not have the notion of inner products
+  until Section \ref{sec:inner-product-spaces}, 
+  we choose to state Theorem \ref{thm:fundamentalLinearAlgebra}
+  for the special case of $\mathbb{F}=\mathbb{R}$.
+\end{rem}
+
+\begin{thm}[Fundamental theorem of linear algebra]
+  \label{thm:fundamentalLinearAlgebra}
+  For a matrix $A\in \mathbb{R}^{m\times n}:
+  \mathbb{R}^n\rightarrow \mathbb{R}^m$,
+  its column space and row space both have dimension
+  $r\le \min(m,n)$;
+  its null space and left null space
+   have dimensions $n-r$ and $m-r$,
+   respectively.
+  In addition, we have
+  \begin{subequations}
+    \label{eq:fundamentalLinearAlgebra}
+    \begin{align}
+      \mathbb{R}^m &= \Range A \oplus \Null A^T,
+      \\
+      \mathbb{R}^n &= \Range A^T \oplus \Null A,
+    \end{align}
+  \end{subequations}
+  where $\Range A\perp \Null A^T$ and
+  $\Range A^T \perp \Null A$.
+\end{thm}
+\begin{proof}
+  The first sentence is a rephrase of
+   Theorem \ref{thm:rowRankIsColRank}
+   and follows from Theorem \ref{thm:dimensionsOfNullAndRange}. 
+  For the second sentence,
+   we only prove (\ref{eq:fundamentalLinearAlgebra}b).
+  $\mathbf{x}\in \Null A$ implies
+  $\mathbf{x}\in \mathbb{R}^n$
+  and $A\mathbf{x}=\mathbf{0}$.
+  The latter expands to
+  \begin{displaymath}
+    \begin{bmatrix}
+      \mathbf{a}^T_1
+      \\
+      \mathbf{a}^T_2
+      \\
+      \cdots
+      \\
+      \mathbf{a}^T_m
+    \end{bmatrix}
+    \mathbf{x}
+    =
+    \begin{bmatrix}
+      0
+      \\
+      0
+      \\
+      \cdots
+      \\
+      0
+    \end{bmatrix},
+  \end{displaymath}
+  which implies that $\forall j=1,2,\ldots, m$,
+  $\mathbf{a}_j \perp \mathbf{x}$.
+  Hence
+  $\mathbf{x}$ is orthogonal to each basis vector
+  of $\Range A^T$.
+  The rest of the proof follows from
+   Lemma \ref{lem:dimRangeOfDualMap},
+   Theorem \ref{thm:matrixOfDualMap}, 
+   Theorem \ref{thm:dimensionsOfNullAndRange}. 
+\end{proof}
+
+\begin{rem}
+  Each $\mathbf{x}\in \mathbb{R}^n$
+  can be split into a row space component $\mathbf{x}_r$
+  and a null space component $\mathbf{x}_n$.
+  Then $A \mathbf{x} = A \mathbf{x}_r \in \Range A$.
+  \emph{Every vector goes to the column space!}
+  Furthermore,
+  \emph{every vector in the column space
+    comes from one and only one vector in the row space}.
+\end{rem}
+
+
+\section{Eigenvalues, eigenvectors, and invariant subspaces}
+\label{sec:eigenv-eigenv-invar}
+
+\subsection{Invariant subspaces}
+
+\begin{defn}
+  \label{def:invariantSubspace}
+  Under a linear operator $T\in {\cal L}({\cal V})$,
+  a subspace ${\cal U}$ of ${\cal V}$ is \emph{invariant}
+  if $\mathbf{u}\in {\cal U}$ implies $T \mathbf{u}\in {\cal U}$.
+\end{defn}
+
+\begin{exm}
+  Under $T\in {\cal L}({\cal V})$,
+  each of the following subspaces of ${\cal V}$
+  is invariant:
+  $\{\mathbf{0}\}$, ${\cal V}$,
+  $\Null\, T$, and $\Range\, T$.
+\end{exm}
+
+\begin{defn}
+  \label{def:eigenPairs}
+  A number $\lambda\in \mathbb{F}$
+  is called an \emph{eigenvalue of an operator}
+  $T\in {\cal L}({\cal V})$ if
+  there exists $\mathbf{v}\in {\cal V}$ such that
+  $T \mathbf{v} = \lambda \mathbf{v}$
+  and $\mathbf{v}\ne \mathbf{0}$.
+  Then the vector $\mathbf{v}$ is called an \emph{eigenvector}
+  of $T$ corresponding to $\lambda$.
+\end{defn}
+
+\begin{lem}
+  \label{lem:eigenValMakesTmlINotInjective}
+  Suppose $V$ is finite-dimensional.
+  $\lambda\in V$ is an eigenvalue of $T\in {\cal L}(V)$
+  if and only if $T-\lambda I$ is not injective.
+\end{lem}
+\begin{proof}
+  This follows directly from Definition \ref{def:eigenPairs}.
+\end{proof}
+
+\begin{exm}
+  For each eigenvector $\mathbf{v}$ of $T\in {\cal L}({\cal V})$,
+  the subspace $\Span(\mathbf{v})$ is a one-dimensional
+  invariant subspace of ${\cal V}$.
+\end{exm}
+
+\begin{lem}
+  \label{lem:distinctEigenValImpliesIndependentEigenVec}
+  Suppose $\lambda_1, \ldots, \lambda_m$ are distinct eigenvalues
+  of $T\in {\cal L}({\cal V})$
+  with corresponding eigenvectors $\mathbf{v}_1, \ldots, \mathbf{v}_m$.
+  Then $\mathbf{v}_1, \ldots, \mathbf{v}_m$ is linearly independent.
+\end{lem}
+
+\begin{lem}
+  Suppose ${\cal V}$ is finite-dimensional.
+  Then each operator on ${\cal V}$ has at most $\dim {\cal V}$ distinct eigenvalues.
+\end{lem}
+
+\begin{defn}
+  \label{def:restrictedLinearOp}
+  Suppose $T\in{\cal L}(V)$ and $U$ is an invariant subspace of $V$
+  under $T$.
+  The \emph{restriction operator} $T|_U\in {\cal L}(U)$
+  is defined by
+  \begin{equation}
+    \label{eq:restrictedLinearOp}
+    \forall \mathbf{u}\in U,\quad T|_U (\mathbf{u}) = T\mathbf{u}.
+  \end{equation}
+  % The \emph{quotient operator} $T/U\in {\cal L}(V/U)$
+  % is defined by
+  % \begin{equation}
+  %   \label{eq:quotientLinearOp}
+  %   \forall \mathbf{v}\in V,\quad (T/U)(\mathbf{v}+U) = T\mathbf{v} + U.
+  % \end{equation}
+\end{defn}
+
+\begin{rem}
+  The behavior of an operator $T\in {\cal L}({\cal V})$
+  is understood in a simple way
+  if there exists a decomposition
+  \begin{displaymath}
+    {\cal V} = {\cal U}_1 \oplus {\cal U}_2 \oplus \cdots \oplus {\cal U}_m;
+  \end{displaymath}
+  then $T$ can be thought of as a Cartesion product 
+  of restricted operators
+  $T|_{{\cal U}_i}$, whose action is contained in ${\cal U}_i$.
+\end{rem}
+
+\subsection{Existence of eigenvalues}
+
+\begin{ntn}
+  \label{ntn:polyOfAnOp}
+  Suppose $T\in {\cal L}({\cal V})$ and $p\in \mathbb{P}(\mathbb{F})$
+  is a polynomial given by
+  \begin{displaymath}
+    p(z) = a_0 + a_1 z + \cdots + a_m z^m
+  \end{displaymath}
+  for $z\in \mathbb{F}$.
+  Then $p(T)$ is the operator given by
+  \begin{displaymath}
+    p(T) = a_0I + a_1 T + \cdots + a_m T^m,
+  \end{displaymath}
+  where $I=T^0$ is the identity operator.
+\end{ntn}
+
+\begin{exm}
+  Suppose $D\in {\cal L}(\mathbb{P}(\mathbb{R}))$
+  is the differentiation operator defined
+  by $Dq =q'$
+  and $p$ is the polynomial defined by
+  $p(x) = 7-3x + 5x^2$.
+  Then we have
+  \begin{displaymath}
+    p(D) = 7-3D+5D^2, \qquad
+    (p(D))q = 7q - 3q' + 5 q''.
+  \end{displaymath}
+\end{exm}
+
+\begin{defn}
+  \label{def:productPoly}
+  The \emph{product polynomial} of two polynomials
+  $p,q\in \mathbb{P}(\mathbb{F})$
+  is the polynomial defined by
+  \begin{equation}
+    \label{eq:productPoly}
+    \forall z\in \mathbb{F},\qquad
+    (pq)(z) := p(z) q(z).
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:polyOpsCommutes}
+  Any $T\in {\cal L}({\cal V})$ and $p,q\in \mathbb{P}(\mathbb{F})$
+  satisfy
+  \begin{equation}
+    \label{eq:polyOpsCommutes}
+      (pq)(T) = p(T)q(T) = q(T)p(T).
+  \end{equation}
+\end{lem}
+
+\begin{thm}[Existence of eigenvalues]
+  \label{thm:existenceOfEigenvalues}
+  Every operator $T\in {\cal L}(V)$ on a finite-dimensional,
+  nonzero, complex vector space $V$
+  has an eigenvalue.
+\end{thm}
+\begin{proof}
+  Write $n:=\dim V$.
+  For a nonzero $\mathbf{v}\in V$,
+  the $n+1$ vectors
+  $(\mathbf{v}, T\mathbf{v}, T\mathbf{v}, \cdots, T^n\mathbf{v})$
+  must be linear dependent, i.e., 
+  \begin{displaymath}
+    \mathbf{0}
+    = a_0 \mathbf{v} + a_1T\mathbf{v} + \cdots + a_n T^n\mathbf{v}
+    = (a_0 + a_1T + \cdots + a_n T^n)\mathbf{v}
+  \end{displaymath}
+  implies that there exists $j\in [1,n]$
+  such that $a_j\ne 0$.
+  By the fundamental theorem of algebra,
+  the polynomial $\sum_{i=0}^n a_i T^i$
+  has $m$ roots, say, $\lambda_1, \ldots, \lambda_m$,
+  and thus for some $c\in\mathbb{C}\setminus\{0\}$,
+  we have
+  \begin{displaymath}
+    \mathbf{0}=c (T-\lambda_1 I)(T-\lambda_2 I)\cdots (T-\lambda_m I)\mathbf{v}.
+  \end{displaymath}
+  Hence $T-\lambda_jI$ is not injective for some $\lambda_j$
+  and the proof is completed by Lemma \ref{lem:eigenValMakesTmlINotInjective}.
+\end{proof}
+
+\subsection{Upper-triangular matrices}
+
+\begin{defn}
+  The \emph{matrix of a linear operator} $T\in {\cal L}({\cal V})$
+  is the matrix of the linear map $T\in {\cal L}({\cal V}, {\cal V})$,
+  c.f. Definition \ref{def:matrixOfLinearMap}.
+\end{defn}
+
+\begin{thm}
+  \label{thm:upperTriangAndInvariantSubspaces}
+  Suppose $T\in {\cal L}({\cal V})$
+  and $\mathbf{v}_1, \ldots, \mathbf{v}_n$
+  is a basis of ${\cal V}$.
+  Then the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item the matrix of $T$ with respect to
+    $\mathbf{v}_1, \ldots, \mathbf{v}_n$
+    is upper triangular;
+  \item $T\mathbf{v}_j\in \Span(\mathbf{v}_1, \ldots, \mathbf{v}_j)$
+    for each $j=1, \ldots, n$;
+  \item $\Span(\mathbf{v}_1, \ldots, \mathbf{v}_j)$
+    is invariant under $T$
+    for each $j=1, \ldots, n$.
+  \end{enumerate}
+\end{thm}
+
+\begin{thm}
+  \label{thm:linearOpHasTriangularMatrix}
+  Every linear operator $T\in {\cal L}({\cal V})$
+  on a finite-dimensional complex vector space ${\cal V}$ 
+  has an upper-triangular matrix
+  with respect to some basis of ${\cal V}$.
+\end{thm}
+
+\begin{thm}
+  Suppose $T\in {\cal L}({\cal V})$ has an upper-triangular matrix
+  with respect to some basis of ${\cal V}$.
+  Then $T$ is invertible if and only if
+  all the entries on the diagonal of
+  that upper-triangular matrix are nonzero.
+\end{thm}
+
+\begin{thm}
+  Suppose $T\in {\cal L}({\cal V})$ has an upper-triangular matrix
+  with respect to some basis of ${\cal V}$.
+  Then the eigenvalues of $T$ are precisely the entries
+  on the diagonal of that upper-triangular matrix.
+\end{thm}
+
+\subsection{Eigenspaces and diagonal matrices}
+\label{sec:eigensp-diag-matr}
+
+\begin{defn}
+  A \emph{diagonal entry} of a matrix
+  is an entry of the matrix of which the row index
+  equals the column index.
+  The \emph{diagonal} of a matrix
+  consists of all diagonal entries of the matrix.
+  A \emph{diagonal matrix} is a matrix
+  that is zero everywhere except possibly
+  along the diagonal.
+\end{defn}
+
+\begin{defn}
+  \label{def:eigenSpace}
+  The \emph{eigenspace} of $T\in {\cal L}({\cal V})$
+  corresponding to $\lambda\in \mathbb{F}$ is
+  \begin{equation}
+    \label{eq:eigenSpace}
+    E(\lambda, T) := \Null(T-\lambda I).
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  In Definition \ref{def:eigenSpace}, 
+  $\lambda$ is an eigenvalue of $T$
+  if and only if $E(\lambda,T)\ne \{\mathbf{0}\}$.
+\end{rem}
+
+\begin{rem}
+  The eigenspace $E(\lambda,T)$
+  is a subspace of ${\cal V}$
+  because the null space of any linear operator on ${\cal V}$ is.
+\end{rem}
+
+\begin{lem}
+  Suppose $\lambda_1, \ldots, \lambda_m$ are distinct eigenvalues
+  of $T\in {\cal L}({\cal V})$
+  on a finite-dimensional space ${\cal V}$.
+  Then
+  \begin{displaymath}
+    E(\lambda_1, T) + \cdots + E(\lambda_m, T) 
+  \end{displaymath}
+  is a direct sum and
+  \begin{equation}
+    \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \le \dim {\cal V}.
+  \end{equation}
+\end{lem}
+
+\begin{defn}
+  An operator $T\in {\cal L}({\cal V})$ is \emph{diagonalizable}
+  if it has a diagonal matrix with respect to some basis of ${\cal V}$.
+\end{defn}
+
+\begin{thm}[Conditions of diagonalizability]
+  \label{thm:diagonalizabilityConditions}
+  Suppose $\lambda_1, \ldots, \lambda_m$ are distinct eigenvalues
+  of $T\in {\cal L}({\cal V})$
+  on a finite-dimensional space ${\cal V}$.
+  Then the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $T$ is diagonalizable;
+  \item ${\cal V}$ has a basis consisting of eigenvectors of $T$;
+  \item there exist one-dimensional subspaces
+    $U_1, \ldots, U_n$ of ${\cal V}$,
+    each invariant under $T$, such that
+%    \begin{displaymath}
+      ${\cal V} = U_1 \oplus \cdots \oplus U_n$;
+%    \end{displaymath}
+  \item ${\cal V} = E(\lambda_1,T) \oplus \cdots \oplus E(\lambda_m,T)$; 
+  \item $\dim {\cal V} = \dim E(\lambda_1,T) + \cdots + \dim E(\lambda_m,T)$.
+  \end{enumerate}
+\end{thm}
+
+\begin{coro}
+  An operator $T\in {\cal L}({\cal V})$ is diagonalizable
+  if $T$ has $\dim {\cal V}$ distinct eigenvalues.
+\end{coro}
+
+
+% \clearpage
+\section{Operators on complex vector spaces}
+\label{sec:oper-compl-vect}
+
+\subsection{Generalized eigenvectors}
+\label{sec:gener-eigenv}
+
+\begin{lem}
+  \label{lem:nullSpacePowerInclusion}
+  For a linear operator $T\in {\cal L}(V)$, we have
+  \begin{equation}
+    \label{eq:nullSpacePowerInclusion}
+    \{\mathbf{0}\} = \Null\, T^0
+    \subseteq \Null\,T^1 \subseteq \cdots
+    \subseteq \Null\,T^k \subseteq \Null\, T^{k+1}  \subseteq \cdots .
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Suppose $\mathbf{v}\in\Null\, T^k$ for $k\in\mathbb{N}$.
+  Thus $T^k\mathbf{v}=0$.
+  Then $T^{k+1}\mathbf{v}= T T^k\mathbf{v}=T\mathbf{0}=\mathbf{0}$
+  and therefore $\mathbf{v}\in\Null\, T^{k+1}$.
+\end{proof}
+
+\begin{lem}
+  \label{lem:nullSpaceEqual}
+  Suppose a linear operator $T\in {\cal L}(V)$ satisfies
+  $\Null\,T^m = \Null\, T^{m+1}$. Then we have
+  \begin{equation}
+    \label{eq:nullSpaceEqual}
+    \Null\,T^m = \Null\, T^{m+1} = \Null\, T^{m+2}
+    = \cdots .
+  \end{equation}
+\end{lem}
+\begin{proof}
+  By Lemma \ref{lem:nullSpacePowerInclusion},
+  it suffices to show
+  \begin{displaymath}
+    \forall k\in \mathbb{N}^+,\quad
+    \Null\, T^{m+k+1}\subseteq \Null\, T^{m+k}, 
+  \end{displaymath}
+  which indeed holds because
+  \begin{displaymath}
+    \begin{array}{rl}
+      \mathbf{v}\in \Null\,T^{m+k+1} \Rightarrow
+      & T^{m+k+1}\mathbf{v}=\mathbf{0}\ \Rightarrow\ 
+        T^{m+1}(T^k\mathbf{v})=\mathbf{0}\\
+      \Rightarrow &
+                    T^k \mathbf{v}\in \Null\,T^{m+1}=\Null\,T^{m}
+      \\
+      \Rightarrow &
+                    T^{m}T^k\mathbf{v}=\mathbf{0}\ \Rightarrow\ 
+                    T^{m+k}\mathbf{v}=\mathbf{0}\\
+      \Rightarrow &
+      \mathbf{v}\in \Null\,T^{m+k}. \qedhere
+    \end{array}
+  \end{displaymath}
+\end{proof}
+
+\begin{lem}
+  \label{lem:nullSpaceStopGrowing}
+  A linear operator $T\in {\cal L}(V)$ satisfies
+  \begin{equation}
+    \label{eq:nullSpaceStopGrowing}
+    \Null\,T^n = \Null\, T^{n+1} = \Null\, T^{n+2}
+    = \cdots ,
+  \end{equation}
+  where $n=\dim V$.
+\end{lem}
+\begin{proof}
+  By Lemma \ref{lem:nullSpaceEqual}, it suffices to show
+  \begin{displaymath}
+    \Null\,T^n = \Null\, T^{n+1}.
+  \end{displaymath}
+%  \mbox{$\Null\,T^n = \Null\, T^{n+1}$}. 
+  Suppose this is not true.
+  Then Lemmas \ref{lem:nullSpacePowerInclusion}
+  and \ref{lem:nullSpaceEqual} yield
+  \begin{displaymath}
+    \{\mathbf{0}\}=\Null\,T^0 \subset \Null\, T^{1}
+    \subset \cdots \subset \Null\, T^{n} \subset \Null\, T^{n+1},
+  \end{displaymath}
+  where the symbol``$\subset$'' means strict inclusion,
+  c.f. Definition \ref{def:subsets}.
+  At each strict inclusion in the above chain,
+  the dimension of the space increases by at least 1,
+  and thus $\dim \Null\, T^{n+1}> n$.
+  But the dimension of any subspace of $V$
+  cannot exceed that of $V$.
+\end{proof}
+
+\begin{thm}
+  \label{thm:directSumOfNullNandRangeN}
+  A linear operator $T\in {\cal L}(V)$ satisfies
+  \begin{equation}
+    \label{eq:directSumOfNullNandRangeN}
+    V = \Null\,T^n \oplus \Range\, T^{n}
+  \end{equation}
+  where $n=\dim V$.
+\end{thm}
+\begin{proof}
+  We first show
+%  \begin{displaymath}
+  $\Null\,T^n \cap \Range\, T^{n}=\{\mathbf{0}\}$.
+  % \end{displaymath}
+  Indeed, if $\mathbf{v}\in \Null\,T^n \cap \Range\, T^{n}$,
+  then $T^n\mathbf{v}=\mathbf{0}$
+  and there exists $\mathbf{u}$ such that $\mathbf{v}=T^n \mathbf{u}$.
+  Hence $T^{2n}\mathbf{u}=\mathbf{0}$.
+  Lemma \ref{lem:nullSpaceStopGrowing} further implies
+  $T^{n}\mathbf{u}=\mathbf{0}$ and thus $\mathbf{v}=\mathbf{0}$.
+
+  By Theorem \ref{thm:directSumIFFintersection0},
+  $\Null\,T^n + \Range\, T^{n}$ is a direct sum.
+  Then (\ref{eq:directSumOfNullNandRangeN}) follows from
+  \begin{displaymath}
+    \begin{array}{rl}
+    \dim(\Null\,T^n \oplus \Range\, T^{n})
+      &= \dim \Null\,T^n + \dim \Range\, T^{n} \\
+      &=\dim V,
+    \end{array}
+  \end{displaymath}
+  where the second step follows
+  from the fundamental theorem of linear maps
+  (Theorem \ref{thm:dimensionsOfNullAndRange}).
+\end{proof}
+
+\begin{exm}
+  For the operator $T\in {\cal L}(\mathbb{C}^3)$ given by
+  \begin{equation}
+    \label{eq:generalizedEigenvectorExmT}
+    T(z_1, z_2, z_3) = (4z_2, 0, 5z_3),
+  \end{equation}
+  $\Null\, T+ \Range\, T$ is not a direct sum of $\mathbb{C}^3$
+  because
+  \begin{displaymath}
+    \begin{array}{l}
+      \Null\, T = \{(z_1, 0, 0): z_1\in \mathbb{C}\},
+      \\
+      \Range\, T = \{(z_1, 0, z_3): z_1,z_3\in \mathbb{C}\}.
+    \end{array}
+  \end{displaymath}
+  In contrast, $T^3(z_1, z_2, z_3) = (0, 0, 125z_3)$
+  and thus
+  \begin{displaymath}
+    \begin{array}{l}
+      \Null\, T^3 = \{(z_1, z_2, 0): z_1, z_2\in \mathbb{C}\},
+      \\
+      \Range\, T^3 = \{(0, 0, z_3): z_3\in \mathbb{C}\},
+      \\
+      \Null\, T^3 \oplus \Range\, T^3 = \mathbb{C}^3.
+    \end{array}
+  \end{displaymath}
+\end{exm}
+
+\begin{rem}
+  The motivation of eigenvectors and generalized eigenvectors
+  is to describe an operator by decomposing its domain
+  into invariant subspaces.
+  For $T\in {\cal L}(V)$, we would like to describe $T$
+  by finding a nice direct-sum decomposition
+  \begin{displaymath}
+     V = U_1 \oplus U_2 \oplus \cdots \oplus U_m,
+  \end{displaymath}
+  where each $U_i$ is a subspace of $V$ invariant under $T$.
+  The simplest possible nonzero subspaces are 1-dimensional
+  and such a decomposition happens if and only if
+  $V$ has a basis that consists of eigenvectors of $T$.
+  By Theorem \ref{thm:diagonalizabilityConditions},
+  this happens if and only if $V$ has an eigenspace decomposition
+  \begin{displaymath}
+    V = E(\lambda_1, T) \oplus E(\lambda_2, T)
+    \oplus \cdots \oplus E(\lambda_m, T),
+  \end{displaymath}
+  where $\lambda_k$'s are distinct eigenvalues of $T$.
+  If $V$ is an inner product space,
+  the above eigenspace decomposition holds
+  for every normal operator if $\mathbb{F}=\mathbb{C}$
+  and for every self-adjoint operator if $\mathbb{F}=\mathbb{R}$;
+  see Theorems \ref{thm:complexSpectralThm}
+  and \ref{thm:realSpectralThm}.
+
+  Unfortunately, for a more general operator $T$
+  it might be impossible to decompose
+  $V$ into the eigenspaces of $T$.
+  For example, the operator $T\in {\cal L}(\mathbb{C}^2)$
+  given by $T(y,z)=(z,0)$ has
+  $E(0,T)=\{(y,0)\in\mathbb{C}^2: y\in \mathbb{C}\}$
+  and $0$ is the only eigenvalue of $T$.
+
+  Generalized eigenvectors and generalized eigenspaces
+  are introduced so that any operator $T$
+  can be decomposed as the direct sum
+  of its generalized eigenspaces.
+\end{rem}
+
+\begin{defn}
+  \label{def:generalizedEigenvector}
+  A \emph{generalized eigenvector of a linear operator}
+  $T\in{\cal L}(V)$ corresponding to the eigenvalue $\lambda$ of $T$
+  is a nonzero vector $\mathbf{v}\in V$ satisfying
+  \begin{equation}
+    \label{eq:generalizedEigenvector}
+    \exists j\in \mathbb{N}^+     \text{ s.t. } 
+    (T-\lambda I)^j \mathbf{v} = \mathbf{0}.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:generalizedEigenspace}
+  The \emph{generalized eigenspace of a linear operator}
+  $T\in{\cal L}(V)$ corresponding to the eigenvalue $\lambda$ of $T$,
+  denoted $G(\lambda,T)$, 
+  is the set of all generalized eigenvectors of $T$ corresponding
+  to $\lambda$ along with the zero vector.
+\end{defn}
+
+\begin{rem}
+  Any generalized eigenspace of $T\in{\cal L}(V)$
+  is a subspace of $V$.
+\end{rem}
+
+\begin{rem}
+  In contrast to generalized eigenvectors,
+  a ``generalized'' eigenvalue would be the same as an eigenvalue,
+  hence we do not define such a concept.
+\end{rem}
+
+\begin{lem}
+  \label{lem:generalizedEigenspace}
+  A generalized eigenspace $G(\lambda, T)$ satisfies
+  \begin{equation}
+    \label{eq:generalizedEigenspace}
+    \forall T\in{\cal L}(V), \forall \lambda\in \mathbb{F},\ 
+    G(\lambda, T) = \Null(T-\lambda I)^{\dim V}.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Suppose $\mathbf{v}\in \Null(T-\lambda I)^{\dim V}$.
+  Then Definitions \ref{def:generalizedEigenvector}
+  and \ref{def:generalizedEigenspace} imply
+  $\mathbf{v}\in G(\lambda,T)$.
+  Conversely, $\mathbf{v}\in G(\lambda,T)$ implies
+  that $(T-\lambda I)^j \mathbf{v} = \mathbf{0}$
+  for some $j\in \mathbb{N}^+$.
+  Then we have $\mathbf{v}\in \Null(T-\lambda I)^{\dim V}$
+  from Lemmas \ref{lem:nullSpacePowerInclusion}
+  and \ref{lem:nullSpaceStopGrowing}.
+\end{proof}
+
+\begin{defn}
+  \label{def:eigenvalueMultiplicity}
+  The \emph{multiplicity or algebraic multiplicity
+    of an eigenvalue} $\lambda$ of an operator $T$
+  is the dimension of the corresponding generalized eigenspace,
+  \begin{equation}
+    \label{eq:algebraicMultiplicity}
+    m_a(\lambda) := \dim G(\lambda, T)
+    = \dim \Null(T-\lambda I)^{\dim V}
+  \end{equation}
+  while the \emph{geometric multiplicity
+    of an eigenvalue} $\lambda$ of $T$
+  is the dimension of the corresponding eigenspace,
+  \begin{equation}
+    \label{eq:geometricMultiplicity}
+    m_g(\lambda) := \dim E(\lambda, T)
+    = \dim \Null(T-\lambda I).
+  \end{equation}
+  The \emph{index of an eigenvalue} $\lambda$ of $T$
+  is the smallest integer $k$ for which
+  \begin{equation}
+    \Null\,(T-\lambda I)^k = \Null\,(T-\lambda I)^{k+1}.
+  \end{equation}
+\end{defn}
+
+\begin{coro}
+  \label{coro:geoNotExceedAlg}
+  Geometric multiplicity and algebraic multiplicity satisfy
+  \begin{equation}
+    \label{eq:geoNotExceedAlg}
+    1 \le m_g(\lambda) \le m_a(\lambda).
+  \end{equation}
+\end{coro}
+\begin{proof}
+  The case $j=1$ in Definition \ref{def:generalizedEigenvector}
+  implies that
+  every eigenvector of $T$ is a generalized eigenvector of $T$.
+  Hence 
+  \begin{displaymath}
+    \forall T\in{\cal L}(V),\ \forall \lambda\in \mathbb{F},\ 
+    E(\lambda,T)\subseteq G(\lambda, T).
+  \end{displaymath}
+  Then Definition \ref{def:eigenvalueMultiplicity} completes the proof.
+\end{proof}
+
+\begin{defn}
+  An eigenvalue $\lambda$ of $A$ is \emph{defective} iff
+  \begin{equation}
+    \label{eq:defectEigenvalue}
+    m_g(\lambda) < m_a(\lambda).
+  \end{equation}
+  $A$ is \emph{defective}
+  iff $A$ has one or more defective eigenvalues.
+\end{defn}
+
+\begin{exm}
+  \label{exm:multiplicities}
+  Eigenvalues of the operator $T\in {\cal L}(\mathbb{C}^3)$ in
+  (\ref{eq:generalizedEigenvectorExmT}) are 0 and 5,
+  with the corresponding eigenspaces as
+  \begin{displaymath}
+    \begin{array}{l}
+      E(0,T) = \{(z_1,0,0): z_1\in \mathbb{C}\}, \\
+      E(5,T) = \{(0,0,z_3): z_3\in \mathbb{C}\}.
+    \end{array}
+  \end{displaymath}
+  The generalized eigenspaces are deduced as follows,
+  \begin{displaymath}
+    \begin{array}{l}
+      T^3(z_1, z_2, z_3) = (0, 0, 125 z_3), 
+      \\
+      G(0, T) = \{(z_1, z_2, 0): z_1, z_2\in \mathbb{C}\},
+      \\
+      (T-5I)^3(z_1, z_2, z_3) =
+      (-125 z_1+300 z_2, -125 z_2, 0),
+      \\
+      G(5,T) = E(5,T) = \{(0,0,z_3): z_3\in \mathbb{C}\}.
+    \end{array}
+  \end{displaymath}
+  Since $m_g(5)=1=m_a(5)$ and $m_g(0)=1<m_a(0)=2$, 
+  the eigenvalue 5 is not defective
+  but the eigenvalue 0 is. 
+  Hence the operator $T$ is defective.
+\end{exm}
+
+\begin{lem}
+  \label{lem:generalizedEigenvecsLinearIndep}
+  Generalized eigenvectors of distinct eigenvalues
+  of an operator $T\in {\cal L}(V)$
+  are linearly independent.
+\end{lem}
+\begin{proof}
+  Let $(\lambda_i,\mathbf{v}_i)$ be
+  a generalized eigenpair of $T$.
+  Define
+  \begin{displaymath}
+    \mathbf{w} := (T-\lambda_1I)^k\mathbf{v}_1,
+  \end{displaymath}
+  where $k\in \mathbb{N}$ is the largest integer
+  such that $\mathbf{w}\ne \mathbf{0}$.
+  By Definition \ref{def:generalizedEigenvector},
+  $(T-\lambda_1I)\mathbf{w}=\mathbf{0}$
+  and thus $\mathbf{w}$ is an eigenvector of $T$.
+  Consequently, we have
+  \begin{displaymath}
+    (*):\quad \forall j\in \mathbb{N}^+,\ \forall \lambda\in \mathbb{C},\quad
+    (T-\lambda I)^j \mathbf{w} = (\lambda_1-\lambda)^j \mathbf{w}.
+  \end{displaymath}
+  
+  Write $n:=\dim V$ and define a polynomial of $T$ by
+  \begin{displaymath}
+    p(T) = (T-\lambda_1 I)^k(T-\lambda_2I)^n\cdots(T-\lambda_mI)^n; 
+  \end{displaymath}
+  By Lemma \ref{lem:polyOpsCommutes}, the factors of $p(T)$ commute.
+  
+  Suppose $\mathbf{0} = \sum_{i=1}^m a_i \mathbf{v}_i$
+  where each $a_i\in \mathbb{C}$.
+  Then the application of $p(T)$ to this equation yields $a_1=0$
+  because of the distinctness of the eigenvalues and
+  \begin{displaymath}
+    \begin{array}{rl}
+    \mathbf{0} &= a_1(T-\lambda_1 I)^k(T-\lambda_2I)^n\cdots(T-\lambda_mI)^n\mathbf{v}_1\\
+      &= a_1(T-\lambda_2I)^n\cdots(T-\lambda_mI)^n\mathbf{w}\\
+      &= a_1(\lambda_1-\lambda_2)^n\cdots(\lambda_1-\lambda_m)^n \mathbf{w},
+    \end{array}
+  \end{displaymath}
+  where the first equality follows from Lemma \ref{lem:generalizedEigenspace}, 
+  the second from the definition of $\mathbf{w}$, 
+  and the third from $(*)$.
+  
+  Similarly,
+  the above arguments applied to
+  the other generalized eigenpairs
+  yield $a_2=\cdots=a_m=0$,
+  which implies the linear independence of generalized eigenvectors.
+\end{proof}
+
+\subsection{Nilpotent operators}
+\label{sec:nilpotent-operators}
+
+\begin{defn}
+  \label{def:nilpotentOp}
+  An operator $N\in{\cal L}(V)$
+  is \emph{nilpotent} iff $N^k=\mathbf{0}$
+  for some $k\in \mathbb{N}^+$.
+\end{defn}
+
+\begin{exm}
+  The differentiation operator
+  on the vector space of polynomials
+  of degree at most $m$
+  is nilpotent.
+  The operator $N\in{\cal L}(\mathbb{F}^3)$
+  given by $N(x,y,z)=(y,z,0)$
+  is nilpotent because $N^3=\mathbf{0}$.
+\end{exm}
+
+\begin{lem}
+  \label{def:nilpotentOpHighestPower}
+  A nilpotent operator $N\in {\cal L}(V)$
+  satisfies
+  \begin{equation}
+    \label{eq:nilpotentOpHighestPower}
+    N^{\dim V}=\mathbf{0}.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Definitions \ref{def:nilpotentOp} and
+  \ref{def:generalizedEigenspace} imply
+  $G(0, N)=V$.
+  The rest follows from Lemma \ref{lem:generalizedEigenspace}.
+\end{proof}
+
+\begin{lem}
+  \label{lem:matrixOfNilpotentOperators}
+  Any nilpotent operator $N\in {\cal L}(V)$
+  has a strictly upper triangular matrix $M$, 
+  % there exists a basis of $V$ with respect to which
+  % the  of $N$ is 
+  i.e., $\forall i\ge j$, $M_{i,j}=0$.
+\end{lem}
+\begin{proof}
+  Write $n:=\dim V$.
+  Choose a basis of $\Null\, N$,
+  extend it to a basis of $\Null\, N^2$,
+  $\ldots$, $\Null\, N^n$,
+  and we have a matrix $U$ whose columns
+  are the vectors of this basis:
+  \begin{displaymath}
+    U = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n].
+  \end{displaymath}
+  Corollary \ref{coro:matrixOfLinearMap} states that
+  \begin{displaymath}
+    N [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n]
+    = [\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n] M.
+  \end{displaymath}
+  The fact of $\mathbf{u}_1\in \Null\,N$ dictates
+  that all entries in the first column of $M$ must be zero.
+  Let $\mathbf{u}_j$ be the first basis vector in $\Null\,N^2$
+  but not in $\Null\,N$.
+  Then $N \mathbf{u}_j\in \Null\,N$, i.e., 
+  $N \mathbf{u}_j$ must be a linear combination
+  of $\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_{j-1}$.
+  Hence the first $j-1$ entries in the $j$th column of $M$
+  could be nonzero while all other entries must be zero.
+  Proceeding in this fashion completes the proof.
+\end{proof}
+
+\begin{lem}
+  \label{lem:nilpotentOpPlusIdenHaveSquareRoots}
+  If an operator $N\in{\cal L}(V)$ is nilpotent, 
+  then $I+N$ has a square root,
+  i.e., there exists an operator $M\in{\cal L}(V)$
+  such that $M^2=I+N$.
+\end{lem}
+\begin{proof}
+  By Definition \ref{def:nilpotentOp},
+  $N^m=\mathbf{0}$ for some $m\in \mathbb{N}^+$. 
+  For operators of the form
+  \begin{displaymath}
+    M = I + \sum_{i=1}^{m-1} a_i N^i,
+  \end{displaymath}
+  $M^2=I+N$ yields
+%  \begin{displaymath}
+  $\left(I + \sum_{i=1}^{m-1} a_i N^i\right)^2 = I +N$,
+%  \end{displaymath}
+  which is equivalent to
+  \begin{displaymath}
+    2a_1 = 1,\ 2a_2+a_1^2=0, \ 2a_3+2a_1a_2=0,\ \ldots,
+  \end{displaymath}
+  where $a_1=\frac{1}{2}$ and each $a_j$
+  can be uniquely determined from $a_1, a_2, \ldots, a_{j-1}$.
+\end{proof}
+
+
+\subsection{Operator decomposition}
+\label{sec:oper-decomp}
+
+\begin{lem}
+  \label{lem:NullRangeInvariantUnderPolyT}
+  Suppose $p(T)$ is a polynomial of an operator $T\in {\cal L}(V)$.
+  Then both $\Null\,p(T)$ and $\Range\,p(T)$
+  are invariant under $T$.
+\end{lem}
+\begin{proof}
+  $\mathbf{v}\in \Null\,p(T)$ implies $p(T)\mathbf{v}=\mathbf{0}$
+  and 
+  \begin{displaymath}
+    p(T) (T\mathbf{v}) = T (p(T)\mathbf{v}) = T \mathbf{0}= \mathbf{0}.
+  \end{displaymath}
+  Hence $T\mathbf{v}\in \Null\, p(T)$,
+  and, by Definition \ref{def:invariantSubspace},
+  $\Null\,p(T)$ is invariant under $T$.
+  Similarly,
+  \begin{displaymath}
+    \mathbf{v}\in \Range\,p(T)\ \Rightarrow\
+    \exists \mathbf{u}\in V \text{ s.t. }
+    p(T)\mathbf{u}=\mathbf{v}
+  \end{displaymath}
+  and thus
+  \begin{displaymath}
+    T\mathbf{v} = T p(T)\mathbf{u} =
+    p(T)(T\mathbf{u}).
+  \end{displaymath}
+  Since $T\mathbf{u}\in V$,
+  we have $T\mathbf{v}\in\Range\,p(T)$
+  and, by Definition \ref{def:invariantSubspace},
+  $\Range\,p(T)$ is invariant under $T$.
+\end{proof}
+
+\begin{rem}
+  The following theorem is a major conclusion
+  that leads to many useful results.
+\end{rem}
+
+\begin{thm}[Decomposing operators on complex vector spaces]
+  \label{thm:operatorDecompositionComplexVectorSpace}
+  Suppose $V$ is a complex vector space,
+  $T\in {\cal L}(V)$, 
+  and $\lambda_1, \lambda_2, \ldots, \lambda_m$
+  are all the distinct eigenvalues of $T$.
+  Then
+  \begin{enumerate}[(DOC-1)]\itemsep0em
+  \item $V=G(\lambda_1,T)\oplus \cdots \oplus G(\lambda_m, T)$;
+  \item each $G(\lambda_j, T)$ is invariant under $T$;
+  \item each $(T-\lambda_jI)|_{G(\lambda_j, T)}$ is nilpotent.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Write $n:=\dim V$. 
+  Lemma \ref{lem:generalizedEigenspace} states that
+  for each $j=1, 2, \ldots, m$
+  we have $G(\lambda_j, T) = \Null(T-\lambda_j I)^{n}$.
+  Then (DOC-3) follows from Definition \ref{def:nilpotentOp}
+  and (DOC-2) follows from Lemma \ref{lem:NullRangeInvariantUnderPolyT}
+  by choosing $p(z)=(z-\lambda_j)^n$.
+  
+  (DOC-1) can be proven by an induction on $n$.
+  The induction basis of $n=1$ clearly holds.
+  As the induction hypothesis, (DOC-1) holds
+  on all vector spaces of which the dimension
+  is smaller than $n$.% and bigger than 1.
+
+  By Theorem \ref{thm:existenceOfEigenvalues},
+  $T$ has an eigenvalue $\lambda_1$.
+  The application of Lemma \ref{thm:directSumOfNullNandRangeN}
+  to $T-\lambda_1 I$ yields
+  \begin{displaymath}
+    (*):\quad V = G(\lambda_1, T) \oplus U,
+  \end{displaymath}
+  where $U=\Range(T-\lambda_1I)^n$.
+  If $U$ is empty, \mbox{(DOC-1)} holds trivially; 
+  otherwise Lemma \ref{lem:NullRangeInvariantUnderPolyT} implies that
+  $U$ is invariant under $T$,
+  furnishing the restriction operator \mbox{$T|_U\in{\cal L}(U)$}
+  in (\ref{eq:restrictedLinearOp}).
+  By $(*)$ and Theorem \ref{thm:existenceOfEigenvalues},
+  $T|_U$ has distinct eigenvalues $\lambda_2,\ldots,\lambda_m$,
+  each of which is different from $\lambda_1$.
+  Since $\dim G(\lambda_1,T)\ge 1$,
+  we have $\dim U<n$
+  and thus we can apply the induction hypothesis to $U$
+  to obtain
+  \begin{displaymath}
+    (**):\quad
+    U = G(\lambda_2,T|_U)\oplus \cdots \oplus G(\lambda_m, T|_U).
+  \end{displaymath}
+  Combining $(**)$ with $(*)$
+  completes the proof if we can show
+  \begin{displaymath}
+    \forall j=2,\ldots,m,\quad
+    G(\lambda_j,T|_U) = G(\lambda_j, T).
+  \end{displaymath}
+  Indeed, 
+  apply $\cap G(\lambda_j, T)$ to both sides of $(*)$
+  and we have
+  \begin{displaymath}
+    \begin{array}{rl}
+      G(\lambda_j, T) &= (G(\lambda_1, T)\cap G(\lambda_j, T))\oplus
+                        (U \cap G(\lambda_j, T))
+                        \\ &= G(\lambda_j,T|_U), 
+    \end{array}
+  \end{displaymath}
+  where the second step follows from Lemma
+  \ref{lem:generalizedEigenvecsLinearIndep} and the identity
+  $G(\lambda_j,T|_U) = G(\lambda_j, T) \cap U$.
+  %%%% Below is another way to show $G(\lambda_j,T|_U) = G(\lambda_j, T)$.
+  % The inclusion $G(\lambda_j,T|_U) \subset G(\lambda_j, T)$
+  % clearly holds because $U$ is an invariant subspace of $V$ under $T$.
+  % To show $G(\lambda_j,T|_U) \supset G(\lambda_j, T)$,
+  % consider $\mathbf{v}\in G(\lambda_j, T)$.
+  % By $(*)$, we have a unique decomposition
+  % $\mathbf{v}= \mathbf{v}_1 + \mathbf{u}$
+  % with $\mathbf{v}_1\in G(\lambda_1,T)$
+  % and $\mathbf{u}\in U$.
+  % Then $(**)$ yields the unique decomposition
+  % \begin{displaymath}
+  %   \mathbf{v} = \mathbf{v}_1 + \mathbf{v}_2 + \cdots + \mathbf{v}_m,
+  % \end{displaymath}
+  % where each $\mathbf{v}_j\in G(\lambda_j, T|_U)$.
+  % Furthermore, Lemma \ref{lem:generalizedEigenvecsLinearIndep}
+  % states that these $\mathbf{v}_j$'s are linearly independent.
+  % Therefore, $\mathbf{v}\in G(\lambda_j, T)$ implies
+  % $\mathbf{v}=\mathbf{v}_j$. Thus we have $\mathbf{v}\in U$
+  % and $\mathbf{v}\in G(\lambda_j,T|_U)$.
+\end{proof}
+
+\begin{exm}
+  For the operator $T\in {\cal L}(\mathbb{C}^3)$ in
+  (\ref{eq:generalizedEigenvectorExmT}),
+  $T$ does not have enough eigenvectors to span
+  $\mathbb{C}^3$.
+  Example \ref{exm:multiplicities} shows that
+  \begin{displaymath}
+    \begin{array}{l}
+      E(0,T)\oplus E(5,T) \subset \mathbb{C}^3,\\
+      G(0,T)\oplus G(5,T) = \mathbb{C}^3.
+    \end{array}
+  \end{displaymath}
+\end{exm}
+
+\begin{coro}
+  \label{coro:basisAsGeneralizedEigenvectors}
+  Suppose $V$ is a complex vector space and
+  $T\in {\cal L}(V)$.
+  Then there is a basis of $V$
+  that consists of generalized eigenvectors of $T$.
+\end{coro}
+\begin{proof}
+  This follows from (DOC-1)
+  in Theorem \ref{thm:operatorDecompositionComplexVectorSpace}.
+\end{proof}
+
+\begin{defn}
+  A \emph{block diagonal matrix} $A$ is a square matrix of the form
+  \begin{equation}
+    \label{eq:blockDiagonal}
+    \begin{pmatrix}
+      A_1& & \mathbf{0}
+      \\
+      & \ddots &
+      \\
+      \mathbf{0} & & A_m
+    \end{pmatrix},
+  \end{equation}
+  where $A_1, \ldots, A_m$ are square matrices along the diagonal
+  and all other entries of $A$ is 0.
+\end{defn}
+
+\begin{rem}
+  By Theorem \ref{thm:linearOpHasTriangularMatrix},
+   a linear operator
+   has an upper triangular matrix,
+   which is the sum of a diagonal matrix
+   and a strictly upper triangular matrix.
+  As a consequence of Theorem
+  \ref{thm:operatorDecompositionComplexVectorSpace}, 
+  the upper triangular form
+  can be further simplified
+  into a block diagonal form.
+\end{rem}
+
+\begin{thm}
+  \label{thm:blockMatrixOpDecomposition}
+  Suppose $V$ is a complex vector space,
+  \mbox{$T\in {\cal L}(V)$}, 
+  and $\lambda_1, \lambda_2, \ldots, \lambda_m$
+  are all the distinct eigenvalues of $T$
+  with multiplicities $d_1, d_2, \ldots, d_m$.
+  Then there is a basis of $V$
+  with respect to which $T$ has a block diagonal form
+  (\ref{eq:blockDiagonal}) where each $A_j$
+  is a $d_j$-by-$d_j$ upper triangular matrix of the form
+  \begin{equation}
+    \label{eq:blockMatrixForm}
+    \begin{bmatrix}
+      \lambda_j & & *
+      \\
+      & \ddots &
+      \\
+      0 & & \lambda_j
+    \end{bmatrix}.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  By Theorem
+  \ref{thm:operatorDecompositionComplexVectorSpace},
+  each \mbox{$(T-\lambda_jI)|_{G(\lambda_j, T)}$} is nilpotent.
+  By Lemma \ref{lem:matrixOfNilpotentOperators},
+  we can choose a basis of $G(\lambda_j, T)$
+  such that the matrix of $(T-\lambda_jI)|_{G(\lambda_j, T)}$
+  is strictly upper triangular.
+  Then the form of (\ref{eq:blockMatrixForm})
+  follows from
+  \begin{displaymath}
+    T|_{G(\lambda_j, T)}
+    = (T-\lambda_jI)|_{G(\lambda_j, T)}
+    + \lambda_jI|_{G(\lambda_j, T)}.
+  \end{displaymath}
+  The rest follows from (DOC-1) in Theorem
+  \ref{thm:operatorDecompositionComplexVectorSpace}.
+\end{proof}
+
+\begin{exm}
+  For $T\in{\cal L}(\mathbb{F}^3)$ given by
+  \begin{equation}
+    \label{eq:blockMatrixFormExam}
+    T(x,y,z) =(6x+3y+4z, 6y+2z, 7z),
+  \end{equation}
+  the matrix of $T$ with respect to the standard basis is
+  \begin{displaymath}
+    T_S = \begin{pmatrix}
+      6 & 3 & 4
+      \\
+      0 & 6 & 2
+      \\
+      0 & 0 & 7
+    \end{pmatrix}.
+  \end{displaymath}
+  It is readily verified that
+  the eigenvalues of $T$ are 6 and 7, with
+  the corresponding generalized eigenspaces as
+  \begin{displaymath}
+    \begin{array}{l}
+      G(6,T) = \Span\{(1,0,0),(0,1,0)\};
+      \\
+      G(7,T) = \Span\{(10,2,1)\}.
+    \end{array}
+  \end{displaymath}
+  The matrix of $T$ with respect to the basis
+  \begin{displaymath}
+    \{\mathbf{v}_1=(1,0,0), 
+    \mathbf{v}_2=(0,1,0), 
+    \mathbf{v}_3=(10,2,1)\}
+  \end{displaymath}
+  is of the block diagonal form:
+  \begin{displaymath}
+    T_B = 
+    \left(
+      \begin{array}{cc}
+        \left[
+        \begin{array}{cc}
+          6 & 3
+          \\
+          0 & 6
+        \end{array}
+              \right]
+            &
+              \begin{array}{c}
+                0 \\ 0
+              \end{array}
+        \\
+        \begin{array}{cc}
+          0 & 0
+        \end{array}
+            &
+              [7]
+      \end{array}
+    \right).
+  \end{displaymath}
+  More precisely,
+  by Corollary \ref{coro:matrixOfLinearMap},
+  we have
+  \begin{displaymath}
+    T_S[\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3] = [\mathbf{v}_1, \mathbf{v}_2, \mathbf{v}_3]T_B.
+  \end{displaymath}
+\end{exm}
+
+\begin{rem}
+  From the viewpoint of operator decomposition, 
+  Theorem \ref{thm:operatorDecompositionComplexVectorSpace}
+  states that every operator on a complex vector space
+  are composed of pieces,
+  each of which,
+  by Theorem \ref{thm:blockMatrixOpDecomposition}, 
+  is a nilpotent operator plus
+  a scalar multiple of the identity.
+  If we assemble the diagonal pieces
+  and the nilpotent pieces back into
+  a diagonal matrix and a nilpotent matrix, respectively,
+  we get Corollary \ref{coro:opDecomposeDiagNilp}.  
+\end{rem}
+
+\begin{coro}
+  \label{coro:opDecomposeDiagNilp}
+  Any operator $T\in {\cal L}(V)$
+  on a complex vector space $V$
+  can be decomposed as $T=\Lambda+N$
+  where $\Lambda$ is diagonalizable,
+  $N$ is nilpotent, and $\Lambda N=N\Lambda$.  
+\end{coro}
+\begin{proof}
+  By Theorem \ref{thm:blockMatrixOpDecomposition},
+  $T$ has a block diagonal form
+  where the diagonal matrices are
+  $T_1, T_2, \cdots, T_p$
+  and each $T_j$ can be decomposed as
+  $T_j=N_j + \Lambda_j$
+  with $N_j=T_j-\lambda_jI_j$
+  and $\Lambda_j=\lambda_jI_j$.
+  Clearly $N_j$ is nilpotent and $\Lambda_j$ is diagonalizable.
+  Also, any matrix commutes with the identity matrix,
+  hence we have $N_j \lambda_jI_j = \lambda_jI_j N_j$.
+  The rest follows from the block diagonal form of $T$.
+\end{proof}
+
+\begin{exm}
+  \label{exm:operatorDecompositionExp}
+  If $p$ is a polynomial of degree $k$,
+  then $p(a+x)$ can be expressed as a Taylor series, 
+  \begin{displaymath}
+    p(a+x) = \sum_{i=0}^k \frac{p^{(i)}(a)}{i!}x^i.
+  \end{displaymath}
+  The formula is an algebraic identity
+  and can be generalized to an operator
+  $T=\Lambda+N$ with the help of $\Lambda N=N\Lambda$,
+  \begin{displaymath}
+    p(\Lambda+N) = \sum_{i=0}^k \frac{p^{(i)}(\Lambda)}{i!}N^i
+    = \sum_{i=0}^{m} \frac{p^{(i)}(\Lambda)}{i!}N^i,
+  \end{displaymath}
+  where the nilpotent operator $N$ satisfies $N^{m+1}=\mathbf{0}$.
+
+  The same approach works if $p$ is not a polynomial, 
+  but an infinite power series with its radius of convergence
+  as $\infty$.
+  In particular, if $p(x)=e^x$,
+  we have
+  \begin{equation}
+    \label{eq:matrixExponentialFromDecomp}
+    e^T = \sum_{i=0}^{+\infty} \frac{e^{\Lambda}}{i!}N^i
+    = e^{\Lambda}\sum_{i=0}^m \frac{1}{i!}N^i,
+  \end{equation}
+  which can be adopted as a definition of matrix exponentials.
+\end{exm}
+
+\begin{thm}
+  \label{thm:invertibleOpComplexVecSpaceHasRoot}
+  Any invertible operator $T\in {\cal L}(V)$
+  on a complex vector space $V$
+  has a square root.
+\end{thm}
+\begin{proof}
+  Let $\lambda_1, \lambda_2, \ldots, \lambda_m$
+  be all distinct eigenvalues of $T$.
+  By (DOC-3) in Theorem
+  \ref{thm:operatorDecompositionComplexVectorSpace},
+  for each $j=1,2,\ldots,m$ there exists a niplotent operator
+  $N_j\in {\cal L}(G(\lambda_j,T))$ 
+  such that
+  $T|_{G(\lambda_j, T)}=\lambda_jI+N_j$.
+  Since $T$ is invertible, $\lambda_j\ne 0$
+  and
+  \begin{displaymath}
+    \forall j=1,2, \ldots, m,\quad
+    T|_{G(\lambda_j, T)}=\lambda_j\left(I+\frac{N_j}{\lambda_j}\right).
+  \end{displaymath}
+  By Lemma \ref{lem:nilpotentOpPlusIdenHaveSquareRoots}
+  and the condition of $\mathbb{F}=\mathbb{C}$,
+  there exists an operator $R_j\in {\cal L}(G(\lambda_j,T))$
+  such that $R_j^2=T|_{G(\lambda_j, T)}$.
+
+  By (DOC-1) in Theorem
+  \ref{thm:operatorDecompositionComplexVectorSpace},
+  any vector $\mathbf{v}\in V$ can be uniquely expressed
+  in the form $\mathbf{v}=\sum_{i=1}^m \mathbf{u}_i$
+  where $\mathbf{u}_i\in G(\lambda_i,T)$.
+  Then it is straightforward to verify that
+  the operator $R\in{\cal L}(V)$ given below
+  satisfies $R^2=T$:
+  \begin{displaymath}
+    R (\mathbf{v}) = \sum_{j=1}^m R_j \mathbf{u}_j. \qedhere
+  \end{displaymath}
+\end{proof}
+
+\begin{rem}
+  In fact, the techniques adopted in
+  proving Lemma \ref{lem:nilpotentOpPlusIdenHaveSquareRoots}
+  and Theorem \ref{thm:invertibleOpComplexVecSpaceHasRoot}
+  are general enough for showing that
+  an invertible operator $T$ on a complex vector space
+  has a $k$th root for every $k\in \mathbb{N}^+$.
+\end{rem}
+
+
+% \subsection{Characteristic and minimal polynomials}
+% \label{sec:char-minim-polyn}
+
+% \begin{thm}[Factorization of a polynomial over $\mathbb{C}$]
+%   If $p\in \mathcal{P}(\mathbb{C})$ is a nonconstant polynomial,
+%   then $p$ has a unique factorization (except for the order of the factors)
+%   of the form
+%   \begin{equation}
+%     \label{eq:polyFactorization}
+%     p(z) = c(z-\lambda_1)\cdots(z-\lambda_m),
+%   \end{equation}
+%   where $c,\lambda_1,\ldots,\lambda_m\in \mathbb{C}$.
+% \end{thm}
+
+
+\subsection{Jordan basis}
+\label{sec:revi-jord-canon}
+
+\begin{rem}
+  We have been trying to simplify the matrix $M_T$ of a linear
+  operator $T$
+  as much as possible, i.e., 
+  to zero out as many elements of $M_T$ as possible.
+  The first milestone was the Schur form
+  in Theorem \ref{thm:linearOpHasTriangularMatrix}.
+  The second one was the block diagonal form
+  in Theorem \ref{thm:blockMatrixOpDecomposition}.
+  Finallly, the Jordan canoncial form in this subsection
+  is the simplest in the most general context.
+\end{rem}
+% \begin{lem}
+%   A nondefective matrix $A$ is diagonalizable,
+%   i.e.,
+%   \begin{equation}
+%     \label{eq:nondefectDiagnolizable}
+%     \exists \text{ nonsingular } R \text{ s.t. }
+%     R^{-1}AR = \Lambda \text{ is diagonal.}
+%   \end{equation}
+% \end{lem}
+
+\begin{defn}
+  A \emph{Jordan block} of order $k$ has the form
+  \begin{equation}
+    \label{eq:JordanBlock}
+    J(\lambda, k) = \lambda I_k+S_k,
+  \end{equation}
+  where
+  \begin{equation*}
+    (S_k)_{i,j}= \begin{cases}
+      1, \quad i=j-1, \\
+      0, \quad \text{otherwise.}
+    \end{cases}
+  \end{equation*}
+\end{defn}
+
+\begin{exm}
+  The Jordan blocks of orders 1, 2, and 3 are
+  \begin{equation*}
+    J(\lambda, 1) = \lambda, \quad
+    J(\lambda,2) = \begin{bmatrix}
+      \lambda & 1 \\
+      0 & \lambda
+    \end{bmatrix}, \quad
+    J(\lambda, 3) = \begin{bmatrix}
+      \lambda & 1 & 0 \\
+      0 & \lambda & 1 \\
+      0 & 0 & \lambda
+    \end{bmatrix}.
+  \end{equation*}
+\end{exm}
+
+\begin{exm}
+  \label{exm:nilpotentOp3}
+  The nilpotent operator % $N\in {\cal L}(\mathbb{F}^3)$,
+%  given by
+  \begin{displaymath}
+    N(x,y,z) = (0, x, y)
+  \end{displaymath}
+  can be exploited to construct a basis of $\mathbb{F}^3$:
+  $(N^2 \mathbf{v}, N\mathbf{v}, \mathbf{v})$
+  where $\mathbf{v}=(1,0,0)$.
+  With respect to this basis,
+  the matrix of $N$ is the Jordan block $J(0,3)$.
+\end{exm}
+
+\begin{exm}
+  \label{exm:nilpotentOp6}
+  The nilpotent operator %$N\in {\cal L}(\mathbb{F}^6)$,
+  \begin{displaymath}
+    N(z_1,z_2,z_3,z_4,z_5,z_6) = (0, z_1, z_2, 0, z_4, 0)
+  \end{displaymath}
+  can be exploited to construct a basis of $\mathbb{F}^6$:
+  \begin{displaymath}
+    (N^2 \mathbf{v}_1, N\mathbf{v}_1, \mathbf{v}_1, N\mathbf{v}_2,
+    \mathbf{v_2}, \mathbf{v}_3)
+  \end{displaymath}
+  where
+  \begin{displaymath}
+    \begin{array}{l}
+    \mathbf{v}_1=(1,0,0,0,0,0),\\
+      \mathbf{v}_2=(0,0,0,1,0,0),\\
+      \mathbf{v}_3=(0,0,0,0,0,1).
+    \end{array}
+  \end{displaymath}
+  With respect to this basis,
+  the matrix of $N$ is the block diagonal matrix
+  \begin{displaymath}
+    \begin{pmatrix}
+      J(0,3) & & \\
+      & J(0,2) & \\
+      & & J(0,1) 
+    \end{pmatrix}.
+  \end{displaymath}
+\end{exm}
+
+\begin{rem}
+  The next lemma shows that every nilpotent operator
+  behaves similarly to those
+  in Examples \ref{exm:nilpotentOp3} and \ref{exm:nilpotentOp6}.
+\end{rem}
+
+\begin{lem}
+  \label{lem:nilpotentOpLeadsToBasis}
+  For a nilpotent operator $N\in{\cal L}(V)$,
+  there exist
+  $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\in V$
+  and $m_1, m_2, \ldots, m_n\in \mathbb{N}$
+  such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $N^{m_1}\mathbf{v}_1, \cdots, N\mathbf{v}_1, \mathbf{v}_1,
+    \cdots, N^{m_n}\mathbf{v}_n, \cdots, N\mathbf{v}_n, \mathbf{v}_n$
+    form a basis of $V$;
+  \item $N^{m_1+1}\mathbf{v}_1 = \cdots = N^{m_n+1}\mathbf{v}_n=\mathbf{0}$.
+  \end{enumerate}
+\end{lem}
+\begin{proof}
+  % See \cite[p. 271]{axler15:_linear_algeb_done_right}.
+  If $\Range\,N$ is empty, Theorem \ref{thm:dimensionsOfNullAndRange}
+  implies that $\Null\, N=V$.
+  Then $N=\mathbf{0}$ and both (a) and (b) hold trivially.
+  Hereafter we prove this lemma by an induction on $\dim V$.
+  The induction basis for $\dim V=1$ clearly holds.
+  Hereafter we assume that $\dim V>1$ and (a) and (b)
+  hold on all vector spaces of smaller dimensions.
+
+  Because $N$ is nilpotent, $N$ is not injective.
+  By Theorem \ref{thm:finiteDimVecSpaceInjecSurjecInvert},
+  $N$ is not surjective either.
+  The range of $N$, 
+  a subspace of $V$ (c.f. Theorem \ref{thm:RangeIsAsubspace}),
+  has a smaller dimension than $V$.
+  Thus we can apply our induction hypothesis to $\Range\,N$
+  to obtain that, 
+  for $N|_{\Range\,N}\in{\cal L}(\Range\,N)$,
+  there exist vectors 
+  $\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n\in \Range\,N$
+  and $m_1, m_2, \ldots, m_n\in \mathbb{N}$ such that
+  \begin{displaymath}
+    (*):\quad N^{m_1}\mathbf{v}_1, \ldots, N\mathbf{v}_1, \mathbf{v}_1,
+    \cdots, N^{m_n}\mathbf{v}_n, \ldots, N\mathbf{v}_n, \mathbf{v}_n
+  \end{displaymath}
+  is a basis of $\Range\,N$
+  and (b) holds for this basis. Then
+  \begin{displaymath}
+    \forall j=1,\ldots,n,\quad \exists \mathbf{u}_j\in V
+    \text{ s.t. } \mathbf{v}_j=N \mathbf{u}_j.
+  \end{displaymath}
+
+  Next, we claim that
+  the following is an independent list of vectors in $V$:
+  \begin{displaymath}
+    (\square):\quad N^{m_1+1}\mathbf{u}_1, \ldots, N\mathbf{u}_1, \mathbf{u}_1,
+    \cdots, N^{m_n+1}\mathbf{u}_n, \ldots, N\mathbf{u}_n, \mathbf{u}_n.
+  \end{displaymath}
+  Indeed, suppose a linear combination of $(\square)$ equals
+  $\mathbf{0}$.
+  Then apply $N$ to it and we get a linear combination of $(*)$
+  equal to $\mathbf{0}$ and thus all the coefficients
+  in the original linear combination must be 0 except for
+  those of the vectors
+  \begin{displaymath}
+    N^{m_1+1}\mathbf{u}_1=N^{m_1}\mathbf{v}_1,\
+    \ldots,\  N^{m_n+1}\mathbf{u}_n=N^{m_n}\mathbf{v}_n.
+  \end{displaymath}
+  Again, the linear independence of the list $(*)$ dictates
+  that all coefficients of the above vectors must be 0.
+
+  By Lemma \ref{lem:linearIndependentListExtendableToBasis},
+  we can extend $(\square)$ to a basis of $V$, 
+  \begin{displaymath}
+    (\triangle):\ \ N^{m_1+1}\mathbf{u}_1, \ldots, \mathbf{u}_1,
+    \cdots, N^{m_n+1}\mathbf{u}_n, \ldots, \mathbf{u}_n,
+    \mathbf{w}_1, \ldots, \mathbf{w}_p.
+  \end{displaymath}
+  Since $N \mathbf{w}_j\in \Range\,N$,
+  each $N\mathbf{w}_j$ is in the span of $(*)$,
+  thus there exists $\mathbf{x}_j$ in the span of $(\square)$
+  such that \mbox{$N\mathbf{w}_j=N \mathbf{x}_j$}.
+%  
+  Define $\mathbf{u}_{n+j}=\mathbf{w}_j-\mathbf{x}_j$
+  and we have $N \mathbf{u}_{n+j} = \mathbf{0}$.
+  Therefore the following list of vectors
+  satisfies (a) and (b):
+  \begin{displaymath}
+    N^{m_1+1}\mathbf{u}_1, \ldots, \mathbf{u}_1,
+    \cdots, N^{m_n+1}\mathbf{u}_n, \ldots, \mathbf{u}_n,
+    \mathbf{u}_{n+1}, \ldots, \mathbf{u}_{n+p}.
+  \end{displaymath}
+  This completes the induction and the proof.
+\end{proof}
+
+\begin{defn}
+  \label{def:JordanBasis}
+  A \emph{Jordan basis for a linear operator} $T\in {\cal L}(V)$
+  is a basis of $V$ with respect to which
+  the matrix of $T$ is a block diagonal matrix of the form
+  \begin{equation}
+    \label{eq:JordanBasis}
+    J = 
+    \begin{pmatrix}
+      J(\lambda_1,k_1) & & & \\
+      & J(\lambda_2,k_2) & \\
+      & & \ddots & \\
+      & & & J(\lambda_p,k_p) 
+    \end{pmatrix},
+  \end{equation}
+  where %$k_j\in \mathbb{N}^+$
+  the $\lambda_j$'s might not be distinct.
+\end{defn}
+
+\begin{thm}[Jordan]
+  \label{thm:JordanBasis}
+  Any operator $T\in{\cal L}(V)$ on a complex vector space
+  has a Jordan basis.
+\end{thm}
+\begin{proof}
+  If $T$ is a nilpotent operator $N$,
+  we consider the basis given in
+  Lemma \ref{lem:nilpotentOpLeadsToBasis}(a).
+  For each $j$, $N$ annihilates
+  $N^{m_j}\mathbf{v}_j$ in the list
+  $N^{m_j}\mathbf{v}_j, \cdots, N\mathbf{v}_j, \mathbf{v}_j$
+  and sends another vector to its previous.
+  Hence
+  $N$ has a block diagonal matrix where each matrix
+  on the diagonal is the Jordan block $J(0,k_j)$.
+  %with respect to the basis in Lemma \ref{lem:nilpotentOpLeadsToBasis}(a).
+  Thus the statement holds for nilpotent operators.
+  
+  Otherwise let $\lambda_1, \lambda_2, \ldots, \lambda_m$
+  be all distinct eigenvalues of $T$.
+  By Theorem \ref{thm:operatorDecompositionComplexVectorSpace},
+  we have the decomposition
+  \begin{displaymath}
+    V=G(\lambda_1,T)\oplus \cdots \oplus G(\lambda_m, T),
+  \end{displaymath}
+  with each $N_j:=(T-\lambda_jI)|_{G(\lambda_j, T)}$ being nilpotent.
+  By the previous paragraph, each $N_j$ has a Jordan basis.
+  The combination of all these Jordan bases is a Jordan basis for $T$.
+\end{proof}
+
+
+\section{Inner product spaces}
+\label{sec:inner-product-spaces}
+
+\subsection{Inner products}
+\label{sec:inner-products-norms}
+
+\begin{defn}
+  \label{def:innerProduct}
+  Denote by $\mathbb{F}$ the underlying field of
+  a vector space ${\cal V}$.
+  The \emph{inner product} $\innerProd{\mathbf{u},\mathbf{v}}$ on ${\cal V}$
+  is a function ${\cal V}\times{\cal V}\rightarrow \mathbb{F}$
+  that satisfies
+  \begin{enumerate}[({IP}-1)]
+    \itemsep0em
+  \item real positivity: 
+    $\forall \mathbf{v}\in{\cal V}$,
+    $\innerProd{\mathbf{v},\mathbf{v}}\ge 0$;
+  \item definiteness:
+    $\innerProd{\mathbf{v},\mathbf{v}}= 0$
+    iff $\mathbf{v}=\mathbf{0}$;
+  \item additivity in the first slot:\\
+    $\forall \mathbf{u},\mathbf{v},\mathbf{w}\in{\cal V}$,
+    $\innerProd{\mathbf{u}+\mathbf{v},\mathbf{w}}
+    = \innerProd{\mathbf{u},\mathbf{w}}
+    + \innerProd{\mathbf{v},\mathbf{w}}$;
+  \item homogeneity in the first slot:\\
+    $\forall a\in \mathbb{F}$,
+    $\forall \mathbf{v},\mathbf{w}\in{\cal V}$,
+    $\innerProd{a\mathbf{v},\mathbf{w}}
+    = a\innerProd{\mathbf{v},\mathbf{w}}$;
+  \item conjugate symmetry:
+    $\forall \mathbf{v},\mathbf{w}\in{\cal V}$,
+    $\innerProd{\mathbf{v},\mathbf{w}}
+    = \overline{\innerProd{\mathbf{w},\mathbf{v}}}$.
+  \end{enumerate}
+  An \emph{inner product space} is a vector space ${\cal V}$
+  equipped with an inner product on ${\cal V}$.
+\end{defn}
+
+\begin{coro}
+  \label{coro:additivity2ndSlot}
+  An inner product has additivity
+  in the second slot, i.e.
+  $\innerProd{\mathbf{u}, \mathbf{v}+\mathbf{w}}
+  = \innerProd{\mathbf{u}, \mathbf{v}}
+  + \innerProd{\mathbf{u}, \mathbf{w}}$.
+\end{coro}
+
+\begin{coro}
+  \label{coro:conjugatehomogeneity}
+  An inner product has conjugate homogeneity
+  in the second slot,
+  i.e.
+  \begin{equation}
+    \label{eq:conjugatehomogeneity}
+    \forall a\in \mathbb{F},\ 
+    \forall \mathbf{v},\mathbf{w}\in{\cal V},\qquad 
+    \innerProd{\mathbf{v},a\mathbf{w}}
+    = \bar{a}\innerProd{\mathbf{v},\mathbf{w}}.
+  \end{equation}
+\end{coro}
+
+\begin{exc}
+  Prove Corollaries \ref{coro:additivity2ndSlot}
+  and \ref{coro:conjugatehomogeneity}
+  from Definition \ref{def:innerProduct}.
+\end{exc}
+\begin{solution}
+  Complex conjugate of a complex number $x=a+ib$
+  is $\bar{x}=a-ib$.
+  For any two complex numbers $x,y$, $\overline{x+y}=\bar{x}+\bar{y}$,
+  $\overline{xy}=\bar{x}\bar{y}$,
+  and $x\bar{x}=|x|^2$.
+\end{solution}
+
+\begin{defn}
+  \label{def:EuclideanInnerProduct}
+  The \emph{Euclidean inner product} on $\mathbb{F}^n$ is 
+  \begin{equation}
+    \label{eq:EuclideanInnerProduct}
+    \innerProd{\mathbf{v},\mathbf{w}} = \sum_{i=1}^n v_i\overline{w_i}.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  The dot product is a special case of
+  the Euclidean inner product for $\mathbb{F}=\mathbb{R}$
+  and is probably the most familiar form of an inner product.
+\end{rem}
+
+\subsection{Norms induced from inner products}
+\label{sec:norms-induced-from}
+
+\begin{defn}
+  \label{def:inducedNorm}
+  Let $\mathbb{F}$ be the underlying field of
+  an inner product space ${\cal V}$.
+  The \emph{norm induced by an inner product} on ${\cal V}$
+  is a function ${\cal V}\rightarrow\mathbb{F}$:
+  \begin{equation}
+    \label{eq:inducedNorm}
+    \|\mathbf{v}\|=\sqrt{\innerProd{\mathbf{v},\mathbf{v}}}.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:EuclideanLpNorm}
+  For $p\in [1,\infty)$, the \emph{Euclidean $\ell_p$ norm}
+  of a vector $\mathbf{v}\in\mathbb{F}^n$ is
+  \begin{equation}
+    \label{eq:EuclideanLpNorm}
+    \|\mathbf{v}\|_p= \left(\sum_{i=1}^n |v_i|^p\right)^{\frac{1}{p}}
+  \end{equation}
+  and the \emph{Euclidean $\ell_{\infty}$ norm} is 
+  \begin{equation}
+    \label{eq:EuclideanLinfNorm}
+    \|\mathbf{v}\|_{\infty}= \max_{i} |v_i|.
+  \end{equation}
+\end{defn}
+
+\begin{thm}[Equivalence of norms]
+  \label{thm:normEquivalence}
+  Any two norms $\|\cdot\|_N$ and $\|\cdot\|_M$
+  on a finite dimensional vector space
+  ${\cal V}=\mathbb{C}^n$ satisfy
+  \begin{equation}
+    \label{eq:normEquivalence}
+    \exists c_1,c_2\in \mathbb{R}^+,
+    \textrm{ s.t. } \forall\mathbf{x}\in {\cal V}, \ 
+    c_1\|\mathbf{x}\|_M \le \|\mathbf{x}\|_N \le c_2\|\mathbf{x}\|_M.
+  \end{equation}
+\end{thm}
+
+\begin{defn}
+  \label{def:angle}
+  The angle between two vectors $\mathbf{v},\mathbf{w}$
+  in an inner product space with $\mathbb{F}=\mathbb{R}$
+  is the number $\theta\in [0,\pi]$, 
+  \begin{equation}
+    \label{eq:angleOf2Vectors}
+    \theta = \arccos \frac{\innerProd{\mathbf{v}, \mathbf{w}}}
+    {\|\mathbf{v}\|\|\mathbf{w}\|}.
+    % {\sqrt{\innerProd{\mathbf{v}, \mathbf{v}}}
+    % \sqrt{\innerProd{\mathbf{w}, \mathbf{w}}}}.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  The generalization of the distance
+  between two points in $\mathbb{R}^n$ leads to the metric.
+  Meanwhile, two points in $\mathbb{R}^n$
+  can also be considered as two vectors; 
+  % which naturally yield the notion of angles.
+  the generalization of the angle between two vectors
+  leads to the inner product.
+\end{rem}
+
+% \begin{rem}
+%   The intuitive geometry meaning of the angle between two vectors
+%   is made rigorous by the dot product.
+%   From elementary geometry,
+%   we know that the angle $\theta$ between two vectors
+%   $\mathbf{v},\mathbf{w} \in \mathbb{R}^2$
+%   is
+%   The angle between two vectors that drives
+%   the introduction of inner products
+%   is analogous to the Euclidean distance between two points
+%   that drives the development of metric.
+% \end{rem}
+
+\begin{rem}
+  By (\ref{eq:angleOf2Vectors}),
+  the geometric meaning of the inner product of $\mathbf{u}$
+  and $\mathbf{v}$ is   
+  \begin{displaymath}
+    \innerProd{\mathbf{u},\mathbf{v}} = \|\mathbf{u}\| \|\mathbf{v}\|
+    \cos\theta, 
+  \end{displaymath}
+  i.e. the product of the length of $\mathbf{u}$
+  with that of the vector obtained by projecting $\mathbf{v}$
+  onto the direction of $\mathbf{u}$.
+  This geometric meaning underlies the properties
+  (IP-1,2,3).
+\end{rem}
+
+\begin{Figure}
+  \centering
+  % png/lawOfCosines
+  \includegraphics[width=0.4\linewidth]{pst/CosinesLaw}
+  \captionof{figure}{The law of cosines.
+  }
+  \label{fig:lawOfCosines}
+\end{Figure}
+
+\begin{thm}[The law of cosines]
+  \label{thm:lawOfCosines}
+  A triangle in Figure \ref{fig:lawOfCosines} satisfies
+  \begin{equation}
+    \label{eq:lawOfCosines}
+    c^2 = a^2 + b^2 -2ab\cos\gamma.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  The dot product of $AB$ to $AB=CB-CA$ yields
+  \begin{displaymath}
+    c^2 = \innerProd{AB, CB} - \innerProd{AB,CA}.
+  \end{displaymath}
+  The dot products of $CB$ and $CA$ to $AB=CB-CA$ yield
+  \begin{align*}
+    \innerProd{CB, AB} &= a^2 - \innerProd{CB,CA};
+    \\
+    -\innerProd{CA, AB} &= -\innerProd{CA, CB} + b^2.
+  \end{align*}
+  The proof is completed by adding up all three equations
+  and applying (\ref{eq:angleOf2Vectors}).
+\end{proof}
+
+\begin{thm}[The law of cosines: abstract version]
+  \label{thm:lawOfCosinesAbstractVersion}
+  Any induced norm on a real vector space
+  satisfies
+  \begin{equation}
+    \label{eq:lawOfCosinesAbstractVersion}
+    \|\mathbf{u} - \mathbf{v}\|^2
+    = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\innerProd{\mathbf{u}, \mathbf{v}}.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Definitions \ref{def:inducedNorm} and \ref{def:innerProduct}
+  and $\mathbb{F}=\mathbb{R}$ yield
+  \begin{align*}
+    \|\mathbf{u} - \mathbf{v}\|^2
+    &= \innerProd{\mathbf{u} - \mathbf{v}, \mathbf{u} - \mathbf{v}}
+    \\
+    &= \innerProd{\mathbf{u}, \mathbf{u}} + \innerProd{\mathbf{v}, \mathbf{v}}
+      - \innerProd{\mathbf{u}, \mathbf{v}} - \innerProd{\mathbf{v}, \mathbf{u}}
+    \\
+    &= \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\innerProd{\mathbf{u},
+      \mathbf{v}}. \qedhere
+  \end{align*}
+\end{proof}
+
+\subsection{Norms and induced inner-products}
+\label{sec:normed-vector-spaces}
+
+\begin{defn}
+  \label{def:norm}
+  A function $\|\cdot\|: {\cal V}\rightarrow\mathbb{F}$
+  is a \emph{norm} for a vector space ${\cal V}$ iff it satisfies
+  \begin{enumerate}[(NRM-1)]
+    \itemsep0em
+  \item real positivity: 
+    $\forall \mathbf{v}\in{\cal V}$, 
+    $\|\mathbf{v}\| \ge 0$;
+  \item point separation:
+    $\|\mathbf{v}\|=0$ $\Rightarrow$ $\mathbf{v}=\mathbf{0}$.
+  \item absolute homogeneity: \\
+    $\forall a\in \mathbb{F}$,
+    $\forall \mathbf{v}\in{\cal V}$,\ 
+    $\|a\mathbf{v}\|=|a|\|\mathbf{v}\|$;
+  \item triangle inequality:\\
+    $\forall \mathbf{u},\mathbf{v}\in{\cal V}$,\ 
+    $\|\mathbf{u}+\mathbf{v}\|\le\|\mathbf{u}\|+\|\mathbf{v}\|$.
+  \end{enumerate}
+  The function $\|\cdot\|: {\cal V}\rightarrow\mathbb{F}$
+  is called a \emph{semi-norm} iff
+  it satifies (NRM-1,3,4).
+\end{defn}
+
+\begin{defn}
+  \label{def:normedSpace}
+  A \emph{normed vector space} (or simply a \emph{normed space})
+  is a vector space ${\cal V}$
+  equipped with a norm on ${\cal V}$.
+\end{defn}
+
+\begin{exm}
+  \label{exm:RdEuclideanSpace}
+  $\left(\mathbb{R}^n, \|\cdot\|_p\right)$
+  is a normed space, 
+  where $\|\cdot\|_p$ is the Euclidean norm
+  in Definition \ref{def:EuclideanLpNorm}
+  with $p\in[1,\infty)$: 
+  \begin{displaymath}
+    \|\mathbf{x}\|_p= \left(\sum_{j=1}^n |x_j|^p\right)^{\frac{1}{p}}.
+  \end{displaymath}
+\end{exm}
+
+\begin{rem}
+  Example \ref{exm:notEuclidNormIfLess1}
+  shows that $\|\cdot\|_p$ is not a norm for $p\in(0,1)$.
+  In addition, the reason for the name of $\infty$-norm
+  will be explained in Remark \ref{rem:reasonForInftyNorm}.
+\end{rem}
+
+\begin{exc}
+  Prove the backward triangle inequality of a norm $\|\cdot\|$, i.e., 
+  \begin{equation}
+    \label{eq:backwardTriangle}
+    \forall u,v \in V,\quad
+    \left|\|u\|-\|v\|\right| \le \|u-v\|.
+  \end{equation}
+\end{exc}
+\begin{solution}
+  Without loss of generality, we may assume that $\|u\|\geq\|v\|$, and then we just need to verify that
+  \begin{equation*}
+    \|u\|\leq\|v\|+\|u-v\|,
+  \end{equation*}
+  which obviously holds because of the triangular inequality.
+\end{solution}
+
+\begin{exc}
+  Explain how (NRM-1,2,3,4) relate to the geometric meaning
+  of the norm of vectors in $\mathbb{R}^3$.
+\end{exc}
+
+\begin{lem}
+  \label{lem:inducedNormIsNorm}
+  The norm induced by an inner product
+  is a norm as in Definition \ref{def:norm}.
+\end{lem}
+\begin{proof}
+  The induced norm as in (\ref{eq:inducedNorm})
+  satisfies (NRM-1,2) trivially. For (NRM-3),
+  \begin{equation*}
+    \|a\mathbf{v}\|^2 = \innerProd{a\mathbf{v}, a\mathbf{v}}
+    = a\innerProd{\mathbf{v}, a\mathbf{v}}
+    = a\bar{a}\innerProd{\mathbf{v},\mathbf{v}}
+    = |a|^2 \|\mathbf{v}\|^2.
+  \end{equation*}
+  To prove (NRM-4), we have
+  \begin{align*}
+    \|\mathbf{u}+\mathbf{v}\|^2 &=
+                                  \innerProd{\mathbf{u}+\mathbf{v}, \mathbf{u}+\mathbf{v}}
+    \\ &=
+         \innerProd{\mathbf{u}, \mathbf{u}}+ \innerProd{\mathbf{v},\mathbf{v}}
+         + \innerProd{\mathbf{u}, \mathbf{v}}+ \overline{\innerProd{\mathbf{u},\mathbf{v}}}
+    \\ &\le
+         \innerProd{\mathbf{u}, \mathbf{u}}+ \innerProd{\mathbf{v},\mathbf{v}}
+         + 2|\innerProd{\mathbf{u}, \mathbf{v}}|
+    \\ &\le
+         \|\mathbf{u}\|^2+\|\mathbf{v}\|^2+2\|\mathbf{u}\|\|\mathbf{v}\|
+    \\ &=
+         \left(\|\mathbf{u}\|+\|\mathbf{v}\|\right)^2,
+  \end{align*}
+  where the second step follows from (IP-5)
+  and the fourth step from
+  Cauchy-Schwarz inequality.
+         %          T\ref{thm:SchwarzInequality} below.
+\end{proof}
+% \begin{thm}[Parallelogram equality]
+%   $\forall \mathbf{u}, \mathbf{v}\in {\cal V}$, 
+%   $\|\mathbf{u}+\mathbf{v}\|^2 + \|\mathbf{u}-\mathbf{v}\|^2
+%   =2(\|\mathbf{u}\|^2+\|\mathbf{v}\|^2)$.
+% \end{thm}
+
+\begin{Figure}
+  \centering
+  % png/parallelogram
+  \includegraphics[width=0.5\linewidth]{pst/ParallelogramLaw}
+  \captionof{figure}{The law of parallelograms. 
+  }
+  \label{fig:lawOfParallelograms}
+\end{Figure}
+
+\begin{thm}[The parallelogram law]
+  \label{thm:parallelogramLaw}
+  The sum of squares of the lengths of the four sides
+  of a parallelogram equals
+  the sum of squares of the two diagonals.
+  More precisely,
+  the parallelogram in Figure \ref{fig:lawOfParallelograms}
+  satisfies 
+  \begin{equation}
+    \label{eq:parallelogramLaw}
+    (AB)^2 + (BC)^2 + (CD)^2 + (DA)^2 = (AC)^2 + (BD)^2.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Apply the law of cosines to the two diagonals,
+  add the two equations, and we obtain (\ref{eq:parallelogramLaw}).
+\end{proof}
+
+\begin{rem}
+  The purpose of our stating
+  Theorems \ref{thm:lawOfCosines} and \ref{thm:parallelogramLaw}
+  is to relate the abstract theory to geometric intuitions;
+  they will not be used in any proofs.
+\end{rem}
+
+\begin{thm}[The parallelogram law: abstract version]
+  \label{thm:inducedNormSatisfiesParellelogramLaw}
+  Any induced norm (\ref{eq:inducedNorm}) satisfies
+  \begin{equation}
+    \label{eq:inducedNormSatisfiesParellelogramLaw}
+    2\|\mathbf{u}\|^2 + 2\|\mathbf{v}\|^2
+    = \|\mathbf{u}+\mathbf{v}\|^2 + \|\mathbf{u}-\mathbf{v}\|^2.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Replace $\mathbf{v}$ in (\ref{eq:lawOfCosinesAbstractVersion})
+  with $-\mathbf{v}$ and we have
+  \begin{align*}
+    \|\mathbf{u} + \mathbf{v}\|^2
+    = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2
+    + 2\innerProd{\mathbf{u}, \mathbf{v}}.
+  \end{align*}
+  (\ref{eq:inducedNormSatisfiesParellelogramLaw})
+  follows from adding the above equation
+  to (\ref{eq:lawOfCosinesAbstractVersion}).
+\end{proof}
+
+\begin{exc}
+  \label{exc:EuclideanPnormParallelogramLaw}
+  In the case of Euclidean $\ell_p$ norms,
+  show that the parallelogram law
+  (\ref{eq:inducedNormSatisfiesParellelogramLaw})
+  holds if and only if $p=2$.  
+\end{exc}
+
+\begin{rem}
+  The following theorem states
+  that the parallelogram characterizes the inner product spaces
+  among the normed vector spaces.
+\end{rem}
+
+\begin{thm}
+  \label{thm:parallelogramCharacterization}
+  The induced norm (\ref{eq:inducedNorm}) holds
+  for some inner product $\innerProd{\cdot, \cdot}$  
+  if and only if the parallelogram law
+  (\ref{eq:inducedNormSatisfiesParellelogramLaw})
+  holds for every pair of $\mathbf{u}, \mathbf{v}\in {\cal V}$.
+\end{thm}
+
+\begin{exc}
+  Prove Theorem \ref{thm:parallelogramCharacterization}.
+\end{exc}
+%          \begin{solution}
+%            The necessity follows from Theorem \ref{thm:inducedNormSatisfiesParellelogramLaw}.
+%            As for the sufficiency,
+%            we employ the law of cosines to define an inner product
+%            as
+%            \begin{displaymath}
+%              \innerProd{\mathbf{u}, \mathbf{v}}:=\frac{1}{4}\left(
+%                \|\mathbf{u}+\mathbf{v}\|^2
+%                - \|\mathbf{u}-\mathbf{v}\|^2
+%              \right)
+%            \end{displaymath}
+%            if the scalar field is $\mathbb{R}$
+%            and by
+%            \begin{align*}
+%              \innerProd{\mathbf{u}, \mathbf{v}} := &\frac{1}{4}\left(
+%                \|\mathbf{u}+\mathbf{v}\|^2
+%                + \|\mathbf{u}-\mathbf{v}\|^2 \right)
+%              \\
+%              &+
+%              \frac{i}{4}\left(
+%                \|i\mathbf{u}-\mathbf{v}\|^2
+%                - \|i\mathbf{u}+\mathbf{v}\|^2
+%              \right)
+%            \end{align*}
+%            if the scalar field is $\mathbb{C}$.
+%            It is straightforward to verify
+%            that the above inner product satisfies (IP-1,2,3,4,5)
+%            and (\ref{eq:inducedNorm}).
+%          \end{solution}
+
+\begin{exm}
+  By Theorem \ref{thm:parallelogramCharacterization}
+  and Exercise \ref{exc:EuclideanPnormParallelogramLaw},
+  none of the Euclidean $\ell_1$ and $\ell_{\infty}$ norms
+  has a corresponding inner product.
+\end{exm}
+
+
+\subsection{Orthonormal bases}
+\label{sec:orthonormal-bases}
+
+\begin{defn}
+  \label{def:orthogonalVectors}
+  Two vectors $\mathbf{u}, \mathbf{v}$ are called \emph{orthogonal}
+  if $\langle \mathbf{u}, \mathbf{v}\rangle=0$,
+  i.e., their inner product is the additive identity of the underlying
+  field.
+\end{defn}
+
+\begin{rem}
+  From a geometric viewpoint,
+  two vectors $\mathbf{u}, \mathbf{v}$ are orthogonal iff
+  they are perpendicular to each other,
+  i.e. the angle between them is $\frac{\pi}{2}$. 
+  A more general and useful notion of orthogonality
+  is a major motivation of inner product spaces.
+  As a fruit of this abstraction,
+  Definition \ref{def:orthogonalVectors} applies to other problems
+  that may appear unrelated to two planar vectors being perpendicular.
+\end{rem}
+
+\begin{exm}
+  An inner product on the vector space of 
+  continuous real-valued functions on the interval $[-1,1]$ is 
+  \begin{equation*}
+    \langle f, g \rangle = \int_{-1}^{+1} f(x) g(x)\dif x.
+  \end{equation*}
+  $f$ and $g$ are said to be orthogonal
+  if the integral is zero.
+\end{exm}
+
+\begin{thm}[Pythagorean]
+  \label{thm:Pythagorean}
+  If $\mathbf{u}, \mathbf{v}$ are orthogonal,
+  then $\|\mathbf{u}+\mathbf{v}\|^2=\|\mathbf{u}\|^2+\|\mathbf{v}\|^2$.
+\end{thm}
+\begin{proof}
+  This follows from (\ref{eq:lawOfCosinesAbstractVersion})
+  % Theorem \ref{thm:lawOfCosinesAbstractVersion}
+  and Definition \ref{def:orthogonalVectors}.
+\end{proof}
+
+\begin{thm}[Cauchy-Schwarz inequality]
+  \label{thm:SchwarzInequality}
+  \begin{equation}
+    \label{eq:CauchySchwarz}
+    |\langle \mathbf{u},\mathbf{v}\rangle|
+    \le \|\mathbf{u}\| \|\mathbf{v}\|,
+  \end{equation}
+  where the equality holds iff one of $\mathbf{u}, \mathbf{v}$
+  is a scalar multiple of the other.
+\end{thm}
+\begin{proof}
+  For any complex number $\lambda$, (IP-1) implies
+  \begin{align*}
+    % \forall \lambda\in \mathbb{C},
+    & \innerProd{\mathbf{u}+\lambda \mathbf{v}, \mathbf{u}+\lambda \mathbf{v}}\ge 0
+    \\ \Rightarrow
+    & 
+      \innerProd{\mathbf{u}, \mathbf{u}} + \lambda\innerProd{ \mathbf{v}, \mathbf{u}}
+      + \bar{\lambda}\innerProd{\mathbf{u}, \mathbf{v}}+\lambda\bar{\lambda}\innerProd{\mathbf{v},\mathbf{v}}\ge 0.
+  \end{align*}
+  If $\mathbf{v}=\mathbf{0}$, (\ref{eq:CauchySchwarz}) clearly holds.
+  Otherwise (\ref{eq:CauchySchwarz}) follows from substituting
+  \mbox{$\lambda=-\frac{\innerProd{\mathbf{u},\mathbf{v}}}{\innerProd{\mathbf{v},\mathbf{v}}}$}
+  into the above equation.
+\end{proof}
+
+\begin{exc}
+  To explain the choice of $\lambda$ in the proof
+  of Theorem \ref{thm:SchwarzInequality}, 
+  what is the geometric meaning of (\ref{eq:CauchySchwarz})
+  in the plane? When will the equality hold?
+\end{exc}
+\begin{solution}
+  The absolute value of inner product
+  is never greater than the length product of the two vectors.
+  The equality holds when the two vectors are collinear.
+\end{solution}
+
+\begin{exm}
+  \label{exm:CS1}
+  If $x_i,y_i\in \mathbb{R}$, then for any $n\in \mathbb{N}^+$
+  \begin{equation*}
+    \left|\sum_{i=1}^n x_iy_i\right|^2
+    \le \sum_{j=1}^nx_j^2 \sum_{k=1}^ny_k^2.
+  \end{equation*}
+\end{exm}
+
+\begin{exm}
+  \label{exm:CS2}
+  If $f,g: [a,b]\rightarrow \mathbb{R}$ are continuous, then
+  \begin{equation*}
+    \left|\int_{a}^{b} f(x) g(x) \dif x\right|^2
+    \le      
+    \left(\int_{a}^{b} f^2(x) \dif x\right)
+    \left(\int_{a}^{b} g^2(x) \dif x\right)
+  \end{equation*}
+\end{exm}
+
+% \begin{rem}
+%   In Examples \ref{exm:CS1} and \ref{exm:CS2},
+%   ``$|\cdot|$'' denotes the modulus of a complex number,
+%   and thus cannot be replaced by ``$(\cdot)$.''
+% \end{rem}
+
+% \begin{defn}
+%   \label{def:openBall}
+%   The \emph{open ball} centered at $\mathbf{x}\in \mathbb{R}^n$
+%   with radius $r\in \mathbb{R}^+$ is
+%   \begin{equation}
+%     \label{eq:openBall}
+%     {\cal B}_r(\mathbf{x}) = \{
+%     \mathbf{x}\in \mathbb{R}^n : \|\mathbf{x}\|_2<r
+%     \}.
+%   \end{equation}
+%   Replacing ``$<$'' with ``$\le$'' 
+%   yields a \emph{closed ball} $\overline{\cal B}_r(\mathbf{x})$.
+% \end{defn}
+
+
+\begin{defn}
+  \label{def:orthonormalList}
+  A list of vectors
+  $(\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_m)$
+  is called \emph{orthonormal}
+  if the vectors in it are pairwise orthogonal
+  and each vector has norm 1, i.e.
+  \begin{equation}
+    \label{eq:orthonormalList}
+    \renewcommand{\arraystretch}{1.2}
+    \left\{
+      \begin{array}{l}
+        \forall i=1,2,\ldots,m, \qquad
+        \|\mathbf{e}_i\| = 1;
+        \\
+        \forall i\ne j, \qquad \innerProd{\mathbf{e}_i, \mathbf{e}_j}=0.
+      \end{array}
+    \right.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{def:orthonormalBasis}
+  An \emph{orthonormal basis}
+  of an inner-product space ${\cal V}$
+  is an orthonormal list of vectors in ${\cal V}$
+  that is also a basis of ${\cal V}$.
+\end{defn}
+
+\begin{rem}
+  The motivation of a basis
+  is to express any vector as a linear combination
+  of the basis vectors.
+  There is a certain amount of wiggle room
+  for a basis.
+  We can further trade the wiggle room
+  for more convenience
+  in orthonormal bases,
+  as illustrated in Theorem \ref{thm:significanceOfOthonormalBases}.
+\end{rem}
+
+\begin{thm}
+  \label{thm:significanceOfOthonormalBases}
+  If $(\mathbf{e}_1, \mathbf{e}_2, \ldots, \mathbf{e}_n)$
+  is an orthonormal basis of ${\cal V}$,
+  then 
+  \begin{subequations}
+    \label{eq:expressVectorsInOrthonormalBasis}
+    \begin{align}
+      \forall \mathbf{v}\in {\cal V},\ \ 
+      \mathbf{v}
+      &= \sum_{i=1}^n \innerProd{\mathbf{v}, \mathbf{e}_i} \mathbf{e}_i,
+      \\
+      \|\mathbf{v}\|^2
+      &= \sum_{i=1}^n \left|\innerProd{\mathbf{v}, \mathbf{e}_i}\right|^2.
+    \end{align}
+  \end{subequations}
+\end{thm}
+
+\begin{lem}
+  \label{lem:existenceOfOrthnormalBasis}
+  Every finite-dimensional inner-product space has an orthonormal basis.
+\end{lem}
+
+\begin{thm}[Schur]
+  \label{thm:Schur}
+  Every linear operator $T\in {\cal L}({\cal V})$
+  on a finite-dimensional complex vector space ${\cal V}$ 
+  has an upper-triangular matrix
+  with respect to some orthonormal basis of ${\cal V}$.
+\end{thm}
+\begin{proof}
+  This follows from Theorem \ref{thm:linearOpHasTriangularMatrix}, 
+  Lemma \ref{lem:existenceOfOrthnormalBasis}
+  and the Gram-Schmidt process.
+  %; see Section \ref{sec:orthonormalSystems}. 
+\end{proof}
+
+\begin{defn}
+  \label{def:linearFunctional}
+  A \emph{linear functional} on ${\cal V}$ is a linear map from ${\cal V}$ to
+  $\mathbb{F}$,
+  or, it is an element of ${\cal L}({\cal V},\mathbb{F})$.
+\end{defn}
+
+\begin{rem}
+  The following theorem reduces
+  the $O(\infty^2)$ complexity of a linear functional
+  $V\mapsto \mathbb{R}$
+  to $O(1)$.
+\end{rem}
+
+\begin{thm}[Riesz representation theorem]
+  \label{thm:RieszRep}
+  If ${\cal V}$ is a finite-dimensional vector space, 
+  then
+  \begin{equation}
+    \label{eq:RieszRep}
+    \forall \varphi\in {\cal V}',\ 
+    \exists! \mathbf{u}\in {\cal V} \text{ s.t. }
+    \forall \mathbf{v}\in {\cal V},\ \  \varphi(\mathbf{v}) = \innerProd{\mathbf{v},\mathbf{u}}.
+  \end{equation}
+%  Furthermore, $\mathbf{u}$ is unique.
+\end{thm}
+\begin{proof}
+  Let $(\mathbf{e}_1,\mathbf{e}_2, \ldots, \mathbf{e}_n)$
+  be an orthonormal basis of ${\cal V}$.
+  \begin{align*}
+    \varphi(\mathbf{v})
+    &= \varphi\left(
+      \sum_{i=1}^n\innerProd{\mathbf{v}, \mathbf{e}_i} \mathbf{e}_i\right)
+      = \sum_{i=1}^n\innerProd{\mathbf{v}, \mathbf{e}_i} \varphi(\mathbf{e}_i)
+    \\
+    &=\sum_{i=1}^n\innerProd{\mathbf{v}, \overline{\varphi(\mathbf{e}_i)}
+      \mathbf{e}_i} 
+      =\innerProd{\mathbf{v},  \sum_{i=1}^n\overline{\varphi(\mathbf{e}_i)}
+      \mathbf{e}_i},
+  \end{align*}
+  where the last two steps follow from
+  Corollaries \ref{coro:additivity2ndSlot}
+  and \ref{coro:conjugatehomogeneity}.
+
+  As for the uniqueness,
+  suppose that $\exists \mathbf{u}_1, \mathbf{u}_2\in {\cal V}$
+  s.t. $\varphi(\mathbf{v})=\innerProd{\mathbf{v},\mathbf{u}_1}
+  =\innerProd{\mathbf{v},\mathbf{u}_2}$.
+  Then for each $\mathbf{v}\in {\cal V}$,
+  \begin{displaymath}
+    0=\innerProd{\mathbf{v},\mathbf{u}_1}-\innerProd{\mathbf{v},\mathbf{u}_2}
+    = \innerProd{\mathbf{v},\mathbf{u}_1-\mathbf{u}_2}.
+  \end{displaymath}
+  Taking $\mathbf{v}=\mathbf{u}_1-\mathbf{u}_2$
+  shows that $\mathbf{u}_1-\mathbf{u}_2=\mathbf{0}$.
+\end{proof}
+
+\begin{rem}
+  In Theorem \ref{thm:RieszRep},
+  $\mathbf{u}$ does not depend on $\mathbf{v}$, 
+  % since the logic statement in (\ref{eq:RieszRep})
+  % is existential-universal.
+  but $\mathbf{u}$ does depend on $\varphi$
+  as it is supposed to represent $\varphi$!
+\end{rem}
+
+
+\section{Operators on inner-product spaces}
+\label{sec:oper-inner-prod}
+
+\subsection{Adjoint and self-adjoint operators}
+
+\begin{defn}
+  \label{def:adjoint}
+  The \emph{adjoint of a linear map}
+  \mbox{$T\in {\cal L}({\cal V},{\cal W})$}
+  between inner-product spaces is a function
+  $T^*:{\cal W}\rightarrow{\cal V}$
+  that satisfies
+  \begin{equation}
+    \label{eq:adjoint}
+    \forall \mathbf{v}\in {\cal V},\ \forall \mathbf{w}\in {\cal W},
+    \qquad \innerProd{T\mathbf{v},\mathbf{w}} = \innerProd{\mathbf{v},T^*\mathbf{w}}.
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  The two inner products in (\ref{eq:adjoint}) may be different.
+\end{rem}
+
+\begin{rem}
+  The concept of adjoint follows naturally
+  from the Riesz representation theorem (Theorem \ref{thm:RieszRep}).
+  Given a fixed $\mathbf{w}\in {\cal W}$,
+  we can construct from $T$ and $\mathbf{w}$ a linear functional
+  $\phi: {\cal V}\rightarrow \mathbf{R}$
+  given by $\phi(\mathbf{v}) = \innerProd{T\mathbf{v},\mathbf{w}}$.
+  By Theorem \ref{thm:RieszRep},
+  there exists a unique vector $\mathbf{u}\in{\cal V}$
+  such that $\phi(\mathbf{v})=\innerProd{\mathbf{v},\mathbf{u}}$.
+  The uniqueness of $\mathbf{u}$
+  and the above process furnish a linear map
+  $T^*:{\cal W}\rightarrow{\cal V}$
+  that assigns for each $\mathbf{w}\in {\cal W}$
+  a unique vector $\mathbf{u}\in {\cal V}$
+  according to (\ref{eq:adjoint}).
+\end{rem}
+
+\begin{exm}
+  Define a linear operator $T:\mathbb{R}^3\rightarrow \mathbb{R}^2$, 
+  \begin{displaymath}
+    T(x_1,x_2,x_3)=(x_2+3x_3,2x_1).
+  \end{displaymath}
+  Then $T^*(y_1,y_2)=(2y_2,y_1,3y_1)$ because
+  \begin{align*}
+    \innerProd{(x_1,x_2,x_3), T^*(y_1,y_2)}
+    &= \innerProd{T(x_1,x_2,x_3), (y_1,y_2)}
+    \\
+    &= \innerProd{(x_2+3x_3,2x_1), (y_1,y_2)}
+    \\
+    &= x_2y_1+3x_3y_1+2x_1y_2
+    \\
+    &= \innerProd{(x_1,x_2,x_3), (2y_2,y_1,3y_1)}.
+  \end{align*}
+\end{exm}
+
+% \begin{exm}
+%   Fix $\mathbf{u}\in {\cal V}$ and $\mathbf{x}\in {\cal W}$.
+%   Define a linear operator $T\in {\cal L}({\cal V},{\cal W})$ by
+%   $T\mathbf{v}=\innerProd{\mathbf{v},\mathbf{u}}\mathbf{x}$.
+%   Then %$T^*$ is found by
+%   \begin{align*}
+%     \innerProd{\mathbf{v},T^*\mathbf{w}} &= \innerProd{T\mathbf{v},\mathbf{w}} = \innerProd{\innerProd{\mathbf{v},\mathbf{u}}\mathbf{x},\mathbf{w}}
+%     \\
+%     &= \innerProd{\mathbf{v},\mathbf{u}}\innerProd{\mathbf{x},\mathbf{w}} = \innerProd{\mathbf{v},\innerProd{\mathbf{w},\mathbf{x}}\mathbf{u}}.
+%   \end{align*}
+%   Hence $T^*\mathbf{w}=\innerProd{\mathbf{w},\mathbf{x}}\mathbf{u}$.
+% \end{exm}
+
+\begin{lem}
+  If $T\in {\cal L}({\cal V},{\cal W})$,
+  then $T^*\in {\cal L}({\cal W},{\cal V})$.
+\end{lem}
+\begin{proof}
+  Use Definition \ref{def:linearMap}.
+\end{proof}
+
+\begin{rem}
+  \label{rem:adjointAndDual}
+  For a linear map $T\in {\cal L}({\cal V},{\cal W})$,
+  its adjoint $T^*\in {\cal L}({\cal W},{\cal V})$
+  is closely related to
+  its dual $T'\in {\cal L}({\cal W}',{\cal V}')$.
+  By Lemma \ref{lem:dimV=dimV'}
+   and the Riez representation theorem, 
+   we can define a natural isomorphism
+   $I_{{\cal V}}: {\cal V}\rightarrow {\cal V}'$
+%   and $I_{{\cal W}}: {\cal W}\rightarrow {\cal W}'$
+   as
+   \begin{displaymath}
+     (*):\quad
+     I_{{\cal V}}(\mathbf{v})(\mathbf{u})
+     := \innerProd{\mathbf{u},\mathbf{v}}.
+   \end{displaymath}
+   Then we have the commutative diagram 
+   \begin{displaymath}
+     \begin{tikzcd}[column sep=3em]
+       {\cal W} \ar{r}{T^*} 
+       \ar{d}{I_{\cal W}}
+       & {\cal V}
+       \ar{d}{I_{\cal V}}
+       \\
+       {\cal W}' \ar{r}{T'}
+       & {\cal V}' 
+     \end{tikzcd}
+   \end{displaymath}
+   which tells us that the adjoint
+   can be regarded as a reformulation of the dual, 
+   and vice versa, because
+   \begin{align*}
+     (T'\circ I_{\cal W})(\mathbf{w})(\mathbf{v})
+     &= I_{\cal W}(\mathbf{w})(T\mathbf{v})
+     = \innerProd{T\mathbf{v}, \mathbf{w}}
+     \\
+     &= \innerProd{\mathbf{v}, T^*\mathbf{w}}
+     = (I_{\cal V}\circ T^*)(\mathbf{w})(\mathbf{v}).
+   \end{align*}
+   In category theory, 
+   the isomorphism $I_{\cal V}$ given in $(*)$
+   is called a \emph{natural transformation}
+   that transforms one morphism into another
+   while respecting the internal structure
+   of the involved categories,
+   which, in the above example,
+   are the category of inner-product spaces
+   and that of vector spaces.
+\end{rem}
+
+\begin{thm}
+  \label{thm:adjointProperties}
+  The adjoint of a linear map has the following properties.
+  \begin{enumerate}[({ADJ}-1)]\itemsep0em
+  \item additivity:\\
+    $\forall S,T\in {\cal L}({\cal V},{\cal W})$,\qquad
+    $(S+T)^*=S^*+T^*$;
+  \item conjugate homogeneity:\\
+    $\forall T\in {\cal L}({\cal V},{\cal W})$,\ 
+    $\forall a\in \mathbb{F}$,\qquad
+    $(aT)^*=\bar{a}T^*$;
+  \item adjoint of adjoint:\\
+    $\forall T\in {\cal L}({\cal V},{\cal W})$,\ 
+    $(T^*)^*=T$;
+  \item identity: $I^*=I$;
+  \item products:
+    let ${\cal U}$ be an inner-product space,\\
+    $\forall T\in {\cal L}({\cal V},{\cal W})$,\ 
+    $\forall S\in {\cal L}({\cal W},{\cal U})$,\ \ 
+    $(ST)^*=T^*S^*$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Use Definitions \ref{def:adjoint}
+  and \ref{def:innerProduct}.
+\end{proof}
+
+\begin{rem}
+  \label{rem:adjointGeneralizesComplexConjugate}
+  The adjoint can also be considered
+  as a generalization of complex conjugate.
+  For the vector space ${\cal V}=\mathbb{C}$
+  with the underlying field $\mathbb{F}=\mathbb{C}$,
+  we have
+  \begin{displaymath}
+%    \label{eq:complexConjugateAsAdjoint}
+    \forall z, x, y\in \mathbb{C},\qquad
+    \innerProd{zx,y}=\innerProd{x,\ccg{z}y}.
+  \end{displaymath}
+\end{rem}
+
+\begin{lem}
+  $T\in {\cal L}(V,W)$ and $T^*$ satisfy
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\Null\,T^* = (\Range\,T)^{\perp}$;
+  \item $\Range\,T^* = (\Null\,T)^{\perp}$;
+  \item $\Null\,T = (\Range\,T^*)^{\perp}$;
+  \item $\Range\,T = (\Null\,T^*)^{\perp}$.
+  \end{enumerate}
+\end{lem}
+
+\begin{defn}
+  \label{def:conjugateTranspose}
+  The \emph{conjugate transpose}, or
+  \emph{Hermitian transpose}, or
+  \emph{Hermitian conjugate}, or \emph{adjoint matrix}, 
+  of a matrix $A\in \mathbb{C}^{m\times n}$
+  is the matrix $A^*\in \mathbb{C}^{n\times m}$ defined by
+  \begin{equation}
+    \label{eq:conjugateTranspose}
+    (A^*)_{ij}=\overline{a_{ji}},
+  \end{equation}
+  where $\overline{a_{ji}}$ denotes
+  the complex conjugate of the entry $a_{ji}$.%\in \mathbb{C}$.
+\end{defn}
+
+\begin{exc}
+  \label{exc:adjointAndConjugateTranspose}
+  Show that 
+  the conjugate transpose is an adjoint operator
+  in ${\cal L}({\cal V},{\cal W})$
+  with ${\cal V}=\mathbb{C}^n$ and ${\cal W}=\mathbb{C}^m$.
+\end{exc}
+\begin{solution}
+  By Definition \ref{def:conjugateTranspose}, we have
+  \begin{align*}
+    \forall x\in {\cal V}, \forall y\in {\cal W},\ 
+    \innerProd{Ax,y} &= \sum_{i,j} A_{ij}x_j\ccg{y_i}
+                 = \sum_{i,j} x_j\ccg{A^*_{ji}}\ccg{y_i}
+    \\
+               &= \sum_{i,j} x_j\ccg{A^*_{ji}y_i}
+                 = \innerProd{x, A^* y}.
+  \end{align*}
+  For $A\in \mathbb{R}^{m\times n}$,
+  $A^*$ is simply $A^T$, the transpose of $A$.
+\end{solution}
+
+\begin{defn}
+  \label{def:unitaryMatrices}
+  A matrix $U\in \mathbb{C}^{n\times n}$ is \emph{unitary}
+  iff $U^*U=I$.
+  A matrix $U\in \mathbb{R}^{n\times n}$ is \emph{orthogonal}
+  iff $U^TU=I$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:unitaryMatrixHasOrthonormalColumns}
+  A matrix $U\in \mathbb{C}^{n\times n}$ is unitary
+  if and only if its columns form an orthonormal basis
+  for $\mathbb{C}^n$.
+\end{thm}
+\begin{proof}
+  This follows from
+  considering the $(i,j)$th element of $U^*U$
+  and applying $U^*U=I$
+  in Definition \ref{def:unitaryMatrices}.
+\end{proof}
+
+\begin{coro}
+  \label{coro:unitaryMatricesPreserveNorms}
+  A unitary matrix $U$ preserves norms and inner products.
+  More precisely, we have 
+  \begin{displaymath}
+    \forall \mathbf{v}, \mathbf{w}\in \mathbb{C}^n,\qquad
+    \innerProd{U\mathbf{v}, U\mathbf{w}} = \innerProd{\mathbf{v}, \mathbf{w}}.
+  \end{displaymath}
+\end{coro}
+\begin{proof}
+  This follows from Definitions \ref{def:adjoint}
+  and \ref{def:unitaryMatrices}.
+\end{proof}
+
+\begin{rem}
+  By Corollary \ref{coro:unitaryMatricesPreserveNorms},
+  a unitary matrix is a linear isometry;
+  see Definition \ref{def:linearIsometry}.
+  as in can be considered
+  as ``rotations'' and ``reflections.''
+\end{rem}
+
+\begin{thm}
+  \label{thm:unitaryMatrices2by2}
+  Every unitary matrix $U\in \mathbb{C}^{2\times 2}$
+  with $\det U=1$ is of the form
+  \begin{equation}
+    \label{eq:unitaryMatrices2by2}
+    U =
+    \begin{bmatrix}
+      a & b \\ -\ccg{b} & \ccg{a}
+    \end{bmatrix},
+  \end{equation}
+  where $|a|^2+|b|^2=1$.
+\end{thm}
+\begin{proof}
+  Let 
+  \begin{displaymath}
+    U=
+    \begin{bmatrix}
+      a & b \\ c & d
+    \end{bmatrix}.    
+  \end{displaymath}
+  Then Theorem \ref{thm:unitaryMatrixHasOrthonormalColumns}
+  and the condition $\det U=1$ yield
+  \begin{align*}
+    a \ccg{b} + c\ccg{d} &= 0,
+    \\
+    a d - cb &= 1.
+  \end{align*}
+  In other words, the linear system
+  \begin{equation*}
+    \begin{bmatrix}
+      \ccg{b} & \ccg{d} \\ d & -b
+    \end{bmatrix}
+    \begin{bmatrix}
+      x \\ y
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      0 \\ 1
+    \end{bmatrix}
+  \end{equation*}
+  has solution $x=a, y=c$.
+  Furthermore, Theorem \ref{thm:unitaryMatrixHasOrthonormalColumns}
+  and the form of $U$ yield
+  $|b|^2+|d|^2=1$.
+  Hence the solution $x=a, y=c$ is unique
+  and we have $a=\ccg{d}$ and $c=-\ccg{b}$,
+  which completes the proof.
+\end{proof}
+
+\begin{thm}
+  \label{thm:matrixRelationOfAdjoints}
+  Let $T\in {\cal L}({\cal V},{\cal W})$.
+  Suppose $e_1,\ldots,e_n$ is an orthonormal basis of ${\cal V}$
+  and $f_1,\ldots,f_m$ is an orthonormal basis of ${\cal W}$.
+  Then 
+  \begin{displaymath}
+    M(T^*,(f_1,\ldots,f_m), (e_1,\ldots,e_n))
+  \end{displaymath}
+  is the conjugate transpose of 
+  \begin{displaymath}
+    M(T, (e_1,\ldots,e_n) ,(f_1,\ldots,f_m)).
+  \end{displaymath}
+\end{thm}
+\begin{proof}
+  By Corollary \ref{coro:matrixOfLinearMap},
+  we have
+  \begin{displaymath}
+    T[e_1,\ldots,e_n] = [f_1,\ldots,f_m] M_T.
+  \end{displaymath}
+  The orthonormality of the two bases
+  and Definition \ref{def:EuclideanInnerProduct} further imply
+  \begin{displaymath}
+    M_T =
+    \begin{bmatrix}
+      \innerProd{Te_1,f_1} & \innerProd{Te_2,f_1} & \cdots & \innerProd{Te_n,f_1}
+      \\
+      \innerProd{Te_1,f_2} & \innerProd{Te_2,f_2} & \cdots & \innerProd{Te_n,f_2}
+      \\
+      \vdots & \vdots & \ddots & \vdots
+      \\
+      \innerProd{Te_1,f_m} & \innerProd{Te_2,f_m} & \cdots & \innerProd{Te_n,f_m}
+    \end{bmatrix}.
+  \end{displaymath}
+  The proof is completed by
+  repeating the above derivation for $T^*$
+  and
+  then applying Definitions \ref{def:innerProduct} and \ref{def:adjoint}.
+\end{proof}
+
+\begin{lem}
+  \label{lem:zeroOpCondition}
+  Suppose ${\cal V}$ is a complex inner product space
+  and $T\in {\cal L}({\cal V})$.
+  If
+  \begin{equation}
+    \label{eq:zeroOpCondition}
+    \forall \mathbf{v}\in {\cal V},\qquad \innerProd{T\mathbf{v},\mathbf{v}}=0,
+  \end{equation}
+  then $T=\mathbf{0}$.  
+\end{lem}
+\begin{proof}
+  By Definition \ref{def:innerProduct}
+  and (\ref{eq:zeroOpCondition}),
+  we have, $\forall \mathbf{u},\mathbf{w}\in {\cal V}$,
+  \begin{align*}
+    \innerProd{T\mathbf{u},\mathbf{w}}
+    =& \frac{\innerProd{T(\mathbf{u}+\mathbf{w}),\mathbf{u}+\mathbf{w}}-\innerProd{T(\mathbf{u}-\mathbf{w}),\mathbf{u}-\mathbf{w}}}{4}
+    \\
+     &+\ii 
+       \frac{\innerProd{T(\mathbf{u}+\ii \mathbf{w}),\mathbf{u}+\ii \mathbf{w}}-\innerProd{T(\mathbf{u}-\ii \mathbf{w}),\mathbf{u}-\ii \mathbf{w}}}{4}
+    \\
+    =& 0.
+  \end{align*}
+  Setting $\mathbf{w}=T\mathbf{u}$ completes the proof.
+\end{proof}
+
+\begin{defn}
+  \label{def:selfAdjoint}
+  An operator $T\in {\cal L}({\cal V})$
+  is \emph{self-adjoint} iff $T=T^*$,
+  i.e. 
+  \begin{equation}
+    \label{eq:selfAdjoint}
+    \forall \mathbf{v},\mathbf{w} \in {\cal V},
+    \qquad \innerProd{T\mathbf{v},\mathbf{w}} = \innerProd{\mathbf{v},T\mathbf{w}}.
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:selfAdjointEigenvalueReal}
+  Every eigenvalue of a self-adjoint operator $T$ is real.
+\end{lem}
+\begin{proof}
+  Let $(\lambda,\mathbf{u})$ be an eigenpair of $T$.
+  % of a self-adjoint operator $T$.
+  We have
+  \begin{displaymath}
+    \lambda \|\mathbf{u}\|^2
+    = \innerProd{\lambda \mathbf{u}, \mathbf{u}}
+    = \innerProd{T \mathbf{u}, \mathbf{u}}
+    = \innerProd{\mathbf{u}, T\mathbf{u}}
+    = \innerProd{\mathbf{u}, \lambda\mathbf{u}}
+    = \bar{\lambda} \|\mathbf{u}\|^2,
+  \end{displaymath}
+  where the third step follows from Definition \ref{def:selfAdjoint}.
+  Then $\mathbf{u}\ne \mathbf{0}$ implies $\lambda=\bar{\lambda}$.
+\end{proof}
+
+\begin{thm}
+  \label{thm:selfAdjointSufNecConds}
+  Suppose ${\cal V}$ is a complex inner product space
+  and $T\in {\cal L}({\cal V})$.
+  Then $T$ is self-adjoint if and only if
+  \begin{equation}
+    \label{eq:selfAdjointSufNecConds}
+    \forall \mathbf{v}\in {\cal V},\ \ \innerProd{T\mathbf{v}, \mathbf{v}}\in \mathbb{R}.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  By Definitions \ref{def:innerProduct}, \ref{def:adjoint}, 
+  and \ref{def:selfAdjoint},
+  we have
+  \begin{align*}
+    \innerProd{T\mathbf{v},\mathbf{v}} - \ccg{\innerProd{T\mathbf{v},\mathbf{v}}}
+    &= \innerProd{T\mathbf{v},\mathbf{v}} - \innerProd{\mathbf{v},T\mathbf{v}}
+    \\
+    &= \innerProd{T\mathbf{v},\mathbf{v}} - \innerProd{T^*\mathbf{v},\mathbf{v}}
+      = \innerProd{(T-T^*)\mathbf{v},\mathbf{v}}.
+  \end{align*}
+  Then Lemma \ref{lem:zeroOpCondition} completes the proof.
+\end{proof}
+
+\begin{rem}
+  Theorem \ref{thm:selfAdjointSufNecConds} characterizes
+  self-adjoint operators
+  in that they act like real numbers.
+  Indeed, for some orthonormal basis
+  a self-ajoint operator does nothing
+  but scaling components of vectors; 
+  see Theorem \ref{thm:realSpectralThm}.
+\end{rem}
+
+\begin{lem}
+  \label{lem:zeroOpConditionSelfAdjoint}
+  Suppose ${\cal V}$ is a real inner product space
+  and $T\in {\cal L}({\cal V})$.
+  If $T$ is self-adjoint
+  and satisfies
+  \begin{equation}
+    \label{eq:zeroOpConditionSelfAdjoint}
+    \forall \mathbf{v}\in {\cal V},\qquad \innerProd{T\mathbf{v},\mathbf{v}}=0,
+  \end{equation}
+  then $T=\mathbf{0}$.
+\end{lem}
+\begin{proof}
+  By the self-adjointness and the underlying field being real,
+  we have
+  \begin{displaymath}
+    \innerProd{T\mathbf{w},\mathbf{u}} = \innerProd{\mathbf{w},T\mathbf{u}} = \innerProd{T\mathbf{u},\mathbf{w}},
+  \end{displaymath}
+  which, together with Definition \ref{def:innerProduct},
+  implies
+  \begin{displaymath}
+    \innerProd{T\mathbf{u},\mathbf{w}} = \frac{\innerProd{T(\mathbf{u}+\mathbf{w}),\mathbf{u}+\mathbf{w}} - \innerProd{T(\mathbf{u}-\mathbf{w}),\mathbf{u}-\mathbf{w}}}{4}.
+  \end{displaymath}
+  Setting $\mathbf{w}=T\mathbf{u}$ completes the proof.
+\end{proof}
+
+\begin{rem}
+  It is instructive to compare
+  Lemma \ref{lem:zeroOpCondition}
+  and Lemma \ref{lem:zeroOpConditionSelfAdjoint}.
+  The condition (\ref{eq:zeroOpCondition})
+  in Lemma \ref{lem:zeroOpCondition}
+  is stronger than that %(\ref{eq:zeroOpConditionSelfAdjoint})
+  in Lemma \ref{lem:zeroOpConditionSelfAdjoint}
+  because both the real part
+  and the imaginary part of the inner product
+  have to be zero.
+  For a real inner product space,
+  the condition (\ref{eq:zeroOpConditionSelfAdjoint}) 
+  itself cannot guarantee $T=\mathbf{0}$, 
+  c.f. the example of $T$ being a rotation of $\frac{\pi}{2}$.
+  With self-adjointness added, $T=\mathbf{0}$ holds again.
+
+  Although $\mathbb{C}\simeq \mathbb{R}^2$,
+  the Euclidean inner product in Definition
+  \ref{def:EuclideanInnerProduct}
+  on these two vector spaces are different in that
+  the inner product of
+  two perpendicular vectors in $\mathbb{R}^2$
+  is zero because they are perpendicular
+  while that in $\mathbb{C}$
+  is zero only when at least one of these two vectors
+  is the zero vector.
+\end{rem}
+
+
+\subsection{Normal operators}
+\label{sec:normal-operators}
+
+\begin{defn}
+  \label{def:normalOps}
+  An operator $T\in {\cal L}({\cal V})$
+  is \emph{normal} iff $TT^*=T^*T$.
+\end{defn}
+
+\begin{coro}
+  \label{coro:TTsIsNormal}
+  Every self-adjoint operator is normal.
+\end{coro}
+
+\begin{rem}
+  Denote by ``$\subset$'' the ``is-a'' relation.
+  Then 
+  \begin{center}
+    self-adjoint operators $\subset$ normal operators
+    $\subset$ linear operators.
+  \end{center}
+  The strict inclusion of the first $\subset$
+  is justified by the fact
+  that skew self-adjoint operators and orthogonal operators
+  are also normal, but not self-adjoint.
+\end{rem}
+
+\begin{lem}
+  \label{lem:normalOpCondition}
+  % An operator
+  $T\in {\cal L}({\cal V})$
+  is normal if and only if
+  \begin{equation}
+    \label{eq:normalOpCondition}
+    \forall \mathbf{v}\in {\cal V},\qquad
+    \|T\mathbf{v}\| = \|T^*\mathbf{v}\|.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  By Lemma \ref{lem:zeroOpConditionSelfAdjoint}
+  and Definition \ref{def:adjoint},
+  we have
+  \begin{align*}
+    T^*T=TT^* %=\mathbf{0}
+    &\Leftrightarrow
+      \forall \mathbf{v}\in {\cal V},\ 
+      \innerProd{(T^*T-TT^*)\mathbf{v}, \mathbf{v}}=0
+    \\
+    &\Leftrightarrow
+      \forall \mathbf{v}\in {\cal V},\ 
+      \innerProd{T^*T\mathbf{v}, \mathbf{v}}=\innerProd{TT^*\mathbf{v}, \mathbf{v}}
+    \\
+    &\Leftrightarrow
+      \forall \mathbf{v}\in {\cal V},\ 
+      \|T\mathbf{v}\|^2 = \|T^*\mathbf{v}\|^2.
+  \end{align*}
+  The positivity of a norm completes the proof.
+\end{proof}
+
+\begin{lem}
+  \label{lem:normalOpEigenVecCondition}
+  %An operator
+  $T\in {\cal L}({\cal V})$
+  is normal if and only if
+  each eigenvector of $T$
+  is also an eigenvector of $T^*$.
+\end{lem}
+\begin{proof}
+  If $T$ is normal, so is $T-\lambda I$.
+  By Lemma \ref{lem:normalOpCondition},
+  an eigenpair $(\lambda, \mathbf{u})$ of $T$ satisfies
+  \begin{displaymath}
+    0=\|(T-\lambda I)\mathbf{u}\|
+    =\|(T-\lambda I)^*\mathbf{u}\|
+    =\|(T^* - \bar{\lambda} I)\mathbf{u}\|,
+  \end{displaymath}
+  and thus $\mathbf{u}$ is also an eigenvector of $T^*$.
+
+  Conversely, suppose each eigenvector $\mathbf{u}$ of $T$
+  is also an eigenvector of $T^*$.
+  Then the above equation implies that the corresponding eigenvalue of
+  $T^*$ is the conjugate of that of $T$.
+  It suffices to prove that these eigenvectors form a basis of $V$,
+  because then we have
+  \begin{displaymath}
+    T U = U \Lambda,\quad T^* U = U \Lambda^*,
+  \end{displaymath}
+  where $U$ is the matrix of these eigenvectors.
+  Thus
+  \begin{displaymath}
+    TT^*U = TU\Lambda^* = U\Lambda\Lambda^* = U\Lambda^*\Lambda =
+    T^*U\Lambda = T^*TU
+  \end{displaymath}
+  and we have $TT^*=T^* T$ because $U$ is nonsingular.
+  By Theorem \ref{thm:diagonalizabilityConditions},
+  it suffices to show that $T$ is diagonalizable.
+  By Theorem \ref{thm:JordanBasis},
+  we only need to show that
+  for any eigenpair $(\lambda, \mathbf{u})$ of $T$, 
+  \begin{displaymath}
+    (A-\lambda I)^2\mathbf{u}=\mathbf{0}\
+    \Rightarrow\ (A-\lambda I)\mathbf{u}=\mathbf{0},
+  \end{displaymath}
+  because this condition will annihilate
+  all Jordan blocks of size greater than 1.
+  Define $\mathbf{v}= (A-\lambda I)\mathbf{u}$
+  and we have
+  \begin{displaymath}
+    \begin{array}{l}
+      \innerProd{A\mathbf{u},\mathbf{v}}= \innerProd{\mathbf{u}, A^*\mathbf{v}}
+      = \innerProd{\mathbf{u}, \bar{\lambda}\mathbf{v}}
+      = \innerProd{\lambda\mathbf{u}, \mathbf{v}},
+      \\
+      \innerProd{A\mathbf{u}, \mathbf{v}}
+      = \innerProd{\mathbf{v}+\lambda\mathbf{u}, \mathbf{v}}
+      = \|\mathbf{v}\|^2 + \innerProd{\lambda\mathbf{u}, \mathbf{v}}, 
+    \end{array}
+  \end{displaymath}
+  which imply %$\|\mathbf{v}\|^2=0$, i.e.,
+  $\mathbf{v}=0$, i.e., $(A-\lambda I)\mathbf{u}=\mathbf{0}$.
+\end{proof}
+
+\begin{rem}
+  In the proof of Lemma \ref{lem:normalOpEigenVecCondition},
+  we see that the condition of normal operators
+  does not allow the existence of Jordan blocks.
+\end{rem}
+
+\begin{thm}
+  \label{thm:normalFormInRealIPspaces}
+  For a linear operator $T\in {\cal L}({\cal V})$
+  on a two-dimensional real inner product space ${\cal V}$, 
+  the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $T$ is normal but not self-adjoint.
+  \item The matrix of $T$ with respect to every orthonormal basis of
+    ${\cal V}$ has the form
+    \begin{equation}
+      \label{eq:normalFormInRealIPspaces}
+      M(T) =
+      \begin{bmatrix}
+        a & -b
+        \\
+        b & a
+      \end{bmatrix}
+    \end{equation}
+    where $b\ne 0$.
+    % \item The matrix of $T$ with respect to some orthonormal basis of
+    %   ${\cal V}$ has the form
+    %   \begin{equation}
+    %     \label{eq:normalNotSelfAdjointMat}
+    %     M(T) =
+    %     \begin{bmatrix}
+    %       a & -b
+    %       \\
+    %       b & a
+    %     \end{bmatrix}
+    %   \end{equation}
+    %   where $b> 0$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  (b) $\Rightarrow$ (a) trivially holds,
+  so we only prove \mbox{(a) $\Rightarrow$ (b)}.
+  Let $(e_1,e_2)$ be an orthonormal basis of ${\cal V}$
+  and set 
+  \begin{displaymath}
+    M(T,(e_1,e_2)) =
+    \begin{bmatrix}
+      a & c
+      \\
+      b & d
+    \end{bmatrix}.
+  \end{displaymath}
+  By Definition \ref{def:normalOps}, we have
+  \begin{align*}
+    &
+    \begin{bmatrix}
+      a & c
+      \\
+      b & d
+    \end{bmatrix}
+    \begin{bmatrix}
+      a & b
+      \\
+      c & d
+    \end{bmatrix}
+          =
+    \begin{bmatrix}
+      a^2+c^2 & ab+cd
+      \\
+      ab+cd & b^2+d^2
+    \end{bmatrix}
+    \\
+    =&
+    \begin{bmatrix}
+      a & b
+      \\
+      c & d
+    \end{bmatrix}
+    \begin{bmatrix}
+      a & c
+      \\
+      b & d
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+      a^2+b^2 & ac+bd
+      \\
+      ac+bd & c^2+d^2
+    \end{bmatrix}.
+  \end{align*}
+  $b^2=c^2$
+  and the condition of $T$ being not self-adjoint
+  further yields
+  $c=-b \ne 0$,
+  which, together with $ab+cd=ac+bd$,
+  yields $a=d$.
+  % -----------------------------------------
+  % The following is an incomplete proof
+  % -----------------------------------------
+  % By Definition \ref{def:matrixOfLinearMap},
+  % Theorem \ref{thm:Pythagorean},
+  % and Definition \ref{def:orthonormalList},
+  % we have $\|Te_1\|^2=a^2+b^2$.
+  % In addition, Theorem \ref{thm:matrixRelationOfAdjoints}
+  % yields $\|T^*e_1\|^2=a^2+c^2$.
+  % Then Lemma \ref{lem:normalOpCondition}
+  % implies $b^2=c^2$
+  % and the condition of $T$ being not self-adjoint
+  % further yields
+  % $c=-b \ne 0$.
+\end{proof}
+
+
+\subsection{The spectral theorems}
+\label{sec:spectral-theorem}
+
+\begin{thm}[Complex spectral]
+  \label{thm:complexSpectralThm}
+  For a linear operator $T\in {\cal L}({\cal V})$
+  with $\mathbb{F}=\mathbb{C}$, 
+  the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $T$ is normal;
+  \item ${\cal V}$ has an orthonormal basis consisting of eigenvectors of
+    $T$;
+  \item $T$ has a diagonal matrix with respect
+    to some orthonormal basis of ${\cal V}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{coro}
+  \label{coro:normalMatWithRealEigenValIsSelfAdjoint}
+  A normal operator $T$ whose eigenvalues are real is self-adjoint.
+\end{coro}
+\begin{proof}
+  By Theorem \ref{thm:complexSpectralThm},
+  we write $T=V\Lambda V^{-1}$
+  and thus $T^*=V \Lambda^* V^{-1}$.
+  Then all entries in $\Lambda$ being real
+  implies $T=T^*$.
+\end{proof}
+
+\begin{rem}
+  With respect to normal operators, 
+  Corollary \ref{coro:normalMatWithRealEigenValIsSelfAdjoint}
+  is the converse of
+  Lemma \ref{lem:selfAdjointEigenvalueReal}.
+\end{rem}
+
+\begin{thm}[Real spectral]
+  \label{thm:realSpectralThm}
+  For a linear operator $T\in {\cal L}({\cal V})$
+  with $\mathbb{F}=\mathbb{R}$, 
+  the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $T$ is self-adjoint;
+  \item ${\cal V}$ has an orthonormal basis consisting of eigenvectors of
+    $T$;
+  \item $T$ has a diagonal matrix with respect
+    to some orthonormal basis of ${\cal V}$.
+  \end{enumerate}
+\end{thm}
+
+\begin{rem}
+  Note that the condition (b) is the same
+  for both Theorem \ref{thm:complexSpectralThm}
+  and Theorem \ref{thm:realSpectralThm}.
+  These theorems are important
+   for numerical solutions of systems of ordinary differential
+   equations
+   of the form $\frac{\dif \mathbf{x}}{\dif t} = A \mathbf{x}$
+   where $A$ is a square matrix.
+\end{rem}
+
+
+\subsection{Isometries}
+
+\begin{defn}
+  \label{def:linearIsometry}
+  An operator $S\in {\cal L}({\cal V})$
+  is called a (linear) \emph{isometry} iff
+  \begin{equation}
+    \label{eq:linearIsometry}
+    \forall \mathbf{v}\in {\cal V}, \qquad \|S \mathbf{v}\| = \|\mathbf{v}\|.
+  \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{thm:isometryFormsInRealIPspaces}
+  An operator $S\in {\cal L}({\cal V})$
+  on a real inner product space
+  is an isometry
+  if and only if
+  there exists an orthonormal basis of ${\cal V}$
+  with respect to which ${\cal S}$ has a block diagonal matrix
+  such that each block on the diagonal is a 1-by-1 matrix
+  containing 1 or $-1$,
+  or, is a 2-by-2 matrix of the form
+  \begin{equation}
+    \label{eq:isometryFormsInRealIPspaces}
+    \begin{bmatrix}
+      \cos\theta & -\sin\theta
+      \\
+      \sin\theta & \cos \theta
+    \end{bmatrix}
+  \end{equation}
+  where $\theta\in (0,\pi)$.
+\end{thm}
+
+\begin{coro}
+  \label{coro:isometryTypes}
+  For an operator ${\cal S}\in {\cal L}({\cal V})$
+  on a two-dimensional real inner product space, 
+  the following are equivalent:
+  \begin{enumerate}[(a)]\itemsep0em
+  \item ${\cal S}$ is an isometry;
+  \item ${\cal S}$ is either an identity or a reflection or a rotation.
+  \end{enumerate}
+\end{coro}
+
+\begin{rem}
+  By Theorem \ref{thm:normalFormInRealIPspaces}
+   and Corollary \ref{coro:isometryTypes},
+   an isometry is a special type of normal operators, 
+   but it may or may not be self-adjoint.
+\end{rem}
+
+
+\subsection{Singular value decomposition}
+\label{sec:sing-value-decomp}
+
+\begin{defn}
+  \label{def:positiveDefinite}
+  An operator $T\in{\cal L}(V)$ is \emph{positive semi-definite}
+  iff
+  \begin{equation}
+    \label{eq:positiveSemiDefinite}
+    \forall \mathbf{v}\in V,\quad
+    \innerProd{T\mathbf{v}, \mathbf{v}} \ge 0
+  \end{equation}
+  and is \emph{positive definite} iff 
+  \begin{equation}
+    \label{eq:positiveDefinite}
+    \forall \mathbf{v}\in V\setminus\{\mathbf{0}\},\quad
+    \innerProd{T\mathbf{v}, \mathbf{v}} > 0.
+  \end{equation}
+  An operator is \emph{positive}
+  if it is self-adjoint
+  and positive semi-definite.
+\end{defn}
+
+\begin{coro}
+  \label{coro:fStarCatf2SelfAdj}
+  For any linear operator $f\in {\cal L}({\cal V})$,
+  both $f^*\circ f$ and $f\circ f^*$ are positive.
+\end{coro}
+\begin{proof}
+  By Definition \ref{def:selfAdjoint}, % and \ref{def:adjoint},
+  $f^*\circ f$ is self-adjoint since
+  \begin{displaymath}
+    \innerProd{(f^*\circ f)\mathbf{u}, \mathbf{v}}
+    = \innerProd{ f\mathbf{u}, f \mathbf{v}}
+    = \innerProd{ \mathbf{u}, (f^*\circ f) \mathbf{v}}.
+  \end{displaymath}
+  Suppose $(\lambda, \mathbf{u})$ is an eigenpair of $(f^*\circ f)$.
+  Then we have
+  \begin{align*}
+    &\lambda\innerProd{\mathbf{u}, \mathbf{u}}
+      = \innerProd{(f^*\circ f)\mathbf{u}, \mathbf{u}}
+      = \innerProd{ f\mathbf{u}, f \mathbf{u}}
+    \\
+    \Rightarrow
+    & \lambda = \frac{\innerProd{ f\mathbf{u}, f
+      \mathbf{u}}}{\innerProd{\mathbf{u}, \mathbf{u}}}\ge 0.
+  \end{align*}
+  Similar arguments apply to $f\circ f^*$. 
+\end{proof}
+
+\begin{rem}
+  Corollary \ref{coro:fStarCatf2SelfAdj} tells us that both $f^*\circ f$ and $f\circ f^*$
+  can be diagonalized and they have nonnegative eigenvalues.
+  This is important 
+  as it leads to the concept of singular values.
+\end{rem}
+
+\begin{defn}
+  \label{def:singularValues}
+  The \emph{singular values} of a linear map
+  $f: \mathbb{C}^n\rightarrow \mathbb{C}^m$
+%  $f\in {\cal L}({\cal V}, {\cal W})$
+  are the non-negative square roots of the eigenvalues
+  of $f^*\circ f$,  % (and $f\circ f^*$)
+  usually sorted in non-increasing order as 
+  \begin{displaymath}
+    \sigma_1 \ge \sigma_2 \ge \cdots \ge \sigma_r
+    > \sigma_{r+1} = \cdots = \sigma_n = 0, 
+  \end{displaymath}
+  where $r$ is the rank of $f$.
+\end{defn}
+
+\begin{thm}
+\label{thm:SVD}
+  For any matrix $A\in \mathbb{C}^{m\times n}$ with rank $r$, 
+  there exist orthonormal bases
+  $\mathbb{C}^n=\Span\{\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\}$
+  and $\mathbb{C}^m=\Span\{\mathbf{v}_1, \mathbf{v}_2, \ldots,
+  \mathbf{v}_m\}$ such that
+  \begin{subequations}
+  \begin{align}
+    \label{eq:SVDtransform}
+    \forall j=1, 2, \ldots, r, \quad
+    \left\{
+    \begin{array}{l}
+    A \mathbf{u}_j = \sigma_j \mathbf{v}_j;\\
+    A^* \mathbf{v}_j = \sigma_j \mathbf{u}_j,
+    \end{array}
+    \right.
+    \\
+    \label{eq:SVDannihilate}
+    \left\{
+    \begin{array}{l}
+    \forall j=r+1, r+2, \ldots, n, \quad
+      A \mathbf{u}_j = \mathbf{0}; \\
+    \forall j=r+1, r+2, \ldots, m, \quad
+      A^* \mathbf{v}_j = \mathbf{0},
+    \end{array}
+    \right.
+  \end{align}
+  \end{subequations}
+  where $\sigma_j$'s are the singular values of $A$
+  in Definition \ref{def:singularValues}. 
+\end{thm}
+\begin{proof}
+  The matrix $A^*A\in \mathbb{C}^{n\times n}$
+  is self-adjoint and thus normal.
+  By Theorem \ref{thm:complexSpectralThm}, 
+  $\mathbb{C}^{n}$ has an orthonormal basis
+  that are also eigenvectors of $A^*A$; 
+  choose them to be
+  $\{\mathbf{u}_1, \mathbf{u}_2, \ldots, \mathbf{u}_n\}$.
+  By Definition \ref{def:singularValues} we have
+  \begin{displaymath}
+    A^* A \mathbf{u}_j = \sigma_j^2 \mathbf{u}_j.
+  \end{displaymath}
+  Then we choose %the first $r$ $\mathbf{v}_j$'s to be
+  \begin{displaymath}
+    \forall j=1,2,\ldots,r, \quad
+    \mathbf{v}_j := \frac{1}{\sigma_j} A \mathbf{u}_j,
+  \end{displaymath}
+  which implies
+  \begin{displaymath}
+    \innerProd{\mathbf{v}_i, \mathbf{v}_j}
+    = \frac{1}{\sigma_i\sigma_j}
+    \innerProd{A\mathbf{u}_i, A \mathbf{u}_j}
+    = \frac{1}{\sigma_i\sigma_j}
+    \innerProd{\mathbf{u}_i, A^*A \mathbf{u}_j}
+    = \frac{\sigma_j}{\sigma_i}
+    \innerProd{\mathbf{u}_i, \mathbf{u}_j}. %= \delta_{i,j},
+  \end{displaymath}
+  Then the orthonormality of $\mathbf{u}_j$'s
+  implies that the first $r$ $\mathbf{v}_j$'s
+  are orthonormal and if $r<m$ we can extend them
+  by the Gram-Schmidt process
+  to arrive at an orthonormal basis of $\mathbb{C}^m$.
+  Therefore (\ref{eq:SVDtransform}) holds.
+
+  The first line of (\ref{eq:SVDannihilate}) follows from
+  $\Null A = \Null (A^* A)$, which is implied by
+  \begin{displaymath}
+    \|A\mathbf{u}\|^2=\innerProd{A\mathbf{u}, A\mathbf{u}}
+    = \innerProd{\mathbf{u}, A^*A\mathbf{u}}.
+  \end{displaymath}
+  The rank of $A^*$ is $r$. 
+  If $r=m$,
+  the second line of (\ref{eq:SVDannihilate}) holds vacuously.
+  Otherwise $r<m$. The fundamental theorem of linear algebra
+  (Theorem \ref{thm:fundamentalLinearAlgebra}) implies that
+  $\null A^*$ has rank $m-r$, which completes the proof.  
+\end{proof}
+
+\begin{defn}
+  \label{def:SVD}
+  The \emph{singular value decomposition} (SVD)
+  of a rectangular matrix $A\in \mathbb{C}^{m\times n}$
+  is the factorization $A=V\Sigma U^*$
+  where $\Sigma$ is a diagonal matrix
+  with its diagonal entries as the singular values
+  in Definition \ref{def:singularValues}
+  and $V$ and $U$ are unitary matrices whose columns
+  are respectively the vectors $\mathbf{v}_j$'s and $\mathbf{u}_j$'s
+  specified in Theorem \ref{thm:SVD}, 
+  which are also called the \emph{left singular vectors}
+  and the \emph{right singular vectors} of $A$,
+  respectively.
+  We also refer to the sequence of triples
+  $(\sigma_j,\mathbf{u}_j,\mathbf{v}_j)$
+  as the \emph{singular system} of $A$.
+\end{defn}
+
+% \begin{thm}
+%   \label{thm:existenceOfSVD}
+%   Any matrix $A\in \mathbb{C}^{m\times n}$ has an SVD. 
+% \end{thm}
+
+\begin{rem}%[Geometric interpretation of SVD]
+  \label{rem:geometryOfSVD}
+  A matrix $A\in \mathbb{C}^{m\times n}$
+  can be viewed as a transformation
+  from $n$-vectors to $m$-vectors.
+  Consider transforming a unit ball in $\mathbb{R}^n$
+  to a hyper-ellipse in $\mathbb{R}^m$.
+  The left singular vectors
+  form an orthonormal basis of $\mathbb{R}^m$
+  and the right singular vectors
+  form an orthonormal basis of $\mathbb{R}^n$.
+  The semi-axes of the hyper-ellipse in $\mathbb{R}^m$
+  are the vectors $A\mathbf{u}_1=\sigma_1\mathbf{v}_1$
+  and $A\mathbf{u}_2=\sigma_2\mathbf{v}_2$, 
+  as shown in Figure \ref{fig:geometricMeaningOfSVD}. 
+\end{rem}
+
+\begin{Figure}
+  \centering
+  \includegraphics[width=0.8\hsize]{pst/svd}
+  \captionof{figure}{Geometric interpretation of SVD.
+  }
+  \label{fig:geometricMeaningOfSVD}
+\end{Figure}
+
+\begin{rem}
+  If $A$ has rank $r$, 
+  the singular value decomposition $A = V\Sigma U^T$ yields
+  \begin{align*}
+    {\cal R}(A) &= \Span\{V_1, V_2, \ldots, V_r\},
+    \\
+    {\cal N}(A) &= \Span\{U_{r+1}, U_{r+2}, \ldots, U_n\},
+    \\
+    {\cal R}(A^T) &= \Span\{U_1, U_2, \ldots, U_r\},
+    \\
+    {\cal N}(A^T) &= \Span\{V_{r+1}, V_{r+2}, \ldots, V_m\}.
+  \end{align*}
+  This is closely related to Theorem \ref{thm:fundamentalLinearAlgebra}.
+\end{rem}
+
+\begin{rem}
+  A self-adjoint operator $T$ on a real inner product space
+   is special in that, 
+   with respect to some orthonormal basis, 
+   its effect is nothing but
+   scaling components of all vectors:
+   $T=P\Lambda P^*$. 
+   c.f. (\ref{eq:selfAdjoint})
+   and Corollary \ref{coro:unitaryMatricesPreserveNorms}:
+   \begin{align*}
+     &\innerProd{P\Lambda P^*\mathbf{v},\mathbf{w}}
+%     = \innerProd{\Lambda P^*\mathbf{v},P^*\mathbf{w}}
+     = \innerProd{P\Lambda P^* \mathbf{v}, P  P^* \mathbf{w}}
+       = \innerProd{\Lambda P^* \mathbf{v},  P^* \mathbf{w}}
+       \\
+     =& \innerProd{\Lambda \mathbf{v}', \mathbf{w}'}
+     = \innerProd{ \mathbf{v}', \Lambda\mathbf{w}'}
+     = \innerProd{\mathbf{v}, P\Lambda P^*\mathbf{w}}. 
+   \end{align*}
+%
+  % In the most general case of a linear operator $A$, 
+  %  we have $A=P\Sigma Q^*$
+  %  where $Q$ can not be expressed as a rotation of $P$. 
+\end{rem}
+
+\begin{defn}
+  \label{def:similarMatrices}
+  Two matrices $A, B\in \mathbb{R}^{n\times n}$
+  are called \emph{similar} iff
+  there exists an invertible matrix $P$
+  such that $B=P^{-1}AP$.
+  The map $A\mapsto P^{-1}AP$
+  is called a \emph{similarity transformation}
+  or \emph{conjugation of the matrix} $A$.
+\end{defn}
+
+\begin{rem}
+  Two matrices are similar
+  if and only if they can be considered
+  as matrices of the same linear operator
+  under two bases.
+\end{rem}
+% \begin{defn}
+%   In $\mathbb{C}^n$,
+%   a sequence of vectors
+%   $\{\mathbf{x}_1, \mathbf{x}_2, \ldots \}$
+%   is said to \emph{converge} to a vector
+%   $\mathbf{x}$
+%   iff $\lim_{m\rightarrow\infty} \|\mathbf{x}_m-\mathbf{x}\|=0$.
+% \end{defn}
+
+
+\section{Trace and determinant}
+
+%\subsection{Trace}
+
+\begin{defn}
+  \label{def:trace}
+  The \emph{trace of a matrix} $A$, denoted by $\text{Trace } A$,
+  is the sum of the diagonal entries of $A$. 
+\end{defn}
+
+\begin{lem}
+  \label{lem:trace}
+  The trace of a matrix is the sum of its eigenvalues, 
+  each of which is repeated according to its multiplicity.
+\end{lem}
+
+% \subsection{Determinants}
+% \label{sec:determinants}
+
+\begin{defn}
+  A \emph{permutation of a set} $A$
+  is a bijective function $\sigma: A \rightarrow A$.
+\end{defn}
+
+\begin{defn}
+  \label{def:permutationSignature}
+  Let $\sigma$ be a permutation of $A=\{1,2,\ldots, n\}$
+  and 
+  let $s$ denote the number of pairs of integers $(j,k)$ 
+  with $1\le j < k \le n$ such that
+  $j$ appears after $k$ in the list $(m_1, \ldots, m_n)$
+  given by $m_i=\sigma(i)$.
+  The \emph{sign of the permutation} $\sigma$
+  is 1 if $s$ is even and $-1$ if $s$ is odd.
+\end{defn}
+
+\begin{defn}
+  \label{def:signedVolume}
+  The \emph{signed volume of a parallelotope}
+  % i.e. the generalization of parallelopiped in $\mathbb{R}^n$,
+  spanned by $n$ vectors
+  $\mathbf{v}_1, \mathbf{v}_{2},\ldots, \mathbf{v}_n\in \mathbb{R}^n$
+  is a function $\delta: \mathbb{R}^{n\times n} \rightarrow \mathbb{R}$
+  that satisfies
+  \begin{enumerate}[(SVP-1)]
+  \item $\delta(I) = 1$;
+  \item $\delta(\mathbf{v}_1, \mathbf{v}_2, \ldots, \mathbf{v}_n)=0$
+    if $\mathbf{v}_i=\mathbf{v}_j$ for some $i\ne j$;
+  \item $\delta$ is linear, i.e.,
+    $\forall j=1,\ldots,n,\ \forall c\in \mathbb{R}$,
+    \begin{equation}
+      \label{eq:linearityOfSignedVolumn}
+      \begin{array}{l}
+        \ \ \ \delta(\mathbf{v}_1, \ldots,
+          \mathbf{v}_{j-1}, \mathbf{v}+ c\mathbf{w}, \mathbf{v}_{j+1},
+          \ldots, \mathbf{v}_n)
+        \\
+        = \delta(\mathbf{v}_1, \ldots,
+            \mathbf{v}_{j-1}, \mathbf{v}, \mathbf{v}_{j+1},
+            \ldots, \mathbf{v}_n)
+        \\
+        \ \ + 
+      c\delta(\mathbf{v}_1, \ldots,
+      \mathbf{v}_{j-1}, \mathbf{w}, \mathbf{v}_{j+1},
+      \ldots, \mathbf{v}_n).
+      \end{array}
+    \end{equation}
+  \end{enumerate}
+\end{defn}
+
+\begin{exc}
+  Give a geometric proof that
+  the signed volume of the parallelogram
+  determined by the two vectors $\mathbf{v}_1=(a,b)^T$
+  and  $\mathbf{v}_2=(c,d)^T$
+  is 
+   \begin{equation}
+     \label{eq:determinantN2}
+    \delta(\mathbf{v}_1, \mathbf{v}_2)
+    % \begin{bmatrix}
+    %   a & c
+    %   \\
+    %   b & d
+    % \end{bmatrix}
+    = ad-bc = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}.
+  \end{equation}
+\end{exc}
+\begin{solution}
+  By high school geometry, we have
+  \begin{displaymath}
+    \delta = |\mathbf{v}_1||\mathbf{v}_2|\sin \alpha
+    = |\mathbf{v}^{\perp}_1||\mathbf{v}_2|\cos(\frac{\pi}{2}-\alpha)
+    = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}
+  \end{displaymath}
+  where $|\cdot|$ denotes the Euclidean 2-norm, 
+  $\alpha$ the angle between the two vectors, 
+  and $\mathbf{v}^{\perp}_1=(-b,a)^T$ the vector obtained from $\mathbf{v}_1$
+  by a counterclockwise rotation of $\frac{\pi}{2}$.
+\end{solution}
+
+\begin{rem}
+  The conditions in Definition \ref{def:signedVolume} capture
+  the properties of signed volumes.
+  (SVP-1) says that the volume of a cube is 1.
+  (SVP-2) says that the volume is zero
+  if two spanning vectors coincide.
+  (SVP-3) says that if we fix any $n-1$ spanning vectors
+  and change the last vector,
+  the volume change is linear with the change of the last vector
+  because (\ref{eq:determinantN2}) yields
+  \begin{align*}
+    \delta(\mathbf{u}, \mathbf{v})
+    + \delta(\mathbf{w}, \mathbf{v})
+    &= \innerProd{\mathbf{u}^{\perp}, \mathbf{v}}
+      + \innerProd{\mathbf{w}^{\perp}, \mathbf{v}}
+      = \innerProd{\mathbf{u}^{\perp}+ {\mathbf{w}}^{\perp}, \mathbf{v}}
+      \\
+    & = \innerProd{(\mathbf{u}+\mathbf{w})^{\perp}, \mathbf{v}}
+      = \delta(\mathbf{u}+\mathbf{w}, \mathbf{v}).
+  \end{align*}
+  Hereafter we shall see how these physical intuitions
+%  (or reasonable assumptions)
+  lead to a unique definition of signed volume,
+  which is identical to Leibniz formula of determinants.  
+\end{rem}
+
+\begin{lem}
+  Adding a multiple of one vector to another does not
+  change the signed volume.
+\end{lem}
+\begin{proof}
+  This follows directly from (SVP-2,3).
+\end{proof}
+
+\begin{lem}
+  If the vectors $\mathbf{v}_1, \mathbf{v}_{2},\ldots,
+  \mathbf{v}_{n}$ are linearly dependent,
+  then $\delta(\mathbf{v}_1, \mathbf{v}_{2}, \ldots, \mathbf{v}_{n})=0$.
+\end{lem}
+\begin{proof}
+  WLOG, we assume $\mathbf{v}_1=\sum_{i=2}^n c_i \mathbf{v}_i$.
+  Then the result follows from (SVP-2,3).
+\end{proof}
+
+\begin{lem}
+  \label{lem:alternatingSignedVolume}
+  The signed volume $\delta$ is alternating, i.e.,
+  \begin{equation}
+    \label{eq:alternatingSignedVolume}
+    \delta(\mathbf{v}_1, \ldots,
+    \mathbf{v}_{i},\ldots, \mathbf{v}_{j},
+    \ldots, \mathbf{v}_n)
+    = - 
+    \delta(\mathbf{v}_1, \ldots,
+    \mathbf{v}_{j},\ldots, \mathbf{v}_{i},
+    \ldots, \mathbf{v}_n).
+  \end{equation}
+\end{lem}
+
+\begin{exc}
+  Prove Lemma \ref{lem:alternatingSignedVolume} using (SVP-2,3).
+\end{exc}
+\begin{solution}
+  Define the shorthand notation
+  \begin{displaymath}
+    \delta(\mathbf{v}_i, \mathbf{v}_j)
+    := \delta(\mathbf{v}_1, \ldots,
+    \mathbf{v}_{i},\ldots, \mathbf{v}_{j},
+    \ldots, \mathbf{v}_n), 
+  \end{displaymath}
+  apply (SVP-2) and (SVP-3) repeatedly, and we have 
+  \begin{align*}
+    \delta(\mathbf{v}_i, \mathbf{v}_j)
+    &= \delta(\mathbf{v}_i, \mathbf{v}_j)
+      + \delta(\mathbf{v}_j, \mathbf{v}_j)
+    \\
+    &= \delta(\mathbf{v}_i+\mathbf{v}_j, \mathbf{v}_j)
+      - \delta(\mathbf{v}_i+\mathbf{v}_j, \mathbf{v}_i+\mathbf{v}_j)
+    \\
+    &= \delta(\mathbf{v}_i+\mathbf{v}_j, -\mathbf{v}_i)
+      + \delta(-\mathbf{v}_i, -\mathbf{v}_i)
+    \\
+    &= \delta(\mathbf{v}_j, -\mathbf{v}_i)
+      = -\delta(\mathbf{v}_j, \mathbf{v}_i).
+  \end{align*}
+\end{solution}
+
+\begin{lem}
+  \label{lem:matrixPermIsSgnSigma}
+  Let $M_{\sigma}$ denote the matrix of a permutation
+  $\sigma: E \rightarrow E$ where $E$ is the set of standard basis
+  vectors in (\ref{eq:standardBasis}). 
+%  (\ref{eq:standardBasisVectors}).
+  Then we have $\delta(M_{\sigma}) = \sgn(\sigma)$.
+\end{lem}
+\begin{proof}
+  There is a one-to-one correspondence
+  between the vectors in the matrix
+  \begin{displaymath}
+    M_{\sigma} = [e_{\sigma(1)}, e_{\sigma(2)}, \ldots, e_{\sigma(n)}]
+  \end{displaymath}
+  and the scalars in the one-line notation
+  \begin{displaymath}
+    (\sigma(1)\  \sigma(2)\ \ldots\ \sigma(n)).
+  \end{displaymath}
+  A sequence of transpositions taking $\sigma$
+   to the identity map also
+   takes $M_{\sigma}$ to the identity matrix.
+  By Lemma \ref{lem:alternatingSignedVolume},
+  each transposition yields a multiplication factor $-1$.
+  Definition \ref{def:permutationSignature}
+  and (SVP-1) give
+  $\delta(M_{\sigma})=\sgn(\sigma)\delta(I)=\sgn(\sigma)$.
+\end{proof}
+
+\begin{defn}[Leibniz formula of determinants]
+  \label{def:determinantOfLeibniz}
+  The \emph{determinant of a square matrix}
+  $A\in \mathbb{R}^{n\times n}$
+  is 
+  \begin{equation}
+    \label{eq:determinantOfLeibniz}
+    \det A = \sum_{\sigma\in S_n} \sgn(\sigma) \prod_{i=1}^n
+    a_{\sigma(i),i},
+  \end{equation}
+  where the sum is over 
+  the symmetric group $S_n$ of all permutations
+%  $S_n: \{\sigma: \{1,2,\ldots, n\}\rightarrow \{1,2,\ldots, n\}\}$
+  and $a_{\sigma(i),i}$ is the element of $A$
+  at the $\sigma(i)$th row and the $i$th column.
+\end{defn}
+
+\begin{rem}
+  The formula in (\ref{eq:determinantOfLeibniz})
+  can be easily memorized by its symmetry
+  and the aid of (\ref{eq:determinantN2}).
+  Each RHS term of (\ref{eq:determinantN2}) is a product of $2$
+  numbers,
+  which come from different rows and different columns.
+  For $n>2$, this implies that
+  no two numbers in a product term
+  come from the same row, nor the same column.
+  This condition is equivalent to require
+  that the row index function of the column index
+  be a permutation.
+  The sign of the permutation is natural
+  for each product.
+  Finally, all permutations in the symmetric group
+  are equal as far as signed volumn is concerned.
+\end{rem}
+
+\begin{lem}
+  \label{lem:determinantIsProductOfEigenvalues}
+  The determinant of a matrix is the product of its eigenvalues, 
+  each of which is repeated according to its multiplicity.
+\end{lem}
+
+\begin{thm}
+  The signed volume function satisfying (SVP-1,2,3)
+  in Definition \ref{def:signedVolume} is unique
+  and is the same as the determinant
+  in (\ref{eq:determinantOfLeibniz}).
+\end{thm}
+\begin{proof}
+  Let the parallelotope be spanned by the column vectors
+  $\mathbf{v}_1, \mathbf{v}_{2},\ldots, \mathbf{v}_n$.
+  We have
+  \begin{align*}
+    & \delta
+    \begin{bmatrix}
+      v_{11} & v_{12} & \ldots & v_{1n}
+      \\
+      v_{21} & v_{22} & \ldots & v_{2n}
+      \\
+      \vdots & \vdots & \ddots & \vdots
+      \\
+      v_{n1} & v_{n2} & \ldots & v_{nn}
+    \end{bmatrix}
+    \\
+    =& \sum_{i_1=1}^n v_{i_1 1}
+    \delta
+    \begin{bmatrix}
+      | & v_{12} & \ldots & v_{1n}
+      \\
+      e_{i_1} & v_{22} & \ldots & v_{2n}
+      \\
+      | & \vdots & \ddots & \vdots
+      \\
+      | & v_{n2} & \ldots & v_{nn}
+    \end{bmatrix}
+    \\
+    =& \sum_{i_1,i_2=1}^n v_{i_1 1}v_{i_2 2}
+    \delta
+    \begin{bmatrix}
+      | & | & v_{13} & \ldots & v_{1n}
+      \\
+      e_{i_1} & e_{i_2} & v_{23} & \ldots & v_{2n}
+      \\
+      | & | & \vdots & \ddots & \vdots
+      \\
+      | & | & v_{n2} & \ldots & v_{nn}
+    \end{bmatrix}
+    \\
+    =& \cdots
+    \\
+    =& \sum_{i_1,i_2, \ldots, i_n=1}^n v_{i_1 1}v_{i_2 2}
+       \cdots v_{i_n n}
+    \delta
+    \begin{bmatrix}
+      | & | & \ldots & |
+      \\
+      e_{i_1} & e_{i_2} & \ldots & e_{i_n}
+      \\
+      | & | & \ldots & |
+    \end{bmatrix}
+    \\
+    =& \sum_{\sigma\in S_n} v_{\sigma(1),1}v_{\sigma(2),2}
+       \cdots v_{\sigma(n),n}
+    \delta
+    \begin{bmatrix}
+      | & | & \ldots & |
+      \\
+      e_{\sigma(1)} & e_{\sigma(2)} & \ldots & e_{\sigma(n)}
+      \\
+      | & | & \ldots & |
+    \end{bmatrix}
+    \\
+    =& \sum_{\sigma\in S_n} v_{\sigma(1),1}v_{\sigma(2),2}
+       \cdots v_{\sigma(n),n}
+       \sgn(\sigma)
+    \\
+    =& \sum_{\sigma\in S_n} \sgn(\sigma)
+       \prod_{i=1}^nv_{\sigma(i),i}, 
+  \end{align*}
+  where the first four steps follow from (SVP-3),
+  the sixth step from Lemma \ref{lem:matrixPermIsSgnSigma},
+  and the fifth step from \mbox{(SVP-2)}.
+  The signed volume $\delta(\cdot)$ is zero for any $i_j=i_k$
+   and hence the only nonzero terms are those
+   of which $(i_1, i_2, \ldots, i_n)$
+   is a permutation of $(1,2,\ldots,n)$.
+\end{proof}
+
+\begin{exc}
+  Use the formula in (\ref{eq:determinantOfLeibniz})
+   to show that $\det A = \det A^T$.
+\end{exc}
+
+\begin{defn}
+  \label{def:cofactor}
+  The $i, j$ \emph{cofactor} of $A\in \mathbb{R}^{n\times n}$
+   is 
+   \begin{equation}
+     \label{eq:cofactor}
+     C_{ij} = (-1)^{i+j} M_{ij},
+   \end{equation}
+   where $M_{ij}$ is the $i, j$ \emph{minor of a matrix} $A$,
+   i.e. the determinant of the $(n-1)\times(n-1)$ matrix
+   that results from deleting the $i$-th row and the $j$-th column of $A$.
+\end{defn}
+
+\begin{thm}[Laplace formula of determinants]
+  \label{thm:LaplaceFormulaForDeterminants}
+  Given fixed indices $i, j \in {1, 2, \ldots, n}$,
+  the determinant of an $n$-by-$n$ matrix $A = [a_{ij}]$
+   is given by
+   \begin{equation}
+     \label{eq:LaplaceFormulaForDeterminants}
+     \det A = \sum_{j'=1}^n a_{ij'} C_{ij'} = \sum_{i'=1}^n a_{i'j} C_{i'j}.
+   \end{equation}
+\end{thm}
+
+\begin{exc}
+  Prove Theorem \ref{thm:LaplaceFormulaForDeterminants}
+  by induction.
+\end{exc}
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../numPDEs"
+%%% End:
+
+% LocalWords:  diagonalizable eigenvalue eigenvector eigenvectors
+% LocalWords:  orthonormal isometry invertible semidefinite adjoint
+
+% LocalWords:  nonnegative nilpotent diagonalized eigenspace

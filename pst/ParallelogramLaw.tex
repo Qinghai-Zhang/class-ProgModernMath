@@ -1,0 +1,27 @@
+\documentclass[10pt]{article}
+
+\usepackage{amsmath}
+\usepackage{pstricks,pst-eps,pst-plot}
+
+\pagestyle{empty}
+\begin{document}
+\begin{TeXtoEPS}
+
+  \begin{pspicture}(-1.5,-1.1)(3.9,1.5)
+    \psset{linewidth=1pt,arrowsize=3pt}   
+    \pspolygon(0,-1)(3.5,-1)(2.5,1.4)(-1,1.4)
+    
+    \psset{linestyle=dashed,dash=4pt 2pt}
+    \psline(0,-1)(2.5,1.4)
+    \psline(3.5,-1)(-1,1.4)
+
+    \footnotesize
+    \uput[l](-1,1.4){$A$}
+    \uput[r](2.5,1.4){$B$}
+    \uput[r](3.5,-1){$C$}
+    \uput[l](0,-1){$D$}
+
+  \end{pspicture}
+
+\end{TeXtoEPS}
+\end{document}
