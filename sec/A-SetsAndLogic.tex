@@ -722,7 +722,100 @@ Why?
   It is \emph{bijective} iff it is both injective and surjective.
 \end{defn}
 
-%draw some diagrams.
+\begin{defn}
+  \label{def:preimage}
+  The \emph{preimage of a set $U\subset Y$}
+  (or the \emph{fiber over $U$ })
+  under a function $f: X\rightarrow Y$ is 
+   \begin{equation}
+     \label{eq:preimage}
+     f^{-1}(U) := \{ x\in X: f(x)\in U\}.
+   \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:setOpPreservation}
+  The operation $f^{-1}$ preserves inclusions,
+  unions, intersections, and differences of sets, 
+  \begin{equation}
+    \label{eq:setOpFpre}
+    \left\{
+      \begin{array}{l}
+        B_0\subseteq B_1 \Rightarrow f^{-1}(B_0)\subseteq f^{-1}(B_1),
+        \\
+        f^{-1}(B_0\cup B_1) = f^{-1}(B_0) \cup f^{-1}(B_1),
+        \\
+        f^{-1}(B_0\cap B_1) = f^{-1}(B_0) \cap f^{-1}(B_1),
+        \\
+        f^{-1}(B_0\setminus B_1) = f^{-1}(B_0) \setminus f^{-1}(B_1), 
+      \end{array}
+    \right .
+  \end{equation}
+  while $f$ only preserves inclusions and unions, 
+  \begin{equation}
+    \label{eq:setOpF}
+    \left\{
+      \begin{array}{l}
+        A_0\subseteq A_1 \Rightarrow f(A_0)\subseteq f(A_1),
+        \\
+        f(A_0\cup A_1) = f(A_0) \cup f(A_1),
+        \\
+        f(A_0\cap A_1) \subseteq f(A_0) \cap f(A_1),
+        \\
+        f(A_0\setminus A_1) \supseteq f(A_0) \setminus f(A_1),
+      \end{array}
+    \right .
+  \end{equation}
+  where the equalities in the last two equations holds
+  if $f$ is injective.
+\end{lem}
+\begin{proof}
+  We only proof the third equation in (\ref{eq:setOpF}).
+  Suppose $y\in f(A_0\cap A_1)$.
+  Then there exists $x\in A_0\cap A_1$ such that $f(x)=y$.
+   $x\in A_0$ implies $y\in f(A_0)$
+   while $x\in A_1$ implies $y\in f(A_1)$.
+  Hence $y\in f(A_0)\cap f(A_1)$.
+  The above argument can be reversed if $f$ is injective.
+\end{proof}
+
+\begin{exm}
+  For $f(x)=x^2$, $A_0=[-1,0]$, $A_1=[0,1]$,
+  we have $\{0\}=f(A_0\cap A_1)\subset f(A_0)\cap f(A_1)=A_1$.
+\end{exm}
+
+\begin{lem}
+  \label{lem:preimageSubsetIdentites}
+  For a map $f: X\rightarrow Y$, $A\subseteq X$,
+  and $B\subseteq Y$,
+  we have
+  \begin{equation}
+    \label{eq:preimageSubsetIdentites}
+    A \subseteq f^{-1}(f(A)),\
+    f(f^{-1}(B))\subseteq B,
+  \end{equation}
+  where the first inclusion
+  is an equality if $f$ is injective 
+  and the second is an equaility
+  if $f$ is surjective or $B\subseteq f(X)$.
+\end{lem}
+\begin{proof}
+  By (\ref{eq:preimage}), $a\in A$ implies
+  $a\in f^{-1}(f(A))$.
+  Conversely, $a\in f^{-1}(f(A))$ implies
+   $f(a)\in f(A)$.
+   $f$ being injective dictates $a\in A$.
+
+  By (\ref{eq:preimage}), $b\in f(f^{-1}(B))$ implies
+  $b\in B$.
+  Furthermore, if $f$ is surjective or $B\subseteq f(X)$,
+  then for any $b\in B$ we have $f^{-1}(\{b\})\ne \emptyset$
+  and thus
+  \begin{displaymath}
+    b\in f(f^{-1}(\{b\})) \subseteq f(f^{-1}(B)).\qedhere
+  \end{displaymath}
+\end{proof}
+
 
 \section{Countable and uncountable sets}
 \label{sec:count-unco-sets}
