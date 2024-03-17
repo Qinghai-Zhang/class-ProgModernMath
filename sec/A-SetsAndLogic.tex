@@ -26,14 +26,19 @@
 %   a number of common notions.
 % \end{rem}
 
-
-\section{First-order logic}
-\label{sec:logic}
-
 \begin{rem}
 The main ingredients of snacks are sugar and fat.
 The main ingredients of math are logic and set theory.
+One common saying in computer science is 
+  ``If syntax sugar does not count, there is nothing left.''
+  This is also true for mathematics. 
+  All high-level mathematical concepts
+  can be considered as syntax sugars
+  of logic and set theory.
 \end{rem}
+
+\section{Sets and set-theoretic rules}
+\label{sec:sets-set-theoretic}
 
 \begin{defn}
   \label{def:setNotation}
@@ -43,8 +48,10 @@ The main ingredients of math are logic and set theory.
    it is often denoted with the following notation
    \begin{equation}
      \label{eq:setNotation}
-     {\cal S} = \{ x\ |\ \text{ the conditions that $x$ satisfies. } \}.
+     {\cal S} = \{ x\ :\ \text{ the conditions that $x$ satisfies } \}.
    \end{equation}
+   $x\in {\cal S}$ means that the object $x$ belongs to ${\cal S}$;
+   otherwise we write $x\not\in {\cal S}$. 
 \end{defn}
 
 \begin{ntn}
@@ -68,6 +75,62 @@ In particular, $\mathbb{N}$ contains the number zero while
   if ${\cal S}\subseteq {\cal U}$
   and $\exists x\in {\cal U}$ s.t. $x\not\in{\cal S}$.
 \end{defn}
+
+\begin{defn}
+  \label{eq:AminusB}
+  The \emph{difference of two sets} is 
+  \begin{equation}
+    \label{eq:AminusB}
+    A\setminus B := \{ x : x\in A \text{ and } x\not\in B \}; 
+  \end{equation}
+  it is also called the \emph{complement of $B$ in $A$}. 
+\end{defn}
+
+\begin{defn}
+  \label{eq:AcapB}
+  The \emph{intersection of two sets} is 
+  \begin{equation}
+    \label{eq:AcapB}
+    A\cap B := \{ x : x\in A \text{ and } x\in B \}.
+  \end{equation}
+\end{defn}
+
+\begin{defn}
+  \label{eq:AcupB}
+  The \emph{union of two sets} is 
+  \begin{equation}
+    \label{eq:AcupB}
+    A\cup B := \{ x : x\in A \text{ or } x\in B \}.
+  \end{equation}
+\end{defn}
+
+\begin{thm}[Distributive laws]
+  \label{thm:distributiveLaws}
+  For any sets $A$, $B$, and $C$, we have
+  \begin{align}
+    \label{eq:distributiveLaw1}
+    A\cap (B\cup C) &= (A\cap B) \cup (A\cap C),
+    \\
+    \label{eq:distributiveLaw2}
+    A\cup (B\cap C) &= (A\cup B) \cap (A\cup C).
+  \end{align}
+\end{thm}
+
+\begin{thm}[DeMorgan's laws]
+  \label{thm:DeMorganLaws}
+  For any sets $A$, $B$, and $C$, we have
+  \begin{align}
+    \label{eq:DeMorganLaw1}
+    A\setminus (B\cup C) &= (A\setminus B) \cap (A\setminus C),
+    \\
+    \label{eq:DeMorganLaw2}
+    A\setminus (B\cap C) &= (A\setminus B) \cup (A\setminus C).
+  \end{align}
+\end{thm}
+
+
+\section{First-order logic}
+\label{sec:logic}
 
 \begin{defn}[Statements of first-order logic]
 \label{def:uni_exist}
@@ -388,6 +451,7 @@ Let $\mathbb{P}$ be the set of all prime numbers.
 \end{enumerate}
 \end{solution}
 
+
 \section{Ordered sets}
 \label{sec:sets}
 
@@ -661,15 +725,6 @@ Another difference is that,
   then $M$ has at least one maximal element.
 \end{axm}
 
-\begin{rem}
-  One common saying in computer science is 
-  ``If syntax sugar does not count, there is nothing left.''
-  This is also true for mathematics. 
-  All high-level mathematical concepts
-  can be considered as syntax sugars
-  of logic and set theory.
-\end{rem}
-
 \begin{lem}[The Union Lemma]
   \label{lem:UnionLemma}
   Let $X$ be a set and $\mathcal{C}$ be a collection of subsets of $X$.
@@ -841,10 +896,10 @@ Why?
 \begin{defn}
   \label{def:CantorSet}
   The \emph{Cantor set} is a subset of $\mathbb{R}$
-  given by $C:=\cap_{n=1}^{+\infty} F_n$
-  where $F_1=[0,1]$
-  and each $F_{n+1}$ is obtained
-  by deleting from $F_n$ the open middle third
+  given by $C:=\cap_{n=0}^{+\infty} C_n$
+  where $C_0=[0,1]$
+  and each $C_{n+1}$ is obtained
+  by deleting from $C_n$ the open middle third
   of each closed interval. % of $F_n$
 \end{defn}
 
