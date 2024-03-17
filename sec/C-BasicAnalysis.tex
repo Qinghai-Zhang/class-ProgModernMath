@@ -1355,6 +1355,15 @@ By Definition \ref{def:TaylorSeries},
 %  $x_i^*\in [x_{i-1}, x_i]$ 
   is a \emph{sample point} % or a \emph{tag}
   of the $i$th subinterval.
+  In particular, the \emph{upper Riemann sum}
+  and \emph{lower Riemann sum} over $P_n$ are
+  \begin{align}
+    \label{eq:upperRiemannSum}
+    M_n(f) = \sum_{i=1}^n (x_{i}-x_{i-1}) \sup f(I_i), 
+    \\
+    \label{eq:lowerRiemannSum}
+    m_n(f) = \sum_{i=1}^n (x_{i}-x_{i-1}) \inf f(I_i). 
+  \end{align}
 \end{defn}
 
 \begin{defn}
@@ -1462,6 +1471,24 @@ By Definition \ref{def:TaylorSeries},
 %\sum_{i=1}^n f(x_i^*) (x_{i}-x_{i-1}).
    \end{equation}
 \end{defn}
+
+\begin{thm}
+  \label{thm:upperLowerRiemannIntegrals}
+  A bounded function $f:[a,b]\rightarrow\mathbb{R}$
+  is Riemann integrable if and only if
+  the upper and lower Riemann integrals of $f$ are equal: 
+  \begin{equation}
+    \label{eq:upperLowerRiemannIntegrals}
+    \overline{\int}_a^b f \dif x :=
+    \inf_{h_n\rightarrow 0} M_n(f), \quad
+%    \sum_{i=1}^n(x_i-x_{i-1}) \sup f(I_i),
+    \underline{\int}_a^b f \dif x :=
+    \sup_{h_n\rightarrow 0} m_n(f), 
+%    \sum_{i=1}^n(x_i-x_{i-1}) \inf f(I_i),
+  \end{equation}
+  where $M_n(f)$ and $m_n(f)$ are respectively defined in
+  (\ref{eq:upperRiemannSum}) and (\ref{eq:lowerRiemannSum}). 
+\end{thm}
 
 \begin{thm}
   A scalar function $f$ is integrable on $[a, b]$
