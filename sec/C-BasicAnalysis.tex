@@ -1948,33 +1948,39 @@ The function is not differentiable at (0,0),
 
 \begin{thm}[Implicit function theorem]
   \label{thm:implicitFunction}
-  Suppose a ${\cal C}^1$ function $\mathbf{g}: \mathbb{R}^m\times
-  \mathbb{R}^n\to \mathbb{R}^n$
-  satisfies
-  \begin{enumerate}[(i)]\itemsep0em
-  \item
-    $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$
-    where $(\mathbf{x}_0, \mathbf{y}_0)\in \mathbb{R}^m\times
-    \mathbb{R}^n$; 
-  % \item
-  %   $\mathbf{g}$ is $\mathcal{C}^r$ in a neighborhood of $(\mathbf{x}_0, \mathbf{y}_0)$;
-  \item
-    the Jacobian matrix $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
-  \end{enumerate}
-  Then there is a neighborhood $U$ of $\mathbf{x}_0$ and
-  a unique ${\cal C}^1$ function $\mathbf{f}: U\to \mathbb{R}^n$
+  For a function $\mathbf{g}:
+  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
+  suppose there exist
+  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
+  and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
   such that
-  $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$
-  and $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$
-  for all $\mathbf{x}\in U$.
-  Furthermore, if $\mathbf{g}$ is analytic or ${\cal C}^p$,
-  then $\mathbf{f}$ is analytic or ${\cal C}^p$.
+  % and 
+  \begin{enumerate}[(i)]\itemsep0em
+  \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
+  \item $\mathbf{g}$ is continuous in $U\times V$;
+    %$\mathcal{C}^r$ in a neighborhood of $(\mathbf{x}_0, \mathbf{y}_0)$;
+  \item its partial derivative $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}$
+    exists and is continuous in $U\times V$;
+  \item the Jacobian matrix
+    $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
+  \end{enumerate}
+  Then there exist an open set $U_0\times V_0\subset U\times V$
+  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
+  and a unique continuous function $\mathbf{f}: U_0\to V_0$
+  such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$, 
+  \item $\forall \mathbf{x}\in U_0$,
+    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$. 
+  \end{enumerate}
+  Furthermore, if $\mathbf{g}$ is ${\cal C}^p$ or analytic,
+  then $\mathbf{f}$ is ${\cal C}^p$ or analytic.
 \end{thm}
 
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../notesNumAnal"
+%%% TeX-master: "../numPDEs"
 %%% End:
 
 % LocalWords:  Lipschitz pointwise boundedness integrable bijective
