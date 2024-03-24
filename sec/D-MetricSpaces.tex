@@ -1,5 +1,3 @@
-% \section{Why functional analysis?}
-% \label{sec:why-funct-analys}
 
 
 \begin{exm}
@@ -48,7 +46,6 @@
   \label{exm:funcAnalExm}
   A copper mining company mines in a mountain
   that has an estimated total amount of $Q$ tonnes of copper.
-%  over a period of $T$ years.
   Let $x(t)$ denote the amount of copper
   removed during the period $[0,t]$,
   with $x(0)=0$ and $x(T)=Q$.
@@ -132,8 +129,6 @@
   \label{def:metricSpace}
   A \emph{metric space} is an ordered pair $({\cal X}, d)$
   where ${\cal X}$ is a set and $d$ is a metric on ${\cal X}$.
-  % The \emph{distance} between $x$ and $y$ in ${\cal X}$
-  % is the number $d(x,y)$. 
 \end{defn}
 
 \begin{exm}
@@ -204,7 +199,6 @@
     \label{eq:CauchySeqMetricSpace}
     \forall \epsilon>0, \exists N\in\mathbb{N} \text{ s.t. }
     m,n > N\ \Rightarrow\ d(x_m,x_n) <\epsilon.
-%    \lim_{m,n\rightarrow +\infty} 
   \end{equation}
 \end{defn}
 
@@ -226,7 +220,6 @@
 \begin{exm}[$\mathbb{Q}$ is not complete]
   \label{exm:QisNotComplete}
   The sequence %$(x_n)_{n\in \mathbb{N}^+}$
-%  defined as
   \begin{equation}
     \label{eq:rationalSeqCauchy}
     x_1=\frac{3}{2};\quad
@@ -238,8 +231,6 @@
   $(x_n)$ is convergent in $\mathbb{R}$.
   However, although $(x_n)$ is Cauchy in $\mathbb{Q}$,
   it is not convergent in $\mathbb{Q}$ because
-  % Suppose it were,
-  % then the limit $L$ would satisfy
   \begin{displaymath}
     L = \frac{4+3L}{3+2L} \ \Rightarrow\ 
     L=\sqrt{2}.
@@ -391,7 +382,7 @@
 \begin{defn}
   \label{def:separableMetricSpace}
   A set in a metric space is \emph{separable}
-  if it has a countable dense subset.
+  iff it has a countable dense subset.
 \end{defn}
 
 
@@ -399,11 +390,6 @@
   A totally bounded metric space is separable.
 \end{lem}
 
-% \begin{lem}
-%   \label{lem:seqCompactMetricSpaces}
-%   A metric space is sequentially compact 
-%   iff it is complete and totally bounded. 
-% \end{lem}
 
 \subsection{Completion via isometry}
 \label{sec:compl-via-isom}
@@ -441,8 +427,6 @@
   is a \emph{subspace} of the metric space
   $({\cal Y}, d_{{\cal Y}})$ iff
   $({\cal X}, d_{{\cal Y}})$ is a metric space itself.
-  % We also say that $({\cal Y}, d_{{\cal Y}})$
-  % is a \emph{superspace} of $({\cal X}, d_{{\cal X}})$.
 \end{defn}
 
 \begin{defn}
@@ -455,24 +439,13 @@
   such that the map $f': {\cal X}\rightarrow f({\cal X})$
   obtained by restricting the codomain to $f({\cal X})$
   is a global isometry.
-%  where ${\cal Y}_1\subseteq {\cal Y}$.
 \end{defn}
-% \begin{exm}
-%   Let $\Omega$ be an open bounded set.
-%   The subspace ${\cal C}_0^{\infty}(\Omega)$
-%   is dense in $L^p(\Omega)$ for each $p\in[1,\infty)$.
-%   The subspace of all the polynomials
-%   is also dense in $L^p(\Omega)$.
-% \end{exm}
 
 \begin{defn}
   \label{def:completionMetricSpace}
   The \emph{completion of a metric space} $({\cal X}, d)$ 
   is the intersection of all complete metric spaces
   that contain $({\cal X}, d)$ as a subspace.
-  % $({\cal X}_1, d_1)$
-  % that is a subspace of any complete metric space
-  % with $({\cal X}, d)$ as a subspace. 
 \end{defn}
 
 
@@ -484,9 +457,6 @@
   Then $({\cal X}_1, d_1)$ is the completion of $({\cal X}, d)$.
 \end{lem}
 
-% \begin{exc}
-%   Prove Lemma \ref{lem:denseCompletion}.
-% \end{exc}
 
 \begin{thm}
   \label{thm:existenceOfMetricCompletion}
@@ -500,7 +470,6 @@
   is a dense subset of the metric space \eqref{eq:CabMetricSpace}, 
   which is the completion of $\mathbb{P}[a,b]$.
 \end{exm}
-
 
 
 \subsection{Sequence spaces}
@@ -520,15 +489,9 @@
       \text{ s.t. } \sup_{i}|\xi_i| < \infty
       \right\}
   \end{equation}
-  % \begin{displaymath}
-  %   \forall x= (\xi_1, \xi_2, \ldots)\in \ell^{\infty},
-  %   \exists c_x\in \mathbb{R},  
-  %   \text{ s.t. } \forall i=1,2, \ldots,\ |\xi_i| \le c_x, 
-  % \end{displaymath}
   and the metric is given by
   $d(x,y) = \sup_{i}|\xi_i- \eta_i|$, 
   where both $x=(\xi_j)$ and $y=(\eta_j)$ are in $\ell^{\infty}$. 
-  %where $y=(\eta_1, \eta_2, \ldots)\in {\cal X}$.
 \end{defn}
 
 \begin{defn}
@@ -574,7 +537,7 @@
   and Definitions \ref{def:lInftySeqSpace} and \ref{def:lpSpace}
   satisfy
   \begin{equation}
-    \label{lem:filtrationOfSequenceSpaces}
+    \label{eq:filtrationOfSequenceSpaces}
     c_{00} \subset \ell^1 \subset \ell^p  \subset \ell^q  
      \subset c_0 \subset c \subset \ell^{\infty},
   \end{equation}
@@ -626,8 +589,6 @@
 
 \begin{defn}
   \label{def:closedSets}
-  % A subset of a metric space is \emph{closed}
-  %  iff its complement is open.
   A subset $E$ of a metric space ${\cal X}$ is \emph{closed}
   iff its complement $E^c:={\cal X}\setminus E$ is open.
 \end{defn}
@@ -891,13 +852,6 @@
 
 
 
-% \begin{lem}
-%   If $f:{\cal X}\rightarrow {\cal Y}$ and $g:{\cal Y}\rightarrow Z$
-%   are continuous functions between metric spaces,
-%   then the composition map $g\circ f: {\cal X}\rightarrow Z$
-%   is continuous.
-% \end{lem}
-
 
 \subsection{Homeomorphisms}
 \label{sec:homeomorphisms}
@@ -948,10 +902,6 @@
   metric spaces $({\cal X},d_{\cal X})$ and $({\cal Y}, d_{\cal Y})$ 
   is \emph{uniformly continuous}
   iff
-  % if for every real number $\epsilon>0$
-  % there exists $\delta>0$ such that
-  % for every pair $x,y\in {\cal X}$ with $d_{\cal X}(x,y)<\delta$,
-  % we have $d_{\cal Y}(x,y)<\epsilon$.
   \begin{align}
     \label{eq:uniformlyContinuousMetricSpace}
     \forall \epsilon>0,\
@@ -1007,9 +957,6 @@
   by proving the uniform continuity
   of $f$ in Definition \ref{def:CantorFunction}.
   Prove that $F$ is monotonically increasing.
-% \end{exc}
-% \begin{exc}
-%   \label{exc:CantorFuncVals}
   Plot the graph of $F$
   on $[0,1]\setminus C_n$ for $n=5$. 
   What are the values of $F(0)$ and $F(1)$?
@@ -1088,12 +1035,12 @@
   (Theorem \ref{thm:FundamentalThoeremODEs}). 
 \end{exm}
 
+
 \begin{exc}
   Use Theorem \ref{thm:fixedPointMetricSpace}
   to prove the implicit function theorem
   \ref{thm:implicitFunction}. 
 \end{exc}
-
 
 
 \section{Sequential compactness}
@@ -1164,8 +1111,6 @@
   because the sequence $(n)_{n\in\mathbb{N}}$ in $\mathbb{R}$
   cannot have a convergent subsequence: 
   the distance between any two terms on any subsequence is at least 1.
-  % None of the intervals $(a,b]$, $[a,b)$, $(-\infty,b]$,
-  % and $[a,+\infty)$ is sequentially compact in $\mathbb{R}$.
 \end{exm}
 
 \begin{lem}
@@ -1237,7 +1182,6 @@
   is closed and bounded, but not sequentially compact.
   For
   \begin{displaymath}
-%    \forall n\in \mathbb{N}^+,\ 
     \mathbf{e}_n = (0,\cdots,0,1,0,\cdots)\in K \subset \ell^2
   \end{displaymath}
   where all terms are zero except that the $n$th term is 1, 
@@ -1289,7 +1233,6 @@
   continuous at each $x\in K$.
   Then
   \begin{displaymath}
-%    \label{eq:WeierStrass}
     \exists a,b\in K \text{ s.t. }
     \left\{
       \begin{array}{l}
@@ -1371,6 +1314,7 @@
 \end{lem}
 
 \begin{thm}
+  \label{thm:compactIsSequCompact}
   A subset $K$ of a metric space ${\cal X}$ is compact
   if and only if it is sequentially compact. 
 \end{thm}
@@ -1426,13 +1370,17 @@
 
 \begin{ntn}
   \label{ntn:setOfContinuousScalarFuncs}
-  ${\cal C}^{(k)}(M)$
+  ${\cal C}^{k}(M)$
   denotes the set of $k$-times continuously differentiable functions
+  $M\rightarrow \mathbb{F}$
   over a subset $M$ of a metric space where $\mathbb{F}=\mathbb{R}$
   or $\mathbb{F}=\mathbb{C}$.
   In particular, 
-  ${\cal C}(M):={\cal C}^{(0)}(M)=\{M\rightarrow \mathbb{F}\}$
-  contains all continuous functions over $M$. 
+  ${\cal C}(M):={\cal C}^{0}(M)$
+  contains all continuous functions over $M$.
+  When necessary, we also write ${\cal C}^k(M,\mathbb{R})$
+  or ${\cal C}^k(M,\mathbb{C})$
+  to indicate the codomain of the functions. 
 \end{ntn}
 
 \begin{defn}
@@ -1447,6 +1395,13 @@
     |f(x)| \le M.
   \end{equation}
 \end{defn}
+
+\begin{lem}
+  \label{lem:completeMetricSpaceForCompactSet}
+  For a compact set $M$,
+  the metric space ${\cal C}(M)$
+  with the uniform metric is complete.
+\end{lem}
 
 \begin{thm}[Ascoli-Arzel\`{a}]
   \label{thm:Ascoli-Arzela}
@@ -1488,10 +1443,7 @@
    is said to \emph{converge} to $L\in {\cal Y}$
    as $x$ converges to $x_0\in E$,
    written
-   % \begin{equation}
-   %   \label{eq:limitingValueOfAfunc}
      $\lim_{x\rightarrow x_0; x\in E} f(x) = L$,
-   % \end{equation}
    iff
    \begin{align}
      \nonumber
@@ -1510,7 +1462,6 @@
   Let $(f_n)_{n\in\mathbb{N}^+}$ be a sequence of functions
    between metric space $({\cal X}, d_{{\cal X}})$
    and $({\cal Y}, d_{{\cal Y}})$.
-%   and let $f:{\cal X}\rightarrow{\cal Y}$ be another function.
   We say that $(f_n)_{n\in\mathbb{n}^+}$ \emph{converges pointwise}
    to another function $f:{\cal X}\rightarrow{\cal Y}$ on ${\cal X}$ iff
    \begin{equation}
@@ -1604,8 +1555,6 @@
      \lim_{n\rightarrow \infty} \int_{a}^b f_n
      \ne \int_a^b \lim_{n\rightarrow \infty} f_n.
    \end{displaymath}
-  % For any given $n$, $f_n(x)$ is bounded,
-  %  but the limit $f$ is not.
   Hence pointwise convergence does not preserve integral.
 \end{exm}
 
@@ -1652,7 +1601,6 @@
   Let $(f_n)_{n\in\mathbb{N}^+}$ be a sequence of functions
    between metric spaces $({\cal X}, d_{{\cal X}})$
    and $({\cal Y}, d_{{\cal Y}})$.
-%   and let $f:{\cal X}\rightarrow{\cal Y}$ be another function.
   We say that $(f_n)_{n\in\mathbb{N}^+}$ \emph{converges uniformly}
   to another function $f:{\cal X}\rightarrow{\cal Y}$
   on ${\cal X}$ iff
@@ -1720,9 +1668,6 @@
     \forall \epsilon>0,\ \exists N\in\mathbb{N} \text{ s.t. }
     \forall m,n > N,\
     d_{\cal Y}(f_n, f_m) < \epsilon, 
-    % \\
-    % & \forall x\in {\cal X},\ \
-    % |f_n(x)-f_m(x)|_{\cal Y} < \epsilon. 
     \end{array}
   \end{equation}
   where $d_{\cal Y}$ is the uniform metric. 
@@ -1733,7 +1678,6 @@
   \label{lem:pointwise2uniformConvergence}
   Suppose a sequence of functions $(f_n)_{n\in\mathbb{N}^+}$ 
   between metric spaces ${\cal X}$ and ${\cal Y}$
-%  and $({\cal Y}, d_{{\cal Y}})$
   converges pointwise to $f$. %$f:{\cal X}\rightarrow{\cal Y}$.
   Then $(f_n)_{n\in\mathbb{N}^+}$ converges
   uniformly to $f$ if and only if
@@ -1751,18 +1695,14 @@
   $(f_n)_{n\in\mathbb{N}^+}$  %: E\rightarrow {\cal Y}
   from a subset $E$ of a metric space ${\cal X}$
   to a complete metric space ${\cal Y}$. 
-%  converges uniformly to $f$.
   If a limit point $x\in E$ satisfies
   \begin{equation}
     \label{eq:uniformConvergenceAndContCondition}
     \forall n\in\mathbb{N}^+, \exists y_n\in {\cal Y} \text{ s.t. }
     \lim_{t\rightarrow x}f_n(t) = y_n.
   \end{equation}
-  % and the sequence $(f_n(x))$ with $y_n:=\lim_{t\rightarrow x}f_n(t)$
-  % converges.
   Then $(y_n)_{n\in\mathbb{N}^+}$ converges in ${\cal Y}$
   and 
-%  $\lim_{n\rightarrow\infty} f_n(x)=\lim_{t\rightarrow x}f(t)$, i.e.,
   \begin{equation}
     \label{eq:uniformConvergenceAndCont}
     \lim_{n\rightarrow\infty} \lim_{t\rightarrow x}f_n(t)
@@ -1798,7 +1738,6 @@
 \begin{thm}
   \label{thm:uniformConvAndIntegral}
   Suppose a sequence of scalar functions $(f_n)_{n\in\mathbb{N}^+}$
-  % defined on a subset $E$ of a metric space ${\cal X}$
   converges uniformly to $f:[a,b]\rightarrow \mathbb{R}$.
   If each $f_n$ is Riemann integrable on $[a,b]$,
   then so is $f$. Furthermore, 
@@ -1888,20 +1827,182 @@
 \end{lem}
 
 \begin{thm}%[Ascoli]
+  \label{thm:AscoliSequence}
   Suppose a scalar function sequence $(f_n)\subset {\cal C}(K)$
   over a compact set $K$ is pointwise bounded and equicontinuous.
   Then $(f_n)$ is uniformly bounded on $K$
   and contains a uniformly convergent subsequence.
 \end{thm}
-%\subsection{The Stone-Weierstrass theorem}
+
+
+
+\subsection{To be inserted}
+
+\begin{exm}
+  \label{exm:invertibleOpSetIsOpen}
+  By Lemma \ref{lem:invertibleBfromA},
+  the set of invertible linear operators in ${\cal L}(\mathbb{R}^n)$
+  is open.
+\end{exm}
+
+\begin{lem}
+  \label{lem:compositionMapIsContinuous}
+  If $f:{\cal X}\rightarrow {\cal Y}$ and $g:{\cal Y}\rightarrow Z$
+  are continuous functions between metric spaces,
+  then the composition map $g\circ f: {\cal X}\rightarrow Z$
+  is continuous.
+\end{lem}
+
+\begin{lem}
+  \label{lem:funcInverseIsContinuous}
+  For the set ${\cal B}(\mathbb{R}^n)^{-1}\subset
+  {\cal L}(\mathbb{R}^n)$
+  of invertible linear operators equipped
+  with the operator norm in Definition \ref{def:operatorNorm},
+  the inverse function 
+  $f: {\cal B}(\mathbb{R}^n)^{-1}\rightarrow
+  {\cal B}(\mathbb{R}^n)^{-1}$ 
+  given by $f(A) = A^{-1}$ is continuous
+  in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
+\end{lem}
+
+
+\begin{exm}
+  \label{exm:identityUniformlyCont}
+  Let $d_1$ and $d_2$ denote the metrics
+  induced from the operator norm and the Hilbert-Schmidt norm
+  in Definitions \ref{def:operatorNorm} and
+  \ref{def:HilbertSchmidtNorm}, respectively.
+  By Theorem \ref{thm:opNormAndHSnorm}
+  and Definition \ref{def:uniformlyContinuousMetricSpace}, 
+  the identity map
+  \begin{equation}
+    \label{eq:identityUniformlyCont}
+    I: \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_1\right)
+    \rightarrow
+    \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_2\right)
+  \end{equation}
+  is uniformly continuous and has a uniformly continuous inverse.
+\end{exm}
+
+
+\begin{thm}[Vector mean value]
+  \label{thm:vectorMeanValue}
+  Suppose a continuous function $\mathbf{f}: [a,b]\rightarrow \mathbb{R}^m$
+  is differentiable on $(a,b)$. Then 
+  \begin{equation}
+    \label{eq:vectorMeanValue}
+    \exists x\in(a,b) \text{ s.t. }
+    |\mathbf{f}(b)-\mathbf{f}(a)|\le (b-a)|\mathbf{f}'(x)|.
+  \end{equation}
+\end{thm}
+
+\begin{defn}
+  \label{def:starShapedSet}
+  A subset $S\subset \mathbb{R}^n$ is \emph{star-shaped} with
+  respect to a point $\mathbf{p}\in S$ if for each $x\in S$
+  the line segment from $\mathbf{p}$ to $x$ lies in $S$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:meanValueVectorSimilar}
+  For a continuously differentiable function
+  $\mathbf{f}: S\rightarrow \mathbb{R}^m$
+  where $S\subset \mathbb{R}^n$
+  is star-shaped with respect to $\mathbf{p}=(p_1,p_2,\ldots,p_n)\in S$, 
+  there exist continuously differentiable functions
+  $\mathbf{g}_1(\mathbf{x}),
+  \mathbf{g}_2(\mathbf{x}), \ldots, \mathbf{g}_n(\mathbf{x})$
+  such that
+  $\mathbf{g}_j(\mathbf{p}) = \frac{\partial \mathbf{f}}{\partial x_j}(\mathbf{p})$
+  and 
+  \begin{equation}
+    \label{eq:meanValueVectorSimilar}
+    \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{p})
+    + \sum_{j=1}^n(x_j-p_j) \mathbf{g}_j(\mathbf{x}). 
+  \end{equation}
+\end{thm}
+
+
+
+\begin{thm}
+  \label{thm:C1impliesLipschitzContinuity}
+  Consider a differentiable function
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$
+  where $E\subset \mathbb{R}^n$ is a convex open set.
+  Suppose there exists $L>0$ such that
+  $\forall \mathbf{x}\in E$, $\|\mathbf{f}'(\mathbf{x})\|\le L$.
+  Then
+  \begin{equation}
+    \label{eq:C1impliesLipschitzContinuity}
+    \forall \mathbf{a}\in E,\ \mathbf{b}\in E,\quad
+    |\mathbf{f}(\mathbf{b})-\mathbf{f}(\mathbf{a})|
+    \le L |\mathbf{b}-\mathbf{a}|. 
+  \end{equation}
+\end{thm}
+
+
+\begin{thm}[Inverse function]
+  \label{thm:inverseFunc}
+  Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^n$
+  with $E\subset \mathbb{R}^n$ being an open subset.
+  Suppose
+  \begin{enumerate}[(i)]\itemsep0em
+  \item $\mathbf{f}\in {\cal C}^1(E)$,
+  \item the matrix $\mathbf{f}'(\mathbf{a})$
+    is invertible for some $\mathbf{a}\in E$. 
+  \end{enumerate}
+  Then we have
+  \begin{enumerate}[(a)]\itemsep0em
+  \item there exists open sets
+    $U,V\subset \mathbb{R}^n$ such that
+    $\mathbf{a}\in U$, $\mathbf{b}:=\mathbf{f}(\mathbf{a})\in V$,
+    $\mathbf{f}(U)=V$, and $\mathbf{f}$ is injective on $U$,
+  \item $\exists \mathbf{g}: V\rightarrow U$ s.t.
+    $\forall \mathbf{x}\in U$, $\mathbf{g}(\mathbf{f}(\mathbf{x}))=\mathbf{x}$, $\mathbf{g}\in {\cal C}^1(V)$,
+    and
+    \begin{equation}
+      \label{eq:inverseFuncDeriv}
+      \forall \mathbf{y}\in V,\quad
+      \mathbf{g}'(\mathbf{y}) = [\mathbf{f}'(\mathbf{g}(\mathbf{y}))]^{-1}.
+    \end{equation}
+  \end{enumerate}
+\end{thm}
+
+
+\begin{thm}[Implicit function theorem]
+  \label{thm:implicitFunction}
+  For a function $\mathbf{g}:
+  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
+  suppose there exist
+  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
+  and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
+  such that
+  \begin{enumerate}[(i)]\itemsep0em
+  \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
+  \item $\mathbf{g}$ is continuous in $U\times V$;
+  \item its partial derivative $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}$
+    exists and is continuous in $U\times V$;
+  \item the Jacobian matrix
+    $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
+  \end{enumerate}
+  Then there exist an open set $U_0\times V_0\subset U\times V$
+  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
+  and a unique continuous function $\mathbf{f}: U_0\to V_0$
+  such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$, 
+  \item $\forall \mathbf{x}\in U_0$,
+    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$. 
+  \end{enumerate}
+  Furthermore, if $\mathbf{g}$ is ${\cal C}^p$ or analytic,
+  then $\mathbf{f}$ is ${\cal C}^p$ or analytic.
+\end{thm}
+
+
 
 
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../notesNumAnal"
 %%% End:
-
-% LocalWords:  equicontinuous Equicontinuity Lipschitz subsequence
-% LocalWords:  boundedness pointwise Bolzano normed injective iff
-% LocalWords:  isometry bijective homeomorphic homeomorphism
-% LocalWords:  contractive
