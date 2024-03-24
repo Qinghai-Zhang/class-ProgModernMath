@@ -1590,12 +1590,630 @@ By Definition \ref{def:TaylorSeries},
 \end{thm}
 
 
-\section{Vector calculus}
+\section{Vector functions}
 \label{sec:sever-vari-diff}
 
-\begin{rem}
-  This section follows \emph{Analysis II} by Tao, Chapter 6.
+\begin{rem} 
+  % In Definition \ref{def:MatrixNorms},
+  % we used a vector norm to define a matrix norm.
+  % This is a typical example
+  % of connecting new stuff 
+  % to things we already know.
+  In Definition \ref{def:norm},
+  the concept of norms are defined with respect
+  to a vector space ${\cal V}$,
+  which is either $\mathbb{R}^n$ or $\mathbb{C}^n$
+  in lower-level classes such as linear algebra,
+  but ${\cal V}$ could be a vector space of functions
+  in upper-level classes such as
+  functional analysis.
+  To transit smoothly from linear algebra
+  to functional analysis,
+  in Sections \ref{sec:operator-norm}
+  we rephrase the induced matrix 2-norm
+  as an operator norm.
+  A careful study of this operator norm
+  and Hilber-Schmidt norm
+  serves as a stepping stone
+  to the more abstract discussion of norms
+  in Sections \ref{sec:norm-equivalence}
+  and \ref{sec:space-CLXY}.
+  Then the norm equivalence is utilized
+  to define the matrix exponential
+  in Sections \ref{sec:matrix-exponential}.
+  % Most contents in the first two subsections
+  % are taken from \cite{knapp05:_basic_real_analy}.
 \end{rem}
+
+\begin{ntn}
+  \label{ntn:lengthOfVec}
+  The \emph{length of a Euclidean vector}
+  $\mathbf{x}\in \mathbb{F}^n$
+  where $\mathbb{F}=\mathbb{R}$ or $\mathbb{F}=\mathbb{C}$
+  is denoted by $|\mathbf{x}|:=\|\mathbf{x}\|_2$
+  where $\|\cdot\|_2$ is
+  the Euclidean 2-norm in (\ref{eq:EuclideanLpNorm}).
+\end{ntn}
+
+\begin{rem}
+  Notation \ref{ntn:lengthOfVec} is a natural generalization
+  of the magnitude of a real number and the modulus of a complex number;
+  it will be further generalized to a matrix as its Hilbert-Schmidt norm
+  in Definition \ref{def:HilbertSchmidtNorm}.
+\end{rem}
+
+
+\subsection{Operator norm and Frobenius norm}
+\label{sec:operator-norm}
+
+\begin{lem}
+  \label{lem:linearOperatorBounded}
+  The length-scaling factor of a linear map
+  \mbox{$T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+  upon any vector is bounded, i.e., 
+  % the vector space of all linear maps from $\mathbb{F}^n$
+  % to $\mathbb{F}^m$.
+  \begin{equation}
+    \label{eq:linearOperatorBounded}
+    \forall T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m),\ 
+    \exists M\in \mathbb{F} \text{ s.t. }
+    \forall \mathbf{x}\in \mathbb{F}^n,\
+    |T\mathbf{x}|\le M|\mathbf{x}|,
+  \end{equation}
+\end{lem}
+\begin{proof}
+  Since $\mathbf{x}=\sum_j x_j\mathbf{e}_j$
+  and $T$ is a linear map, we have
+  \begin{displaymath}
+    \begin{array}{rl}
+    |T\mathbf{x}| &= \left|\sum_j x_j T \mathbf{e}_j\right|
+                    \le \sum_j \left| x_j T \mathbf{e}_j\right|
+                    = \sum_j \left| x_j||T \mathbf{e}_j\right|
+    \\
+    &\le  |\mathbf{x}| \sum_j\left|T \mathbf{e}_j\right|, 
+    \end{array}
+  \end{displaymath}
+  where the second step follows from the triangle inequality
+  in Definition \ref{def:norm}, 
+  the third step from the absolute homogeneity 
+  in Definition \ref{def:norm}, 
+  and the last step from $|x_j|\le |\mathbf{x}|$.
+  The proof is completed by setting
+  $M:=\sum_j\left|T \mathbf{e}_j\right|$.
+\end{proof}
+
+\begin{defn}
+  \label{def:uniformlyContinuousVector}
+  A function $f: \mathbb{F}^m\rightarrow \mathbb{F}^n$
+  is \emph{uniformly continuous} in $U\subset \mathbb{F}^m$
+  iff
+   \begin{equation}
+     \label{eq:uniformlyContinuous}
+     \begin{array}{l}
+     \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
+     \\
+     \forall x,y\in I,\ 
+       |\mathbf{x}-\mathbf{y}|<\delta \Rightarrow
+       |\mathbf{f}(\mathbf{x})-\mathbf{f}(\mathbf{y})|<\epsilon.
+     \end{array}
+   \end{equation}
+\end{defn}
+
+\begin{rem}
+  Definition \ref{def:uniformlyContinuousVector}
+  is a straightforward generalization
+  of Definition \ref{def:uniformlyContinuousScalar}.
+  One main point of this subsection is to
+  equip us with uniform continuity of a linear map
+  so that we can discuss its size or length, c.f. Notation \ref{ntn:lengthOfVec}.
+\end{rem}
+
+\begin{coro}
+  \label{coro:linearMapIsUniformlyCont}
+  Any linear map
+  $T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$
+  is uniformly continuous on $\mathbb{F}^n$.
+\end{coro}
+\begin{proof}
+  For any $\mathbf{x},\mathbf{y}\in \mathbb{F}^n$,
+  we have
+  \begin{displaymath}
+    |T\mathbf{x} - T\mathbf{y}|
+    = |T(\mathbf{x} - \mathbf{y})|
+    \le M |\mathbf{x} - \mathbf{y}|.
+  \end{displaymath}
+  The rest follows from setting $\delta = \frac{\epsilon}{M}$
+  in Definition \ref{def:uniformlyContinuousVector}.
+\end{proof}
+
+\begin{defn}
+  \label{def:operatorNorm}
+  The \emph{operator norm} of a linear map
+  \mbox{$T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+  is the non-negative number %in $\mathbb{F}$,
+  \begin{equation}
+    \label{eq:operatorNorm}
+    \|T\| := \inf%_{\mathbf{x}\in \mathbb{F}^n}
+    \left\{
+      M\ge 0 : \forall \mathbf{x}\in \mathbb{F}^n,
+      |T\mathbf{x}| \le M |\mathbf{x}|
+    \right\}.
+  \end{equation}
+\end{defn}
+
+\begin{coro}
+  \label{coro:2normLessThanOpNorm}
+  $\forall \mathbf{x}\in \mathbb{F}^n,\
+  |T\mathbf{x}| \le \|T\||\mathbf{x}|$.
+\end{coro}
+\begin{proof}
+  For any given $T$,
+   Lemma \ref{lem:linearOperatorBounded} implies that
+   the set
+   \begin{displaymath}
+     {\cal M}:=\left\{ M\ge 0 : \forall \mathbf{x}\in \mathbb{F}^n,
+       |T\mathbf{x}| \le M |\mathbf{x}| \right\}
+   \end{displaymath}
+  is nonempty and bounded from below.
+%  It is also closed: 
+  For any Cauchy sequence $\{M_n\}_{n=1}^{\infty}$ in ${\cal M}$
+  that converges to $c$,
+  we can take the limit to the sequence of inequalities
+  $|T\mathbf{x}|\le M_n |\mathbf{x}|$
+  to obtain $|T\mathbf{x}|\le c |\mathbf{x}|$.
+  Hence $c\in {\cal M}$ and ${\cal M}$ is closed.
+  It follows that the infimum of ${\cal M}$
+  is contained in ${\cal M}$.
+\end{proof}
+
+\begin{rem}
+  By Lemma \ref{lem:spectralRadiusLessEqNorm},
+  we have $\rho(A)\le \|A\|$.
+  The equality holds when $A$ is a normal matrix.
+  For a nilpotent matrix such as a Jordan block $J$
+  with $\lambda=0$,
+  we have $\rho(J)=0$
+  but $\|J\|>0$.
+\end{rem}
+
+\begin{exc}
+  Verify that (\ref{eq:operatorNorm})
+  is indeed a norm in the sense of Definition \ref{def:norm}.
+\end{exc}
+\begin{solution}
+  For the point separation, we have
+  \begin{displaymath}
+    \begin{array}{rl}
+    \|T\| = 0 & \implies \inf\{M: \forall \mathbf{x} \in
+                \mathbb{F}^n, |T\mathbf{x}| \leq M|\mathbf{x}|\} =0
+      \\ &\implies \forall \mathbf{x} \in \mathbb{F}^n,
+           |T\mathbf{x}| \leq 0
+      \\ &\implies \forall \mathbf{x} \in \mathbb{F}^n, |T\mathbf{x}| = 0 \implies T = 0,
+    \end{array}
+  \end{displaymath}
+  where the second step follows from
+  taking the limit to a sequence of equalities
+  $|T\mathbf{x}|\le M_n |\mathbf{x}|$
+  with the sequence $\{M_n\}_{n=1}^{\infty}$
+  satisfying $\lim_{n\rightarrow +\infty} M_n = 0$.
+
+  The absolute homogeneity holds because $\forall a \in \mathbb{F}$, 
+  \begin{displaymath}
+    \begin{array}{rl}
+%      &\forall T \in \mathcal{L}(\mathbb{F}^n,\mathbb{F}^m),
+      \|aT\| &= \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,|aT
+               \mathbf{x} | \leq M|\mathbf{x}|\}
+      \\ &= \inf\{M:\forall \mathbf{x} \in
+           \mathbb{F}^n,|a||T\mathbf{x}| \leq M|\mathbf{x}|\}
+      \\ &= |a|\inf\{M:\forall \mathbf{x} \in
+           \mathbb{F}^n,|T\mathbf{x}| \leq M|\mathbf{x}|\}
+      \\ &= |a|\|T\|.
+    \end{array}
+  \end{displaymath}
+  The triangle inequality holds because
+  \begin{displaymath}
+    \begin{array}{rl}
+      % & \forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m),
+      % \\
+      \|T + S\| &= \inf\{M: \forall \mathbf{x} \in \mathbb{F}^n,
+                  |(T+S)\mathbf{x}| \leq M|\mathbf{x}|\}\\
+      &= \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |T\mathbf{x}+S\mathbf{x}| \leq M|\mathbf{x}|\} \\
+      &\leq \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |T\mathbf{x}|+|S\mathbf{x}| \leq M|\mathbf{x}|\}\\
+      &\leq \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,
+        |T\mathbf{x}| \leq M|\mathbf{x}|\} \\
+      &\ \  + \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |S\mathbf{x}| \leq M|\mathbf{x}|\}\\
+      &= \|T\| + \|S\|.
+    \end{array}
+  \end{displaymath}
+  Finally the real positivity holds trivially.
+\end{solution}
+
+\begin{coro}
+  \label{coro:operatorNormAsSupOf2norm}
+  $\|T\|=\sup_{|\mathbf{x}|\le 1} |T \mathbf{x}|
+  = \sup_{|\mathbf{x}|=1} |T\mathbf{x}|$.
+\end{coro}
+\begin{proof}
+  Since $T$ is a linear map
+  and $|\cdot|$ is a norm,
+  we have
+  \begin{displaymath}
+    |T(c\mathbf{x})|=|cT\mathbf{x}|=|c||T\mathbf{x}|.
+  \end{displaymath}
+  Hence the inequality $|T\mathbf{x}| \le M |\mathbf{x}|$
+  in (\ref{eq:operatorNorm}) holds
+  for all $\mathbf{x}\ne 0$
+  if and only if it holds for all $\mathbf{x}$
+  with $|\mathbf{x}|\in (0,1]$, 
+  if and only if it holds for all $\mathbf{x}$
+  with $|\mathbf{x}|=1$.
+\end{proof}
+
+\begin{rem}
+  In some books, Corollary \ref{coro:operatorNormAsSupOf2norm}
+  is used to define the operator norm
+  \emph{induced} from the Euclidean 2-norm.
+  Indeed, Corollary \ref{coro:operatorNormAsSupOf2norm}
+  and (\ref{eq:operatorNorm})
+  are equivalent definitions of this operator norm.
+  It is emphasized that the operator norm
+  depends on the choice of the vector norm.
+\end{rem}
+
+\begin{coro}
+  \label{coro:compositionTriangleIneq}
+  The composition of two linear maps
+  \mbox{$S\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+   and \mbox{$T\in {\cal L}(\mathbb{F}^m,\mathbb{F}^k)$}
+  satisfies
+  \begin{equation}
+    \label{eq:compositionTriangleIneq}
+    % T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m),\
+    % S\in {\cal L}(\mathbb{F}^m,\mathbb{F}^k)\
+    % \Rightarrow\ 
+    \|TS\| \le \|T\| \|S\|.
+  \end{equation}
+\end{coro}
+\begin{proof}
+  By Corollary \ref{coro:2normLessThanOpNorm}, we have
+  \begin{displaymath}
+    |(TS)(\mathbf{x})| = |T(S\mathbf{x})|
+    \le \|T\||S\mathbf{x}| \le \|T\|\|S\||\mathbf{x}|.
+  \end{displaymath}
+  Taking supremum of the above for $|\mathbf{x}|\le 1$
+  and applying Corollary \ref{coro:operatorNormAsSupOf2norm}
+  yield (\ref{eq:compositionTriangleIneq}).
+\end{proof}
+
+\begin{coro}
+  The identity function $I\in {\cal L}(\mathbb{F}^n)$
+  satisfies $\|I\|=1$.
+\end{coro}
+\begin{proof}
+  This follows directly from (\ref{eq:operatorNorm}).
+\end{proof}
+
+\begin{exc}
+  Verify that the space ${\cal L}(\mathbb{F}^n,\mathbb{F}^m)$
+  becomes a metric space
+  if we define the metric as $d(T,S)=\|T-S\|$.
+\end{exc}
+\begin{solution}
+  We verify the conditions of a metric space.
+  \begin{itemize}\itemsep0em
+  \item[(i)] $\forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m), d(T, S) = \|T - S\| \geq 0 $ and $d(T, S) = 0 \iff \|T - S\| = 0 \iff T - S = 0 \iff T = s$;
+  \item[(ii)] $d(T, S) = \|T - S\| = \|S - T\| = d(S, T)$;
+  \item[(iii)] $\forall T, S ,V \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m), d(T, V) = \|T - V\| = \|T - S + S - V\| \leq \|T - S\| + \|S - V\| = d(T, S) + d(S, V)$.
+  \end{itemize}
+\end{solution}
+
+\begin{rem}
+  If an operator $T\in{\cal L}(\mathbb{C}^n,\mathbb{C}^m)$
+  can also be considered as another operator
+  $\mathbb{R}^n \rightarrow \mathbb{R}^n$, 
+  there is a potential glitch of Definition \ref{def:operatorNorm}
+  that the operator norms
+  of these two operators are different.
+  The following lemma prevents this potential glitch
+  from happening.
+\end{rem}
+
+\begin{lem}
+  \label{lem:consistencyNestedRealInsideComplex}
+  For $T\in{\cal L}(\mathbb{C}^n,\mathbb{C}^m)$, 
+  suppose for each standard basis vectors $\mathbf{e}_j$
+  in Definition \ref{def:standardBasis}
+  we have $T \mathbf{e}_j \in \mathbb{R}^m$.
+  Then $T$ carries $\mathbb{R}^n$ into $\mathbb{R}^m$
+  and $\|T\|$ is consistently defined in the sense that
+  \begin{equation}
+    \label{eq:consistencyNestedRealInsideComplex}
+    \|T\|
+    = \sup_{\mathbf{x}\in \mathbb{R}^n; |\mathbf{x}|\le 1} |T \mathbf{x}|
+    = \sup_{\mathbf{z}\in \mathbb{C}^n; |\mathbf{z}|\le 1} |T \mathbf{z}|.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  First, $T(\mathbb{R}^n)$ $\subset \mathbb{R}^m$ is trivial because the matrix of $T$ is a real matrix.
+  Thus, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. From this fact, we can define an operator norm of $T$ as
+  \begin{equation}\label{equ1}
+    \|T\| = \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|.
+  \end{equation}
+  On the one hand, we have
+  \begin{equation}\nonumber
+    \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}| \leq \underset{\mathbf{z}\in \mathbb{C}^n;|\mathbf{z}| \leq 1}{\sup}|T\mathbf{z}|
+  \end{equation}
+  since $\mathbb{R}^n \subset \mathbb{C}^n$. 
+  On the other hand,
+  $\forall \mathbf{z} \in \mathbb{C}^n$,
+  $|\mathbf{z}| \leq 1$,
+  $\exists \mathbf{x},\mathbf{y} \in \mathbb{R}^n$,
+  s.t. $\mathbf{z} = \mathbf{x} + \ii \mathbf{y}$
+  and $|\mathbf{x}|^2 + |\mathbf{y}|^2 \leq 1$, and we have
+  \begin{align*}
+    |T\mathbf{z}| &= |T\mathbf{x} + \ii T\mathbf{y}| =
+                    \sqrt{|T\mathbf{x}|^2 + |T\mathbf{y}|^2}
+    \\
+                  &\le \sqrt{\|T\|^2|\mathbf{x}|^2 + \|T\|^2|\mathbf{y}|^2}
+    \\
+    &= \|T\|\sqrt{|\mathbf{x}|^2 + |\mathbf{y}|^2} \leq \|T\| = \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|  
+  \end{align*}
+  \noindent where the third step follows from Corollary
+  \ref{coro:2normLessThanOpNorm}, 
+  the fifth step from $|\mathbf{x}|^2 + |\mathbf{y}|^2 \leq 1$, and
+  the last step from (\ref{equ1}). Thus we have
+  \begin{displaymath}
+    \underset{\mathbf{x}\in \mathbb{R}^n;
+      |\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}| \geq
+    \underset{\mathbf{z}\in \mathbb{C}^n;
+      |\mathbf{z}| \leq 1}{\sup}|T\mathbf{z}|,
+  \end{displaymath}
+  which completes the proof.
+\end{proof}
+
+\begin{defn}
+  \label{def:HilbertSchmidtNorm}
+  The \emph{Hilbert-Schmidt norm} or the \emph{Frobenius norm}
+  of a linear map
+  \mbox{$T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+  is the non-negative number 
+  \begin{equation}
+    \label{eq:HilbertSchmidtNorm}
+    |T| := \left(
+      \sum_{j=1}^n \left|T \mathbf{e}_j\right|^2
+    \right)^{\frac{1}{2}}
+  \end{equation}
+  where $\mathbf{e}_1, \ldots, \mathbf{e}_n$
+  is the standard basis %of $\mathbb{F}^n$
+  in Definition \ref{def:standardBasis}.
+\end{defn}
+
+\begin{exc}
+  Verify that (\ref{eq:HilbertSchmidtNorm})
+  is indeed a norm in the sense of Definition \ref{def:norm}.
+\end{exc}
+\begin{solution}
+  The real positivity holds trivially.
+  For the point separation, we have
+  $|T| = 0 \implies \forall 1 \leq j \leq n,|T\mathbf{e}_j|^2 = 0
+  \implies \forall 1 \leq j \leq n, T\mathbf{e}_j = 0 \implies \forall
+  \nu \in \mathbb{F}^n, T\nu = 0 \implies T = 0$.
+
+  The absolute homogeneity holds because
+  $\forall a \in \mathbb{F}, \forall T \in \mathcal{L}(\mathbb{F}^n,
+  \mathbb{F}^m), |aT| = (\sum\limits_{j =
+    1}^n|aT\mathbf{e}_j|^2)^{\frac{1}{2}} = |a|(\sum\limits_{j =
+    1}^n|T\mathbf{e}_j|^2)^{\frac{1}{2}} = |a||T|$.
+
+  Finally, the triangle inequality holds because
+  $\forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m)$, we have
+    \begin{align*}
+      &|T + S|^2 = \sum\limits_{j = 1}^n|(T+S)\mathbf{e}_j|^2
+      \\ =& \sum\limits_{j = 1}^n|T\mathbf{e}_j + S\mathbf{e}_j|^2
+      \\
+      =& \sum\limits_{j = 1}^n|T\mathbf{e}_j|^2
+         + 2\sum\limits_{j = 1}^n|(T\mathbf{e}_j)^H(S\mathbf{e}_j)|
+         + \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2
+      \\
+      \le& \sum\limits_{j = 1}^n|T\mathbf{e}_j|^2
+           + 2\sum\limits_{j = 1}^n|T\mathbf{e}_j||S\mathbf{e}_j|
+           + \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2
+      \\
+      \le& \sum\limits_{j = 1}^n|T\mathbf{e}_j|^2 %+|S\mathbf{e}_j|^2\right)
+           + 2\sqrt{\left(\sum\limits_{j = 1}^n|T\mathbf{e}_j|^2\right)
+           \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2}
+           + \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2
+      \\
+      =& \left(\sqrt{\sum\limits_{j = 1}^n|T\mathbf{e}_j|^2} +
+         \sqrt{\sum\limits_{j = 1}^n|S\mathbf{e}_j|^2}\right)^2 = (|T|
+         + |S|)^2, 
+    \end{align*}
+  where the fifth step follows from Cauchy inequality.  
+\end{solution}
+
+\begin{coro}
+  \label{coro:HilbertSchmidtNormMatrix}
+  The matrix $A$ %of the Hilbert-Schmidt norm
+  of \mbox{$T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+  satisfies
+  \begin{equation}
+    \label{eq:HilbertSchmidtNormMatrix}
+    |A| = \left(
+      \sum_{i,j} |a_{ij}|^2
+    \right)^{\frac{1}{2}}
+  \end{equation}
+\end{coro}
+\begin{proof}
+  Since $A$ is a linear map, we rewrite (\ref{eq:HilbertSchmidtNorm}) as
+  \begin{displaymath}
+    |A|^2 =  |A \mathbf{e}_1|^2 + |A \mathbf{e}_2|^2 + \cdots
+    + |A \mathbf{e}_n|^2.
+  \end{displaymath}
+  The proof is completed by the fact that
+  $|\cdot|$ is the Euclidean 2-norm.
+\end{proof}
+
+\begin{rem}
+  The notation $|\cdot|$ for a scalar and a vector
+  is consistent in the sense that
+  it represents the length of both of them.
+  Due to (\ref{eq:HilbertSchmidtNormMatrix}),
+  this notation also makes sense for a linear map
+  and its matrix.
+\end{rem}
+
+\begin{coro}
+  \label{coro:HSnormIneq}
+  $\forall \mathbf{x}\in \mathbb{F}^n,\
+  |T\mathbf{x}| \le |T||\mathbf{x}|$.
+\end{coro}
+\begin{proof}
+  We have
+  \begin{displaymath}
+    \begin{array}{rl}
+    |T \mathbf{x}| 
+    &= \left|\sum_j x_j T\mathbf{e}_j\right|
+    \le \sum_j |x_j| \left|T\mathbf{e}_j\right|
+    \\
+    &\le \left(\sum_j |x_j|^2\right)^{\frac{1}{2}}
+    \left(\sum_j \left|T\mathbf{e}_j\right|^2
+      \right)^{\frac{1}{2}}
+      = |T||\mathbf{x}|,
+    \end{array}
+  \end{displaymath}
+  where the first inequality follows from
+  (NRM-3,4) in Definition \ref{def:norm}, 
+  the second inequality from
+  the Cauchy-Schwarz inequality (\ref{eq:CauchySchwarz}), 
+  and the last step from Definition \ref{def:HilbertSchmidtNorm}.
+\end{proof}
+
+\begin{coro}
+  \label{coro:compositionTriangleIneqHS}
+  The composition of two linear maps
+  \mbox{$S\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m)$}
+   and \mbox{$T\in {\cal L}(\mathbb{F}^m,\mathbb{F}^k)$}
+  satisfies
+  \begin{equation}
+    \label{eq:compositionTriangleIneqHS}
+    |TS| \le |T| |S|.
+  \end{equation}
+\end{coro}
+
+\begin{exc}
+  Prove Corollary \ref{coro:compositionTriangleIneqHS}.
+\end{exc}
+\begin{solution}
+  Let $\mathbf{e}_i$ be the standard basis of $\mathbb{F}^n$. We have
+  \begin{align*}
+    |TS|^2 &= \sum\limits_{i = 1}^n|TS\mathbf{e}_i|^2
+             \leq \sum\limits_{i = 1}^n|T|^2|S\mathbf{e}_i|^2
+    \\
+           &= |T|^2\sum\limits_{i = 1}^n|S\mathbf{e}_i|^2
+             = |T|^2|S|^2, 
+  \end{align*}
+  where the first step and the last step follow
+  from Definition \ref{def:HilbertSchmidtNorm}
+  and the second step from Corollary \ref{coro:HSnormIneq}. 
+\end{solution}
+
+
+\begin{coro}
+  The identity function $I\in {\cal L}(\mathbb{F}^n)$
+  satisfies $|I|=\sqrt{n}$.
+\end{coro}
+\begin{proof}
+  This follows directly from (\ref{eq:HilbertSchmidtNorm}).
+\end{proof}
+
+\begin{thm}
+  \label{thm:opNormAndHSnorm}
+  The operator norm and the Hilbert-Schmidt norm
+  on ${\cal L}(\mathbb{F}^n)$
+  are related by
+  \begin{equation}
+    \label{eq:opNormAndHSnorm}
+    \|T\| \le |T| \le \sqrt{n} \|T\|.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Take supremum of Corollary \ref{coro:HSnormIneq},
+  apply Corollary \ref{coro:operatorNormAsSupOf2norm},
+  and we have $\|T\| \le |T|$.
+  Then $|T| \le \sqrt{n} \|T\|$ is given by
+  \begin{displaymath}
+    |T|^2 = \sum_j |T \mathbf{e}_j|^2
+    \le \sum_j \|T\|^2 |\mathbf{e}_j|^2 = n \|T\|^2,
+  \end{displaymath}
+  where the inequality follows from
+  Corollary \ref{coro:2normLessThanOpNorm}.
+\end{proof}
+
+\begin{rem}
+  For a sequence of matrices $(T_n)$,
+  $\lim_{n\rightarrow \infty}|T_n-T|=0$
+  implies the convergence of the sequence to $T$.
+  As a special case of Theorem \ref{thm:normEquivalenceRn}, 
+  Theorem \ref{thm:opNormAndHSnorm} states that 
+  the Hilbert-Schmidt norm and the operator norm are equivalent
+  in measuring the convergence of matrix sequences.
+  Therefore,
+  convergence in the operator norm
+  also implies \emph{entry-by-entry} convergence
+  of matrix sequences.
+\end{rem}
+
+% \begin{rem}
+%   The operator norms discussed in this subsection
+%   are for the continuous linear operators
+%   on \emph{finite}-dimensional normed spaces
+%   and thus are special cases of the operator norm in \ref{eq:OpNormCLXY}.
+%   Nonetheless, most proofs here are also applicable
+%   to Section \ref{sec:space-CLXY}.
+% \end{rem}
+
+\begin{lem}
+  \label{lem:invertibleBfromA}
+  For $A,B\in {\cal L}(\mathbb{R}^n)$,
+  if $A$ is invertible and $\|B-A\|\cdot\|A^{-1}\|<1$,
+  then $B$ is also invertible.
+\end{lem}
+\begin{proof}
+  Write $\alpha := \frac{1}{\|A^{-1}\|}$, $\beta := \|B-A\|$,
+  and we have $\alpha>\beta$. 
+  Then, $\forall \mathbf{x}\in\mathbb{R}^n$,
+  \begin{displaymath}
+    \begin{array}{rl}
+      \alpha |\mathbf{x}|
+      &= \alpha|A^{-1}A \mathbf{x}|
+        \le \alpha\|A^{-1}\| |A\mathbf{x}|
+        %=|A\mathbf{x}|
+        = |(A-B+B)\mathbf{x}|
+      \\
+      & \le \|B-A\||\mathbf{x}| + |B\mathbf{x}|
+        = \beta |\mathbf{x}| + |B\mathbf{x}|, 
+    \end{array}
+  \end{displaymath}
+  which implies $0< (\alpha-\beta)|\mathbf{x}|\le |B\mathbf{x}|$.
+  Theorem \ref{thm:injectiveIsNull0} implies that
+  $B$ is injective and
+  Theorem \ref{thm:finiteDimVecSpaceInjecSurjecInvert}
+  further implies that $B$ is invertible.
+\end{proof}
+
+\begin{rem}
+  By its proof, Lemma \ref{lem:invertibleBfromA} holds not only
+  for the operator norm,
+  but also for any norm of a linear operator. 
+  It will be further generalized to infinite-dimensional spaces
+  in Theorem \ref{thm:NeumannSeries}.
+\end{rem}
+
+\subsection{Differentiation}
+
+% \begin{rem}
+%   This section follows \emph{Analysis II} by Tao, Chapter 6.
+% \end{rem}
 
 \begin{rem}
   \label{rem:singleVarDiff2MultiVarDiff}
@@ -1650,15 +2268,15 @@ By Definition \ref{def:TaylorSeries},
   \label{def:derivativeNdim}
   For $E\subset \mathbb{R}^n$, $f: E\rightarrow \mathbb{R}^m$,
   $x_0\in E$, $f$ is \emph{differentiable at $x_0$ with derivative}
-  $L: \mathbb{R}^n \rightarrow \mathbb{R}^m$
-  if
+  $L\in{\cal L}(\mathbb{R}^n,\mathbb{R}^m)$
+  iff 
   \begin{equation}
     \label{eq:derivativeNdim}
-    \lim_{x\rightarrow x_0, x\in E\setminus\{x_0\}} \frac{\|f(x)-
-      f(x_0) - L(x-x_0)\|_2}{\|x-x_0\|_2}=0.
+    \lim_{x\rightarrow x_0, x\in E\setminus\{x_0\}}
+    \frac{|f(x)- f(x_0) - L(x-x_0)|}{|x-x_0|}=0. 
   \end{equation}
-  We denote the derivative of $f$ with $f'(x_0)=L$
-  and also call it the \emph{total derivative of $f$}.
+  We write $f'(x_0)=L$
+  and call it the \emph{total derivative of $f$}.
 \end{defn}
 
 \begin{rem}
@@ -1679,26 +2297,29 @@ By Definition \ref{def:TaylorSeries},
   \end{equation}
   we claim that $f$ is differentiable at $(1,2)$
   with \mbox{$f'(x_0)=L$} by computing
-  \begin{align*}
+  \begin{displaymath}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{array}{rl}
     &\lim_{\stackrel{(x,y)\rightarrow (1,2)}{(x,y)\ne(1,2)}}
-    \frac{\|f(x,y)- f(1,2) - L((x,y)-(1,2))\|_2}{\|(x,y)-(1,2)\|_2}
+    \frac{|f(x,y)- f(1,2) - L((x,y)-(1,2))|}{|(x,y)-(1,2)|}
       \\
     =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
-    \frac{\|f(1+a,2+b)- f(1,2) - L(a,b)\|_2}{\|(a,b)\|_2}
+    \frac{|f(1+a,2+b)- f(1,2) - L(a,b)|}{|(a,b)|}
       \\
     =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
-    \frac{\|\left((1+a)^2,(2+b)^2\right)- (1,4) - (2a,4b)\|_2}{\|(a,b)\|_2}
+    \frac{|\left((1+a)^2,(2+b)^2\right)- (1,4) - (2a,4b)|}{|(a,b)|}
       \\
     =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
-    \frac{\|(a^2, b^2)\|_2}{\|(a,b)\|_2}
+    \frac{|(a^2, b^2)|}{|(a,b)|}
     \le \lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
-          \left(\frac{\|(a^2, 0)\|_2}{\|(a,b)\|_2}
-          +  \frac{\|(0, b^2)\|_2}{\|(a,b)\|_2}\right)
+          \left(\frac{|(a^2, 0)|}{|(a,b)|}
+          +  \frac{|(0, b^2)|}{|(a,b)|}\right)
       \\
     = &\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
         \sqrt{a^2 + b^2}
     = 0.
-  \end{align*}
+    \end{array}
+  \end{displaymath}
 \end{exm}
 
 \begin{lem}
@@ -1866,26 +2487,6 @@ The function is not differentiable at (0,0),
   Hence the limit in (\ref{eq:derivativeNdim}) does not exist.
 \end{solution}
 
-
-\begin{thm}
-  \label{thm:continuousParitialDerivativesImplyDifferentiability}
-  Let $E$ be a subset of $\mathbb{R}^n$,
-  $f: E\rightarrow \mathbb{R}^m$ a function,
-  $F$ a subset of $E$,
-  and $x_0\in E$ an interior point of $F$.
-  If all the partial derivatives $\frac{\partial f}{\partial x_j}$
-  exist on $F$ and are continuous at $x_0$,
-  then $f$ is differentiable at $x_0$,
-  and the linear transformation
-  $f'(x_0): \mathbb{R}^n \rightarrow \mathbb{R}^m$ is defined by
-  \begin{equation}
-    \label{eq:continuousParitialDerivativesImplyDifferentiability}
-    f'(x_0) (\mathbf{v})
-    = \sum_{j=1}^n v_j \frac{\partial f}{\partial x_j} (x_0).
-  \end{equation}
-\end{thm}
-
-
 \begin{defn}
   The \emph{derivative matrix} or \emph{differential matrix}
   or \emph{Jacobian matrix} of a differentiable function
@@ -1946,36 +2547,433 @@ The function is not differentiable at (0,0),
   \end{align*}
 \end{rem}
 
-\begin{thm}[Implicit function theorem]
-  \label{thm:implicitFunction}
-  For a function $\mathbf{g}:
-  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
-  suppose there exist
-  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
-  and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
-  such that
-  % and 
-  \begin{enumerate}[(i)]\itemsep0em
-  \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
-  \item $\mathbf{g}$ is continuous in $U\times V$;
-    %$\mathcal{C}^r$ in a neighborhood of $(\mathbf{x}_0, \mathbf{y}_0)$;
-  \item its partial derivative $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}$
-    exists and is continuous in $U\times V$;
-  \item the Jacobian matrix
-    $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
-  \end{enumerate}
-  Then there exist an open set $U_0\times V_0\subset U\times V$
-  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
-  and a unique continuous function $\mathbf{f}: U_0\to V_0$
-  such that
-  \begin{enumerate}[(a)]\itemsep0em
-  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$, 
-  \item $\forall \mathbf{x}\in U_0$,
-    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$. 
-  \end{enumerate}
-  Furthermore, if $\mathbf{g}$ is ${\cal C}^p$ or analytic,
-  then $\mathbf{f}$ is ${\cal C}^p$ or analytic.
+\begin{defn}
+  \label{def:C1VecFunc}
+  A differentiable function $\mathbf{f}: E\rightarrow \mathbb{R}^m$
+  with $E\subset \mathbb{R}^n$ open
+  is \emph{continuously differentiable},
+  written $\mathbf{f}\in{\cal C}^1(E)$, 
+  iff $\mathbf{f}'$ is a continuous mapping of $E$
+  into ${\cal L}(\mathbb{R}^n,\mathbb{R}^m)$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:continuousParitialDerivativesImplyDifferentiability}
+  Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^m$
+  with $E\subset \mathbb{R}^n$ an open subset.
+  Then $\mathbf{f}\in {\cal C}^1(E)$
+  if and only if the partial derivatives $\frac{\partial f_i}{\partial x_j}$
+  exist and are continuous on $E$ for all $i=1,\ldots,m$ and $j=1,\ldots,n$.
+  In this case, the linear transformation
+  $\mathbf{f}'(x_0): \mathbb{R}^n \rightarrow \mathbb{R}^m$ is given by
+  \begin{equation}
+    \label{eq:continuousParitialDerivativesImplyDifferentiability}
+    \mathbf{f}'(x_0) (\mathbf{v})
+    = \sum_{j=1}^n v_j \frac{\partial \mathbf{f}}{\partial x_j} (x_0).
+  \end{equation}
 \end{thm}
+
+
+
+\subsection{Matrix exponential}
+\label{sec:matrix-exponential}
+
+\begin{rem}
+  Most contents in this subsection %in Section \ref{sec:matrix-exponential}
+  about matrix exponentials
+  also apply to operator exponentials in Section \ref{sec:series-operators}.
+\end{rem}
+
+\begin{defn}
+  \label{def:matrixExponential}
+  The \emph{matrix exponential} $e^{A}$
+  of a complex matrix $A\in \mathbb{C}^{n\times n}$ is 
+  \begin{equation}
+    \label{eq:matrixExponential}
+    e^{A} 
+    := \sum_{N=0}^{\infty}\frac{1}{N!}A^N
+    = I + A + \frac{1}{2!}A^2 + \cdots
+  \end{equation}
+\end{defn}
+
+\begin{rem}
+  It follows from (\ref{eq:matrixExponentialFromDecomp})
+  in Example \ref{exm:operatorDecompositionExp} that
+  (\ref{eq:matrixExponential}) is well defined.
+  Another justification is due to the following. 
+\end{rem}
+
+\begin{lem}
+  \label{lem:expMatConverges}
+  The series in (\ref{eq:matrixExponential}) is 
+  \emph{entry-by-entry} convergent.
+\end{lem}
+\begin{proof}
+  Apply the Hilbert-Schmidt norm
+  in Definition \ref{def:HilbertSchmidtNorm}
+  to (\ref{eq:matrixExponential})
+  and we have
+  \begin{displaymath}
+    \left|e^{A}\right|
+    = \left|\sum_{N=0}^{\infty}\frac{1}{N!}A^N\right|
+    \le \sum_{N=0}^{\infty}\frac{1}{N!}\left|A^N\right|
+    \le \sum_{N=0}^{\infty}\frac{1}{N!}\left|A\right|^N,
+  \end{displaymath}
+  where the second inequality follows from Corollary
+  \ref{coro:compositionTriangleIneqHS}. 
+  Since the size of $A$ is fixed,
+  $|A|$ is a bounded nonnegative number.
+  Then the ratio test (Theorem \ref{thm:ratioTest}) implies
+   the convergence of the last series in the Hilbert-Schmidt norm,
+   % which, by Theorem \ref{thm:opNormAndHSnorm},
+   % is equivalent to the convergence in the Hilbert-Schmidt norm,
+   which,
+   by (\ref{eq:HilbertSchmidtNormMatrix}), %Definition \ref{def:HilbertSchmidtNorm},
+   is equivalent to
+   the entry-by-entry convergence.
+\end{proof}
+
+\begin{thm}
+  \label{thm:matExpSmooth}
+  Interpreted as a map $f: \mathbb{R}^{2n^2}\rightarrow \mathbb{R}^{2n^2}$,
+   the matrix exponential $A\mapsto e^A$ is ${\cal C}^{\infty}$.
+  In other words,
+   every partial derivative of $f$
+   to any order is entry-by-entry uniformly convergent
+   to some continuous function.
+\end{thm}
+\begin{proof}
+  Denote by $E_j$, $j=1,\ldots,2n^2$, 
+  an $n$-by-$n$ complex matrix that has 1 or $\ii$ in one entry
+  and 0 in all other entries.
+  By Definition \ref{def:partialDerivative},
+  the partial derivative of $f$ in the direction of $E_j$
+  is
+  \begin{displaymath}
+    \frac{\partial f}{\partial E_j}(A)
+    = \left. \frac{\dif }{\dif t} f(A+tE_j)\right|_{t=0}.
+  \end{displaymath}
+  By (\ref{eq:matrixExponential}) and Definition \ref{def:seriesFromSequence},
+  the sequence associated with the series $f(A)$ is
+  $\left\{\frac{1}{N!}A^N\right\}$.
+%  $g_1(A)g_2(A)\cdots g_N(A)$
+%  where each $g_j(A)$ equal to $A$ or a constant.
+  Hence 
+  $\frac{\partial f}{\partial E_j}(A)$ is the sum
+  of derivatives of all terms in the sequence; 
+  by the chain rule, 
+  each derivative is of the form
+  \begin{displaymath}
+    \frac{1}{N!}\sum_{i=1}^N g_1(A)\cdots g_{i-1}(A)
+    \left. \frac{\dif }{\dif t} g_i(A+tE_j)\right|_{t=0}
+    g_{i+1}(A)\cdots g_N(A),
+  \end{displaymath}
+  where each $g_i$ is $A$. % or $E_j$. % or a constant.
+  Taking further partial derivatives preserves this general form,
+  except that $g_i$ is either $A$ or $E_j$
+  and that the number of products to be summed up is increased.
+  
+  % $\left\{\frac{1}{N!}A^N\right\}$,
+  The $k$th-order partial derivative of
+  the $N$th term $\frac{1}{N!}A^N$ in the sequence
+  is a sum of $N^k$ products,
+  each product consisting of $N$ terms
+  and each term is either $A$ or $E_j$
+  satisfying
+  \begin{displaymath}
+    \max(|A|, |E_j|)\le M := \max(|A|,1).
+  \end{displaymath}
+  Hence we have, for any fixed $k\in \mathbb{N}$, 
+  \begin{displaymath}
+    \left|
+      \frac{\partial^k }{\partial E_{j_1}\cdots \partial E_{j_k}}
+      \left(\frac{1}{N!}A^N\right)
+    \right|
+    \le \frac{N^k M^N}{N!}.
+  \end{displaymath}
+  By the ratio test, 
+  the series $\frac{\partial^k f}{\partial E_{j_1}\cdots
+    \partial E_{j_k}}(A)$
+  uniformly converges entry-by-entry to some function. 
+  The rest of the proof follows from
+  Theorem \ref{thm:uniformConvergenceOfDerivatives}
+  and Lemma \ref{lem:expMatConverges}.
+\end{proof}
+
+\begin{exm}
+  For the real skew-symmetric matrix
+  \begin{displaymath}
+    A =
+    \begin{bmatrix}
+      0 & -\theta
+      \\
+      \theta & 0
+    \end{bmatrix},
+  \end{displaymath}
+  we have
+  \begin{displaymath}
+    e^A =
+    \begin{bmatrix}
+      \cos \theta & -\sin\theta
+      \\
+      \sin\theta & \cos\theta
+    \end{bmatrix}.
+  \end{displaymath}
+  Indeed, define
+  \begin{displaymath}
+    I_2 :=
+    \begin{bmatrix}
+      1 & 0
+      \\
+      0 & 1
+    \end{bmatrix};
+    \quad
+    J_2 :=
+    \begin{bmatrix}
+      0 & -1
+      \\
+      1 & 0
+    \end{bmatrix}
+  \end{displaymath}
+  and we have
+  \begin{align*}
+    A^{4n} &= \theta^{4n} I_2, \ 
+    A^{4n+2} = -\theta^{4n+2} I_2, \\
+    A^{4n+1} &= \theta^{4n+1} J_2, \ 
+    A^{4n+3} = -\theta^{4n+3} J_2. 
+  \end{align*}
+  It follows that
+  $e^A = \cos\theta I_2 + \sin\theta J_2$. 
+\end{exm}
+
+\begin{lem}
+  \label{lem:exp-commuteMatrices}
+  If two matrices $X$ and $Y$ commute,
+  then
+  \begin{equation}
+    \label{eq:exp-commuteMatrices}
+    e^X e^Y = e^{X+Y}.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  By rearranging double summations, we have
+  \begin{align*}
+    e^X e^Y
+    &= \left(
+      \sum_{r=0}^{\infty} \frac{1}{r!} X^r
+      \right)
+      \left(
+      \sum_{s=0}^{\infty} \frac{1}{s!} Y^s
+      \right)
+      = \sum_{r,s\in \mathbb{N}} \frac{1}{r! s!} X^rY^s
+    \\
+    &= \sum_{N=0}^{\infty}\sum_{k=0}^N \frac{X^k Y^{N-k}}{k!(N-k)!} 
+      = \sum_{N=0}^{\infty}\frac{1}{N!}
+      \sum_{k=0}^N {N \choose k} X^k Y^{N-k}
+    \\
+    &= \sum_{N=0}^{\infty}\frac{1}{N!} (X+Y)^N
+      = e^{X+Y},
+  \end{align*}
+  where the commutativity of $X$ and $Y$ ensures the validity of the
+  last two steps.
+\end{proof}
+
+\begin{exm}
+  If two matrices $X$ and $Y$ do not commute,
+  then Lemma \ref{lem:exp-commuteMatrices} does not hold,
+  e.g., 
+  \begin{displaymath}
+    X=
+    \begin{bmatrix}
+      0 & 1 \\ 0 & 0
+    \end{bmatrix}, \ 
+    Y=
+    \begin{bmatrix}
+      1 & 0 \\ 0 & 0
+    \end{bmatrix}.
+  \end{displaymath}
+\end{exm}
+
+\begin{coro}
+  The matrix $e^X$ is nonsingular
+  for any $X\in \mathbb{C}^{n\times n}$.
+\end{coro}
+\begin{proof}
+  This follows from 
+  setting $Y=-X$ in (\ref{eq:exp-commuteMatrices})
+  and taking determinant of both sides.
+\end{proof}
+
+\begin{lem}
+  \label{lem:derivativeOfMatrixExponential}
+  $\frac{\dif}{\dif t}(e^{tX}) = X e^{tX}$.
+\end{lem}
+\begin{proof}
+  By (\ref{eq:matrixExponential}) and Theorem \ref{thm:matExpSmooth}, we have
+  \begin{align*}
+    \frac{\dif}{\dif t}\left(e^{tX}\right)
+    &= \frac{\dif}{\dif t}\sum_{N=0}^{\infty} \frac{1}{N!}(tX)^N
+    = X\sum_{N=1}^{\infty} \frac{1}{(N-1)!}(tX)^{N-1}
+    \\
+    &= X e^{tX}. \qedhere
+  \end{align*}
+\end{proof}
+
+\begin{lem}
+  \label{lem:expSimilarityTrans}
+  For any nonsingular matrix $W$, we have 
+  \begin{equation}
+    \label{eq:expSimilarityTrans}
+    e^{W^{-1}X W} = W^{-1} e^X W.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  By (\ref{eq:matrixExponential}), we have
+  \begin{align*}
+    e^{W^{-1}X W} &= \sum_{N=0}^{\infty} \frac{1}{N!}(W^{-1}X W)^N
+    = \sum_{N=0}^{\infty} \frac{1}{N!}W^{-1}X^N W
+    \\
+    &= W^{-1} e^X  W. \qedhere
+  \end{align*}  
+\end{proof}
+
+\begin{coro}
+  \label{coro:diagonalMatrixExp}
+  For a diagonalizable matrix $A=R \Lambda R^{-1}$, we have
+  \begin{equation}
+    \label{eq:diagonalMatrixExp}
+    e^A = R e^{\Lambda} R^{-1}.
+  \end{equation}
+  % \begin{align*}
+  %   e^{A t} &=RR^{-1}+R\Lambda R^{-1}t+\frac{1}{2!}R\Lambda R^{-1}R\Lambda R^{-1}t^2+\cdots \\
+  %           &= R\sum_{j=0}^{\infty}\frac{t^j}{j!}\Lambda^jR^{-1}=Re^{\Lambda t}R^{-1}.
+  % \end{align*}
+\end{coro}
+\begin{proof}
+  This follows directly from Lemma \ref{lem:expSimilarityTrans}.
+\end{proof}
+
+\begin{lem}
+  \label{lem:eigenPairOfExp}  
+  If $\lambda_1, \ldots, \lambda_n$ are eigenvalues of
+  $A\in \mathbb{C}^{n\times n}$,
+  then $e^{\lambda_1}, \ldots, e^{\lambda_n}$
+  are eigenvalues of $e^A$.
+  Furthermore, if $\mathbf{u}$ is an eigenvector
+  of $A$ for $\lambda_i$,
+  then $\mathbf{u}$ is an eigenvector
+  of $e^A$ for $e^{\lambda_i}$.
+\end{lem}
+\begin{proof}
+  By the Schur Theorem \ref{thm:Schur},
+  there exist an invertible matrix $P$
+  and an upper triangular matrix $T$ such that
+  \begin{displaymath}
+    A = P^{-1} T P.
+  \end{displaymath}
+  Then Lemma \ref{lem:expSimilarityTrans}
+  yields
+  \begin{displaymath}
+    e^A = e^{P^{-1} T P} = P^{-1} e^{T} P,  
+  \end{displaymath}
+  where $e^T$, by Definition \ref{def:matrixExponential},
+  is an upper triangular matrix with
+  its diagonal entries as
+  $e^{\lambda_1}, \ldots, e^{\lambda_n}$.
+  If $\mathbf{u}$ is an eigenvector
+  of $A$ for the eigenvalue $\lambda$,
+  then $\mathbf{u}$ is an eigenvector
+  of $A^n$ for the eigenvalue $\lambda^n$, 
+  the rest follows from Definition \ref{def:matrixExponential}. 
+\end{proof}
+
+\begin{thm}
+  \label{thm:expMatDet}
+  $\det e^X = e^{\text{Trace } X}$.
+\end{thm}
+
+\begin{exc}
+  Prove Theorem \ref{thm:expMatDet}.
+\end{exc}
+\begin{solution}
+  Let $\lambda_1, \ldots, \lambda_n$
+  be the eigenvalues of $X$. 
+  Lemmas \ref{lem:eigenPairOfExp},
+  \ref{lem:trace},
+  and \ref{lem:determinantIsProductOfEigenvalues} yield
+  \begin{displaymath}
+    \det e^X = e^{\lambda_1} e^{\lambda_2}\cdots e^{\lambda_n}
+    = e^{\lambda_1+\lambda_2+\ldots+\lambda_n} = e^{\text{Trace } X}. 
+    \qedhere
+  \end{displaymath}
+\end{solution}
+
+
+\begin{rem}
+  An alternative proof of Theorem \ref{thm:expMatDet} is as follows. 
+  Define $f(t) = \det e^{tX}$.
+  By (\ref{eq:matrixExponential}), we have
+  \begin{align*}
+    &\det e^{sX} \\
+    =& \det
+    \begin{pmatrix}
+      1 + s x_{11} + s^2 F_{11}(s)  & s x_{12} + s^2 F_{12}(s) &
+      \cdots
+      \\
+      s x_{21} + s^2 F_{21}(s)  & 1 + s x_{22} + s^2 F_{22}(s) &
+      \cdots
+      \\
+      \vdots & \vdots & \ddots 
+    \end{pmatrix}
+    \\
+    =& 1 + s \text{Trace } X + s^2 G(s),
+  \end{align*}
+  where $x_{ij}$ is the $(i,j)$-entry of $X$
+  and $F_{ij}(s)$ and $G(s)$ are smooth functions of $s$.
+  Consequently, we have
+  \begin{align*}
+    f'(t)
+    &= \left. \frac{\dif }{\dif s} \det e^{(t+s)X}\right|_{s=0}
+      = \left. \frac{\dif }{\dif s}
+      \det \left(e^{tX}e^{sX}\right)\right|_{s=0}
+    \\
+    &= \left. \frac{\dif }{\dif s}
+      \left(\det e^{tX} \det e^{sX}\right)\right|_{s=0}
+      = \det e^{tX} \left. \frac{\dif }{\dif s}
+      \left(\det e^{sX}\right)\right|_{s=0}
+    \\
+    &= f(t) \left. \frac{\dif }{\dif s} \left(
+      1 + s \text{Trace } X + s^2 G(s)
+      \right)\right|_{s=0}
+    \\
+    &= f(t) \text{ Trace } X,
+  \end{align*}
+  where the second step follows from Lemma
+  \ref{lem:exp-commuteMatrices} and 
+  the third step from a property of determinant.
+  It follows that  
+  \begin{align*}
+    &\frac{\dif}{\dif t} \left( e^{- t \text{ Trace } X}f(t)\right)
+    \\
+    =& e^{- t \text{ Trace } X}f'(t) -
+    e^{- t \text{ Trace } X} f(t) \text{ Trace } X  = 0
+  \end{align*}
+  and hence $e^{- t \text{ Trace } X}f(t)$ is a constant,
+  which is clearly 1 from setting $t=0$.
+  Finally, the identity
+  \begin{displaymath}
+    f(t) = \det e^{tX} = e^{t \text{ Trace } X}
+  \end{displaymath}
+  yields Theorem \ref{thm:expMatDet} at $t=1$.
+\end{rem}
+
+\begin{rem}
+  The operator norm and matrix exponential in this chapter
+  concerns linear maps that act on finite-dimensional spaces.
+  For infinite-dimensional spaces,
+  see Section \ref{sec:operator-norms} and \ref{sec:series-operators}.
+\end{rem}
+
 
 
 %%% Local Variables:
