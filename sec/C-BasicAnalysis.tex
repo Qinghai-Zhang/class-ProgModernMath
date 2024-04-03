@@ -1720,8 +1720,10 @@ By Definition \ref{def:TaylorSeries},
   \begin{displaymath}
     |T\mathbf{x} - T\mathbf{y}|
     = |T(\mathbf{x} - \mathbf{y})|
-    \le M |\mathbf{x} - \mathbf{y}|.
+    \le M |\mathbf{x} - \mathbf{y}|,
   \end{displaymath}
+  where the second step follows
+  from Lemma \ref{lem:linearOperatorBounded}. 
   The rest follows from setting $\delta = \frac{\epsilon}{M}$
   in Definition \ref{def:uniformlyContinuousVector}.
 \end{proof}
@@ -1901,16 +1903,22 @@ By Definition \ref{def:TaylorSeries},
 \begin{solution}
   We verify the conditions of a metric space.
   \begin{itemize}\itemsep0em
-  \item[(i)] $\forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m), d(T, S) = \|T - S\| \geq 0 $ and $d(T, S) = 0 \iff \|T - S\| = 0 \iff T - S = 0 \iff T = s$;
+  \item[(i)] $\forall T, S \in \mathcal{L}(\mathbb{F}^n,
+    \mathbb{F}^m),
+    d(T, S) = \|T - S\| \geq 0 $
+    and $d(T, S) = 0 \iff \|T - S\| = 0 \iff T - S = 0 \iff T = s$;
   \item[(ii)] $d(T, S) = \|T - S\| = \|S - T\| = d(S, T)$;
-  \item[(iii)] $\forall T, S ,V \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m), d(T, V) = \|T - V\| = \|T - S + S - V\| \leq \|T - S\| + \|S - V\| = d(T, S) + d(S, V)$.
+  \item[(iii)] $\forall T, S ,V \in \mathcal{L}(\mathbb{F}^n,
+    \mathbb{F}^m),
+    d(T, V) = \|T - V\| = \|T - S + S - V\| \leq \|T - S\| + \|S - V\|
+    = d(T, S) + d(S, V)$.
   \end{itemize}
 \end{solution}
 
 \begin{rem}
   If an operator $T\in{\cal L}(\mathbb{C}^n,\mathbb{C}^m)$
   can also be considered as another operator
-  $\mathbb{R}^n \rightarrow \mathbb{R}^n$, 
+  $\mathbb{R}^n \rightarrow \mathbb{R}^m$, 
   there is a potential glitch of Definition \ref{def:operatorNorm}
   that the operator norms
   of these two operators are different.
@@ -2978,7 +2986,7 @@ The function is not differentiable at (0,0),
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../numPDEs"
+%%% TeX-master: "../notesNumAnal"
 %%% End:
 
 % LocalWords:  Lipschitz pointwise boundedness integrable bijective
