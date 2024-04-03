@@ -587,6 +587,13 @@
   \end{displaymath}
 \end{defn}
 
+\begin{exm}
+  \label{exm:invertibleOpSetIsOpen}
+  By Lemma \ref{lem:invertibleBfromA},
+  the set of invertible linear operators is open
+  in ${\cal L}(\mathbb{R}^n)$.
+\end{exm}
+
 \begin{defn}
   \label{def:closedSets}
   A subset $E$ of a metric space ${\cal X}$ is \emph{closed}
@@ -597,6 +604,16 @@
   Show that $\emptyset$ and ${\cal X}$
   are both open and closed.
 \end{exc}
+
+\begin{lem}
+  \label{lem:intersectionOpenSets}
+  The intersection of two open sets is open.
+\end{lem}
+
+\begin{lem}
+  \label{lem:unionClosedSets}
+  The union of two closed sets is closed.
+\end{lem}
 
 
 \subsection{Limit points and closure}
@@ -730,6 +747,12 @@
   we have $\overline{\overline{A}}=\overline{A}$. 
 \end{coro}
 
+\begin{coro}
+  \label{coro:closurePreserveSubset}
+  The subset relation is preserved by taking closure, 
+  i.e., $A\subset E$ implies $\overline{A}\subset \overline{E}$.
+\end{coro}
+
 
 \subsection{Closed sets and convergence}
 \label{sec:clos-sets-conv}
@@ -750,6 +773,45 @@
   if and only if any sequence $(x_n)\subset E$
   that converges in ${\cal X}$ also converges in $E$.
 \end{lem}
+
+\subsection{The Baire category theorem}
+
+\begin{defn}
+  \label{def:nowhereDense}
+  A subset of a metric space is \emph{nowhere dense}
+  if its interior is an empty set.
+\end{defn}
+
+\begin{exm}
+  The Cantor set in Definition \ref{def:CantorSet}
+  is nowhere dense in the metric space $([0,1],|\cdot|)$.
+\end{exm}
+
+\begin{defn}
+  \label{def:metricSpaceFirstCat}
+  A subset of a metric space is of \emph{the first category}
+  if it is contained in the countable union
+  of closed nowhere dense sets.
+\end{defn}
+
+\begin{thm}[Baire category]
+  \label{thm:BaireCat}
+  In a complete metric space,
+  the intersection of countably many open dense sets is nonempty.
+\end{thm}
+
+\begin{coro}
+  \label{coro:BaireCat}
+  A complete metric space ${\cal X}$ is 
+  not the union of countably many closed nowhere dense sets.
+\end{coro}
+
+\begin{defn}
+  A \emph{Baire space} is a topological space ${\cal X}$
+  in which every countable intersection of open dense sets
+  is dense in ${\cal X}$.
+\end{defn}
+
 
 
 \section{Continuous functions}
@@ -838,10 +900,37 @@
     is open in ${\cal X}$.
   \item $\forall A\subseteq {\cal X}$,
     $f(\overline{A})\subseteq \overline{f(A)}$.
+  \item $\forall E\subseteq {\cal Y}$,
+    $\overline{f^{-1}(E)}\subseteq f^{-1}(\overline{E})$.
   \item The preimage $f^{-1}(V)$ of any closed set $V$ in ${\cal Y}$
     is closed in ${\cal X}$.
   \end{enumerate}
 \end{thm}
+
+
+\begin{lem}
+  \label{lem:compositionMapIsContinuous}
+  If $f:{\cal X}\rightarrow {\cal Y}$ and $g:{\cal Y}\rightarrow Z$
+  are continuous functions between metric spaces,
+  then the composition map $g\circ f: {\cal X}\rightarrow Z$
+  is continuous.
+\end{lem}
+
+\begin{lem}
+  \label{lem:funcInverseIsContinuous}
+  For the set ${\cal B}(\mathbb{R}^n)^{-1}\subset
+  {\cal L}(\mathbb{R}^n)$
+  of invertible linear operators equipped
+  with the operator norm in Definition \ref{def:operatorNorm},
+  the inverse function 
+  $f: {\cal B}(\mathbb{R}^n)^{-1}\rightarrow
+  {\cal B}(\mathbb{R}^n)^{-1}$ 
+  given by $f(A) = A^{-1}$ is continuous
+  in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
+\end{lem}
+
+
+
 
 \begin{defn}
   \label{def:openMap}
@@ -849,7 +938,6 @@
   if its image of any open set is open; 
   it is \emph{closed} if its image of any closed set is closed. 
 \end{defn}
-
 
 
 
@@ -871,6 +959,7 @@
   \label{lem:homeomorphismIsOpenAndClosed}
   A homeomorphism is both open and closed.
 \end{lem}
+
 
 \begin{defn}
   \label{def:topologicalProperty}
@@ -914,12 +1003,31 @@
 
 
 
+\begin{exm}
+  \label{exm:identityUniformlyCont}
+  Let $d_1$ and $d_2$ denote the metrics
+  induced from the operator norm and the Hilbert-Schmidt norm
+  in Definitions \ref{def:operatorNorm} and
+  \ref{def:HilbertSchmidtNorm}, respectively.
+  By Theorem \ref{thm:opNormAndHSnorm}
+  and Definition \ref{def:uniformlyContinuousMetricSpace}, 
+  the identity map
+  \begin{equation}
+    \label{eq:identityUniformlyCont}
+    I: \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_1\right)
+    \rightarrow
+    \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_2\right)
+  \end{equation}
+  is uniformly continuous and has a uniformly continuous inverse.
+\end{exm}
+
+
 \begin{thm}[Continuous extension]
   \label{thm:continuousExt}
-  For a uniformly continuous function $f: E \rightarrow {\cal Y}$ 
+  A uniformly continuous function $f: E \rightarrow {\cal Y}$ 
   that maps a dense subset $E$ of a metric space ${\cal X}$
-  to a complete metric space ${\cal Y}$, 
-  it can be uniquely extended to a continuous function
+  to a complete metric space ${\cal Y}$
+  can be uniquely extended to a continuous function
   $F: {\cal X}\rightarrow {\cal Y}$ such that
   $F|_{E} = f$.
 \end{thm}
@@ -984,8 +1092,8 @@
 \end{defn}
 
 
-\subsection{Lipschitz continuity and contractions}
-\label{sec:fixed-points}
+\subsection{Lipschitz continuity}
+\label{sec:lipschitz-continuity}
 
 \begin{defn}
   \label{def:LipschitzContinuityMetricSpaces}
@@ -1005,6 +1113,66 @@
   in (\ref{eq:uniformlyContinuousMetricSpace})
   and (\ref{eq:LipschitzContinuityMetricSpaces})? 
 \end{exc}
+
+\begin{thm}[Vector mean value]
+  \label{thm:vectorMeanValue}
+  Suppose a continuous function $\mathbf{f}: [a,b]\rightarrow \mathbb{R}^m$
+  is differentiable on $(a,b)$. Then 
+  \begin{equation}
+    \label{eq:vectorMeanValue}
+    \exists x\in(a,b) \text{ s.t. }
+    |\mathbf{f}(b)-\mathbf{f}(a)|\le (b-a)|\mathbf{f}'(x)|.
+  \end{equation}
+\end{thm}
+
+\begin{defn}
+  \label{def:starShapedSet}
+  A subset $S\subset \mathbb{R}^n$ is \emph{star-shaped} with
+  respect to a point $\mathbf{p}\in S$ if for each $\mathbf{x}\in S$
+  the line segment from $\mathbf{p}$ to $\mathbf{x}$ lies in $S$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:meanValueVectorSimilar}
+  For a continuously differentiable function
+  $\mathbf{f}: S\rightarrow \mathbb{R}^m$
+  where $S\subset \mathbb{R}^n$
+  is star-shaped with respect to $\mathbf{p}=(p_1,p_2,\ldots,p_n)\in S$, 
+  there exist continuous functions
+  $\mathbf{g}_1(\mathbf{x}),
+  \mathbf{g}_2(\mathbf{x}), \ldots, \mathbf{g}_n(\mathbf{x})$
+  such that
+  $\mathbf{g}_j(\mathbf{p}) = \frac{\partial \mathbf{f}}{\partial x_j}(\mathbf{p})$
+  and 
+  \begin{equation}
+    \label{eq:meanValueVectorSimilar}
+    \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{p})
+    + \sum_{j=1}^n(x_j-p_j) \mathbf{g}_j(\mathbf{x}). 
+  \end{equation}
+\end{thm}
+
+
+
+\begin{thm}
+  \label{thm:C1impliesLipschitzContinuity}
+  Consider a differentiable function
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$
+  where $E\subset \mathbb{R}^n$ is a convex open set.
+  Suppose there exists $L>0$ such that
+  $\forall \mathbf{x}\in E$, $\|\mathbf{f}'(\mathbf{x})\|\le L$.
+  Then
+  \begin{equation}
+    \label{eq:C1impliesLipschitzContinuity}
+    \forall \mathbf{a}\in E,\ \mathbf{b}\in E,\quad
+    |\mathbf{f}(\mathbf{b})-\mathbf{f}(\mathbf{a})|
+    \le L |\mathbf{b}-\mathbf{a}|. 
+  \end{equation}
+\end{thm}
+
+
+
+\subsection{The Banach fixed point theorem}
+\label{sec:banach-fixed-point}
 
 \begin{defn}
   \label{def:contractionMetricSpace}
@@ -1036,11 +1204,68 @@
 \end{exm}
 
 
-\begin{exc}
-  Use Theorem \ref{thm:fixedPointMetricSpace}
-  to prove the implicit function theorem
-  \ref{thm:implicitFunction}. 
-\end{exc}
+
+\subsection{The inverse function theorem
+  and the implicit function theorem}
+
+\begin{thm}[Inverse function]
+  \label{thm:inverseFunc}
+  Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^n$
+  with $E\subset \mathbb{R}^n$ being an open subset.
+  Suppose
+  \begin{enumerate}[(i)]\itemsep0em
+  \item $\mathbf{f}\in {\cal C}^1(E)$,
+  \item the matrix $\mathbf{f}'(\mathbf{a})$
+    is invertible for some $\mathbf{a}\in E$. 
+  \end{enumerate}
+  Then we have
+  \begin{enumerate}[(a)]\itemsep0em
+  \item there exists open sets
+    $U,V\subset \mathbb{R}^n$ such that
+    $\mathbf{a}\in U$, $\mathbf{b}:=\mathbf{f}(\mathbf{a})\in V$,
+    $\mathbf{f}(U)=V$, and $\mathbf{f}$ is injective on $U$,
+  \item $\exists \mathbf{g}: V\rightarrow U$ s.t.
+    $\forall \mathbf{x}\in U$, $\mathbf{g}(\mathbf{f}(\mathbf{x}))=\mathbf{x}$, $\mathbf{g}\in {\cal C}^1(V)$,
+    and
+    \begin{equation}
+      \label{eq:inverseFuncDeriv}
+      \forall \mathbf{y}\in V,\quad
+      \mathbf{g}'(\mathbf{y}) = [\mathbf{f}'(\mathbf{g}(\mathbf{y}))]^{-1}.
+    \end{equation}
+  \end{enumerate}
+\end{thm}
+
+
+\begin{thm}[Implicit function theorem]
+  \label{thm:implicitFunction}
+  For a function $\mathbf{g}:
+  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
+  suppose there exist
+  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
+  and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
+  such that
+  \begin{enumerate}[(i)]\itemsep0em
+  \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
+  \item $\mathbf{g}$ is continuous in $U\times V$;
+  \item its partial derivative $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}$
+    exists and is continuous in $U\times V$;
+  \item the Jacobian matrix
+    $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
+  \end{enumerate}
+  Then there exist an open set $U_0\times V_0\subset U\times V$
+  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
+  and a unique continuous function $\mathbf{f}: U_0\to V_0$
+  such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$, 
+  \item $\forall \mathbf{x}\in U_0$,
+    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$. 
+  \end{enumerate}
+  Furthermore, if $\mathbf{g}$ is ${\cal C}^p$ or analytic,
+  then $\mathbf{f}$ is ${\cal C}^p$ or analytic.
+\end{thm}
+
+
 
 
 \section{Sequential compactness}
@@ -1836,173 +2061,239 @@
 
 
 
-\subsection{To be inserted}
 
-\begin{exm}
-  \label{exm:invertibleOpSetIsOpen}
-  By Lemma \ref{lem:invertibleBfromA},
-  the set of invertible linear operators in ${\cal L}(\mathbb{R}^n)$
-  is open.
-\end{exm}
-
-\begin{lem}
-  \label{lem:compositionMapIsContinuous}
-  If $f:{\cal X}\rightarrow {\cal Y}$ and $g:{\cal Y}\rightarrow Z$
-  are continuous functions between metric spaces,
-  then the composition map $g\circ f: {\cal X}\rightarrow Z$
-  is continuous.
-\end{lem}
-
-\begin{lem}
-  \label{lem:funcInverseIsContinuous}
-  For the set ${\cal B}(\mathbb{R}^n)^{-1}\subset
-  {\cal L}(\mathbb{R}^n)$
-  of invertible linear operators equipped
-  with the operator norm in Definition \ref{def:operatorNorm},
-  the inverse function 
-  $f: {\cal B}(\mathbb{R}^n)^{-1}\rightarrow
-  {\cal B}(\mathbb{R}^n)^{-1}$ 
-  given by $f(A) = A^{-1}$ is continuous
-  in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
-\end{lem}
-
-
-\begin{exm}
-  \label{exm:identityUniformlyCont}
-  Let $d_1$ and $d_2$ denote the metrics
-  induced from the operator norm and the Hilbert-Schmidt norm
-  in Definitions \ref{def:operatorNorm} and
-  \ref{def:HilbertSchmidtNorm}, respectively.
-  By Theorem \ref{thm:opNormAndHSnorm}
-  and Definition \ref{def:uniformlyContinuousMetricSpace}, 
-  the identity map
-  \begin{equation}
-    \label{eq:identityUniformlyCont}
-    I: \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_1\right)
-    \rightarrow
-    \left({\cal L}(\mathbb{F}^n,\mathbb{F}^m), d_2\right)
-  \end{equation}
-  is uniformly continuous and has a uniformly continuous inverse.
-\end{exm}
-
-
-\begin{thm}[Vector mean value]
-  \label{thm:vectorMeanValue}
-  Suppose a continuous function $\mathbf{f}: [a,b]\rightarrow \mathbb{R}^m$
-  is differentiable on $(a,b)$. Then 
-  \begin{equation}
-    \label{eq:vectorMeanValue}
-    \exists x\in(a,b) \text{ s.t. }
-    |\mathbf{f}(b)-\mathbf{f}(a)|\le (b-a)|\mathbf{f}'(x)|.
-  \end{equation}
-\end{thm}
+\subsection{The Stone-Weierstrass theorem}
 
 \begin{defn}
-  \label{def:starShapedSet}
-  A subset $S\subset \mathbb{R}^n$ is \emph{star-shaped} with
-  respect to a point $\mathbf{p}\in S$ if for each $x\in S$
-  the line segment from $\mathbf{p}$ to $x$ lies in $S$.
+  \label{def:algebraOfFuncs}
+  An \emph{algebra of scalar functions} % complex-valued
+  is a algebra ${\cal A}$ (as in Definition \ref{def:algebra})
+  closed under addition, multiplication,
+  and scalar multiplication, i.e.,
+  \begin{equation}
+    \label{eq:algebraOfFuncs}
+    \forall f,g\in {\cal A}, \forall c\in\mathbb{C},\
+    f+g\in{\cal A},\ fg\in {\cal A},\ cf\in{\cal A},
+  \end{equation}
+  where $fg$ is the multiplication of function values in $\mathbb{C}$.
 \end{defn}
 
-\begin{thm}
-  \label{thm:meanValueVectorSimilar}
-  For a continuously differentiable function
-  $\mathbf{f}: S\rightarrow \mathbb{R}^m$
-  where $S\subset \mathbb{R}^n$
-  is star-shaped with respect to $\mathbf{p}=(p_1,p_2,\ldots,p_n)\in S$, 
-  there exist continuously differentiable functions
-  $\mathbf{g}_1(\mathbf{x}),
-  \mathbf{g}_2(\mathbf{x}), \ldots, \mathbf{g}_n(\mathbf{x})$
-  such that
-  $\mathbf{g}_j(\mathbf{p}) = \frac{\partial \mathbf{f}}{\partial x_j}(\mathbf{p})$
-  and 
-  \begin{equation}
-    \label{eq:meanValueVectorSimilar}
-    \mathbf{f}(\mathbf{x}) = \mathbf{f}(\mathbf{p})
-    + \sum_{j=1}^n(x_j-p_j) \mathbf{g}_j(\mathbf{x}). 
-  \end{equation}
-\end{thm}
+\begin{defn}
+  \label{def:uniformClosedness}
+  An algebra of scalar functions is \emph{uniformly closed}
+  iff
+  any sequence $(f_n)\subset {\cal A}$
+  that is uniformly convergent
+  converges to some $f\in {\cal A}$.
+\end{defn}
 
 
+\begin{defn}
+  \label{def:uniformClosure}
+  The \emph{uniform closure of an algebra ${\cal A}$ of scalar functions}
+  is the set of all functions that are limits
+  of uniformly convergent sequences of functions in ${\cal A}$.
+\end{defn}
 
-\begin{thm}
-  \label{thm:C1impliesLipschitzContinuity}
-  Consider a differentiable function
-  $\mathbf{f}: E\rightarrow \mathbb{R}^m$
-  where $E\subset \mathbb{R}^n$ is a convex open set.
-  Suppose there exists $L>0$ such that
-  $\forall \mathbf{x}\in E$, $\|\mathbf{f}'(\mathbf{x})\|\le L$.
-  Then
-  \begin{equation}
-    \label{eq:C1impliesLipschitzContinuity}
-    \forall \mathbf{a}\in E,\ \mathbf{b}\in E,\quad
-    |\mathbf{f}(\mathbf{b})-\mathbf{f}(\mathbf{a})|
-    \le L |\mathbf{b}-\mathbf{a}|. 
-  \end{equation}
-\end{thm}
+\begin{exm}
+  The Weierstrass approximation theorem \ref{thm:WeierstrassApproximation}
+  states that ${\cal C}([a,b],\mathbb{R})$
+  is the uniform closure of the set of polynomials on $[a,b]$.
+\end{exm}
+
+\begin{lem}
+  \label{lem:uniformClosureIsClosed}
+  The uniform closure ${\cal B}$ of any algebra ${\cal A}$
+  of bounded scalar functions is a uniformly closed algebra. 
+\end{lem}
 
 
-\begin{thm}[Inverse function]
-  \label{thm:inverseFunc}
-  Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^n$
-  with $E\subset \mathbb{R}^n$ being an open subset.
-  Suppose
-  \begin{enumerate}[(i)]\itemsep0em
-  \item $\mathbf{f}\in {\cal C}^1(E)$,
-  \item the matrix $\mathbf{f}'(\mathbf{a})$
-    is invertible for some $\mathbf{a}\in E$. 
-  \end{enumerate}
+\begin{lem}
+  \label{lem:polyConvergesToAbsX}
+  For any interval $[-a,a]$
+  there exists a sequence $(p_n)$ of real polynomials
+  such that $p_n(0)=0$ and
+  $(p_n)$ converges uniformly to $|x|$ on $[-a,a]$. 
+\end{lem}
+
+\begin{defn}
+  \label{def:separatePoints}
+  A set ${\cal A}$ of scalar functions over $E$
+  is said to \emph{separate points} on $E$
+  iff
+  \begin{displaymath}
+    \forall x_1,x_2\in E,\
+    x_1\ne x_2\ \Rightarrow\
+    \exists f\in{\cal A} \text{ s.t. }
+    f(x_1)\ne f(x_2).
+  \end{displaymath}
+\end{defn}
+
+\begin{exm}
+  The set of all even polynomials 
+  does not separate points on $[-1,1]$. 
+\end{exm}
+
+\begin{exm}
+  \label{exm:complexTrigPolysNotSeparable}
+  The algebra of continuous complex-valued
+  periodic functions on $[-\pi, \pi]$
+  does not separate points, 
+  neither does that of complex-valued
+  trinometric polynomials
+  $\sum_{n=-N}^{+N} c_n e^{\ii nx}$:
+  every function $f$ in question has
+  $f(-\pi) = f(\pi)$. 
+\end{exm}
+
+\begin{defn}
+  \label{def:vanishAtNoPoints}
+  A set ${\cal A}$ of scalar functions on $E$
+  is said to \emph{vanish at no point} of $E$ iff
+  \begin{displaymath}
+    \forall x\in E,\
+    \exists f\in{\cal A} \text{ s.t. }
+    f(x)\ne 0. 
+  \end{displaymath}
+\end{defn}
+
+\begin{exm}
+  The set of all polynomials %in one variable
+  separate points on $E:=[-a,a]$
+  and vanishes at no point of $E$ for any $a\in\mathbb{R}^+$.  
+\end{exm}
+
+\begin{lem}
+  \label{lem:twoValsOfFuncAlgebra}
+  Suppose an algebra ${\cal A}$ of scalar functions on $E$
+  separates points on $E$ and vanishes at no point of $E$.
   Then we have
+  \begin{displaymath}
+    \forall x, y\in E\ %\text{ with } x\ne y,\
+    \forall \xi, \eta \in \mathbb{F},\
+    \exists f\in {\cal A} \text{ s.t. }
+    f(x)=\xi,\ f(y)=\eta, 
+  \end{displaymath}
+  where $\mathbb{F}=\mathbb{R}$ or $\mathbb{C}$
+  and $\xi=\eta$ if $x=y$. 
+\end{lem}
+
+\begin{lem}
+  \label{lem:absMaxMinInFuncClosure}
+  Suppose an algebra ${\cal A}$ of continuous scalar functions
+  on a compact set $K$
+  separates points on $K$ and vanishes at no point of $K$.
+  For the uniform closure ${\cal B}$ of ${\cal A}$, 
+  we have
   \begin{enumerate}[(a)]\itemsep0em
-  \item there exists open sets
-    $U,V\subset \mathbb{R}^n$ such that
-    $\mathbf{a}\in U$, $\mathbf{b}:=\mathbf{f}(\mathbf{a})\in V$,
-    $\mathbf{f}(U)=V$, and $\mathbf{f}$ is injective on $U$,
-  \item $\exists \mathbf{g}: V\rightarrow U$ s.t.
-    $\forall \mathbf{x}\in U$, $\mathbf{g}(\mathbf{f}(\mathbf{x}))=\mathbf{x}$, $\mathbf{g}\in {\cal C}^1(V)$,
-    and
-    \begin{equation}
-      \label{eq:inverseFuncDeriv}
-      \forall \mathbf{y}\in V,\quad
-      \mathbf{g}'(\mathbf{y}) = [\mathbf{f}'(\mathbf{g}(\mathbf{y}))]^{-1}.
-    \end{equation}
+  \item $f\in{\cal B}$ $\Rightarrow$ $|f|\in {\cal B}$;
+  \item $f,g\in{\cal B}$ $\Rightarrow$
+    $\max(f,g)\in {\cal B}$ and $\min(f,g)\in {\cal B}$, 
   \end{enumerate}
+  where $h=\max(f,g)$ is defined as
+  \begin{equation}
+    \label{eq:maxFG}
+    h(x):=
+    \begin{cases}
+      f(x) & \text{if } f(x)\ge g(x);
+      \\
+      g(x) & \text{otherwise }
+    \end{cases}
+  \end{equation}
+  and $\min(f,g)$ is defined similarly.
+\end{lem}
+
+\begin{thm}[Stone--Weierstrass]
+  \label{thm:StoneWeierstrass}
+  Suppose an algebra ${\cal A}$ of continuous real-valued functions
+  on a compact set $K$
+  separates points on $K$ and vanishes at no point of $K$.
+  Then the uniform closure ${\cal B}$ of ${\cal A}$
+  consists of all real continuous functions on $K$. 
+  In other words, ${\cal B}={\cal C}(K, \mathbb{R})$
+  and ${\cal A}$ is dense in ${\cal B}$.
 \end{thm}
 
+\begin{exc}
+  Theorem \ref{thm:StoneWeierstrass}
+  cannot be generalized directly to
+  the set of continuous complex-valued functions.
+  Denote by $\mathbb{S}^1$ the unit circle in the complex plane
+  and ${\cal A}$ the algebra of all functions of the form
+  $f(e^{\ii \theta}) = \sum_{n=0}^N c_n e^{\ii n\theta}$
+  where $\theta\in \mathbb{R}$.
+  Show that ${\cal A}$ separates points on $\mathbb{S}^1$,
+  vanishes at no points of $\mathbb{S}^1$,
+  but there still exists continuous functions
+  $\mathbb{S}^1\rightarrow \mathbb{C}$
+  that do not belong to the uniform closure of ${\cal A}$. 
+\end{exc}
 
-\begin{thm}[Implicit function theorem]
-  \label{thm:implicitFunction}
-  For a function $\mathbf{g}:
-  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
-  suppose there exist
-  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
-  and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
-  such that
-  \begin{enumerate}[(i)]\itemsep0em
-  \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
-  \item $\mathbf{g}$ is continuous in $U\times V$;
-  \item its partial derivative $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}$
-    exists and is continuous in $U\times V$;
-  \item the Jacobian matrix
-    $\frac{\partial \mathbf{g}}{\partial \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)$ is invertible.
-  \end{enumerate}
-  Then there exist an open set $U_0\times V_0\subset U\times V$
-  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
-  and a unique continuous function $\mathbf{f}: U_0\to V_0$
-  such that
-  \begin{enumerate}[(a)]\itemsep0em
-  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$, 
-  \item $\forall \mathbf{x}\in U_0$,
-    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$. 
-  \end{enumerate}
-  Furthermore, if $\mathbf{g}$ is ${\cal C}^p$ or analytic,
-  then $\mathbf{f}$ is ${\cal C}^p$ or analytic.
-\end{thm}
+\begin{coro}
+  \label{coro:StoneWeierstrass}
+  Suppose an algebra ${\cal A}$ of continuous complex-valued functions
+  on a compact set $K$
+  separates points on $K$, vanishes at no point of $K$, 
+  and is closed under complex conjugation, %i.e., 
+  $\overline{f}(x):=\overline{f(x)}$. 
+  Then the uniform closure ${\cal B}$ of ${\cal A}$
+  consists of all complex continuous functions on $K$.
+  In other words,
+  ${\cal B}={\cal C}(K, \mathbb{C})$
+  and ${\cal A}$ is dense in ${\cal B}$.
+\end{coro}
+
+\begin{exm}
+  To fix the problem of complex trigonometric polynomials
+  in Example \ref{exm:complexTrigPolysNotSeparable},
+  we change their domain to $\mathbb{S}^1$
+  parameterized by $e^{\ii \theta}$ with $\theta\in[0,2\pi)$.
+  Then $\mathbb{S}^1$ is compact in $\mathbb{C}$. 
+  The algebra of complex trigonometric polynomials
+  restricted to $\mathbb{S}^1$ separates points, 
+  vanishes at no points of $\mathbb{S}^1$,
+  and thus by Corollary \ref{coro:StoneWeierstrass}
+  is dense in the space of complex-valued continuous periodic functions.
+\end{exm}
+
+\begin{defn}
+  \label{def:kCell}
+  A \emph{$k$-cell} $I^k$ is a compact set in $\mathbb{R}^k$
+  of the form
+  \begin{equation}
+    \label{eq:kCell}
+    I^k = \{(x_1,\ldots, x_k): \forall i=1,\ldots,k,\ \ 
+    x_i\in[a_i, b_i]\}. 
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:factoredFunc}
+  Consider functions $f: I^k\rightarrow \mathbb{R}$
+  satisfying
+  \begin{equation}
+    \label{eq:factoredFunc}
+    \begin{array}{l}
+      \exists f_i\in[a_i,b_i]\rightarrow \mathbb{R} \text{ s.t. }
+      f(\mathbf{x}) = \prod_{i=1}^k f_i(x_i).
+    \end{array}
+  \end{equation}
+  The set ${\cal A}$ of all finite sums of such functions
+  form an algebra and is dense in ${\cal C}(I^k,\mathbb{R})$.
+\end{lem}
+
+\begin{coro}%[Fubini]
+  \label{coro:FubiniOnKcell}
+  For any continuous function $f: I^m\times I^n \rightarrow \mathbb{R}$,
+  we have
+  \begin{equation}
+    \label{eq:FubiniOnKcell}
+    \int_{I^m} \int_{I^n} f = \int_{I^n} \int_{I^m} f,
+  \end{equation}
+  where $\int_{I^n}$ denotes the Riemann integral
+  over the $n$-cell $I^n$.
+\end{coro}
 
 
 
 
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../notesNumAnal"
-%%% End:
