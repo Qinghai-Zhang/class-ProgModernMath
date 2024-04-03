@@ -532,8 +532,7 @@
   of the basis.
   As another example,
   the Riesz representation theorem \ref{thm:RieszRep}
-  reduces the $O(\infty^2)$ complexity
-  (accoding to Axiom \ref{axm:multiplicationPrinciple})
+  reduces the $O(\infty)$ complexity
   to the $O(1)$ complexity of taking
   inner product to a single element.
 \end{rem}
@@ -3092,6 +3091,38 @@ For $T\in {\cal L}(V)$,
   The combination of all these Jordan bases is a Jordan basis for $T$.
 \end{proof}
 
+\begin{thm}[Jordan canonical form]
+  \label{thm:JordanDecomp}
+  Every matrix $A\in\mathbb{C}^{n\times n}$ has a similarity transformation
+  \begin{equation}
+    \label{eq:JordanCanoForm}
+    A = RJR^{-1},
+  \end{equation}
+  where $R$ is invertible and
+  $J$ is a block diagonal matrix of the form (\ref{eq:JordanBasis}), 
+  % \begin{equation}
+  %   \label{eq:JordanCanoFormJ}
+  %   J = \begin{bmatrix}
+  %     J(\lambda_1, k_1) & & & \\
+  %     & J(\lambda_2, k_2) & & \\
+  %     & & \ddots & \\
+  %     & & & J(\lambda_s, k_s)
+  %   \end{bmatrix}.
+  % \end{equation}
+  and each $J(\lambda_i, k_i)$ is a Jordan block of order $k_i$, 
+  $\sum_{i=1}^sk_i=n$, and each $k_i$ is no greater
+  than the index of $\lambda_i$.
+  Let $m_a$ and $m_g$ respectively denote
+  the algebraic multiplicity and
+  the geometric multiplicity of an eigenvalue $\lambda$ of $A$.
+  Then $\lambda$ appears in $m_g$ blocks and
+  the sum of the orders of these blocks is $m_a$.
+\end{thm}
+\begin{proof}
+  This is simply a restatement of Theorem \ref{thm:JordanBasis}
+  using Definition \ref{def:eigenvalueMultiplicity}.
+\end{proof}
+
 
 \section{Inner product spaces}
 \label{sec:inner-product-spaces}
@@ -5336,7 +5367,7 @@ For $T\in {\cal L}(V)$,
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../numPDEs"
+%%% TeX-master: "../notesNumAnal"
 %%% End:
 
 % LocalWords:  diagonalizable eigenvalue eigenvector eigenvectors
