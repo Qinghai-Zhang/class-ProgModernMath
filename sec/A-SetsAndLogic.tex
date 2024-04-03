@@ -790,37 +790,33 @@ Why?
 
 \begin{lem}
   \label{lem:setOpPreservation}
-  The operation $f^{-1}$ preserves inclusions,
+  For $f: X\rightarrow Y$, the operation $f^{-1}$ preserves inclusions,
   unions, intersections, and differences of sets, 
-  \begin{equation}
+  \begin{subequations}
     \label{eq:setOpFpre}
-    \left\{
-      \begin{array}{l}
-        B_0\subseteq B_1 \Rightarrow f^{-1}(B_0)\subseteq f^{-1}(B_1),
-        \\
-        f^{-1}(B_0\cup B_1) = f^{-1}(B_0) \cup f^{-1}(B_1),
-        \\
-        f^{-1}(B_0\cap B_1) = f^{-1}(B_0) \cap f^{-1}(B_1),
-        \\
-        f^{-1}(B_0\setminus B_1) = f^{-1}(B_0) \setminus f^{-1}(B_1), 
-      \end{array}
-    \right .
-  \end{equation}
+    \begin{align}
+      B_0\subseteq B_1 &\Rightarrow f^{-1}(B_0)\subseteq f^{-1}(B_1),
+      \\
+      f^{-1}(B_0\cup B_1) &= f^{-1}(B_0) \cup f^{-1}(B_1),
+      \\
+      f^{-1}(B_0\cap B_1) &= f^{-1}(B_0) \cap f^{-1}(B_1),
+      \\
+      f^{-1}(B_0\setminus B_1) &= f^{-1}(B_0) \setminus f^{-1}(B_1), 
+    \end{align}
+  \end{subequations}
   while $f$ only preserves inclusions and unions, 
-  \begin{equation}
+  \begin{subequations}
     \label{eq:setOpF}
-    \left\{
-      \begin{array}{l}
-        A_0\subseteq A_1 \Rightarrow f(A_0)\subseteq f(A_1),
-        \\
-        f(A_0\cup A_1) = f(A_0) \cup f(A_1),
-        \\
-        f(A_0\cap A_1) \subseteq f(A_0) \cap f(A_1),
-        \\
-        f(A_0\setminus A_1) \supseteq f(A_0) \setminus f(A_1),
-      \end{array}
-    \right .
-  \end{equation}
+    \begin{align}
+      A_0\subseteq A_1 &\Rightarrow f(A_0)\subseteq f(A_1),
+      \\
+      f(A_0\cup A_1) &= f(A_0) \cup f(A_1),
+      \\
+      f(A_0\cap A_1) &\subseteq f(A_0) \cap f(A_1),
+      \\
+      f(A_0\setminus A_1) &\supseteq f(A_0) \setminus f(A_1),
+    \end{align}
+  \end{subequations}
   where the equalities in the last two equations hold
   if $f$ is injective.
 \end{lem}
@@ -844,11 +840,13 @@ Why?
   For a map $f: X\rightarrow Y$, $A\subseteq X$,
   and $B\subseteq Y$,
   we have
-  \begin{equation}
-    \label{eq:preimageSubsetIdentites}
-    A \subseteq f^{-1}(f(A)),\
-    f(f^{-1}(B))\subseteq B,
-  \end{equation}
+  \begin{align}
+    \label{eq:preimageSubsetIdentitesA}
+    A &\subseteq f^{-1}(f(A)),
+    \\
+    \label{eq:preimageSubsetIdentitesffInvB}
+    f(f^{-1}(B))&\subseteq B,
+  \end{align}
   where the first inclusion
   is an equality if $f$ is injective 
   and the second is an equaility
@@ -924,5 +922,5 @@ Why?
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../numPDEs"
+%%% TeX-master: "../notesNumAnal"
 %%% End:
