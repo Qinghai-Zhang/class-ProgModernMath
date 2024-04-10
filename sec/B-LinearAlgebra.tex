@@ -407,6 +407,7 @@
 \end{exm}
 
 \begin{lem}[Linear dependence lemma]
+  \label{lem:linearDependence}
   Suppose \mbox{$V=(\mathbf{v}_1,\mathbf{v}_2,\cdots,\mathbf{v}_m)$}
   is a linearly dependent list in ${\cal V}$.
   Then there exists $j\in \{1,2,\ldots,m\}$ such that
@@ -1888,7 +1889,7 @@ For $T\in {\cal L}(V)$,
 \begin{rem}
   The eigenspace $E(\lambda,T)$
   is a subspace of ${\cal V}$
-  because the null space of any linear operator on ${\cal V}$ is.
+  because the null space of any linear operator on ${\cal V}$ is so.
 \end{rem}
 
 \begin{lem}
@@ -2194,7 +2195,7 @@ For $T\in {\cal L}(V)$,
   \begin{equation}
     \label{eq:algebraicMultiplicity}
     m_a(\lambda) := \dim G(\lambda, T)
-    = \dim \Null(T-\lambda I)^{\dim V}
+    = \dim \Null(T-\lambda I)^{\dim V}, 
   \end{equation}
   while the \emph{geometric multiplicity
     of an eigenvalue} $\lambda$ of $T$
@@ -2344,7 +2345,7 @@ For $T\in {\cal L}(V)$,
 \end{exm}
 
 \begin{lem}
-  \label{def:nilpotentOpHighestPower}
+  \label{lem:nilpotentOpHighestPower}
   A nilpotent operator $N\in {\cal L}(V)$
   satisfies
   \begin{equation}
@@ -2650,6 +2651,7 @@ For $T\in {\cal L}(V)$,
 \end{proof}
 
 \begin{exm}
+  \label{exm:blockMatrixFormExam}
   For $T\in{\cal L}(\mathbb{F}^3)$ given by
   \begin{equation}
     \label{eq:blockMatrixFormExam}
@@ -2830,19 +2832,264 @@ For $T\in {\cal L}(V)$,
 \end{rem}
 
 
-% \subsection{Characteristic and minimal polynomials}
-% \label{sec:char-minim-polyn}
+\subsection{Minimal and characteristic polynomials}
+\label{sec:char-minim-polyn}
 
-% \begin{thm}[Factorization of a polynomial over $\mathbb{C}$]
-%   If $p\in \mathcal{P}(\mathbb{C})$ is a nonconstant polynomial,
-%   then $p$ has a unique factorization (except for the order of the factors)
-%   of the form
-%   \begin{equation}
-%     \label{eq:polyFactorization}
-%     p(z) = c(z-\lambda_1)\cdots(z-\lambda_m),
-%   \end{equation}
-%   where $c,\lambda_1,\ldots,\lambda_m\in \mathbb{C}$.
-% \end{thm}
+\begin{defn}
+  \label{def:monicPoly}
+  A \emph{monic polynomial} is a polynomial
+  whose highest-degree coefficient equals 1.
+\end{defn}
+
+\begin{lem}
+  \label{lem:existenceOfMinimalPoly}
+  For any $T\in{\cal L}(V)$ over a finite-dimensional vector space $V$,
+  there exists a unique monic polynomial $p$
+  of the smallest degree such that $p(T)=\mathbf{0}$.
+\end{lem}
+\begin{proof}
+  Denote $n:=\dim V$. Since the dimension of ${\cal L}(V)$ is $n^2$,
+  the list $I, T, T^2, \ldots, T^m$
+  is linearly dependent for any $m\ge n^2$.
+  Set $m$ to the smallest integer such that the list is linearly
+  dependent.
+  Then by the linear dependence lemma  \ref{lem:linearDependence},
+  $T^m$ can be expressed as a linear combination of
+  the other terms on the list,
+  which leads to a monic polynomial $p$ satisfying $p(T)=0$.
+  
+  Suppose another monic polynomial $q$ of degree $m$
+  satisfies $q(T)=0$.
+  Then $(p-q)(T)=\mathbf{0}$ and $m$ being the smallest integer
+  for the linear dependence of the list
+  dictate that $p-q=\mathbf{0}$
+  and thus $p$ is unique.
+\end{proof}
+
+\begin{defn}
+  \label{def:minimalPoly}
+  The minimal polynomial of an operator $T\in{\cal L}(V)$
+  is the unique monic polynomial $p$ of the smallest degree
+  satisfying $p(T)=\mathbf{0}$.
+\end{defn}
+
+\begin{exm}
+  For the projection operator $P$ defined as $P^2=P$,
+  its minimal polynomial is $p(z)=z^2-z$.
+\end{exm}
+
+\begin{rem}
+  \label{rem:findingDegreeOfMinimalPoly}
+  To determine the monic polynomial in Lemma
+  \ref{lem:existenceOfMinimalPoly},
+  one may also solve the system of linear equations
+  \begin{displaymath}
+    a_0 I + a_1 M_T + \cdots + a_{m-1} M_T^{m-1} = - M_T^m
+  \end{displaymath}
+  for increasing values of $m\in\mathbb{N}^+$
+  until there is a solution for $\{a_0, a_1, \ldots, a_{m-1}\}$. 
+\end{rem}
+
+\begin{exm}
+  \label{exm:minimalPolyC5}
+  For the operator $T\in {\cal L}(\mathbb{C}^5)$ whose matrix is
+  \begin{displaymath}
+    \begin{bmatrix}
+      0 & 0 & 0 & 0 & -3
+      \\
+      1 & 0 & 0 & 0 & 6
+      \\
+      0 & 1 & 0 & 0 & 0
+      \\
+      0 & 0 & 1 & 0 & 0
+      \\
+      0 & 0 & 0 & 1 & 0
+    \end{bmatrix},
+  \end{displaymath}
+  its minimal polynomial is $p(z)=z^5-6z+3$.
+\end{exm}
+
+\begin{defn}
+  \label{def:characterPoly}
+  The \emph{characteristic polynomial} of an operator
+  $T\in{\cal L}(V)$ on a complex vector space $V$
+  is the polynomial
+  \begin{equation}
+    \label{eq:characterPoly}
+    q(z) := (z-\lambda_1)^{m_1}\cdots(z-\lambda_n)^{m_n},
+  \end{equation}
+  where $\lambda_i$'s are the $n$ distinct eigenvalues of $T$
+  and $m_i$'s their corresponding algebraic multiplicities. 
+%  for $i=1,2,\ldots,n$.
+\end{defn}
+
+\begin{coro}
+  \label{coro:degreeOfCharacterPoly}
+  The degree of the characteristic polynomial of $T\in{\cal L}(V)$ 
+  is $\dim V$. 
+\end{coro}
+\begin{proof}
+  This follows from Theorems
+  \ref{thm:operatorDecompositionComplexVectorSpace}
+  and \ref{thm:directSumIFFintersection0}. 
+\end{proof}
+
+\begin{thm}[Cayley--Hamilton]
+  \label{thm:Cayley-Hamilton}
+  The characteristic polynomial $q$ of an operator $T\in{\cal L}(V)$
+  satisfies $q(T)=\mathbf{0}$.
+\end{thm}
+\begin{proof}
+  Let $\lambda_1, \ldots, \lambda_n$ be the distinct eigenvalues of $T$
+  and $m_1, \ldots, m_n$ their corresponding algebraic multiplicities, 
+  which, by Definition \ref{def:eigenvalueMultiplicity},
+  are the dimensions of the generalized eigenspaces.
+  By Definitions \ref{def:generalizedEigenspace}
+  and \ref{def:generalizedEigenvector},
+  $(T-\lambda_iI)|_{G(\lambda_i,T)}$ is nilpotent
+  for each $i=1, 2, \ldots, n$.
+  Lemma \ref{lem:nilpotentOpHighestPower} implies
+  \begin{displaymath}
+    (*):\quad (T-\lambda_iI)^{m_i}|_{G(\lambda_i,T)}=\mathbf{0}.
+  \end{displaymath}
+%
+  By Theorem \ref{thm:operatorDecompositionComplexVectorSpace},
+  any vector in $V$ is a sum of vectors in
+  $G(\lambda_1,T)$, $\ldots$, $G(\lambda_n,T)$.
+  Thus it suffices to show that $q(T)|_{G(\lambda_i,T)}=\mathbf{0}$
+  for each $i$.
+  Indeed, for any fixed $i\in\{1, 2, \ldots, n\}$, we have
+  \begin{displaymath}
+    \begin{array}{rl}
+      q(T)
+      &= (T-\lambda_1I)^{m_1}\cdots(T-\lambda_iI)^{m_i}\cdots(T-\lambda_nI)^{m_n}
+      \\
+      &= (T-\lambda_1I)^{m_1}\cdots(T-\lambda_nI)^{m_n}(T-\lambda_iI)^{m_i}, 
+    \end{array}
+  \end{displaymath}
+  where the first step follows from (\ref{eq:characterPoly})
+  and the second from the identity
+  $(T-\lambda_iI)(T-\lambda_jI)=(T-\lambda_jI)(T-\lambda_iI)$.
+  Then $(*)$ completes the proof.
+\end{proof}
+
+\begin{rem}
+  The Cayley-Hamilton theorem is remarkable in that
+  it reduces the upper bound of the degree of minimal polynomials
+  from $(\dim V)^2$ to $\dim V$,
+  c.f. Corollary \ref{coro:degreeOfCharacterPoly}. 
+\end{rem}
+
+\begin{lem}
+  \label{lem:multipleOfMinimalPolys}
+  For $T\in{\cal L}(V)$,
+  a polynomial $q(T)=\mathbf{0}$ if and only if $q(T)$
+  is a polynomial multiple of the minimal polynomial $p$ of $T$.
+\end{lem}
+\begin{proof}
+  The sufficiency is trivial and we only prove the necessity.
+  Suppose $q(T)=\mathbf{0}$.
+  Divide $q$ by $p$ and we have $q=ps+r$
+  where $r$ is the remainder polynomial
+  satisfying $\deg r< \deg p$.
+  Then we have
+  \begin{displaymath}
+    \mathbf{0} = q(T) = p(T)s(T) + r(T) = r(T),
+  \end{displaymath}
+  which implies $q(T)=p(T)s(T)$ and this completes the proof.
+\end{proof}
+
+\begin{coro}
+  \label{coro:characterPolyIsMultipleOfMinimalPolys}
+  For $T\in{\cal L}(V)$,
+  its characteristic polynomial is a multiple of
+  its minimal polynomial.
+\end{coro}
+\begin{proof}
+  This follows directly from Lemma \ref{lem:multipleOfMinimalPolys}
+  and the Cayley-Hamilton theorem \ref{thm:Cayley-Hamilton}. 
+\end{proof}
+
+\begin{thm}[Fundamental theorem of algebra]%[Factorization of a polynomial over $\mathbb{C}$]
+  \label{thm:polyFactorization}
+  If $p\in \mathcal{P}(\mathbb{C})$ is a nonconstant polynomial,
+  then $p$ has a unique factorization (except for the order of the factors)
+  of the form
+  \begin{equation}
+    \label{eq:polyFactorization}
+    p(z) = c(z-\lambda_1)\cdots(z-\lambda_m),
+  \end{equation}
+  where $c,\lambda_1,\ldots,\lambda_m\in \mathbb{C}$.
+\end{thm}
+
+\begin{lem}
+  \label{lem:rootsAreEigenVals4MinimalPoly}
+  The set of roots of the minimal polynomial
+  of an operator $T\in{\cal L}(V)$
+  equals the set of eigenvalues of $T$.
+\end{lem}
+\begin{proof}
+  Denote by $p(z):=z^m+\sum_{i=0}^{m-1}a_i z^i$ the minimal
+  polynomial of $T$.
+  Suppose $\lambda$ is a root of $p$.
+  By Theorem \ref{thm:polyFactorization}, 
+  we have $p(z)=(z-\lambda)q(z)$ where $q(z)$
+  is another monic polynomial.
+  Then $p(T)=\mathbf{0}$ implies
+  $(T-\lambda I)q(T)\mathbf{v}=0$
+  for any $\mathbf{v}\in V$.
+  Since the degree of $q(z)$ is $m-1$,
+  there exists at least one $\mathbf{u}\in V$
+  such that $q(T)\mathbf{u}\ne 0$.
+  Hence $\lambda$ is an eigenvalue of $T$.
+
+  Conversely, suppose $\lambda$ is an eigenvalue of $T$.
+  Then there exists a nonzero $\mathbf{u}\in V$
+  such that $T\mathbf{u} = \lambda \mathbf{u}$. 
+  Hence $T^i\mathbf{u} = \lambda^i \mathbf{u}$
+  for any $i\in\mathbb{N}^+$
+  and we have $\mathbf{0}=p(T)\mathbf{u} = p(\lambda)\mathbf{u}$.
+  Therefore, $\lambda$ is a root of $p$. 
+\end{proof}
+
+\begin{rem}
+  Corollary \ref{coro:characterPolyIsMultipleOfMinimalPolys}
+  and Lemma \ref{lem:rootsAreEigenVals4MinimalPoly}
+  fully characterize the relationship
+  of the characteristic polynomial
+  and the minimal polynomial of a linear operator.
+\end{rem}
+
+\begin{exm}
+  For the operator $T\in {\cal L}(\mathbb{C}^3)$
+  in Example \ref{exm:blockMatrixFormExam}, 
+  both its minimal 
+  and characteristic polynomials
+  are $p(z)=(z-6)^2(z-7)$.
+\end{exm}
+
+\begin{exm}
+  For $T\in {\cal L}(\mathbb{C}^3)$
+  given by $T(z_1,z_2,z_3)=(6z_1, 6z_2, 7z_3)$,
+  its characteristic polynomial is $p(z)=(z-6)^2(z-7)$
+  while its minimal polynomial is $p(z)=(z-6)(z-7)$.
+\end{exm}
+
+\begin{exm}
+  \label{exm:minimalPoly5Eigenvals}
+  By numerically computing the eigenvalues
+  of the operator $T$ in Example \ref{exm:minimalPolyC5}, 
+  we know that all eigenvalues of $T$ have multiplicity 1.
+  Thus the minimal polynomial of $T$
+  is the same as its characteristic polynomial.
+\end{exm}
+
+\begin{rem}
+  Example \ref{exm:minimalPoly5Eigenvals} show that
+  finding the minimal polynomial
+  of a linear operator has the same complexity
+  of computing its full spectrum.
+\end{rem}
 
 
 \subsection{Jordan basis}
@@ -2857,7 +3104,7 @@ For $T\in {\cal L}(V)$,
   in Theorem \ref{thm:linearOpHasTriangularMatrix}.
   The second one was the block diagonal form
   in Theorem \ref{thm:blockMatrixOpDecomposition}.
-  Finallly, the Jordan canoncial form in this subsection
+  Finally, the Jordan canonical form in this subsection
   is the simplest in the most general context.
 \end{rem}
 % \begin{lem}
@@ -3048,7 +3295,7 @@ For $T\in {\cal L}(V)$,
   the matrix of $T$ is a block diagonal matrix of the form
   \begin{equation}
     \label{eq:JordanBasis}
-    J = 
+%    J = 
     \begin{pmatrix}
       J(\lambda_1,k_1) & & & \\
       & J(\lambda_2,k_2) & \\
@@ -5006,22 +5253,45 @@ For $T\in {\cal L}(V)$,
 % \subsection{Determinants}
 % \label{sec:determinants}
 
-\begin{defn}
-  A \emph{permutation of a set} $A$
-  is a bijective function $\sigma: A \rightarrow A$.
-\end{defn}
+\begin{exm}
+  \label{exm:determinantN2}
+  The signed volume of the parallelogram
+  determined by the two vectors $\mathbf{v}_1=(a,b)^T$
+  and  $\mathbf{v}_2=(c,d)^T$
+  is 
+   \begin{equation}
+     \label{eq:determinantN2}
+    \delta(\mathbf{v}_1, \mathbf{v}_2)
+    % \begin{bmatrix}
+    %   a & c
+    %   \\
+    %   b & d
+    % \end{bmatrix}
+    = ad-bc = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}.
+  \end{equation}
 
-\begin{defn}
-  \label{def:permutationSignature}
-  Let $\sigma$ be a permutation of $A=\{1,2,\ldots, n\}$
-  and 
-  let $s$ denote the number of pairs of integers $(j,k)$ 
-  with $1\le j < k \le n$ such that
-  $j$ appears after $k$ in the list $(m_1, \ldots, m_n)$
-  given by $m_i=\sigma(i)$.
-  The \emph{sign of the permutation} $\sigma$
-  is 1 if $s$ is even and $-1$ if $s$ is odd.
-\end{defn}
+  By high school geometry, we have
+  \begin{displaymath}
+    \delta = |\mathbf{v}_1||\mathbf{v}_2|\sin \alpha
+    = |\mathbf{v}^{\perp}_1||\mathbf{v}_2|\cos(\frac{\pi}{2}-\alpha)
+    = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}
+  \end{displaymath}
+  where $|\cdot|$ denotes the Euclidean 2-norm, 
+  $\alpha$ the angle between the two vectors, 
+  and $\mathbf{v}^{\perp}_1=(-b,a)^T$ the vector obtained from $\mathbf{v}_1$
+  by a counterclockwise rotation of $\frac{\pi}{2}$.
+\end{exm}
+
+\begin{rem}
+  The generalization of the computation in Example
+  \ref{exm:determinantN2}
+  can be considered as a motivation of the concepts of determinants.
+  To blend geometry and algebra, we first examine the signed volume
+  of a parallelotope and then show the assumptions in Definition
+  \ref{def:signedVolume}
+  uniquely determine the formula of determinants
+  in Definition \ref{def:determinantOfLeibniz}. 
+\end{rem}
 
 \begin{defn}
   \label{def:signedVolume}
@@ -5056,36 +5326,6 @@ For $T\in {\cal L}(V)$,
     \end{equation}
   \end{enumerate}
 \end{defn}
-
-\begin{exc}
-  Give a geometric proof that
-  the signed volume of the parallelogram
-  determined by the two vectors $\mathbf{v}_1=(a,b)^T$
-  and  $\mathbf{v}_2=(c,d)^T$
-  is 
-   \begin{equation}
-     \label{eq:determinantN2}
-    \delta(\mathbf{v}_1, \mathbf{v}_2)
-    % \begin{bmatrix}
-    %   a & c
-    %   \\
-    %   b & d
-    % \end{bmatrix}
-    = ad-bc = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}.
-  \end{equation}
-\end{exc}
-\begin{solution}
-  By high school geometry, we have
-  \begin{displaymath}
-    \delta = |\mathbf{v}_1||\mathbf{v}_2|\sin \alpha
-    = |\mathbf{v}^{\perp}_1||\mathbf{v}_2|\cos(\frac{\pi}{2}-\alpha)
-    = \innerProd{\mathbf{v}^{\perp}_1, \mathbf{v}_2}
-  \end{displaymath}
-  where $|\cdot|$ denotes the Euclidean 2-norm, 
-  $\alpha$ the angle between the two vectors, 
-  and $\mathbf{v}^{\perp}_1=(-b,a)^T$ the vector obtained from $\mathbf{v}_1$
-  by a counterclockwise rotation of $\frac{\pi}{2}$.
-\end{solution}
 
 \begin{rem}
   The conditions in Definition \ref{def:signedVolume} capture
@@ -5173,6 +5413,23 @@ For $T\in {\cal L}(V)$,
       = -\delta(\mathbf{v}_j, \mathbf{v}_i).
   \end{align*}
 \end{solution}
+
+\begin{defn}
+  A \emph{permutation of a set} $A$
+  is a bijective function $\sigma: A \rightarrow A$.
+\end{defn}
+
+\begin{defn}
+  \label{def:permutationSignature}
+  Let $\sigma$ be a permutation of $A=\{1,2,\ldots, n\}$
+  and 
+  let $s$ denote the number of pairs of integers $(j,k)$ 
+  with $1\le j < k \le n$ such that
+  $j$ appears after $k$ in the list $(m_1, \ldots, m_n)$
+  given by $m_i=\sigma(i)$.
+  The \emph{sign of the permutation} $\sigma$
+  is 1 if $s$ is even and $-1$ if $s$ is odd.
+\end{defn}
 
 \begin{lem}
   \label{lem:matrixPermIsSgnSigma}
@@ -5364,13 +5621,24 @@ For $T\in {\cal L}(V)$,
   by induction.
 \end{exc}
 
+\begin{thm}
+  \label{thm:characterPolyDeterminant}
+  The characteristic polynomial $p_A(z)$
+  of a linear operator $T\in{\cal L}(V)$
+  equals $\det(zI-M_T)$
+  where $M_T$ is the matrix of $T$. 
+\end{thm}
+\begin{proof}
+  See \cite[p. 309]{axler15:_linear_algeb_done_right}.
+\end{proof}
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../notesNumAnal"
+%%% TeX-master: "../numPDEs"
 %%% End:
 
 % LocalWords:  diagonalizable eigenvalue eigenvector eigenvectors
 % LocalWords:  orthonormal isometry invertible semidefinite adjoint
 
-% LocalWords:  nonnegative nilpotent diagonalized eigenspace
+% LocalWords:  nonnegative nilpotent diagonalized eigenspace monic
+% LocalWords:  Cayley eigenspaces bijective
