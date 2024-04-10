@@ -2217,11 +2217,8 @@ By Definition \ref{def:TaylorSeries},
   in Theorem \ref{thm:NeumannSeries}.
 \end{rem}
 
-\subsection{Differentiation}
 
-% \begin{rem}
-%   This section follows \emph{Analysis II} by Tao, Chapter 6.
-% \end{rem}
+\subsection{Differentiation}
 
 \begin{rem}
   \label{rem:singleVarDiff2MultiVarDiff}
@@ -2429,6 +2426,21 @@ By Definition \ref{def:TaylorSeries},
   Here $e_j$ is the $j$th standard basis vector of $\mathbb{R}^n$.
 \end{defn}
 
+\begin{defn}
+  \label{def:gradient}
+  The \emph{gradient} of a differentiable function
+  $f: \mathbb{R}^n\rightarrow \mathbb{R}$ is
+  \begin{equation}
+    \label{eq:gradient}
+    \nabla f := \left(
+      \frac{\partial f}{\partial x_1}, 
+      \frac{\partial f}{\partial x_2}, 
+      \ldots,
+      \frac{\partial f}{\partial x_n}
+      \right).
+  \end{equation}  
+\end{defn}
+
 \begin{rem}
   By Lemma \ref{lem:totalDiffImpliesDirectionalDiff},
   one can write directional derivatives
@@ -2447,21 +2459,15 @@ By Definition \ref{def:TaylorSeries},
   and the last step from (\ref{eq:partialDerivative}),
   (\ref{eq:totalDiffImpliesDirectionalDiff}), and
   (\ref{eq:directionalDerivative}).
-  In particular, for $m=1$ we have the familar formula
-  \begin{displaymath}
-    D_{\mathbf{v}} f(x_0) = \mathbf{v}\cdot \nabla f(x_0),
-  \end{displaymath}
-  where the \emph{gradient} of the function
-  $f: \mathbb{R}^n\rightarrow \mathbb{R}$ is defined as
-  \begin{displaymath}
-    \nabla f := \left(
-      \frac{\partial f}{\partial x_1}, 
-      \frac{\partial f}{\partial x_2}, 
-      \ldots,
-      \frac{\partial f}{\partial x_n}
-      \right).
-  \end{displaymath}
+  In particular, for $m=1$ we have
 \end{rem}
+
+\begin{coro}
+  For a differentiable function
+  $f: \mathbb{R}^n\rightarrow \mathbb{R}$,
+  we have
+  $D_{\mathbf{v}} f(x_0) = \mathbf{v}\cdot \nabla f(x_0)$.
+\end{coro}
 
 \begin{exc}
   Show that the existence of partial derivatives at $x_0$
@@ -2986,7 +2992,7 @@ The function is not differentiable at (0,0),
 
 %%% Local Variables:
 %%% mode: latex
-%%% TeX-master: "../notesNumAnal"
+%%% TeX-master: "../numPDEs"
 %%% End:
 
 % LocalWords:  Lipschitz pointwise boundedness integrable bijective
