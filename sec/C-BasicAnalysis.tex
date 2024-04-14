@@ -128,10 +128,23 @@ This is one of the main motivations of infinite sequence and series.
   \label{lem:seqLimitIsUnique}
   A convergent sequence has a unique limit.
 \end{lem}
+\begin{proof}
+  Suppose a sequence $(a_{n})$ which converges to $L$
+  also converges $L_{0}\neq L.$
+  For $\epsilon=\frac{|L-L_{0}|}{2}>0,$ there exists $N\in \mathbb{N}$
+  such that for all $n\ge N$ we have
+  $|a_{n}-L|<\epsilon$ and $|a_{n}-L_{0}|<\epsilon$. It follows that
+  \begin{align*}
+    |L-L_{0}|&= |L-a_{N}+a_{N}-L_{0}|\\
+    &\le |a_{N}-L|+|a_{N}-L_{0}|
+    < 2\epsilon = |L-L_{0}|,
+  \end{align*}
+  which is a contradiction.
+\end{proof}
 
 \begin{defn}
   \label{def:CauchySequence}
-  A sequence $\{a_n\}$ is \emph{Cauchy} if
+  A sequence $(a_n)$ is \emph{Cauchy} if
   \begin{equation}
     \label{eq:CauchySequence}
     \forall \epsilon>0, \exists N\in \mathbb{N}
@@ -145,16 +158,16 @@ This is one of the main motivations of infinite sequence and series.
   is Cauchy.
 \end{lem}
 \begin{proof}
-  Since $(x_n)$ converges to some $L\in \mathbb{R}$,
+  Since $(a_n)$ converges to some $L\in \mathbb{R}$,
   for any given $\epsilon>0$,
   there exists $N\in \mathbb{N}$ such that
-  for all $n>N$ we have $|x_n-L|<\frac{\epsilon}{2}$.
+  for all $n>N$ we have $|a_n-L|<\frac{\epsilon}{2}$.
   It follows that
   \begin{align*}
-    \forall n,m>N,\  |x_n-x_m|
-    &\le |x_n-L+L-x_m|
+    \forall n,m>N,\  |a_n-a_m|
+    &= |a_n-L+L-a_m|
     \\
-    &\le |x_n-L| + |x_m-L| \le \epsilon.\qedhere
+    &\le |a_n-L| + |a_m-L| < \epsilon.\qedhere
   \end{align*}
 %  The proof is completed by Definition \ref{def:CauchySequence}. 
 \end{proof}
@@ -165,9 +178,9 @@ This is one of the main motivations of infinite sequence and series.
   then the entire sequence converges to the same limit.
 \end{lem}
 \begin{proof}
-  Suppose $\{a_n\}$ is a Cauchy sequence
+  Suppose $(a_n)$ is a Cauchy sequence
   %in a normed space $V$
-  and $\{a_{n_j}\}$ is a subsequence converging to some $a\in \mathbb{R}$.
+  and $(a_{n_j})$ is a subsequence converging to some $a\in \mathbb{R}$.
   It follows that
   \begin{displaymath}
     \begin{array}{l}
@@ -191,11 +204,45 @@ This is one of the main motivations of infinite sequence and series.
   \label{lem:CauchySeqIsBounded}
   Every Cauchy sequence is bounded.
 \end{lem}
+\begin{proof}
+  Suppose $(a_{n})$ is a Cauchy sequence. For $\epsilon=1$,
+  there exists $N\in \mathbb{N}$ such that for all $m,n\ge N$ we have
+  $|a_{n}-a_{m}|\le 1$. It follows that
+  \begin{displaymath}
+    \forall n\ge N, |a_{n}|\le |a_{N}|+|a_{n}-a_{N}|\le |a_{N}|+1.
+  \end{displaymath}
+  Let $M:=\max\{|a_{1}|,|a_{2}|,\cdots,|a_{N-1}|,|a_{N}|+1\}$ and
+  we have $|a_{n}|\le M$ for all $n\in \mathbb{N}$.
+\end{proof}
 
 \begin{lem}
   \label{lem:monotoneSubsequence}
   Every real sequence has a monotone subsequence.
 \end{lem}
+\begin{proof}
+  Define
+  \begin{displaymath}
+    A:=\{a_{m}:\ \exists m\in \mathbb{N},\text{ s.t. }
+  \forall n>m, a_{n}<a_{m}\}\subseteq (a_{n}).
+  \end{displaymath}
+  If $\#A=+\infty$, we can choose infinitely many elements in $A$.
+  Hence we take $1\le n_{1}<n_{2}<\cdots$ s.t.
+  $\forall j\ge 1,\ a_{n_{j}}\in A$, 
+  and then we get a subsequence $(a_{n_{j}})$,
+  which is monotonically decreasing by the definition of $A$.
+
+  If $\#A<+\infty$, then there exists some $N\in \mathbb{N}$ such that
+  \begin{align*}
+    &\forall n>N,\ a_{n}\notin A\\
+    \Rightarrow\ &\forall n>N,\ \exists m>n,\text{ s.t. } a_{n}\le a_{m}.
+  \end{align*}
+  Hence for $n_{1}>N$, there exists $n_{2}>n_{1}$ s.t.
+  $a_{n_{1}}\le a_{n_{2}}$. For $n_{2}$, there exists $n_{3}>n_{2}$ s.t.
+  $a_{n_{2}}\le a_{n_{3}}$. By an easy induction, for $n_{j}$,
+  there exists $n_{j+1}>n_{j}$ s.t. $a_{n_{j}}\le a_{n_{j+1}}$.
+  Hence we construct a monotonically increasing subsequence
+  $(a_{n_{j}})$.
+\end{proof}
 
 \begin{rem}
   The idea to prove Lemma \ref{lem:monotoneSubsequence} is as follows.
@@ -217,12 +264,32 @@ This is one of the main motivations of infinite sequence and series.
   \label{thm:boundedMonotoneSeqIsConvergent}
   A bounded monotone sequence is convergent.
 \end{thm}
+\begin{proof}
+  Let $(a_{n})$ be a bounded monotone sequence.
+  WLOG, we assume that $(a_{n})$ is monotonically increasing.
+  Let $A:=\sup(a_{n})_{n=1}^{\infty}$, which is finite because of
+  the boundedness of $(a_{n})$.
+  Then for any $\epsilon>0$, there exists $N\in \mathbb{N}$ such that
+  $a_{N}>A-\epsilon$. Hence for all $n\ge N,$ we have
+  \begin{displaymath}
+    A-\epsilon<a_{N}\le a_{n}\le A\ \Rightarrow\ |a_{n}-A|<\epsilon,
+  \end{displaymath}
+  which yields that $(a_{n})$ converges to $A$.
+\end{proof}
 
 \begin{thm}[Bolzano-Weierstrass]
   \label{thm:Bolzano-Weierstrass}
   Every bounded sequence in $\mathbb{R}$
   has a convergent subsequence.
 \end{thm}
+\begin{proof}
+  Let $(a_{n})$ be a bounded sequence in $\mathbb{R}$.
+  By Lemma \ref{lem:monotoneSubsequence},
+  $(a_{n})$ has a monotone subsequence $(a_{n_{j}})$,
+  which is also bounded.
+  Then Theorem \ref{thm:boundedMonotoneSeqIsConvergent}
+  completes the proof.
+\end{proof}
 
 \begin{rem}
   The Bolzano-Weierstrass theorem generalizes
@@ -258,12 +325,63 @@ This is one of the main motivations of infinite sequence and series.
   and Theorem \ref{thm:realCauchySeqConverges}.
 \end{proof}
 
+\begin{defn}
+  \label{def:limitOfSequenceInR*}
+  A sequence $(a_n)$ in
+  $\mathbb{R^{*}}:=\mathbb{R}\cup\{+\infty, -\infty\}$
+  is said to \emph{converge} in $\mathbb{R^{*}}$ iff
+  $(a_{n})$ converges in $\mathbb{R}$ or
+  $(a_{n})$ diverges to $+\infty$ (or $-\infty$), i.e.,
+  \begin{equation}
+    \label{eq:limitOfSequenceInInfty}
+    \forall M>0,\ \exists N\in \mathbb{N},\text{ s.t. }
+    \forall n>N, a_{n}>M\ (\text{or }a_{n}<-M).
+  \end{equation}
+  We also write $\lim_{n\rightarrow \infty} a_n = L$,
+  where $L\in \mathbb{R}^{*}$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:monotoneSubsequenceInR*}
+  A monotone sequence in $\mathbb{R}^*$ is convergent in $\mathbb{R}^*$.
+\end{thm}
+\begin{proof}
+  Let $(a_{n})$ be a monotone sequence.
+  WLOG, we assume that $(a_{n})$ is monotonically increasing.
+  Let $A:=\sup(a_{n})_{n=1}^{\infty}\in \mathbb{R}^{*}. $
+  If $A=-\infty$, then $(a_{n})_{n=1}^{\infty}=(-\infty)_{n=1}^{\infty}$,
+  which is a constant sequence and of course diverges to $-\infty$.
+  If $A\in \mathbb{R}$, then $(a_{n})$ converges to $A$ by the proof of
+  Theorem \ref{thm:boundedMonotoneSeqIsConvergent}.
+  If $A=+\infty$, then for any $M>0$,
+  there exists $N\in \mathbb{N}$ such that $a_{N}>M$.
+  Hence for all $n\ge N,$ we have $a_{n}\ge a_{N}>M$,
+  which yields that $(a_{n})$ diverges to $+\infty$.
+\end{proof}
+
+\begin{coro}
+  \label{coro:theEquivalenceOfMonotoneSequenceLimit}
+  Let $(a_{n})_{n=1}^{\infty}$ and $(b_{n})_{n=1}^{\infty}$
+  be monotonically increasing and decreasing
+  sequences in $\mathbb{R}^{*}$, respectively. Then we have
+  \begin{align}
+    \lim_{n\rightarrow \infty}a_{n}&=\sup(a_{n})_{n=1}^{\infty},
+    \label{eq:monotonicallyIncreasingLimit}
+    \\
+    \lim_{n\rightarrow \infty}b_{n}&=\inf(b_{n})_{n=1}^{\infty}.
+    \label{eq:monotonicallyDecreasingLimit}
+  \end{align}
+\end{coro}
+\begin{proof}
+  This follows from the proof of
+  Theorem \ref{thm:monotoneSubsequenceInR*}.
+\end{proof}
+
 \begin{thm}
   \label{thm:interchangeOfLimits}
-  Consider $b_{ij}\ge 0$ in
-  $\mathbb{R}^*:=\mathbb{R}\cup\{+\infty, -\infty\}$.
-  If $b_{ij}$ is monotone increasing in $i$ for each $j$
-  and is monotone increasing in $j$ for each $i$,
+  Consider $b_{ij}\ge 0$ in $\mathbb{R}^*$.
+  If $b_{ij}$ is monotonically increasing in $i$ for each $j$
+  and is monotonically increasing in $j$ for each $i$,
   then we have
   \begin{equation}
     \label{eq:interchangeOfLimits}
@@ -272,7 +390,50 @@ This is one of the main motivations of infinite sequence and series.
   \end{equation}
   with all the indicated limits existing in $\mathbb{R}^*$.
 \end{thm}
-
+\begin{proof}
+  Define
+  \begin{align*}
+    a_{i}&:=\lim_{j=0}^{\infty}b_{ij},\ i\ge 0,\\
+    c_{j}&:=\lim_{i=0}^{\infty}b_{ij},\ j\ge 0.
+  \end{align*}
+  Since $b_{ij}$ is monotonically increasing in $j$ for each $i$,
+  we have $a_{i}=\sup(b_{ij})_{j=0}^{\infty}$ for each $i\ge 0$
+  by Corollary \ref{coro:theEquivalenceOfMonotoneSequenceLimit}.
+  Similarly we have $c_{i}=\sup(b_{ij})_{i=0}^{\infty}$ for each $j\ge 0$.
+  Since for any $i_{1}<i_{2}$, we have
+  $b_{i_{1},j}\le b_{i_{2},j}$ for all $j\ge 0$, and hence
+  \begin{displaymath}
+    a_{i_{1}}=\sup(b_{i_{1},j})_{j=0}^{\infty}
+    \le \sup(b_{i_{2},j})_{j=0}^{\infty} =a_{i_{2}},
+  \end{displaymath}
+  which implies that
+  $(a_{i})_{i=0}^{\infty}$ is monotonically increasing. It follows that
+  $\lim_{i=0}^{\infty}a_{i}=\sup(a_{i})_{i=0}^{\infty}$
+  from Corollary \ref{coro:theEquivalenceOfMonotoneSequenceLimit}.
+  Similarly, we have
+  $\lim_{j=0}^{\infty}c_{j}=\sup(c_{j})_{j=0}^{\infty}.$
+  Hence
+  \begin{align*}
+    \lim_{i=0}^{\infty} \lim_{j=0}^{\infty} b_{ij}
+    =\lim_{i=0}^{\infty} a_{i}
+    =\sup(a_{i})_{i=0}^{\infty}
+    \ge \sup(b_{ij})_{i=0}^{\infty}
+    =c_{j}
+  \end{align*}
+  holds for all $j\ge 0$, which implies that
+  \begin{align*}
+    \lim_{i=0}^{\infty} \lim_{j=0}^{\infty} b_{ij}
+    \ge \sup(c_{j})_{j=0}^{\infty}
+    =\lim_{j=0}^{\infty} c_{j}
+    =\lim_{j=0}^{\infty} \lim_{i=0}^{\infty} b_{ij}.
+  \end{align*}
+  Similarly, we can also prove that
+  \begin{align*}
+    \lim_{i=0}^{\infty} \lim_{j=0}^{\infty} b_{ij}
+    \le \lim_{j=0}^{\infty} \lim_{i=0}^{\infty} b_{ij},
+  \end{align*}
+  hence (\ref{eq:interchangeOfLimits}) holds.
+\end{proof}
 
 \begin{defn}
   Let $\epsilon>0$ be a real number.
@@ -296,7 +457,7 @@ This is one of the main motivations of infinite sequence and series.
   A real number $x$ is a \emph{limit point} or \emph{adherent point}
   of a sequence $(a_n)_{n=m}^{\infty}$ of real numbers
   if it is continually $\epsilon$-adherent to
-  $(a_n)_{n=m}^{\infty}$ for every $\epsilon\ge 0$.
+  $(a_n)_{n=m}^{\infty}$ for every $\epsilon> 0$.
 \end{defn}
 
 \begin{rem}
@@ -348,6 +509,7 @@ This is one of the main motivations of infinite sequence and series.
 \end{exm}
 
 \begin{lem}
+  \label{lem:qualitiesAboutLimitSuperiorAndInferior}
   Let $(a_n)_{n=m}^{\infty}$ be a sequence of real numbers.
   For $L^+=\lim\sup a_n$ and $L^-=\lim\inf a_n$,
   we have
@@ -391,6 +553,186 @@ This is one of the main motivations of infinite sequence and series.
     
   \end{enumerate}
 \end{lem}
+\begin{proof}
+  (a) WLOG, we only prove the first statement.
+  This statement clearly holds if $L^{+}=+\infty$.
+  
+  If $L^{+}=-\infty$, then for every $x>-\infty$, 
+  there exists $N\ge m$ such that  $a_{N}^{+}<x$
+  by the definition of $L^{+}=\inf(a_{N}^{+})_{N=m}^{\infty}$.
+  Then $a_{N}^{+}=\sup(a_{n})_{n=N}^{\infty}$ gives that
+  $a_{n}<x$ for all $n\ge N$. 
+  
+  If $L^{+}\in \mathbb{R}$,
+  then for every $x>L^{+}$, let $\epsilon=\frac{x-L^{+}}{2}>0$.
+  Since $L^{+}=\lim \sup a_{n}=\inf(a_{N}^{+})_{N=m}^{\infty}$,
+  there exists $N\ge m$ such that
+  $a_{N}^{+}<L^{+}+\epsilon=\frac{x+L^{+}}{2}<x$.
+  Then $a_{N}^{+}=\sup(a_{n})_{n=N}^{\infty}$ gives that
+  $a_{n}<x$ for all $n\ge N$.
+
+  (b) WLOG, we only prove the first statement.
+  This statement clearly holds if $L^{+}=-\infty$.
+  
+  If $L^{+}=+\infty$, then $a_{N}^{+}=+\infty$ for all $N\ge m$
+  by the definition of $L^{+}$.
+  Hence for any $x<+\infty$ and $N\ge m$,
+  there exists $n\ge N$ such that
+  $a_{n}>x$ by the definition of $a_{N}^{+}$.
+  
+  If $L^{+}\in \mathbb{R}$,
+  for every $x<L^{+}$, we have $x<a_{N}^{+}$ for all $N\ge m$
+  by the definition of $L^{+}$.
+  Let $\epsilon=\frac{a_{N}^{+}-x}{2}>0$.
+  Since $a_{N}^{+}=\sup(a_{n})_{n=N}^{\infty}$,
+  there exists $n\ge N$ such that
+  $a_{n}>a_{N}^{+}-\epsilon=\frac{a_{N}^{+}+x}{2}>x$.
+
+  (c) By definitions of $L^{+}$ and $L^{-}$, it follows that
+  \begin{align*}
+    L^{+}&=\inf(a_{N}^{+})_{N=m}^{\infty}\le a_{m}^{+}
+           =\sup(a_{n})_{n=m}^{\infty},\\
+    L^{-}&=\sup(a_{N}^{-})_{N=m}^{\infty}\ge a_{m}^{-}
+           =\inf(a_{n})_{n=m}^{\infty}.
+  \end{align*}
+  Hence it suffices to show that $L^{-}\le L^{+}$.
+  Since
+  \begin{align*}
+    \forall k\ge 0, a_{N}^{+}&\ge a_{N+k}\\
+    \Rightarrow
+    \forall k\ge 0, L^{+}&=\inf(a_{N}^{+})_{N=m}^{\infty}\\
+      &\ge \inf(a_{N+k})_{N=m}^{\infty}
+         = \inf(a_{N})_{N=m+k}^{\infty} = a_{m+k}^{-},
+  \end{align*}
+  then we have $a_{N}^{-} \le L^{+}$ for all $N\ge m$ and
+  \begin{displaymath}
+    L^{-}=\sup(a_{N}^{-})_{N=m}^{\infty}\le L^{+}.
+  \end{displaymath}
+
+  (d) Suppose that $c>L^{+}$. By the proof of (a),
+  there exists $N\ge m$ such that $a_{n}<\frac{L^{+}+c}{2}$
+  for all $n\ge N$. Let $\epsilon=\frac{c-L^{+}}{2}>0$.
+  Then
+  \begin{displaymath}
+    (\ast):\ \forall n\ge N,\ 
+    c-a_{n}>c-\frac{L^{+}+c}{2}=\frac{c-L^{+}}{2}=\epsilon.
+  \end{displaymath}
+  However, $c$ is a limit point of $(a_{n})_{n=m}^{\infty}$ gives that
+  there exists $n\ge N$ such that $|a_{n}-c|<\epsilon$,
+  which contradicts ($\ast$) and hence $c\le L^{+}$.
+  $c\ge L^{-}$ can be shown by similar arguments.
+
+  (e) If $L^{+}$ is finite, by the definition of $L^{+}$,
+  for any $\epsilon>0$, there exists $n_{0}\ge m$ such that
+  $L^{+} \le a_{n_{0}}^{+}<L^{+}+\epsilon$.
+  For every $N\ge m$, 
+  since $a_{n_{0}}^{+}\ge L^{+}>L^{+}-\epsilon$,
+  there exists $n\ge \max\{N,n_{0}\}$ such that $a_{n}>L^{+}-\epsilon.$
+  Hence $L^{+}-\epsilon<a_{n}\le a_{n_{0}}^{+}<L^{+}+\epsilon$, i.e.,
+  $a_{n}$ is $\epsilon$-close to $L^{+}$, which implies that
+  $L^{+}$ is continually $\epsilon$-adherent to
+  $(a_{n})_{n=m}^{\infty}$.
+  Since $\epsilon>0$ is arbitrary, we conclude that 
+  $L^{+}$ is a limit point of $(a_{n})_{n=m}^{\infty}$.
+  The case of $L^{-}$ can be shown in the similar way.
+
+  (f) For the necessity,
+  if $c=+\infty$, then for any $M>0$,
+  there exists $N_{0}\ge m$ such that
+  $a_{n}>M$ for all $n\ge N_{0}$. Hence
+  \begin{displaymath}
+    L^{-}=\sup(a_{N}^{-})_{N=m}^{\infty}
+    \ge a_{N_{0}}^{-}
+    =\inf(a_{n})_{n=N_{0}}^{\infty}
+    \ge M.
+  \end{displaymath}
+  Take $M\rightarrow +\infty$ and we have $L^{-}=+\infty$,
+  which implies $L^{+}=+\infty$ because of (c).
+  Hence $L^{+}=L^{-}=c=+\infty.$
+  The case for $c=-\infty$ can be shown in the similar way.
+
+  If $c\in \mathbb{R}$, then
+  $\lim_{n\rightarrow \infty}a_{n}=c$ implies that
+  $c$ is a limit point of $(a_{n})_{n=m}^{\infty}$, hence
+  $L^{-}\le c\le L^{+}$ from (d).
+  Now for any $\epsilon>0$, there exists $N_{0}\ge m$ such that
+  $|a_{n}-c|<\epsilon$ for all $n\ge N_{0}$. Hence
+  \begin{displaymath}
+    L^{+}=\inf(a_{N}^{+})_{N=m}^{\infty}
+    \le a_{N_{0}}^{+}
+    =\sup(a_{n})_{n=N_{0}}^{\infty}\le c+\epsilon.
+  \end{displaymath}
+  Similarly we can get $L^{-}\ge c-\epsilon$.
+  Take $\epsilon\rightarrow 0^{+}$ and we have $L^{+}\le c\le L^{-}$,
+  which shows that $L^{+}=L^{-}=c$.
+
+  For the sufficiency, 
+  if $c=+\infty$,
+  suppose that $(a_{n})$ does not diverge to $+\infty$, i.e.,
+  \begin{displaymath}
+    \exists M_{0}>0, \text{ s.t. } \forall N\ge m,\
+    \exists n_{0}\ge N \text{ s.t. } a_{n_{0}}\le M_{0}.
+  \end{displaymath}
+  Hence we cam take $m\le n_{1}\le n_{2}\le \cdots$, s.t.
+  $a_{n_{j}}\le M_{0}$ for all $j\ge 1$.
+  Then for any $N\ge m$, there exists $j_{0}\ge 1$ such that
+  $n_{j_{0}}\ge N$ and then
+  \begin{displaymath}
+    a_{N}^{-}=\inf(a_{n})_{n=N}^{\infty}\le a_{n_{j_{0}}}\le M_{0}.
+  \end{displaymath}
+  Hence $L^{-}=\sup(a_{N}^{-})_{N=m}^{\infty}\le M_{0}<+\infty$,
+  which contradicts $L^{-}=c=+\infty$.
+  The case of $c=-\infty$ can be shown in the similar way.
+
+  If $c\in \mathbb{R}$,
+  suppose that $(a_{n})$ does not converge to $c$, i.e.,
+  \begin{displaymath}
+    \exists \epsilon_{0}>0, \text{ s.t. } \forall N\ge m,\ 
+    \exists n_{0}\ge N \text{ s.t. } |a_{n_{0}}-c|\ge \epsilon_{0}.
+  \end{displaymath}
+  Hence we can take $m\le n_{1}\le n_{2}\le \cdots$, s.t.
+  $|a_{n_{j}}-c|\ge \epsilon_{0}$ for all $j\ge 1$.
+  Define the index sets $J_{1}:=\{j\ge 1:a_{n_{j}}-c\ge \epsilon_{0}\},\
+  J_{2}:=\{j\ge 1:a_{n_{j}}-c\le -\epsilon_{0}\}$. Then one of them
+  is infinite. WLOG we assume $\# J_{1}=\infty$. Then for any $N\ge m$,
+  there exists $j_{0}\in J_{1}$ such that $n_{j_{0}}\ge N$ and then
+  \begin{displaymath}
+    a_{N}^{+}=\sup(a_{n})_{n=N}^{\infty}
+    \ge a_{n_{j_{0}}}\ge \epsilon_{0}+c.
+  \end{displaymath}
+  Hence $L^{+}=\inf(a_{N}^{+})_{N=m}^{\infty}\ge \epsilon_{0}+c>c$, 
+  which contradicts $L^{+}=c$.
+\end{proof}
+
+\begin{lem}
+  \label{lem:limitSupAndInfPreserveOrder}
+  Let $(a_{n})_{n=m}^{\infty}$ and $(b_{n})_{n=m}^{\infty}$
+  be two sequences of real numbers that satisfy
+  \begin{displaymath}
+    \exists M\in \mathbb{N} \text{ s.t. }
+    \forall n\ge M, a_{n}\le b_{n}.
+  \end{displaymath}
+  Then $\lim\sup a_{n}\le \lim\sup b_{n}$
+  and $\lim\inf a_{n}\le \lim\inf b_{n}$.
+\end{lem}
+\begin{proof}
+  \begin{align*}
+    \forall n\ge M, a_{n}&\le b_{n}\\
+    \Rightarrow
+    \sup(a_{n})_{n=M}^{\infty}&\le \sup(b_{n})_{n=M}^{\infty}\\
+    \Leftrightarrow
+    (a_{N}^{+})_{N=M}^{\infty}&\le (b_{N}^{+})_{N=M}^{\infty}\\
+    \Rightarrow
+    \inf(a_{N}^{+})_{N=M}^{\infty}&\le \inf(b_{N}^{+})_{N=M}^{\infty}\\
+    \Leftrightarrow
+    \inf(a_{N}^{+})_{N=m}^{\infty}&\le \inf(b_{N}^{+})_{N=m}^{\infty}\\
+    \Leftrightarrow
+    \lim\sup a_{n}&\le \lim\sup b_{n},
+  \end{align*}
+  where the fourth step holds because
+  $(a_{N}^{+})_{N=m}^{\infty}$ is monotonically decreasing.
+  Similarly we can get $\lim\inf a_{n}\le \lim\inf b_{n}$.
+\end{proof}
 
 \begin{thm}[Squeeze test or the Sandwich Theorem]
   \label{thm:squeezeTest}
@@ -405,6 +747,24 @@ This is one of the main motivations of infinite sequence and series.
   both converge to the same limit $L$.
   Then $(b_n)_{n=m}^{\infty}$ also converges to $L$.
 \end{thm}
+\begin{proof}
+  We have
+  \begin{align*}
+    \ \forall n\ge M, a_{n}&\le b_{n}\le c_{n} \\ 
+    \Rightarrow
+    \lim\sup a_{n}&\le \lim\sup b_{n}\le \lim\sup c_{n}\\
+    \Rightarrow
+    L&\le \lim\sup b_{n}\le L\\
+    \Rightarrow
+    \lim\sup b_{n}&=L,
+  \end{align*}
+  where the first step follows from
+  Lemma \ref{lem:limitSupAndInfPreserveOrder} and the second step from
+  Lemma \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(f).
+  Similarly we have $\lim\inf b_{n}=L.$ By Lemma
+  \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(f) again,
+  we have $\lim_{n\rightarrow \infty}b_{n}=L$.
+\end{proof}
 
 \begin{rem}
   Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
@@ -416,7 +776,7 @@ This is one of the main motivations of infinite sequence and series.
   \end{displaymath}
   Then we have
   $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
-  where ``$\le$'' cannot be strengthened to ``$<$.''
+  where ``$\le$'' cannot be strengthened to ``$<$''.
   In addition, replace ``$a_n< b_n$''
   with ``$a_n\le b_n$'' and we get the same conclusions.
   This is deeply connected to the difference between
