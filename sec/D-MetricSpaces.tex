@@ -1716,8 +1716,8 @@
 \begin{lem}
   \label{lem:sandwichCompactSequence}
   For any compact set $K$ of $\mathbb{R}^n$
-  and any finite open cover $\{U_1, \ldots, U_m\}$ of $K$, 
-  there exists another open cover $\{V_1, \ldots, V_m\}$
+  and any finite open cover $\{U_i: i=1, \ldots, m\}$ of $K$, 
+  there exists another open cover $\{V_i: i=1, \ldots, m\}$
   of $K$
   such that $\overline{V_i}$ is compact and
   $\overline{V_i}\subset U_i$ for each $i$.
@@ -1746,7 +1746,7 @@
 \begin{defn}
   \label{defn:partitionOfUnity}
   A \emph{partition of unity of a metric space ${\cal X}$}
-  is a family of continuous functions
+  is a family of functions
   $\{f_i: i\in {\cal I}\}$ such that
   \begin{enumerate}[(a)]\itemsep0em
   \item $\forall i=1, \ldots, m$,
@@ -1755,13 +1755,18 @@
     $\exists r>0$ s.t. 
     $\{f_i:\ i\in {\cal I};\, f_i(B_r(x))\ne \{0\}\}$
     is a finite set;
-  \item $\forall x\in {\cal X}$, $\sum_{i\in{\cal I}} f_i(x)=1$. 
+  \item $\forall x\in {\cal X}$, $\sum_{i\in{\cal I}} f_i(x)=1$, 
   \end{enumerate}
+  where the index set ${\cal I}$ may be finite or infinite.
   This partition of unity is \emph{subordinate to an open cover}
-  ${\cal U}:=\{U_i: i\in {\cal I}\}$
-  iff for any $i\in{\cal I}$
-  we have $\Supp(f_i)\subset U_j$ for some $j\in{\cal I}$.
+  $\{U_i: i\in {\cal I}\}$ iff
+  \begin{equation}
+    \forall i\in{\cal I}, \exists j \in {\cal I} \text{ s.t. }
+    \Supp(f_i)\subset U_j. 
+  \end{equation}
 \end{defn}
+
+
 
 \begin{exm}
   \label{exm:B-splineAsPartOfUnity}
@@ -2479,15 +2484,4 @@
 
 
 
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../numPDEs2cols"
-%%% End:
-
-% LocalWords:  equicontinuous Equicontinuity Lipschitz subsequence
-% LocalWords:  boundedness pointwise Bolzano normed injective iff
-% LocalWords:  isometry bijective homeomorphic homeomorphism Baire
-% LocalWords:  contractive invertible pseudometric Jacobian infimum
-% LocalWords:  preimage codomain Homeomophisms isometries
 
