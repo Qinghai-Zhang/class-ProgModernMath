@@ -1,4 +1,4 @@
-default: notesNumAnal.pdf
+default: numPDEs2cols.pdf
 
 %.pdf : %.tex bib pst sec
 	$(MAKE) --directory=pst

@@ -496,7 +496,7 @@
 
 \begin{defn}
   \label{def:lpSpace}
-  For a real number $p>0$,
+  For a real number $p\ge 1$,
    the \emph{$\ell^p$ sequence space} is the metric space $(\ell^p, d)$
    with
   \begin{align}
@@ -779,8 +779,9 @@
 \begin{defn}
   \label{def:nowhereDense}
   A subset of a metric space is \emph{nowhere dense}
-  if its interior is an empty set.
+  if the interior of its closure is an empty set.
 \end{defn}
+
 
 \begin{exm}
   The Cantor set in Definition \ref{def:CantorSet}
@@ -790,8 +791,7 @@
 \begin{defn}
   \label{def:metricSpaceFirstCat}
   A subset of a metric space is of \emph{the first category}
-  if it is contained in the countable union
-  of closed nowhere dense sets.
+  if it is contained in the countable union of nowhere dense sets.
 \end{defn}
 
 \begin{thm}[Baire category]
@@ -815,8 +815,10 @@
 
 
 \section{Continuous functions}
+\label{sec:continuous-functions-metricSpaces}
 
 \subsection{Pointwise continuity}
+\label{sec:pointwise-continuity}
 
 \begin{defn}
   \label{def:continuousFuncPointMetricSpace}
@@ -895,15 +897,15 @@
   \label{thm:contMapConditions}
   For a map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces,
   the following conditions are equivalent:
-  \begin{enumerate}[(a)]
-  \item The preimage $f^{-1}(V)$ of any open set $V$ in ${\cal Y}$
-    is open in ${\cal X}$.
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $f^{-1}(V)$ is open in ${\cal X}$ for any open set $V$ in ${\cal Y}$.
   \item $\forall A\subseteq {\cal X}$,
     $f(\overline{A})\subseteq \overline{f(A)}$.
   \item $\forall E\subseteq {\cal Y}$,
-    $\overline{f^{-1}(E)}\subseteq f^{-1}(\overline{E})$.
-  \item The preimage $f^{-1}(V)$ of any closed set $V$ in ${\cal Y}$
-    is closed in ${\cal X}$.
+    $\overline{f^{-1}(E)}\subseteq f^{-1}(\overline{E})$, 
+  \item $f^{-1}(V)$ is closed in ${\cal X}$
+    for any closed set $V$ in ${\cal Y}$,
+  \item $f$ is continuous. 
   \end{enumerate}
 \end{thm}
 
@@ -915,6 +917,24 @@
   then the composition map $g\circ f: {\cal X}\rightarrow Z$
   is continuous.
 \end{lem}
+
+\begin{lem}
+  \label{lem:elementaryMapIsContinuousNF}
+  For continuous functions $f,g:{\cal X}\rightarrow\mathbb{F}^n$ 
+  where $\mathbb{F}=\mathbb{R}$ or $\mathbb{C}$, 
+  the functions $cf$, $f+g$, $f-g$, and $|f|$
+  are continuous for any $c\in\mathbb{F}$.
+  In particular, 
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\frac{1}{f}$ is continuous for $n=1$;
+  \item both $\max\{f,g\}$ and $\min\{f,g\}$
+    are continuous for $n=1$ and $\mathbb{F}=\mathbb{R}$;
+  \item $\bar{f}$, the complex conjugate of $f$, is continuous
+    for $n=1$ and $\mathbb{F}=\mathbb{C}$. 
+  \end{enumerate}
+\end{lem}
+
+
 
 \begin{lem}
   \label{lem:funcInverseIsContinuous}
@@ -939,6 +959,93 @@
   it is \emph{closed} if its image of any closed set is closed. 
 \end{defn}
 
+
+
+\subsection{Separation properties of metric spaces}
+\label{sec:separ-prop}
+
+
+\begin{defn}
+  \label{def:distPointAndSet}
+  In a metric space $({\cal X},d)$, 
+  the \emph{distance between a nonempty set $A\subset {\cal X}$
+    and a point $x\in {\cal X}$}
+  is
+  \begin{equation}
+    \label{eq:distPointAndSet}
+    \rho(x,A) := \inf_{y\in A} d(x,y).
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:distPointAndSetContinuous}
+  For any subset $A$ of a metric space ${\cal X}$,
+  the function $f: {\cal X}\rightarrow \mathbb{R}$
+  given by $f(x):= \rho(x,A)$ is continuous.
+\end{lem}
+
+\begin{coro}
+  \label{coro:metricContinuous}
+  For any point $y$ of a metric space $({\cal X},d)$,
+  the function $f: {\cal X}\rightarrow \mathbb{R}$
+  given by $f(x):= d(x,y)$ is continuous.
+\end{coro}
+
+\begin{coro}
+  \label{coro:closedBallIsClosed}
+  In a metric space $({\cal X},d)$,
+  the closed ball $\{x\in{\cal X}: d(x,y)\le r\}$
+  is a closed set for any $y\in {\cal X}$ and $r\in\mathbb{R}^+$.
+\end{coro}
+
+
+\begin{lem}
+  \label{lem:defineClosureFromDistance}
+  Any nonempty subset $A$ of a metric space $({\cal X},d)$
+  satisfies $\overline{A}=\{x\in{\cal X}: \rho(x,A)=0\}$.
+\end{lem}
+
+\begin{lem}
+  \label{lem:separateClosedSets}
+  For any two disjoint sets $E$ and $F$
+  in a metric space ${\cal X}$,
+  there exists a continuous function $f:{\cal X}\rightarrow [0,1]$
+  such that $f(E)=\{0\}$ and $f(F)=\{1\}$.
+\end{lem}
+
+\begin{coro}
+  \label{coro:metricSpaceIsNormal}
+  A metric space ${\cal X}$ is \emph{normal},
+  i.e.
+  for any two disjoint closed subsets $E,F$ of ${\cal X}$,
+  there exist disjoint open sets $U,V$
+  such that $E\subset U$ and $F\subset V$.
+\end{coro}
+
+\begin{coro}
+  \label{coro:metricSpaceIsT1}
+  A metric space ${\cal X}$ is \emph{T1},
+  i.e., every one point subset of $X$ is closed.
+\end{coro}
+
+\begin{coro}
+  \label{coro:metricSpaceIsRegular}
+  A metric space ${\cal X}$ is \emph{regular},
+  i.e., 
+  for any closed set $E$ of ${\cal X}$
+  and any point $x\in{\cal X}$ with $x\not\in E$
+  there exist disjoint open sets $U,V$
+  such that $E\subset U$ and $x\in V$.
+\end{coro}
+
+\begin{coro}
+  \label{coro:metricSpaceIsT2}
+  A metric space ${\cal X}$ is \emph{Hausdorff} or \emph{T2},
+  i.e., 
+  for any two disjoint points $x,y$ in ${\cal X}$,
+  there exist disjoint open sets $U,V$
+  such that $x\in U$ and $y\in V$.
+\end{coro}
 
 
 \subsection{Homeomorphisms}
@@ -1220,12 +1327,12 @@
   \end{enumerate}
   Then we have
   \begin{enumerate}[(a)]\itemsep0em
-  \item there exists open sets
-    $U,V\subset \mathbb{R}^n$ such that
-    $\mathbf{a}\in U$, $\mathbf{b}:=\mathbf{f}(\mathbf{a})\in V$,
-    $\mathbf{f}(U)=V$, and $\mathbf{f}$ is injective on $U$,
-  \item $\exists \mathbf{g}: V\rightarrow U$ s.t.
-    $\forall \mathbf{x}\in U$, $\mathbf{g}(\mathbf{f}(\mathbf{x}))=\mathbf{x}$, $\mathbf{g}\in {\cal C}^1(V)$,
+  \item there exist open sets $U\subset E$ such that
+    $\mathbf{a}\in U$, %$\mathbf{b}:=\mathbf{f}(\mathbf{a})\in V$,
+    $\mathbf{f}$ is injective on $U$,
+    and $V:=\mathbf{f}(U)$ is open.
+  \item $\exists \mathbf{g}\in {\cal C}^1(V,U)$ s.t. 
+    $\forall \mathbf{x}\in U$, $\mathbf{g}(\mathbf{f}(\mathbf{x}))=\mathbf{x}$, 
     and
     \begin{equation}
       \label{eq:inverseFuncDeriv}
@@ -1240,30 +1347,32 @@
 \begin{thm}[Implicit function theorem]
   \label{thm:implicitFunction}
   For a function $\mathbf{g}:
-  \mathbb{R}^m\times \mathbb{R}^n\to \mathbb{R}^n$,
+  \mathbb{R}^n\times \mathbb{R}^m\to \mathbb{R}^m$,
   suppose there exist
-  $U\times V\subset \mathbb{R}^m\times \mathbb{R}^n$
+  $U\times V\subset \mathbb{R}^n\times \mathbb{R}^m$
   and $(\mathbf{x}_0, \mathbf{y}_0)\in U\times V$
   such that
   \begin{enumerate}[(i)]\itemsep0em
   \item $\mathbf{g}(\mathbf{x}_0, \mathbf{y}_0)=\mathbf{0}$; 
-  \item $\mathbf{g}\in {\cal C}(U\times V)$;
-  \item $\forall \mathbf{x}\in U$,
-    $\mathbf{g}|_{\{\mathbf{x}\}\times V} \in {\cal C}^1(V)$; 
   \item $\det\left|\frac{\partial \mathbf{g}}{\partial
-        \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)\right|\ne 0$. 
+        \mathbf{y}}(\mathbf{x}_0, \mathbf{y}_0)\right|\ne 0$;
+  \item $\mathbf{g}\in {\cal C}^1(U\times V)$.
   \end{enumerate}
-  Then there exist an open set $U_0\times V_0\subset U\times V$
-  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$
-  and a unique function $\mathbf{f}: U_0\to V_0$
-  such that
+  Then there exists an open set $U_0\times V_0\subset U\times V$
+  with $(\mathbf{x}_0,\mathbf{y}_0)\in U_0\times V_0$ such that
   \begin{enumerate}[(a)]\itemsep0em
-  \item $\mathbf{f}(\mathbf{x}_0) = \mathbf{y}_0$;
-  \item $\forall \mathbf{x}\in U_0$,
-    $\mathbf{g}(\mathbf{x}, \mathbf{f}(\mathbf{x}))=\mathbf{0}$;
-  \item $\mathbf{f}\in{\cal C}^1(U_0)$. 
+  \item $\forall \mathbf{x}\in U_0$, $\exists! \mathbf{y}\in V_0$ s.t.
+    $\mathbf{g}(\mathbf{x}, \mathbf{y})=\mathbf{0}$; 
+  \end{enumerate}
+  the function $\mathbf{f}: U_0\to V_0$ given by
+  $\mathbf{f}(\mathbf{x}) := \mathbf{y}$ in (a) satisfies
+  \begin{enumerate}[(b)]\itemsep0em
+  \item $\mathbf{f}\in{\cal C}^1(U_0)$ and
+    $\mathbf{f}'=-[\frac{\partial g_i}{\partial y_j}]^{-1}
+    [\frac{\partial g_i}{\partial x_j}]$.
   \end{enumerate}
 \end{thm}
+
 
 
 
@@ -1422,7 +1531,7 @@
 \begin{lem}
   \label{lem:seqCompactFromTotalBoundedness}
   In a complete metric space,
-  a totally bounded set $M$ is sequentially compact.
+  a closed and totally bounded set $M$ is sequentially compact.
 \end{lem}
 
 \begin{exc}
@@ -1441,6 +1550,7 @@
 
 \subsection{Generalizing
   the extreme value theorem \ref{thm:extremeValues}}
+\label{sec:gener-extr-value}
 
 \begin{lem}
   \label{lem:contFuncPreservesCompactness}
@@ -1489,6 +1599,7 @@
 
 
 \subsection{Sequential compactness = compactness}
+\label{sec:sequCompIsCompactness}
 
 \begin{defn}
   A collection $\alpha$ of subsets of a metric space ${\cal X}$
@@ -1548,6 +1659,7 @@
 \subsection{Generalizing
   the uniform continuity theorem
   \ref{thm:uniformContinuityScalarFunc}}
+\label{sec:gener-unif-cont}
 
 \begin{defn}
   \label{def:distancePoint2Set}
@@ -1590,8 +1702,83 @@
 \end{thm}
 
 
+\subsection{Partition of unity in $\mathbb{R}^n$}
+\label{sec:partition-unity}
+
+\begin{lem}
+  \label{lem:sandwichCompact}
+  For a compact set $L$ of $\mathbb{R}^n$
+  and an open set $U$ with $L\subset U$, 
+  there exists an open set $V$ satisfying
+  $L\subset V\subset \overline{V}\subset U$.
+\end{lem}
+
+\begin{lem}
+  \label{lem:sandwichCompactSequence}
+  For any compact set $K$ of $\mathbb{R}^n$
+  and any finite open cover $\{U_i: i=1, \ldots, m\}$ of $K$, 
+  there exists another open cover $\{V_i: i=1, \ldots, m\}$
+  of $K$
+  such that $\overline{V_i}$ is compact and
+  $\overline{V_i}\subset U_i$ for each $i$.
+\end{lem}
+
+\begin{thm}
+  \label{thm:openCoverForCompactSets}
+  For any compact set $K$ of $\mathbb{R}^n$
+  and any finite open cover $\{U_i: i=1, \ldots, m\}$ of $K$, 
+  there exist a set of functions
+  $\{f_i: %\mathbb{R}^n\rightarrow [0,1]\ |\
+  i=1, \ldots, m\}$
+  such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\forall i=1, \ldots, m$,
+    $f_i\in {\cal C}(\mathbb{R}^n, [0,1])$; 
+  \item $\forall i=1, \ldots, m$,
+    $\Supp(f_i)\subset U_i$; 
+  \item $\forall x\in \mathbb{R}^n$, $\sum_{i=1}^m f_i(x)=1$, 
+  \end{enumerate}
+  where $\Supp(f_i)$ is the support of the function $f_i$
+  in Definition \ref{def:support}.
+\end{thm}
+
+
+\begin{defn}
+  \label{defn:partitionOfUnity}
+  A \emph{partition of unity of a metric space ${\cal X}$}
+  is a family of functions
+  $\{f_i: i\in {\cal I}\}$ such that
+  \begin{enumerate}[(a)]\itemsep0em
+  \item $\forall i=1, \ldots, m$,
+    $f_i\in {\cal C}({\cal X}, [0,1])$; 
+  \item $\forall x\in {\cal X}$, 
+    $\exists r>0$ s.t. 
+    $\{f_i:\ i\in {\cal I};\, f_i(B_r(x))\ne \{0\}\}$
+    is a finite set;
+  \item $\forall x\in {\cal X}$, $\sum_{i\in{\cal I}} f_i(x)=1$, 
+  \end{enumerate}
+  where the index set ${\cal I}$ may be finite or infinite.
+  This partition of unity is \emph{subordinate to an open cover}
+  $\{U_i: i\in {\cal I}\}$ iff
+  \begin{equation}
+    \forall i\in{\cal I}, \exists j \in {\cal I} \text{ s.t. }
+    \Supp(f_i)\subset U_j. 
+  \end{equation}
+\end{defn}
+
+
+
+\begin{exm}
+  \label{exm:B-splineAsPartOfUnity}
+  The B-spline functions discussed in Section \ref{sec:B-Splines}
+  is a partition of unity
+  for any closed interval of $\mathbb{R}$,
+  c.f. Corollary \ref{coro:partitionOfUnityBSplines}.
+\end{exm}
+
 \subsection{The Ascoli-Arzel\`{a} theorem}
 \label{sec:ascoli-arzela-theor}
+
 
 \begin{ntn}
   \label{ntn:setOfContinuousScalarFuncs}
@@ -1630,9 +1817,10 @@
 
 \begin{thm}[Ascoli-Arzel\`{a}]
   \label{thm:Ascoli-Arzela}
-  For a compact metric space $M$, % with the uniform metric $d$,
-  a subset ${\cal F}$ in the metric space ${\cal C}(M)$
-  with the uniform metric $d$ is sequentially compact
+  Denote by $M$ a compact metric space
+  and $d$ the uniform metric. 
+  A closed set ${\cal F}$ in the metric space $({\cal C}(M),d)$
+  is sequentially compact
   if and only if ${\cal F}$ is uniformly bounded and equicontinuous. 
 \end{thm}
 
