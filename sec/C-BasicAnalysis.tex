@@ -142,6 +142,20 @@ This is one of the main motivations of infinite sequence and series.
   which is a contradiction.
 \end{proof}
 
+\begin{lem}
+  \label{lem:subsequenceInConvergentSequenceIsConvergent}
+  The subsequence of a convergent sequence is also convergent.
+\end{lem}
+\begin{proof}
+  Suppose a sequence $(a_{n})$ which converges to $L$.
+  Then for any $\epsilon>0$, there exists $N\in \mathbb{N}$ such that
+  $|a_{n}-L|<\epsilon$ for all $n\ge N$.
+  Let $(a_{n_{j}})$ be subsequence of $(a_{n})$. Then there exists
+  $j_{0}\in \mathbb{N}$ such that $n_{j_{0}}\ge N$ and hence
+  $|a_{n_{j}}-L|<\epsilon$ for all $j\ge j_{0}$, which implies that
+  $(a_{n_{j}})$ converges to $L$.
+\end{proof}
+
 \begin{defn}
   \label{def:CauchySequence}
   A sequence $(a_n)$ is \emph{Cauchy} if
@@ -434,6 +448,57 @@ This is one of the main motivations of infinite sequence and series.
   \end{align*}
   hence (\ref{eq:interchangeOfLimits}) holds.
 \end{proof}
+
+\begin{thm}
+  \label{thm:limitOperation}
+  Let $(a_{n})$ and  $(b_{n})$ be two sequences in $\mathbb{R}^{*}$.
+  Suppose $(a_{n})$ converges to $a\in \mathbb{R}^{*}$
+  and $(b_{n})$ converges to $b\in \mathbb{R}$.
+  Then
+  \begin{enumerate}[(a)]
+  \item $(a_{n}\pm b_{n})$ converges to $a\pm b$.
+  \item If $a\in \mathbb{R}$, then $(a_{n}b_{n})$ converges to $ab$.
+  \item If $b\ne 0$ and $b_{n}\ne 0$ for all $n$,
+    then $a_{n}/b_{n}$ converges to $a/b$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  (a) If $a\in \mathbb{R}$, by using triangle inequality
+  $|a_{n}\pm b_{n}-(a\pm b)|\le |a_{n}-a|+|b_{n}-b|$,
+  we get $\lim_{n\rightarrow \infty}(a_{n}\pm b_{n})=a\pm b$ easily.
+  If $a=\pm\infty$, the boundness of $b_{n}$, 
+  c.f. Lemma \ref{lem:CauchySeqIsBounded}, gives that
+  $\lim_{n\rightarrow\infty}(a_{n}\pm b_{n})
+  =\lim_{n\rightarrow\infty}(a_{n})=a=a\pm b$.
+
+  (b) Assume that $|b_{n}|\le M$ for all $n$. Using triangle inequality,
+  we have
+  \begin{align*}
+    |a_{n}b_{n}-ab|
+    &\le |a_{n}b_{n}-ab_{n}|+|ab_{n}-ab|\\
+    &\le M|a_{n}-a|+|a||b_{n}-b|
+  \end{align*}
+  and then (b) holds.
+
+  (c) Since $b\ne 0$, there exists $N\in \mathbb{N}^{+}$ and $t>0$
+  such that $|b_{n}|\ge t$ for all $n\ge N$. WLOG we assume that
+  $|b_{n}|\ge t$ for all $n$. Using triangle inequality, we have
+  \begin{align*}
+    \left| \frac{a_{n}}{b_{n}}-\frac{a}{b} \right|
+    &\le \frac{1}{t|b|}|a_{n}b-ab_{n}| \\
+    &\le \frac{1}{t|b|}(|a_{n}b-ab|+|ab-ab_{n}|) \\
+    &=\frac{1}{t}|a_{n}-a|+\frac{|a|}{t|b|}|b_{n}-b|
+  \end{align*}
+  and then (c) holds.
+\end{proof}
+
+\begin{rem}
+  Many qualities that hold in $\mathbb{R}$ are also true in
+  $\mathbb{R}^{*}$, Theorem \ref{thm:monotoneSubsequenceInR*}
+  is an example.
+  Lemma \ref{lem:subsequenceInConvergentSequenceIsConvergent}
+  can also hold in $\mathbb{R}^{*}$.
+\end{rem}
 
 \begin{defn}
   Let $\epsilon>0$ be a real number.
@@ -871,6 +936,19 @@ This is one of the main motivations of infinite sequence and series.
   and call $L$ the \emph{sum of the infinite series}.
 \end{defn}
 
+\begin{lem}
+  \label{lem:seriesConvergeNecessity}
+  If an infinite series $\sum_{n=0}^{\infty}a_{n}$ of real numbers
+  is convergent, then $\lim_{n\rightarrow \infty}a_{n}=0$.
+\end{lem}
+\begin{proof}
+  Assume that the series is convergent to $L\in \mathbb{R}$.
+  We have $a_{n}=S_{n}-S_{n-1}$ for all $n$, where $S_{n}$ is defined
+  in (\ref{eq:partialSum}). Let $n\rightarrow \infty$, by
+  Theorem \ref{thm:limitOperation}, we have
+  $\lim_{n\rightarrow \infty}a_{n}=L-L=0$.
+\end{proof}
+
 \begin{defn}
   A formal infinite series is said to be \emph{divergent}
   if its sequence of partial sums diverges.
@@ -887,6 +965,16 @@ This is one of the main motivations of infinite sequence and series.
     \forall p,q\ge N, \ \left|\sum_{n=p}^q a_n\right| \le \epsilon.
   \end{equation}
 \end{lem}
+\begin{proof}
+  $\sum_{n=0}^{\infty}a_{n}$ is convergent if and only if
+  $\{S_{n}\}$ is convergent, if and only if $\{S_{n}\}$ is Cauchy
+  by Theorem \ref{thm:completenessOfRealNumbers}, if and only if
+  \begin{displaymath}
+    \forall \epsilon>0,\ \exists N\in \mathbb{N} \text{ s.t. }
+    \forall p,q\ge N, \ |S_{q}-S_{p-1}|
+    =\left|\sum_{n=p}^q a_n\right| \le \epsilon. \qedhere
+  \end{displaymath}
+\end{proof}
 
 \begin{thm}[Comparison test]
   \label{thm:comparisonTest}
@@ -898,6 +986,22 @@ This is one of the main motivations of infinite sequence and series.
     then \mbox{$\sum b_n=+\infty$}.
   \end{enumerate}
 \end{thm}
+\begin{proof}
+  (i) Note that for any $p,q\in\mathbb{N}$,
+  \begin{displaymath}
+    \left| \sum_{n=p}^{q}b_{n} \right|
+    \le  \sum_{n=p}^{q}|b_{n}| \le \sum_{n=p}^{q}a_{n}
+    =\left| \sum_{n=p}^{q}a_{n} \right|.
+  \end{displaymath}
+  Using Lemma \ref{lem:seriesConvergeCauchy}, the proof is completed.
+
+  (ii) $(\sum_{j=1}^{n}a_{j})_{n=1}^{\infty}$ diverges to $+\infty$
+  implies that
+  $(\sum_{j=1}^{n}b_{j})_{n=1}^{\infty}$ diverges to $+\infty$
+  because of the equations
+  $\sum_{j=1}^{n}b_{j}\ge \sum_{j=1}^{n}a_{j}(n\ge 1)$ and
+  (\ref{eq:limitOfSequenceInInfty}).
+\end{proof}
 
 \begin{defn}
   \label{def:absoluteConvergence}
@@ -911,21 +1015,45 @@ This is one of the main motivations of infinite sequence and series.
   An infinite series that is absolutely convergent
   is convergent.
 \end{lem}
+\begin{proof}
+  Since $|a_{n}|\ge 0$,  $\sum |a_{n}|$ converges and
+  $|a_{n}|\le |a_{n}|$ for all $n$, the proof is completed by
+  (i) in Theorem \ref{thm:comparisonTest}.
+\end{proof}
 
 \begin{thm}[Ratio test]
   \label{thm:ratioTest}
   A series $\sum a_n$ of nonzero terms
   \begin{enumerate}[(i)]\itemsep0em
-  \item converges absolutely if ${\lim\sup}_{n\rightarrow\infty}|a_{n+1}/a_n|<1$;
+  \item converges absolutely if
+    ${\lim\sup}_{n\rightarrow\infty}|a_{n+1}/a_n|<1$;
   \item diverges if ${\lim\inf}_{n\rightarrow\infty}|a_{n+1}/a_n|>1$,
   \end{enumerate}
   Otherwise, this test gives no information
   about the convergence of $\sum a_n$.
 \end{thm}
+\begin{proof}
+  Choose $\epsilon>0$ such that $\alpha+\epsilon\in(0,1)$. Then
+  \begin{displaymath}
+    \exists N\in \mathbb{N}^{+} \text{ s.t. }
+    \forall n\ge N, \sup_{n\ge N}\{|a_{n+1}/a_{n}|\}<\alpha+\epsilon.
+  \end{displaymath}
+  Hence $|a_{n+1}/a_{n}|<\alpha+\epsilon$ for all $n\ge N$,
+  which implies that
+  \begin{displaymath}
+    |a_{n}|=\left|\frac{a_{n}}{a_{n-1}}\cdot \frac{a_{n-1}}{a_{n-2}}
+     \cdots \frac{a_{N+1}}{a_{N}}\cdot a_{N}  \right|
+    <|a_{N}|(\alpha+\epsilon)^{n-N}
+  \end{displaymath}
+  for all $n\ge N$.
+  The comparison test with the geometric series yields (i).
+  (ii) can be shown by the similar method.
+\end{proof}
 
 \begin{thm}[Root test]
   \label{thm:rootTest}
-  Let $\sum a_n$ be a series and $\alpha={\lim\sup}_{n\rightarrow\infty}|a_n|^{1/n}$.
+  Let $\sum a_n$ be a series and
+  $\alpha={\lim\sup}_{n\rightarrow\infty}|a_n|^{1/n}$.
   The series $\sum a_n$
   \begin{enumerate}[(i)]\itemsep0em
   \item converges absolutely if $\alpha<1$;
@@ -939,11 +1067,21 @@ This is one of the main motivations of infinite sequence and series.
   Then 
   \begin{displaymath}
     \exists N\in \mathbb{N}^+ \text{ s.t. }
-    \forall n\ge N, \ \sup_{n\ge N}\{ a_n^{\frac{1}{n}}\} < \alpha+\epsilon.
+    \forall n\ge N,
+    \ \sup_{n\ge N}\{ |a_n|^{\frac{1}{n}}\} < \alpha+\epsilon.
   \end{displaymath}
-  Hence $a_n<(\alpha+\epsilon)^n$ for all $n\ge N$.
+  Hence $|a_n|<(\alpha+\epsilon)^n$ for all $n\ge N$.
   The comparison test with the geometric series yields (i).
   (ii) can be shown via proof by contradiction.
+  Suppose $\sum a_{n}$ converges, we have $\lim a_{n}=0$
+  from Lemma \ref{lem:seriesConvergeNecessity}.
+  By Lemma \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(b),
+  there exists a subsequence $a_{n_{j}}$ such that
+  $|a_{n_{j}}|^{\frac{1}{n_{j}}}>1$, i.e., $|a_{n_{j}}|>1$ for all $j$.
+  That contradicts
+  $\lim_{j\rightarrow\infty} a_{n_{j}}=\lim_{n\rightarrow\infty}a_{n}=0$,
+  where the first step follows from
+  Lemma \ref{lem:subsequenceInConvergentSequenceIsConvergent}.
 \end{proof}
 
 \begin{rem}
@@ -960,7 +1098,38 @@ This is one of the main motivations of infinite sequence and series.
   Then the series $\sum_{n=0}^{\infty}f(n)$ is convergent if and only if
    $\sup_{N>0}\int_0^N f$ is finite.
 \end{thm}
+\begin{proof}
+  Note that $\int_{N}^{N+1}f\in [f(N+1),f(N)]$ for all $N\in \mathbb{N}$
+  since $f$ is monotonically decreasing and non-negative, we have
+  \begin{displaymath}
+    \sum_{n=1}^{N}f(n)\le \int_{0}^{N}f \le \sum_{n=0}^{N-1}f(n)
+  \end{displaymath}
+  for all $N\in \mathbb{N}^{+}$.
+  
+  For the necessity, suppose $\sum_{n=0}^{\infty}f(n)=L<+\infty$.
+  Since $f\ge 0$, we have
+  \begin{displaymath}
+    \int_{0}^{N}f\le\sum_{n=0}^{N-1}f(n)\le\sum_{n=0}^{\infty}f(n)=L
+  \end{displaymath}
+  for all $N\in \mathbb{N}$.
+  Hence for any $T>0$, there exists $N_{0}\in \mathbb{N}$ such that
+  $T\le N_{0}$ and then $\int_{0}^{T}f\le \int_{0}^{N_{0}}f\le L$.
+  Therefore $\sup_{T> 0}\int_{0}^{T}\le L <+\infty$.
 
+  For the sufficiency, there exists $M>0$ such that
+  $\int_{0}^{N}f\le M$ for all $N\in \mathbb{N}$.
+  Then we have
+  \begin{displaymath}
+    \sum_{n=0}^{N}f(n)=\sum_{n=1}^{N}f(n)+f(0)
+    \le \int_{0}^{N}f+f(0)
+    \le M+f(0)
+  \end{displaymath}
+  for all $N\in \mathbb{N}$.
+  Combining with $f\ge 0$, we conclude that
+  the sequence $(\sum_{n=0}^{N}f(n))_{N=0}^{\infty}$
+  is bounded and monotonically decreasing and hence is convergent
+  by Theorem \ref{thm:boundedMonotoneSeqIsConvergent}.
+\end{proof}
 
 \section{Scalar functions
   $\mathbb{R}\rightarrow\mathbb{R}$}
