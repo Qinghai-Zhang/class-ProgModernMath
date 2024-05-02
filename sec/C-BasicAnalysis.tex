@@ -41,13 +41,14 @@
   is guranteed by Theorem \ref{thm:completenessOfR}.
 \end{rem}
 
+
 \subsection{Convergence in $\mathbb{R}$}
 \label{sec:convergenceOfSequenceInR}
 
 \begin{defn}[Limit of a sequence]
   \label{def:limitOfSequence}
   A sequence $(a_n)$ in $\mathbb{R}$
-  is said to \emph{converge} in $\mathbb{R}$ iff
+  is said to \emph{converge in $\mathbb{R}$} iff
   \begin{equation}
     \label{eq:limitOfSequence}
     \exists L\in \mathbb{R} \text{ s.t. }  
@@ -55,10 +56,12 @@
     \forall n>N, \ |a_n-L| < \epsilon, 
   \end{equation}
   where $L$ is called the \emph{limit} of $(a_n)$, 
-  written $\lim_{n\rightarrow \infty} a_n = L$,
+  written $\lim_{n\rightarrow \infty} a_n = L$
   or 
-  \mbox{$a_n\rightarrow L \text{ as } n\rightarrow\infty$}.
-  We also say that $(a_n)$ \emph{converges} to $L$.
+  \mbox{$a_n\rightarrow L \text{ as } n\rightarrow\infty$}, 
+  and $(a_n)$ is said to \emph{converges} to $L$.
+  The sequence $(a_n)$ is said to \emph{diverge}
+  iff it does not converge.
 \end{defn}
 
 \begin{exm}[A story of $\pi$]
@@ -137,16 +140,18 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{lem}
   \label{lem:subsequenceInConvergentSequenceIsConvergent}
-  The subsequence of a convergent sequence is also convergent.
+  Any subsequence of a convergent sequence converges
+  to the same limit of the sequence.
 \end{lem}
 \begin{proof}
   Suppose a sequence $(a_{n})$ converges to $L$.
   Then for any $\epsilon>0$, there exists $N\in \mathbb{N}$ such that
   $|a_{n}-L|<\epsilon$ for all $n\ge N$.
-  Let $(a_{n_{j}})$ be subsequence of $(a_{n})$. Then there exists
-  $j_{0}\in \mathbb{N}$ such that $n_{j_{0}}\ge N$ and hence
-  $|a_{n_{j}}-L|<\epsilon$ for all $j\ge j_{0}$, which implies that
-  $(a_{n_{j}})$ converges to $L$.
+  Let $(a_{n_{j}})$ be a subsequence of $(a_{n})$.
+  Then there exists $j_{0}\in \mathbb{N}$
+  such that $n_{j_{0}}\ge N$
+  and $|a_{n_{j}}-L|<\epsilon$ for all $j\ge j_{0}$,
+  which implies the convergence of $(a_{n_{j}})$ to $L$.
 \end{proof}
 
 \begin{defn}
@@ -222,6 +227,19 @@ This is one of the main motivations of infinite sequence and series.
   we have $|a_{n}|\le M$ for all $n\in \mathbb{N}$.
 \end{proof}
 
+\begin{defn}
+  \label{defn:monotoneSequences}
+  A sequence $(a_n)_{n=m}^{+\infty} \subset \mathbb{R}$ is
+  \begin{itemize}\itemsep0em
+  \item \emph{monotonically increasing} iff
+    $a_n\le a_{n+1}$ for each $n$; 
+  \item \emph{monotonically decreasing} iff
+    $a_n\ge a_{n+1}$ for each $n$. 
+  \end{itemize}
+  $(a_n)_{n=m}^{+\infty}$ is a \emph{monotone sequence}
+  iff it is monotonically increasing or monotonically decreasing.
+\end{defn}
+
 \begin{lem}
   \label{lem:monotoneSubsequence}
   Every real sequence has a monotone subsequence.
@@ -255,11 +273,11 @@ This is one of the main motivations of infinite sequence and series.
   along the real line,
   where the $n$th hotel has height $x_n$.
   There is a sea at $+\infty$.
-  A hotel is said to have the \emph{seaview property}
+  A hotel is said to have the \emph{sea-view property}
   if it is higher than all hotels to the right of it.
   There are only two possibilities:
-  infinitely many hotels have the seaview property
-  or finitely many hotels have the seaview property.
+  infinitely many hotels have the sea-view property
+  or finitely many hotels have the sea-view property.
   The former case corresponds to a monotonically decreasing sequence
   while
   the latter case corresponds to a monotonically increasing sequence.
@@ -331,57 +349,86 @@ This is one of the main motivations of infinite sequence and series.
 \end{proof}
 
 
-\subsection{Convergence in $\mathbb{R}^*$}
+\subsection{Convergence in $\overline{\mathbb{R}}$}
 \label{sec:convergenceOfSequenceInRStar}
 
 \begin{defn}
-  The \emph{extended real number system}
-  is the real line $\mathbb{R}$ with two additional elements
-  $-\infty$ and $+\infty$: 
+  \label{def:extendedReals}
+  The \emph{extended real number system} is 
+  the set $\overline{\mathbb{R}}$ that consists of the real numbers %$\mathbb{R}$
+   and two symbols, % $-\infty$ and $+\infty$, 
   \begin{equation}
     \label{eq:extendedReals}
-    \mathbb{R}^* := \mathbb{R} \cup \{-\infty, + \infty\}.
+    \overline{\mathbb{R}} := \mathbb{R} \cup \{-\infty, + \infty\}, 
   \end{equation}
-  An extended real number $x\in \mathbb{R}^*$
-  is \emph{finite} if $x\in \mathbb{R}$
-  and it is \emph{infinite} otherwise.
+  such that the following rules hold:
+  \begin{subequations}
+    \label{eq:extendedRealsConditions}
+    \begin{align}
+      x\in \mathbb{R}
+      &\Rightarrow \left\{
+        \begin{array}{l}
+          -\infty < x < +\infty; 
+          \\
+          x\pm\infty = \pm\infty; %, x-\infty=-\infty;
+          \\
+          \frac{x}{+\infty} = \frac{x}{-\infty} = 0,
+        \end{array}\right.
+      \\
+      x>0 &\Rightarrow x\cdot(\pm\infty) = \pm \infty,
+      \\
+      x<0 &\Rightarrow x\cdot(\pm\infty) = \mp \infty.
+    \end{align}
+  \end{subequations}
+\end{defn}
+
+\begin{rem}
+  $\mathbb{R}$ is a field but $\overline{\mathbb{R}}$ is not.
+  Why?
+\end{rem}
+
+\begin{defn}
+  An extended real number $x\in \overline{\mathbb{R}}$
+  is \emph{finite} iff $x\in \mathbb{R}$
+  and is \emph{infinite} otherwise.
 \end{defn}
 
 \begin{rem}
   Some of the concepts and results in Section
   \ref{sec:convergenceOfSequenceInR}
   that hold in $\mathbb{R}$
-  can be generalized to hold in $\mathbb{R}^{*}$. 
+  can be generalized to hold in $\overline{\mathbb{R}}$. 
   % Theorem \ref{thm:monotoneSubsequenceInR*}
   % is an example.
   % Lemma \ref{lem:subsequenceInConvergentSequenceIsConvergent}
-  % can also hold in $\mathbb{R}^{*}$.
+  % can also hold in $\overline{\mathbb{R}}$.
 \end{rem}
 
 \begin{defn}
   \label{def:limitOfSequenceInR*}
-  A sequence $(a_n)$ in
-  $\mathbb{R^{*}}:=\mathbb{R}\cup\{+\infty, -\infty\}$
-  is said to \emph{converge} in $\mathbb{R^{*}}$ iff
-  $(a_{n})$ converges in $\mathbb{R}$ or
-  $(a_{n})$ diverges to $+\infty$ (or $-\infty$), i.e.,
+  A sequence $(a_n)\subset \mathbb{R}$ 
+%  $\overline{\mathbb{R}}:=\mathbb{R}\cup\{+\infty, -\infty\}$
+  \emph{converges in $\overline{\mathbb{R}}$},
+  written $\lim_{n\rightarrow \infty} a_n = L\in \overline{\mathbb{R}}$,
+  iff $(a_{n})$ converges in $\mathbb{R}$ or
   \begin{equation}
     \label{eq:limitOfSequenceInInfty}
     \forall M>0,\ \exists N\in \mathbb{N},\text{ s.t. }
     \forall n>N, a_{n}>M\ (\text{or }a_{n}<-M).
   \end{equation}
-  We also write $\lim_{n\rightarrow \infty} a_n = L$,
-  where $L\in \mathbb{R}^{*}$.
+  In particular,
+  $(a_{n})$ is said to \emph{diverges to $+\infty$}
+  iff (\ref{eq:limitOfSequenceInInfty}) holds. 
 \end{defn}
 
 \begin{thm}
   \label{thm:monotoneSubsequenceInR*}
-  A monotone sequence in $\mathbb{R}^*$ is convergent in $\mathbb{R}^*$.
+  Any monotone sequence in $\overline{\mathbb{R}}$ converges in $\overline{\mathbb{R}}$.
 \end{thm}
 \begin{proof}
   Let $(a_{n})$ be a monotone sequence.
   WLOG, we assume that $(a_{n})$ is monotonically increasing.
-  Let $A:=\sup(a_{n})_{n=1}^{\infty}\in \mathbb{R}^{*}. $
+  Let $A:=\sup(a_{n})_{n=1}^{\infty}\in \overline{\mathbb{R}}. $
   If $A=-\infty$, then $(a_{n})_{n=1}^{\infty}=(-\infty)_{n=1}^{\infty}$,
   which is a constant sequence and of course diverges to $-\infty$.
   If $A\in \mathbb{R}$, then $(a_{n})$ converges to $A$ by the proof of
@@ -397,7 +444,7 @@ This is one of the main motivations of infinite sequence and series.
   \label{coro:theEquivalenceOfMonotoneSequenceLimit}
   Let $(a_{n})_{n=1}^{\infty}$ and $(b_{n})_{n=1}^{\infty}$
   be monotonically increasing and decreasing
-  sequences in $\mathbb{R}^{*}$, respectively. Then we have
+  sequences in $\overline{\mathbb{R}}$, respectively. Then we have
   \begin{align}
     \lim_{n\rightarrow \infty}a_{n}&=\sup(a_{n})_{n=1}^{\infty},
     \label{eq:monotonicallyIncreasingLimit}
@@ -413,7 +460,7 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{thm}
   \label{thm:interchangeOfLimits}
-  Consider $b_{ij}\ge 0$ in $\mathbb{R}^*$ where $i,j\in\mathbb{N}$.
+  Consider $b_{ij}\ge 0$ in $\overline{\mathbb{R}}$ where $i,j\in\mathbb{N}$.
   If $b_{ij}$ is monotonically increasing in $i$ for each $j$
   and is monotonically increasing in $j$ for each $i$,
   then we have
@@ -422,7 +469,7 @@ This is one of the main motivations of infinite sequence and series.
     \lim_{i\rightarrow\infty} \lim_{j\rightarrow\infty} b_{ij}
     = \lim_{j\rightarrow\infty} \lim_{i\rightarrow\infty} b_{ij}
   \end{equation}
-  with all the indicated limits existing in $\mathbb{R}^*$.
+  with all the indicated limits existing in $\overline{\mathbb{R}}$.
 \end{thm}
 \begin{proof}
   Define $a_{i}:=\lim_{j\rightarrow\infty}b_{ij}$
@@ -468,45 +515,50 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{thm}
   \label{thm:limitOperation}
-  Let $(a_{n})$ and  $(b_{n})$ be two sequences in $\mathbb{R}^{*}$.
-  Suppose $(a_{n})$ converges to $a\in \mathbb{R}^{*}$
-  and $(b_{n})$ converges to $b\in \mathbb{R}$.
+  Suppose $(a_{n})$ converges to $a\in \overline{\mathbb{R}}$
+  and $(b_{n})\subset \mathbb{R}$ converges to $b\in \mathbb{R}$.
   Then
   \begin{enumerate}[(a)]\itemsep0em
   \item $(a_{n}\pm b_{n})$ converges to $a\pm b$.
   \item If $a\in \mathbb{R}$, then $(a_{n}b_{n})$ converges to $ab$.
-  \item If $b\ne 0$ and $b_{n}\ne 0$ for all $n$,
-    then $a_{n}/b_{n}$ converges to $a/b$.
+  \item ($b\ne 0$ and $\forall n$, $b_{n}\ne 0$)\ $\Rightarrow$\ 
+    $\lim_{n\rightarrow \infty}\frac{a_{n}}{b_{n}} = \frac{a}{b}$.
   \end{enumerate}
 \end{thm}
 \begin{proof}
-  (a) If $a\in \mathbb{R}$, by using triangle inequality
-  $|a_{n}\pm b_{n}-(a\pm b)|\le |a_{n}-a|+|b_{n}-b|$,
-  we get $\lim_{n\rightarrow \infty}(a_{n}\pm b_{n})=a\pm b$ easily.
-  If $a=\pm\infty$, the boundness of $b_{n}$, 
-  c.f. Lemma \ref{lem:CauchySeqIsBounded}, gives that
-  $\lim_{n\rightarrow\infty}(a_{n}\pm b_{n})
-  =\lim_{n\rightarrow\infty}(a_{n})=a=a\pm b$.
+  (a) If $a\in \mathbb{R}$, the triangle inequality
+  \begin{displaymath}
+    |a_{n}\pm b_{n}-(a\pm b)|\le |a_{n}-a|+|b_{n}-b|
+  \end{displaymath}
+  yields $\lim_{n\rightarrow \infty}(a_{n}\pm b_{n})=a\pm b$.
+  If $a=\pm\infty$, (\ref{eq:extendedRealsConditions}a) yields 
+  \begin{displaymath}
+    \lim_{n\rightarrow\infty}(a_{n}\pm b_{n})
+    =\lim_{n\rightarrow\infty}(a_{n})=a=a\pm b.
+  \end{displaymath}
 
-  (b) Assume $|b_{n}|\le M$ for all $n$.
+  (b) By Lemmas \ref{lem:CauchySeqIsBounded}
+  and \ref{lem:convergentSeqIsCauchy}, 
+  there exists $M\in\mathbb{R}^+$ such that $|b_{n}|\le M$ for all $n$.
   The triangle inequality yields
   \begin{align*}
     |a_{n}b_{n}-ab|
     &\le |a_{n}b_{n}-ab_{n}|+|ab_{n}-ab|\\
-    &\le M|a_{n}-a|+|a||b_{n}-b|
+    &\le M|a_{n}-a|+|a||b_{n}-b|,
   \end{align*}
-  and then (b) holds.
+  which implies the convergence of $(a_{n}b_{n})$ to $ab$.
 
   (c) Since $b\ne 0$, there exists $N\in \mathbb{N}^{+}$ and $L>0$
   such that $|b_{n}|\ge L$ for all $n\ge N$. WLOG we assume that
-  $|b_{n}|\ge L$ for all $n$. Using triangle inequality, we have
+  $|b_{n}|\ge L$ for all $n$. The triangle inequality yields
   \begin{align*}
     \left| \frac{a_{n}}{b_{n}}-\frac{a}{b} \right|
-    &\le \frac{1}{L|b|}|a_{n}b-ab_{n}| \\
-    &\le \frac{1}{L|b|}(|a_{n}b-ab|+|ab-ab_{n}|) \\
-    &=\frac{1}{L}|a_{n}-a|+\frac{|a|}{L|b|}|b_{n}-b|
+    &\le \frac{1}{L|b|}|a_{n}b-ab_{n}| 
+    \le \frac{1}{L|b|}(|a_{n}b-ab|+|ab-ab_{n}|) \\
+    &=\frac{1}{L}|a_{n}-a|+\frac{|a|}{L|b|}|b_{n}-b|,
   \end{align*}
-  and then (c) holds.
+  which implies the convergence of $(\frac{a_{n}}{b_{n}})$
+  to $\frac{a}{b}$.
 \end{proof}
 
 
@@ -781,7 +833,7 @@ This is one of the main motivations of infinite sequence and series.
     J_{2}:=\{j\ge 1:a_{n_{j}}-c\le -\epsilon_{0}\}.
   \end{displaymath}
   Then one of them must be infinite.
-  WLOG we assume $\# J_{1}=\infty$. Then for any $N\ge m$,
+  WLOG we assume $J_{1}$ is infinite. Then for any $N\ge m$,
   there exists $j_{0}\in J_{1}$ such that $n_{j_{0}}\ge N$ and 
   \begin{displaymath}
     a_{N}^{+}=\sup(a_{n})_{n=N}^{\infty}
@@ -792,9 +844,37 @@ This is one of the main motivations of infinite sequence and series.
 \end{proof}
 
 \begin{lem}
+  \label{lem:limSupLimInfIndependenceOnStartingIndices}
+  Suppose both the limit superior and limit inferior
+  exist for a sequence $(a_n)_{n=m}^{\infty}$.
+  Then 
+  \begin{equation}
+    \label{eq:limSupLimInfIndependenceOnStartingIndices}
+    \forall M>m,\
+    \left\{
+      \begin{array}{l}
+        \lim\sup (a_n)_{n=m}^{\infty}
+        = \lim\sup (a_n)_{n=M}^{\infty},\\
+        \lim\inf (a_n)_{n=m}^{\infty}
+        = \lim\inf (a_n)_{n=M}^{\infty}.
+      \end{array}\right.
+  \end{equation}
+\end{lem}
+\begin{proof}
+  This follows from Definition \ref{def:limSupLimInf}. 
+\end{proof}
+
+\begin{rem}
+  By Lemma \ref{lem:limSupLimInfIndependenceOnStartingIndices}, 
+  both the limit superior and limit inferior of a sequence
+  remain the same if the first $m\in\mathbb{N}^+$ items
+  are removed from the sequence.
+\end{rem}
+
+\begin{lem}
   \label{lem:limitSupAndInfPreserveOrder}
-  Let $(a_{n})_{n=m}^{\infty}$ and $(b_{n})_{n=m}^{\infty}$
-  be two sequences of real numbers that satisfy
+  Suppose $(a_{n})_{n=m}^{\infty}\subset \mathbb{R}$
+  and $(b_{n})_{n=m}^{\infty}\subset \mathbb{R}$ satisfy
   \begin{displaymath}
     \exists M\in \mathbb{N} \text{ s.t. }
     \forall n\ge M, a_{n}\le b_{n}.
@@ -819,12 +899,11 @@ This is one of the main motivations of infinite sequence and series.
     \ \Leftrightarrow\ 
     \lim\sup a_{n} \le \lim\sup b_{n},
   \end{align*}
-  where the second equivalence follows from 
-  $(a_{N}^{+})_{N=m}^{\infty}$ being a supremum
-  and a monotonically decreasing function of $m$. 
+  where the second equivalence follows from
+  Lemma \ref{lem:limSupLimInfIndependenceOnStartingIndices}. 
 \end{proof}
 
-\begin{thm}[Squeeze test or the Sandwich Theorem]
+\begin{thm}[Squeeze test or the sandwich theorem]
   \label{thm:squeezeTest}
   Let $(a_n)_{n=m}^{\infty}$, $(b_n)_{n=m}^{\infty}$,
   and $(c_n)_{n=m}^{\infty}$ be sequences of real numbers
@@ -3551,3 +3630,4 @@ The function is not differentiable at (0,0),
 %%% End:
 
 % LocalWords:  Lipschitz pointwise boundedness integrable bijective
+% LocalWords:  infimum supremum iff subsequence 
