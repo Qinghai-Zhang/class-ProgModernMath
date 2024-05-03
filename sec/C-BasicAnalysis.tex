@@ -405,28 +405,35 @@ This is one of the main motivations of infinite sequence and series.
 \end{rem}
 
 \begin{defn}
-  \label{def:limitOfSequenceInR*}
-  A sequence $(a_n)\subset \mathbb{R}$ 
-%  $\overline{\mathbb{R}}:=\mathbb{R}\cup\{+\infty, -\infty\}$
-  \emph{converges in $\overline{\mathbb{R}}$},
-  written $\lim_{n\rightarrow \infty} a_n = L\in \overline{\mathbb{R}}$,
-  iff $(a_{n})$ converges in $\mathbb{R}$ or
-  \emph{diverges to $+\infty$ or $-\infty$}, i.e., 
+  \label{def:divergeToInfty}
+  A sequence $(a_n)\subset \mathbb{R}$
+  \emph{diverges to $+\infty$ or $-\infty$},
+  written $\lim_{n\rightarrow +\infty} a_n = \pm \infty$,
+  iff
   \begin{equation}
-    \label{eq:limitOfSequenceInInfty}
+    \label{eq:divergeToInfty}
     \forall M>0,\ \exists N\in \mathbb{N},\text{ s.t. }
     \forall n>N, a_{n}>M\ \text{or }a_{n}<-M.
   \end{equation}
 \end{defn}
 
 \begin{rem}
-  In Definition \ref{def:limitOfSequenceInR*},
+  In Definition \ref{def:divergeToInfty},
   the divergence of $(a_n)$ to $\pm \infty$
   is a special case of the more general divergence
   in Definition \ref{def:limitOfSequence}. 
   Sometimes a sequence $(a_n)$ neither diverge to $\pm \infty$
   nor converges to any number.  
 \end{rem}
+
+\begin{defn}
+  \label{def:limitOfSequenceInRclosure}
+  A sequence $(a_n)\subset \mathbb{R}$
+  \emph{converges in $\overline{\mathbb{R}}$},
+  written $\lim_{n\rightarrow \infty} a_n = L\in \overline{\mathbb{R}}$,
+  iff $(a_{n})$ converges in $\mathbb{R}$ or
+  diverges to $\pm \infty$. 
+\end{defn}
 
 \begin{thm}
   \label{thm:monotoneSubsequenceInR*}
@@ -1000,6 +1007,7 @@ This is one of the main motivations of infinite sequence and series.
   are $a=0$ and $a=+\infty$.
 \end{rem}
 
+
 \subsection{Series}
 \label{sec:series}
 
@@ -1020,21 +1028,21 @@ This is one of the main motivations of infinite sequence and series.
   \end{equation}
 \end{defn}
 
-\begin{defn}[Formal infinite series]
+\begin{defn}%[Formal infinite series]
   \label{def:seriesFromSequence}
-  A (formal) \emph{infinite series} associated with an infinite sequence $\{a_n\}$
+  A (formal) \emph{infinite series} associated with an infinite sequence $(a_n)$
    is the expression $\sum_{n=0}^{\infty} a_n$.
 %   the sum of all terms of the sequence.
 \end{defn}
 
 \begin{defn}
-  The \emph{sequence of partial sums} $(S_n)_{n=0}^{\infty}$ associated
-  with a formal infinite series
+  \label{def:sequenceOfPartialSums}
+  The $n$th term of the \emph{sequence of partial sums}
+  $(S_n)_{n=0}^{\infty}$ associated with a formal infinite series
   $\sum_{i=0}^{\infty} a_i$
-  is defined for each $n$ as the sum of the sequence $\{a_i\}$
-  from $a_0$ to $a_n$
+  is the sum of the sequence $(a_i)$ from $a_0$ to $a_n$
   \begin{equation}
-    \label{eq:partialSum}
+    \label{eq:sequenceOfPartialSums}
     S_n = \sum_{i=0}^{n} a_i.
   \end{equation}
 \end{defn}
@@ -1049,22 +1057,26 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{lem}
   \label{lem:seriesConvergeNecessity}
-  If an infinite series $\sum_{n=0}^{\infty}a_{n}$ of real numbers
-  is convergent, then $\lim_{n\rightarrow \infty}a_{n}=0$.
+  A convergent infinite series $\sum_{n=0}^{\infty}a_{n}$ of real numbers
+  must have $\lim_{n\rightarrow \infty}a_{n}=0$.
 \end{lem}
 \begin{proof}
-  Assume that the series is convergent to $L\in \mathbb{R}$.
-  We have $a_{n}=S_{n}-S_{n-1}$ for all $n$, where $S_{n}$ is defined
-  in (\ref{eq:partialSum}). Let $n\rightarrow \infty$, by
-  Theorem \ref{thm:limitOperation}, we have
+  Assume that the series converges to $L\in \mathbb{R}$.
+  For $S_{n}$ in \eqref{eq:sequenceOfPartialSums}, 
+  we have $a_{n}=S_{n}-S_{n-1}$ for all $n$. 
+  Then Theorem \ref{thm:limitOperation} yields
   $\lim_{n\rightarrow \infty}a_{n}=L-L=0$.
 \end{proof}
 
 \begin{defn}
-  A formal infinite series is said to be \emph{divergent}
-  if its sequence of partial sums diverges.
-  In this case we do not assign any real number value to this series.
+  A formal infinite series is said to \emph{diverge}
+  or be \emph{divergent}
+  if its sequence of partial sums does not converge.
 \end{defn}
+
+\begin{rem}
+  We do not assign any value to a divergent infinite series.
+\end{rem}
 
 \begin{lem}[Cauchy criterion]
   \label{lem:seriesConvergeCauchy}
@@ -1078,7 +1090,9 @@ This is one of the main motivations of infinite sequence and series.
 \end{lem}
 \begin{proof}
   $\sum_{n=0}^{\infty}a_{n}$ is convergent if and only if
-  $\{S_{n}\}$ is convergent, if and only if $\{S_{n}\}$ is Cauchy
+  its sequence $(S_{n})$ of partial sums
+  in Definition \ref{def:sequenceOfPartialSums}
+  is convergent, if and only if $(S_{n})$ is Cauchy
   by Theorem \ref{thm:completenessOfRealNumbers}, if and only if
   \begin{displaymath}
     \forall \epsilon>0,\ \exists N\in \mathbb{N} \text{ s.t. }
@@ -1098,20 +1112,37 @@ This is one of the main motivations of infinite sequence and series.
   \end{enumerate}
 \end{thm}
 \begin{proof}
-  (i) Note that for any $p,q\in\mathbb{N}$,
+  For any $p,q\in\mathbb{N}$, we have
   \begin{displaymath}
+    \begin{array}{l}
     \left| \sum_{n=p}^{q}b_{n} \right|
     \le  \sum_{n=p}^{q}|b_{n}| \le \sum_{n=p}^{q}a_{n}
     =\left| \sum_{n=p}^{q}a_{n} \right|.
+    \end{array}
   \end{displaymath}
-  Using Lemma \ref{lem:seriesConvergeCauchy}, the proof is completed.
+  Then (i) follows from Lemma \ref{lem:seriesConvergeCauchy}. 
 
-  (ii) $(\sum_{j=1}^{n}a_{j})_{n=1}^{\infty}$ diverges to $+\infty$
-  implies that
-  $(\sum_{j=1}^{n}b_{j})_{n=1}^{\infty}$ diverges to $+\infty$
-  because of the equations
-  $\sum_{j=1}^{n}b_{j}\ge \sum_{j=1}^{n}a_{j}(n\ge 1)$ and
-  (\ref{eq:limitOfSequenceInInfty}).
+  By Definition \ref{def:divergeToInfty}
+  and the condition
+  $\sum_{j=1}^{n}b_{j}\ge \sum_{j=1}^{n}a_{j}$ for all $n\in \mathbb{N}^+$,
+  the divergence of $(\sum_{j=1}^{n}a_{j})_{n=1}^{\infty}$ to $+\infty$
+  implies the divergence of
+  $(\sum_{j=1}^{n}b_{j})_{n=1}^{\infty}$ to $+\infty$.
+\end{proof}
+
+\begin{thm}
+  \label{thm:geometricSeries}
+  The \emph{geometric series} $\sum_{n=0}^{\infty} x^n$
+  diverges to $+\infty$ if $x\ge 1$
+  and converges to $\frac{1}{1-x}$ if $x\in [0,1)$.
+\end{thm}
+\begin{proof}
+  For $x=1$, the geometric series
+  $\sum_0^{\infty} x^n = 1 + 1+\cdots = \infty$.
+  The case of $x>1$ follows from the comparison test.
+  For $x\in[0,1)$,
+  $\sum_0^{\infty} x^n = \frac{1-x^{n+1}}{1-x}$
+  and the conclusion follows.
 \end{proof}
 
 \begin{defn}
@@ -1123,8 +1154,7 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{lem}
   \label{lem:absolutelyConvergenceSeriesConverge}
-  An infinite series that is absolutely convergent
-  is convergent.
+  An absolutely convergent infinite series is convergent.
 \end{lem}
 \begin{proof}
   Since $|a_{n}|\ge 0$,  $\sum |a_{n}|$ converges and
@@ -1134,65 +1164,73 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{thm}[Ratio test]
   \label{thm:ratioTest}
-  A series $\sum a_n$ of nonzero terms
+  A series $\sum a_n$ of nonzero real numbers 
   \begin{enumerate}[(i)]\itemsep0em
   \item converges absolutely if
-    ${\lim\sup}_{n\rightarrow\infty}|a_{n+1}/a_n|<1$;
-  \item diverges if ${\lim\inf}_{n\rightarrow\infty}|a_{n+1}/a_n|>1$,
+    ${\lim\sup}_{n\rightarrow\infty}|\frac{a_{n+1}}{a_n}|<1$;
+  \item diverges if ${\lim\inf}_{n\rightarrow\infty}|\frac{a_{n+1}}{a_n}|>1$. 
   \end{enumerate}
   Otherwise, this test gives no information
   about the convergence of $\sum a_n$.
 \end{thm}
 \begin{proof}
-  Choose $\epsilon>0$ such that $\alpha+\epsilon\in(0,1)$. Then
+  Write $\alpha:={\lim\sup}_{n\rightarrow\infty}|\frac{a_{n+1}}{a_n}|$.
+  Choose $\epsilon>0$ such that $\alpha+\epsilon\in(0,1)$.
+  Then Lemma \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(a) implies
   \begin{displaymath}
+    \begin{array}{l}
     \exists N\in \mathbb{N}^{+} \text{ s.t. }
-    \forall n\ge N, \sup_{n\ge N}\{|a_{n+1}/a_{n}|\}<\alpha+\epsilon.
+    \forall n\ge N,
+    \sup_{n\ge N}\{\left|\frac{a_{n+1}}{a_{n}}\right|\}<\alpha+\epsilon.
+    \end{array}
   \end{displaymath}
-  Hence $|a_{n+1}/a_{n}|<\alpha+\epsilon$ for all $n\ge N$,
+  Hence $|\frac{a_{n+1}}{a_{n}}|<\alpha+\epsilon$ for all $n\ge N$,
   which implies that
   \begin{displaymath}
+    \forall n\ge N,\ 
     |a_{n}|=\left|\frac{a_{n}}{a_{n-1}}\cdot \frac{a_{n-1}}{a_{n-2}}
      \cdots \frac{a_{N+1}}{a_{N}}\cdot a_{N}  \right|
-    <|a_{N}|(\alpha+\epsilon)^{n-N}
+    <|a_{N}|(\alpha+\epsilon)^{n-N}.
   \end{displaymath}
-  for all $n\ge N$.
-  The comparison test with the geometric series yields (i).
-  (ii) can be shown by the similar method.
+  Then (i) follows from Theorem \ref{thm:comparisonTest}
+  by comparing $(|a_n|)$ with the geometric series.
+  (ii) can be shown similarly.
 \end{proof}
 
 \begin{thm}[Root test]
   \label{thm:rootTest}
-  Let $\sum a_n$ be a series and
-  $\alpha={\lim\sup}_{n\rightarrow\infty}|a_n|^{1/n}$.
-  The series $\sum a_n$
+  A series $\sum a_n$ of real numbers
   \begin{enumerate}[(i)]\itemsep0em
   \item converges absolutely if $\alpha<1$;
   \item diverges if $\alpha>1$,
   \end{enumerate}
+  where $\alpha={\lim\sup}_{n\rightarrow\infty}|a_n|^{\frac{1}{n}}$.
   Otherwise, this test gives no information
   about the convergence of $\sum a_n$.
 \end{thm}
 \begin{proof}
-  Choose $\epsilon>0$ such that $\alpha+\epsilon\in (0,1)$.
-  Then 
+  Since $\alpha<1$, we can choose $\epsilon>0$ so that $\alpha+\epsilon\in (0,1)$.
+  Lemma \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(a) gives
   \begin{displaymath}
+    \begin{array}{l}
     \exists N\in \mathbb{N}^+ \text{ s.t. }
     \forall n\ge N,
     \ \sup_{n\ge N}\{ |a_n|^{\frac{1}{n}}\} < \alpha+\epsilon.
+    \end{array}
   \end{displaymath}
   Hence $|a_n|<(\alpha+\epsilon)^n$ for all $n\ge N$.
   The comparison test with the geometric series yields (i).
-  (ii) can be shown via proof by contradiction.
-  Suppose $\sum a_{n}$ converges, we have $\lim a_{n}=0$
-  from Lemma \ref{lem:seriesConvergeNecessity}.
+
+  We prove (ii) by contradiction.
+  Suppose $\sum a_{n}$ converges.
+  Then Lemma \ref{lem:seriesConvergeNecessity}
+  yields $\lim a_{n}=0$.
   By Lemma \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(b),
   there exists a subsequence $a_{n_{j}}$ such that
   $|a_{n_{j}}|^{\frac{1}{n_{j}}}>1$, i.e., $|a_{n_{j}}|>1$ for all $j$.
-  That contradicts
+  But Lemma \ref{lem:subsequenceInConvergentSequenceIsConvergent} implies
   $\lim_{j\rightarrow\infty} a_{n_{j}}=\lim_{n\rightarrow\infty}a_{n}=0$,
-  where the first step follows from
-  Lemma \ref{lem:subsequenceInConvergentSequenceIsConvergent}.
+  which contradicts $|a_{n_{j}}|>1$ for all $j$.
 \end{proof}
 
 \begin{rem}
@@ -1202,44 +1240,48 @@ This is one of the main motivations of infinite sequence and series.
 
 \begin{thm}[Integral test]
   \label{thm:integralTest}
-  Let $f:[0, \infty)\rightarrow \mathbb{R}$
-   be a monotone decreasing function 
-   which is non-negative.
-%   such that $f(x)\ge 0$ for all $x\ge 0$.
+  Let $f:[0, \infty)\rightarrow \mathbb{R}^+\cup\{0\}$
+   be a monotonically decreasing function,
+   i.e., $x\ge y$ implies $f(x)\le f(y)$.
   Then the series $\sum_{n=0}^{\infty}f(n)$ is convergent if and only if
-   $\sup_{N>0}\int_0^N f$ is finite.
+   $\sup_{N\in\mathbb{N}^+}\int_0^N f$ is finite.
 \end{thm}
 \begin{proof}
-  Note that $\int_{N}^{N+1}f\in [f(N+1),f(N)]$ for all $N\in \mathbb{N}$
-  since $f$ is monotonically decreasing and non-negative, we have
+  Since $f$ is monotonically decreasing and non-negative,
+  the comparison test yields
   \begin{displaymath}
-    \sum_{n=1}^{N}f(n)\le \int_{0}^{N}f \le \sum_{n=0}^{N-1}f(n)
+    (*):\quad
+    \forall N\in \mathbb{N}^{+},\ 
+    \sum_{n=1}^{N}f(n)\le \int_{0}^{N}f \le \sum_{n=0}^{N-1}f(n).
   \end{displaymath}
-  for all $N\in \mathbb{N}^{+}$.
   
-  For the necessity, suppose $\sum_{n=0}^{\infty}f(n)=L<+\infty$.
-  Since $f\ge 0$, we have
+  For necessity, suppose $\sum_{n=0}^{\infty}f(n)=L<+\infty$.
+  Then 
   \begin{displaymath}
-    \int_{0}^{N}f\le\sum_{n=0}^{N-1}f(n)\le\sum_{n=0}^{\infty}f(n)=L
+    \forall N\in \mathbb{N}^+,\ 
+    \int_{0}^{N}f\le\sum_{n=0}^{N-1}f(n)\le\sum_{n=0}^{\infty}f(n)=L,
   \end{displaymath}
-  for all $N\in \mathbb{N}$.
-  Hence for any $T>0$, there exists $N_{0}\in \mathbb{N}$ such that
-  $T\le N_{0}$ and then $\int_{0}^{T}f\le \int_{0}^{N_{0}}f\le L$.
-  Therefore $\sup_{T> 0}\int_{0}^{T}\le L <+\infty$.
+  where the first inequality follows from $(*)$
+  and the second from $f\ge 0$. 
+  Hence for any $T\in\mathbb{N}^+$, there exists $N_{0}\in \mathbb{N}$ such that
+  $T\le N_{0}$ and thus $\int_{0}^{T}f\le \int_{0}^{N_{0}}f\le L$.
 
-  For the sufficiency, there exists $M>0$ such that
+  For sufficiency, there exists $M>0$ such that
   $\int_{0}^{N}f\le M$ for all $N\in \mathbb{N}$.
   Then we have
   \begin{displaymath}
+    \forall N\in \mathbb{N},\ 
     \sum_{n=0}^{N}f(n)=\sum_{n=1}^{N}f(n)+f(0)
     \le \int_{0}^{N}f+f(0)
-    \le M+f(0)
+    \le M+f(0),
   \end{displaymath}
-  for all $N\in \mathbb{N}$.
-  Combining with $f\ge 0$, we conclude that
-  the sequence $(\sum_{n=0}^{N}f(n))_{N=0}^{\infty}$
-  is bounded and monotonically decreasing and hence is convergent
-  by Theorem \ref{thm:boundedMonotoneSeqIsConvergent}.
+  where the first inequality follows from $(*)$.
+  By Definition \ref{defn:monotoneSequences}
+  and $f\ge 0$, 
+  the sequence $(\sum_{n=0}^{N}f(n))_{N\in \mathbb{N}}$
+  is monotonically decreasing.
+  The rest follows from
+  Theorem \ref{thm:boundedMonotoneSeqIsConvergent}.
 \end{proof}
 
 \section{Scalar functions
