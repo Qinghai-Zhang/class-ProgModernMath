@@ -1248,7 +1248,8 @@ This is one of the main motivations of infinite sequence and series.
 \end{thm}
 \begin{proof}
   Since $f$ is monotonically decreasing and non-negative,
-  the comparison test yields
+  the integral mean value theorem \ref{thm:integralMeanValue}
+  yields
   \begin{displaymath}
     (*):\quad
     \forall N\in \mathbb{N}^{+},\ 
@@ -1283,6 +1284,16 @@ This is one of the main motivations of infinite sequence and series.
   The rest follows from
   Theorem \ref{thm:boundedMonotoneSeqIsConvergent}.
 \end{proof}
+
+\begin{rem}
+  Technically Theorem \ref{thm:integralTest}
+  should not appear before Section \ref{sec:RiemannIntegral};
+  after all,
+  we have not defined the integral of a scalar function yet.
+  However, for a coherent collection of conclusions
+  on testing sequence convergence, 
+  we put Theorem \ref{thm:integralTest} here anyway. 
+\end{rem}
 
 \section{Scalar functions
   $\mathbb{R}\rightarrow\mathbb{R}$}
@@ -1545,7 +1556,7 @@ Theorem \ref{thm:intermediateValue}
    if $a>0$ 
    and is not so if $a=0$.
 \end{exc}
-\begin{solutioin}
+\begin{solution}
   If $a>0$, then
   $|f(x)-f(y)|=\frac{|x-y|}{xy} %< \frac{\delta}{xy}\
   <\frac{|x-y|}{a^2}$.\\
@@ -1582,7 +1593,7 @@ Theorem \ref{thm:intermediateValue}
   However, 
    $|f(x)-f(y)|=\frac{|x-y|}{xy}>\frac{\epsilon\delta^2}{xy}
    > \frac{1}{y} > \frac{1}{\delta} > 2\epsilon> \epsilon$.
-\end{solutioin}
+\end{solution}
 
 \begin{exc}
   On $(a,\infty)$,
