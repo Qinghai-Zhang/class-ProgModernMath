@@ -1,5 +1,3 @@
-
-
 \begin{exm}
   \label{exm:quantumMechanics}  
   In classical mechanics, a physical quantity
@@ -80,8 +78,6 @@
   in functional analysis.
 \end{exm}
 
-
-
 \begin{defn}
   \label{def:metric}
   A \emph{metric} on a set ${\cal X}$ is a function
@@ -111,7 +107,6 @@
   \end{equation}
    is a metric called the \emph{discrete metric}.
 \end{exm}
-
 
 \begin{exc}
   Let ${\cal X}$ be the set of all bounded and unbounded sequences
@@ -169,13 +164,11 @@
   \end{equation}
 \end{defn}
 
-
 \section{Complete metric spaces}
 \label{sec:compl-conv}
 
 \subsection{Completeness for Cauchy sequences}
 \label{sec:completenessCauchySeq}
-
 
 \begin{defn}
   \label{def:convergenceOfSequenceMetricSpace}
@@ -202,12 +195,10 @@
   \end{equation}
 \end{defn}
 
-
 \begin{lem}
   \label{lem:convergentSeqIsCauchyMetric}
   Convergent sequences in a metric space are Cauchy.
 \end{lem}
-
 
 \begin{defn}
   \label{def:completeMetricSpace}  
@@ -215,7 +206,6 @@
   every Cauchy sequence in ${\cal X}$ converges
   to an element in ${\cal X}$.
 \end{defn}
-
 
 \begin{exm}[$\mathbb{Q}$ is not complete]
   \label{exm:QisNotComplete}
@@ -237,7 +227,6 @@
   \end{displaymath}
 \end{exm}
 
-
 \begin{exm}
   The sequence $(\sum_{k=1}^n\frac{1}{k^k})_{n\in\mathbb{N}}$
   is Cauchy, 
@@ -245,12 +234,10 @@
   whether the limit is rational or irrational.
 \end{exm}
 
-
 \begin{lem}
   \label{lem:CabMetricSpace}
   The metric space (\ref{eq:CabMetricSpace}) is complete.
 \end{lem}
-
 
 \begin{exc}
   The completeness depends on the metric.
@@ -259,7 +246,6 @@
   show that the metric space $({\cal C}[a,b],d_1)$
   is not complete.
 \end{exc}
-
 
 \subsection{Dense subsets and separable spaces}
 \label{sec:dense-subsets}
@@ -283,7 +269,6 @@
   each element of $\mathbb{R}$ is constructed
   as an equivalence class of Cauchy sequences of rational numbers.
 \end{exm}
-
 
 \begin{exm}
   \label{exm:CantorSetRemovedDense}
@@ -362,12 +347,10 @@
   Why? 
 \end{exm}
 
-
 \begin{lem}
   \label{lem:totalBoundedImpliesBounded}
   A totally bounded set is bounded. 
 \end{lem}
-
 
 \begin{exm}
   For the metric space $(\mathbb{Z},d)$
@@ -385,11 +368,9 @@
   iff it has a countable dense subset.
 \end{defn}
 
-
 \begin{lem}
   A totally bounded metric space is separable.
 \end{lem}
-
 
 \subsection{Completion via isometry}
 \label{sec:compl-via-isom}
@@ -407,7 +388,6 @@
   \end{equation}
 \end{defn}
 
-
 \begin{defn}
   \label{def:isometricIsomorphism}
   A \emph{global isometry} or \emph{isometric isomorphism}
@@ -419,7 +399,6 @@
   are \emph{isomorphic} if there exists
   a global isometry between them.
 \end{defn}
-
 
 \begin{defn}
   \label{def:subspaceMetric}
@@ -448,7 +427,6 @@
   that contain $({\cal X}, d)$ as a subspace.
 \end{defn}
 
-
 \begin{lem}
   \label{lem:denseCompletion}
   Suppose that $({\cal X}, d)$ is a dense subspace
@@ -456,7 +434,6 @@
   with $d_1|_{{\cal X}\times{\cal X}} = d$.
   Then $({\cal X}_1, d_1)$ is the completion of $({\cal X}, d)$.
 \end{lem}
-
 
 \begin{thm}
   \label{thm:existenceOfMetricCompletion}
@@ -471,10 +448,8 @@
   which is the completion of $\mathbb{P}[a,b]$.
 \end{exm}
 
-
 \subsection{Sequence spaces}
 \label{sec:metric-spaces-basicAnal}
-
 
 \begin{defn}
   \label{def:lInftySeqSpace}
@@ -513,8 +488,6 @@
   In particular, the \emph{Hilbert sequence space} $\ell^2$
    is the $\ell^p$ space with $p=2$.
 \end{defn}
-
-
 
 \begin{exc}
   \label{exc:ellPisComplete}
@@ -563,10 +536,8 @@
   is separable for all $p\in[1,\infty)$.
 \end{lem}
 
-
 \section{Basic metric topology}
 \label{sec:metric-topology}
-
 
 \subsection{Open sets and closed sets}
 \label{sec:open-sets-closed}
@@ -615,6 +586,12 @@
   The union of two closed sets is closed.
 \end{lem}
 
+\begin{exc}
+  \label{exc:meagerSetComplementIsDense}
+  If a closed set $F$ in a metric space ${\cal X}$
+  does not contain any open set,
+  then ${\cal X}\setminus F$ is dense in ${\cal X}$.
+\end{exc}
 
 \subsection{Limit points and closure}
 \label{sec:limit-points-conv}
@@ -653,7 +630,6 @@
     \ne \emptyset. 
   \end{equation}
 \end{defn}
-
 
 \begin{lem}
   \label{lem:limitPointImpliesConvergence}
@@ -695,14 +671,12 @@
   \end{equation}
 \end{defn}
 
-
 \begin{defn}
   \label{def:perfectSets}
   A subset $E$ of a metric space is \emph{perfect}
   iff $E$ is closed and every point of $E$
   is a limit point of $E$.
 \end{defn}
-
 
 \begin{lem}
   \label{lem:closedSetsContainsAllLimitPoints}
@@ -753,10 +727,8 @@
   i.e., $A\subset E$ implies $\overline{A}\subset \overline{E}$.
 \end{coro}
 
-
 \subsection{Closed sets and convergence}
 \label{sec:clos-sets-conv}
-
 
 \begin{lem}
   \label{lem:converge2cases}
@@ -765,7 +737,6 @@
   $x$, 
   or, is eventually equal to $x$.
 \end{lem}
-
 
 \begin{lem}
   \label{lem:closedSetConvergence}
@@ -781,7 +752,6 @@
   A subset of a metric space is \emph{nowhere dense}
   if the interior of its closure is an empty set.
 \end{defn}
-
 
 \begin{exm}
   The Cantor set in Definition \ref{def:CantorSet}
@@ -812,8 +782,6 @@
   is dense in ${\cal X}$.
 \end{defn}
 
-
-
 \section{Continuous functions}
 \label{sec:continuous-functions-metricSpaces}
 
@@ -838,7 +806,6 @@
                            d_{\cal Y}(f(x),f(x_n))<\epsilon. 
   \end{align}
 \end{defn}
-
 
 \begin{lem}
   \label{lem:pointContinuityBall}
@@ -870,7 +837,6 @@
     &d_{\cal X}(x,y)<\delta\ \Rightarrow\ d_{\cal Y}(f(x),f(y))<\epsilon
   \end{align}
 \end{defn}
-
 
 \begin{thm}[Continuous extension at a limit point]
   \label{thm:continuousExtPoint}
@@ -909,7 +875,6 @@
   \end{enumerate}
 \end{thm}
 
-
 \begin{lem}
   \label{lem:compositionMapIsContinuous}
   If $f:{\cal X}\rightarrow {\cal Y}$ and $g:{\cal Y}\rightarrow Z$
@@ -934,8 +899,6 @@
   \end{enumerate}
 \end{lem}
 
-
-
 \begin{lem}
   \label{lem:funcInverseIsContinuous}
   For the set ${\cal B}(\mathbb{R}^n)^{-1}\subset
@@ -949,9 +912,6 @@
   in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
 \end{lem}
 
-
-
-
 \begin{defn}
   \label{def:openMap}
   A map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces is \emph{open}
@@ -959,11 +919,8 @@
   it is \emph{closed} if its image of any closed set is closed. 
 \end{defn}
 
-
-
 \subsection{Separation properties of metric spaces}
 \label{sec:separ-prop}
-
 
 \begin{defn}
   \label{def:distPointAndSet}
@@ -998,7 +955,6 @@
   is a closed set for any $y\in {\cal X}$ and $r\in\mathbb{R}^+$.
 \end{coro}
 
-
 \begin{lem}
   \label{lem:defineClosureFromDistance}
   Any nonempty subset $A$ of a metric space $({\cal X},d)$
@@ -1007,7 +963,7 @@
 
 \begin{lem}
   \label{lem:separateClosedSets}
-  For any two disjoint sets $E$ and $F$
+  For any two disjoint closed sets $E$ and $F$
   in a metric space ${\cal X}$,
   there exists a continuous function $f:{\cal X}\rightarrow [0,1]$
   such that $f(E)=\{0\}$ and $f(F)=\{1\}$.
@@ -1047,7 +1003,6 @@
   such that $x\in U$ and $y\in V$.
 \end{coro}
 
-
 \subsection{Homeomorphisms}
 \label{sec:homeomorphisms}
 
@@ -1061,12 +1016,10 @@
   if there exists a homeomorphism between them.
 \end{defn}
 
-
 \begin{lem}
   \label{lem:homeomorphismIsOpenAndClosed}
   A homeomorphism is both open and closed.
 \end{lem}
-
 
 \begin{defn}
   \label{def:topologicalProperty}
@@ -1089,7 +1042,6 @@
   is a homeomorphism.
 \end{defn}
 
-
 \subsection{Uniform continuity}
 
 \begin{defn}
@@ -1107,8 +1059,6 @@
     &d_{\cal X}(x,y)<\delta\ \Rightarrow\ d_{\cal Y}(f(x),f(y))<\epsilon.
   \end{align}
 \end{defn}
-
-
 
 \begin{exm}
   \label{exm:identityUniformlyCont}
@@ -1128,7 +1078,6 @@
   is uniformly continuous and has a uniformly continuous inverse.
 \end{exm}
 
-
 \begin{thm}[Continuous extension]
   \label{thm:continuousExt}
   A uniformly continuous function $f: E \rightarrow {\cal Y}$ 
@@ -1138,7 +1087,6 @@
   $F: {\cal X}\rightarrow {\cal Y}$ such that
   $F|_{E} = f$.
 \end{thm}
-
 
 \begin{defn}
   \label{def:continuousExt}
@@ -1177,7 +1125,6 @@
   What are the values of $F(0)$ and $F(1)$?
 \end{exc}
 
-
 \subsection{Equicontinuity}
 
 \begin{defn}
@@ -1197,7 +1144,6 @@
     \end{array}
   \end{equation}
 \end{defn}
-
 
 \subsection{Lipschitz continuity}
 \label{sec:lipschitz-continuity}
@@ -1258,8 +1204,6 @@
   \end{equation}
 \end{thm}
 
-
-
 \begin{thm}
   \label{thm:C1impliesLipschitzContinuity}
   Consider a differentiable function
@@ -1275,8 +1219,6 @@
     \le L |\mathbf{b}-\mathbf{a}|. 
   \end{equation}
 \end{thm}
-
-
 
 \subsection{The Banach fixed point theorem}
 \label{sec:banach-fixed-point}
@@ -1294,7 +1236,6 @@
   \end{equation}
 \end{defn}
 
-
 \begin{thm}[Banach fixed point]
   \label{thm:fixedPointMetricSpace}
   A contractive mapping $f:{\cal X}\rightarrow {\cal X}$
@@ -1303,14 +1244,11 @@
   has a unique fixed point $x=f(x)\in {\cal X}$.
 \end{thm}
 
-
 \begin{exm}
   Theorem \ref{thm:fixedPointMetricSpace}
   can be used to prove the fundamental theorem of ODEs
   (Theorem \ref{thm:FundamentalThoeremODEs}). 
 \end{exm}
-
-
 
 \subsection{The inverse function theorem
   and the implicit function theorem}
@@ -1342,8 +1280,6 @@
   \end{enumerate}
 \end{thm}
 
-
-
 \begin{thm}[Implicit function theorem]
   \label{thm:implicitFunction}
   For a function $\mathbf{g}:
@@ -1371,15 +1307,12 @@
     $\mathbf{f}'=-[\frac{\partial g_i}{\partial y_j}]^{-1}
     [\frac{\partial g_i}{\partial x_j}]$.
   \end{enumerate}
+  For $p>1$, we have $\mathbf{f}\in{\cal C}^p(U_0)$ if
+  $\mathbf{g}\in {\cal C}^p(U\times V)$.
 \end{thm}
-
-
-
-
 
 \section{Sequential compactness}
 \label{sec:sequentialCompactness}
-
 
 \begin{defn}
   \label{def:sequentialCompactness}
@@ -1397,13 +1330,11 @@
   where the function $k$ is monotonically increasing. 
 \end{defn}
 
-
 \begin{lem}
   \label{lem:CauchySeqInCompactMetric}
   In a sequentially compact metric space ${\cal X}$,   
   any Cauchy sequence converges in ${\cal X}$.
 \end{lem}
-
 
 \begin{coro}
   \label{coro:compactnessImpliesCompleteness}
@@ -1415,9 +1346,6 @@
   A sequentially compact subset $K$ of a metric space ${\cal X}$
   is closed and bounded.
 \end{lem}
-
-
-
 
 \subsection{In finite-dimensional metric spaces}
 
@@ -1473,9 +1401,7 @@
   it is sequentially compact.
 \end{exm}
 
-
 \subsection{In infinite-dimensional metric spaces}
-
 
 \begin{exm}
   \label{exm:closedBallInC01}
@@ -1547,7 +1473,6 @@
   is sequentially compact.
 \end{exc}
 
-
 \subsection{Generalizing
   the extreme value theorem \ref{thm:extremeValues}}
 \label{sec:gener-extr-value}
@@ -1595,8 +1520,6 @@
   \end{displaymath}
   has a minimizer.
 \end{exm}
-
-
 
 \subsection{Sequential compactness = compactness}
 \label{sec:sequCompIsCompactness}
@@ -1655,7 +1578,6 @@
   if and only if it is sequentially compact. 
 \end{thm}
 
-
 \subsection{Generalizing
   the uniform continuity theorem
   \ref{thm:uniformContinuityScalarFunc}}
@@ -1701,7 +1623,6 @@
   is uniformly continuous.
 \end{thm}
 
-
 \subsection{Partition of unity in $\mathbb{R}^n$}
 \label{sec:partition-unity}
 
@@ -1736,12 +1657,11 @@
     $f_i\in {\cal C}(\mathbb{R}^n, [0,1])$; 
   \item $\forall i=1, \ldots, m$,
     $\Supp(f_i)\subset U_i$; 
-  \item $\forall x\in \mathbb{R}^n$, $\sum_{i=1}^m f_i(x)=1$, 
+  \item $\forall x\in K$, $\sum_{i=1}^m f_i(x)=1$, 
   \end{enumerate}
   where $\Supp(f_i)$ is the support of the function $f_i$
   in Definition \ref{def:support}.
 \end{thm}
-
 
 \begin{defn}
   \label{defn:partitionOfUnity}
@@ -1766,8 +1686,6 @@
   \end{equation}
 \end{defn}
 
-
-
 \begin{exm}
   \label{exm:B-splineAsPartOfUnity}
   The B-spline functions discussed in Section \ref{sec:B-Splines}
@@ -1778,7 +1696,6 @@
 
 \subsection{The Ascoli-Arzel\`{a} theorem}
 \label{sec:ascoli-arzela-theor}
-
 
 \begin{ntn}
   \label{ntn:setOfContinuousScalarFuncs}
@@ -1824,7 +1741,6 @@
   if and only if ${\cal F}$ is uniformly bounded and equicontinuous. 
 \end{thm}
 
-
 \begin{exc}
   \label{exc:equiContInRn2Compact}
   Denote by $\Omega\subset \mathbb{R}^n$ a bounded open convex set.
@@ -1839,7 +1755,6 @@
   \end{equation}
   is sequentially compact.
 \end{exc}
-
 
 \section{Function sequences}
 \label{sec:uniform-convergence}
@@ -1869,14 +1784,13 @@
    \end{align}
 \end{defn}
 
-
 \begin{defn}[Pointwise convergence]
   \label{def:pointwiseConvergence}
-  Let $(f_n)_{n\in\mathbb{N}^+}$ be a sequence of functions
+  A sequence $(f_n)_{n\in\mathbb{N}^+}$ of functions 
    between metric space $({\cal X}, d_{{\cal X}})$
-   and $({\cal Y}, d_{{\cal Y}})$.
-  We say that $(f_n)_{n\in\mathbb{n}^+}$ \emph{converges pointwise}
-   to another function $f:{\cal X}\rightarrow{\cal Y}$ on ${\cal X}$ iff
+   and $({\cal Y}, d_{{\cal Y}})$
+   \emph{converges pointwise}
+   to a function $f:{\cal X}\rightarrow{\cal Y}$ iff
    \begin{equation}
      \label{eq:pointwiseConvergence1}
      \forall x\in {\cal X},\qquad
@@ -1910,7 +1824,6 @@
   Show that the functions in (\ref{eq:construcRatVsIrrat})
   and (\ref{eq:rationalVsIrr}) are identical. 
 \end{exc}
-
 
 \begin{exm}
   \label{exm:pointwiseConvergencePreservesNoContinuity}
@@ -2004,8 +1917,6 @@
   converges pointwise to $f(x)=x$.
 \end{exm}
 
-
-
 \subsection{Uniform convergence} % comes to the rescue
 \label{sec:uniformConvergence}
 
@@ -2030,7 +1941,6 @@
    such that $(\left. f_n\right|_{B_r(x)\cap {\cal X}})$ is
    uniformly convergent to $f$ on $B_r(x)\cap {\cal X}$.
 \end{defn}
-
 
 \begin{exm}
   Consider $f_n:[0,1]\rightarrow \mathbb{R}$
@@ -2066,7 +1976,6 @@
   uniformly or locally uniformly?
 \end{exc}
 
-
 \subsubsection{Criteria}
 
 \begin{thm}[Cauchy criterion]
@@ -2086,7 +1995,6 @@
   where $d_{\cal Y}$ is the uniform metric. 
 \end{thm}
 
-
 \begin{lem}
   \label{lem:pointwise2uniformConvergence}
   Suppose a sequence of functions $(f_n)_{n\in\mathbb{N}^+}$ 
@@ -2098,9 +2006,7 @@
   where $M_n:=\sup_{x\in {\cal X}}|f_n(x)-f(x)|_{\cal Y}$.
 \end{lem}
 
-
 \subsubsection{Consequences}
-
 
 \begin{lem}
   \label{lem:uniformConvergenceAndCont}
@@ -2123,7 +2029,6 @@
   \end{equation}
 \end{lem}
 
-
 \begin{coro}
   \label{coro:uniformLimitIsCont}
   Suppose a sequence of continuous functions $(f_n)_{n\in\mathbb{N}^+}$ 
@@ -2131,7 +2036,6 @@
   converges uniformly to $f$.
   Then $f$ is continuous on $E$.
 \end{coro}
-
 
 \begin{coro}
   \label{coro:CXisComplete}
@@ -2147,7 +2051,6 @@
   \end{equation}
 \end{coro}
 
-
 \begin{thm}
   \label{thm:uniformConvAndIntegral}
   Suppose a sequence of scalar functions $(f_n)_{n\in\mathbb{N}^+}$
@@ -2159,7 +2062,6 @@
     \int_a^bf = \lim_{n\rightarrow \infty} \int_a^bf_n. 
   \end{equation}
 \end{thm}
-
 
 \begin{thm}
   \label{thm:uniformConvergenceOfDerivatives}
@@ -2175,8 +2077,6 @@
     f'(x) = \lim_{n\rightarrow \infty} f'_n(x).
   \end{equation}
 \end{thm}
-
-
 
 \begin{exc}
   Give a different proof of Theorem
@@ -2195,9 +2095,7 @@
   is equicontinuous on $K$. 
 \end{thm}
 
-
 \subsection{Pointwise and uniform boundedness}
-
 
 \begin{defn}
   \label{eq:uniformlyBounded}
@@ -2247,9 +2145,6 @@
   and contains a uniformly convergent subsequence.
 \end{thm}
 
-
-
-
 \subsection{The Stone-Weierstrass theorem}
 
 \begin{defn}
@@ -2275,7 +2170,6 @@
   converges to some $f\in {\cal A}$.
 \end{defn}
 
-
 \begin{defn}
   \label{def:uniformClosure}
   The \emph{uniform closure of an algebra ${\cal A}$ of scalar functions}
@@ -2294,7 +2188,6 @@
   The uniform closure ${\cal B}$ of any algebra ${\cal A}$
   of bounded scalar functions is a uniformly closed algebra. 
 \end{lem}
-
 
 \begin{lem}
   \label{lem:polyConvergesToAbsX}
@@ -2482,6 +2375,8 @@
   over the $n$-cell $I^n$.
 \end{coro}
 
-
-
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../numPDEs2cols"
+%%% End:
 
