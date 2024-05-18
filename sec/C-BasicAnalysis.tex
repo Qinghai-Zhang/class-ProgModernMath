@@ -121,6 +121,21 @@ This is one of the main motivations of infinite sequence and series.
 % \end{equation*}
 
 \begin{lem}
+  \label{lem:seqCvTo0IsEqulvalentToAbsoluteSeqCvTo0}
+  Let $(a_{n})$ be a sequence. Then
+  \begin{displaymath}
+    \lim_{n\rightarrow \infty}a_{n}=0\
+    \Leftrightarrow\
+    \left|\lim_{n\rightarrow \infty}a_{n}\right|=0\
+    \Leftrightarrow\
+    \lim_{n\rightarrow\infty}|a_{n}|=0.
+  \end{displaymath}
+\end{lem}
+\begin{proof}
+  It follows from \eqref{eq:limitOfSequence} with $L=0$.
+\end{proof}
+
+\begin{lem}
   \label{lem:seqLimitIsUnique}
   A convergent sequence has a unique limit.
 \end{lem}
@@ -575,6 +590,23 @@ This is one of the main motivations of infinite sequence and series.
   to $\frac{a}{b}$.
 \end{proof}
 
+\begin{coro}
+  \label{coro:seqToLIsEquvalentToAbsOfSeqMinusLTo0}
+  Let $(a_{n})_{n\in \mathbb{N}}$ be a sequence. Then
+  $\lim_{n\rightarrow\infty}a_{n}=L$ if and only if
+  $\lim_{n\rightarrow\infty}|a_{n}-L|=0$.
+\end{coro}
+\begin{proof}
+  By Theorem \ref{thm:limitOperation}(a) and Lemma
+  \ref{lem:seqCvTo0IsEqulvalentToAbsoluteSeqCvTo0},
+  \begin{align*}
+    \lim_{n\rightarrow\infty}a_{n}=L
+    &\Leftrightarrow
+      \lim_{n\rightarrow\infty}(a_{n}-L)=0\\
+    &\Leftrightarrow
+      \lim_{n\rightarrow\infty}|a_{n}-L|=0.\qedhere
+  \end{align*}
+\end{proof}
 
 \subsection{$\lim\sup$, $\lim\inf$, and
   the asymptotic notation}
@@ -917,6 +949,40 @@ This is one of the main motivations of infinite sequence and series.
   Lemma \ref{lem:limSupLimInfIndependenceOnStartingIndices}. 
 \end{proof}
 
+\begin{lem}
+  \label{lem:limitPreserveOrder}
+   Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
+  be two convergent sequences of real numbers
+  that satisfy
+  \begin{displaymath}
+    \exists M\in \mathbb{N} \text{ s.t. }
+    \forall n\ge M, a_n\le b_n.
+  \end{displaymath}
+  Then we have
+  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$.
+\end{lem}
+\begin{proof}
+  Lemmas \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(f)
+  and \ref{lem:limitSupAndInfPreserveOrder} yield
+  \begin{displaymath}
+    \lim_{n\rightarrow\infty}a_{n}
+    =\lim\sup_{n\rightarrow\infty}a_{n}\le
+    \lim\sup_{n\rightarrow\infty}b_{n}
+    =\lim_{{n\rightarrow\infty}}b_{n}.\qedhere
+  \end{displaymath}
+\end{proof}
+
+\begin{rem}
+  In Lemma \ref{lem:limitPreserveOrder}, if we
+  replace ``$a_{n}\le b_{n}$'' with ``$a_{n}<b_{n}$'',
+  then we also get the same conclusion
+  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
+  where ``$\le$'' cannot be strengthened to ``$<$''.
+  This is deeply connected to the difference between
+  open and closed sets.
+\end{rem}
+
+
 \begin{thm}[Squeeze test or the sandwich theorem]
   \label{thm:squeezeTest}
   Let $(a_n)_{n=m}^{\infty}$, $(b_n)_{n=m}^{\infty}$,
@@ -948,23 +1014,6 @@ This is one of the main motivations of infinite sequence and series.
   \ref{lem:qualitiesAboutLimitSuperiorAndInferior}(f) again,
   we have $\lim_{n\rightarrow \infty}b_{n}=L$.
 \end{proof}
-
-\begin{rem}
-  Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
-  be two convergent sequences of real numbers
-  that satisfy
-  \begin{displaymath}
-    \exists M\in \mathbb{N} \text{ s.t. }
-    \forall n\ge M, a_n< b_n.
-  \end{displaymath}
-  Then we have
-  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
-  where ``$\le$'' cannot be strengthened to ``$<$''.
-  In addition, replace ``$a_n< b_n$''
-  with ``$a_n\le b_n$'' and we get the same conclusions.
-  This is deeply connected to the difference between
-  open and closed sets.
-\end{rem}
 
 \begin{ntn}[Asymptotic notation]
   \label{ntn:asymptoticNtn}
@@ -1185,12 +1234,12 @@ This is one of the main motivations of infinite sequence and series.
     \end{array}
   \end{displaymath}
   and hence
-  \begin{displaymath}
+  \begin{align*}
     \forall n\ge N,\ 
-    |a_{n}|=\left|\frac{a_{n}}{a_{n-1}}\cdot \frac{a_{n-1}}{a_{n-2}}
-     \cdots \frac{a_{N+1}}{a_{N}}\cdot a_{N}  \right|
-    <|a_{N}|(\alpha+\epsilon)^{n-N}.
-  \end{displaymath}
+    |a_{n}|&=\left|\frac{a_{n}}{a_{n-1}}\cdot \frac{a_{n-1}}{a_{n-2}}
+     \cdots \frac{a_{N+1}}{a_{N}}\cdot a_{N}  \right|\\
+    &<|a_{N}|(\alpha+\epsilon)^{n-N}.
+  \end{align*}
   Then (i) follows from Theorem \ref{thm:comparisonTest}
   by comparing $(|a_n|)$ with the geometric series.
   (ii) can be shown similarly.
@@ -1312,7 +1361,8 @@ This is one of the main motivations of infinite sequence and series.
 \begin{defn}[Limit of a scalar function]
   \label{def:limitOfAScalarFunc}
   Consider a function $f: I\rightarrow \mathbb{R}$
-   with $I(c,r)=(c-r,c)\cup (c,c+r)$.
+  with $I=I(c,r)=(c-r,c)\cup (c,c+r)$, where $c\in \mathbb{R}$
+  and $r\in \mathbb{R}^{+}$.
   The \emph{limit} of $f(x)$  exists
    as $x$ approaches $c$, written
      $\lim_{x\rightarrow c} f(x) = L$,
@@ -1357,6 +1407,176 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   is that two functions have the same limit
   if their difference can be shown to be as small as you wish.
 \end{rem}
+
+\begin{thm}
+  \label{thm:FuncLimitToSeqLimit}
+  Let $f:\mathbb{R}\rightarrow \mathbb{R}$ be a function.
+  Then $\lim_{x\rightarrow c}f(x)=L$ if and only if
+  for any sequence $(a_{n})_{n\in \mathbb{N}^{+}}$ satisfying
+  $a_{n}\neq c$ for all $n$ and
+  $\lim_{n\rightarrow\infty}a_{n}=c$, we have
+  $\lim_{n\rightarrow \infty}f(a_{n})=L$.
+\end{thm}
+\begin{proof}
+  For the necessity, Definition \ref{def:limitOfAScalarFunc}
+  implies that
+  \begin{displaymath}
+    (*):\quad
+    \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
+    \forall\ 0<|x-c|<\delta, |f(x)-L|<\epsilon.
+  \end{displaymath}
+  Since $\lim_{n\rightarrow\infty}a_{n}=c$, there exists $N\in \mathbb{N}^{+}$
+  such that $|a_{n}-c|<\delta$ for all $n>N$. Then $a_{n}\neq c$ and
+  ($\ast$) imply $|f(a_{n})-L|<\epsilon$ for all $n>N$, which yields
+  the convergence of $(f(a_{n}))$ to $L$.
+
+  For the sufficiency, suppose that $\lim_{x\rightarrow c}f(x)=L$
+  does not hold. Then we have
+  \begin{align*}
+    (**): \quad
+    \exists \epsilon_{0}>0,&\text{ s.t. }
+    \forall n\in \mathbb{N}^{+},\ \exists a_{n}, 0<|a_{n}-c|<\frac{1}{n},\\
+    &\text{ s.t. } |f(a_{n})-L|\ge \epsilon_{0}.
+  \end{align*}
+  The squeeze test implies that
+  $\lim_{n\rightarrow\infty}|a_{n}-c|=0$, which,
+  by Corollary
+  \ref{coro:seqToLIsEquvalentToAbsOfSeqMinusLTo0},
+  is equivalent to
+  $\lim_{n\rightarrow\infty}a_{n}=c$.
+  Then we must have
+  $\lim_{n\rightarrow\infty}f(a_{n})=L$,
+  which contradicts ($\ast\ast$).
+\end{proof}
+
+\begin{exm}
+  \label{exm:nonexistLimitForShowingEpsDelt}
+  We show that $\lim_{x\rightarrow 0}\sin \frac{1}{x}$ does not exist
+  as follows. Suppose that $\lim_{x\rightarrow 0}f(x)$ exists, where
+  $f(x):=\sin \frac{1}{x}, x\in \mathbb{R}\backslash \{0\}.$
+  Then we define two sequences $(a_{n}),(b_{n})$, where
+  $a_{n}:=(\frac{\pi}{2}+2n\pi)^{-1},\
+      b_{n}:=(2n\pi)^{-1},\ n\ge 1.$
+  Since $\lim_{n\rightarrow\infty}a_{n}=\lim_{n\rightarrow\infty}b_{n}=0$,
+  Theorem \ref{thm:FuncLimitToSeqLimit} implies
+  that $\lim_{n\rightarrow\infty}f(a_{n})=\lim_{n\rightarrow\infty}f(b_{n})$.
+  However,
+  \begin{displaymath}
+    \begin{array}{l}
+      f(a_{n})=\sin \frac{1}{a_{n}}=\sin(\frac{\pi}{2}+2n\pi)=1,\\
+      f(b_{n})=\sin \frac{1}{b_{n}}=\sin(2n\pi)=0,\quad n\ge 1,
+    \end{array}
+  \end{displaymath}
+  contradiction!
+\end{exm}
+
+\begin{thm}[Cauchy criterion for limit of a scalar function]
+  \label{thm:FuncLimitCauchyCriterion}
+  Let $f:I\rightarrow \mathbb{R}$ with
+  $I=I(c,r)=(c-r,c)\cup (c,c+r)$.
+  Then $\lim_{x\rightarrow c}f(x)$ exists if and only if
+  \begin{equation}
+    \begin{array}{l}
+      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }\\
+      \forall x,y\in I(c,\delta),\ |f(x)-f(y)|<\epsilon.
+    \end{array}
+  \end{equation}
+\end{thm}
+\begin{proof}
+  For the necessity, let $L:=\lim_{x\rightarrow c}f(x)$. Definition
+  \ref{def:limitOfAScalarFunc} implies
+  \begin{displaymath}
+    \begin{array}{l}
+      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
+      \forall x\in I(c,\delta),\ |f(x)-L|<\frac{\epsilon}{2}.
+    \end{array}
+  \end{displaymath}
+  Hence 
+  \begin{displaymath}
+    \begin{array}{l}
+      \forall x,y\in I(c,\delta),\\
+      |f(x)-f(y)|\le |f(x)-L|+|f(y)-L|
+      <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
+    \end{array}
+  \end{displaymath}
+  For the sufficiency, for any sequence $(a_{n})$
+  satisfying $a_{n}\neq c$ and $\lim a_{n}=c$, we have
+  \begin{align*}
+    &\ \exists N\in \mathbb{N}^{+}, \text{ s.t. }
+      0<|a_{n}-c|<\delta,\forall n>N\\
+    \Rightarrow &\ a_{m},a_{n}\in I(c,\delta), \forall m,n>N\\
+    \Rightarrow &\ \forall \epsilon>0, \exists N\in \mathbb{N}^{+},
+                  \text{ s.t. } |f(a_{m})-f(a_{n})|<\epsilon,\
+                  \forall m,n>N.
+  \end{align*}
+  Hence Definition \ref{def:CauchySequence} yields that
+  $(f(a_{n}))$ is Cauchy. Then
+  Theorems \ref{thm:realCauchySeqConverges} and
+  \ref{thm:FuncLimitToSeqLimit} complete the proof.
+\end{proof}
+
+\begin{defn}[One sided limit of a scalar function]
+  \label{def:OneSidedLimitOfAScalarFunc}
+  Consider a function $f: I\rightarrow \mathbb{R}$
+   with $I=(c-r,c)\cup (c,c+r)$.
+  The \emph{left-sided limit} or \emph{left-hand limit} of $f(x)$ exists
+   as $x$ approaches $c$ from the left side of $c$, written
+     $\lim_{x\rightarrow c^{-}} f(x) = L$,
+  iff 
+  \begin{equation}
+    \forall \epsilon>0, \exists \delta>0, \text{ s.t. }
+    \forall x\in (c-r,c),\ |f(x)-L|<\epsilon.
+  \end{equation}
+  When this limit exists, we usually denote it by $f(c^{-})$, i.e.,
+  \begin{displaymath}
+    f(c^{-})=\lim_{x\rightarrow c^{-}}f(x).
+  \end{displaymath}
+  Similarly, $f(c^{+})$,
+  the \emph{right-sided limit} or \emph{right-hand limit} of $f(x)$
+  at $c$,
+  can be also defined.
+\end{defn}
+
+\begin{thm}
+  \label{thm:OneSidedLimitAndLimitExistence}
+   Let $f: \mathbb{R}\rightarrow \mathbb{R}$ be a function.
+   Then $\lim_{x\rightarrow c}f(x)$ exists if and only if
+   $f(c^{-})=f(c^{+})$.
+   \begin{proof}
+     It follows from Definitions \ref{def:limitOfAScalarFunc}
+     and \ref{def:OneSidedLimitOfAScalarFunc}.
+   \end{proof}
+\end{thm}
+
+\begin{thm}
+  \label{thm:FuncOneSidedLimitToSeqLimit}
+  Let $f:\mathbb{R}\rightarrow \mathbb{R}$ be a function.
+  Then $f(c^{-})=L$ (or $f(c^{+})=L$) if and only if
+  for any sequence $(a_{n})_{n\in \mathbb{N}^{+}}$ satisfying
+  $a_{n}< c$ (or $a_{n}>c$) for all $n$ and
+  $\lim_{n\rightarrow\infty}a_{n}=c$, we have
+  $\lim_{n\rightarrow \infty}f(a_{n})=L$.
+\end{thm}
+\begin{proof}
+  It follows from the proof of Theorem \ref{thm:FuncLimitToSeqLimit}.
+\end{proof}
+
+\begin{thm}[Cauchy criterion for one sided limit of a scalar function]
+  \label{thm:FuncOneSidedLimitCauchyCriterion}
+  Let $f:I\rightarrow \mathbb{R}$ with $I=(c-r,c)$ (or $I=(c,c+r)$).
+  Then $f(c^{-})$ (or $f(c^{+})$) exists if and only if
+  \begin{equation}
+    \begin{array}{l}
+      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }\\
+      \forall x,y\in (c-\delta,c)\ 
+      (\text{or } (c,c+\delta)),\ |f(x)-f(y)|<\epsilon.
+    \end{array}
+  \end{equation}
+\end{thm}
+\begin{proof}
+  It follows from the proof of
+  Theorem \ref{thm:FuncLimitCauchyCriterion}.
+\end{proof}
 
 % \begin{defn}
 %   The \emph{open ball} centered at $P_0\in \mathbb{R}^n$
@@ -1493,13 +1713,75 @@ This idea is packaged in the $\epsilon-\delta$ technique.
    \end{equation}
 \end{defn}
 
+\begin{thm}
+  \label{thm:continuousEquivSeqLimit}
+  Let $f:\mathbb{R}\rightarrow \mathbb{R}$ be a function
+  and $c\in \mathbb{R}$.
+  Then $f$ is continuous at $c$ if and only if
+  for any sequence $(a_{n})_{n\in \mathbb{N}^{+}}$ satisfying
+  $a_{n}\neq c$ for all $n$ and
+  $\lim_{n\rightarrow\infty}a_{n}=c$, the sequence
+  $(f(a_{n}))_{n\in \mathbb{N}^{+}}$ is convergent to $f(c)$.
+\end{thm}
+\begin{proof}
+  It follows from Definition \ref{def:continuousScalarFunc}
+  and Theorem \ref{thm:FuncLimitToSeqLimit} directly.
+\end{proof}
+
+\begin{defn}
+  \label{def:leftRightContinuousScalarFunc}
+  $f: \mathbb{R}\rightarrow \mathbb{R}$
+  is \emph{left-continuous} at $c$
+  iff
+   \begin{equation}
+     \label{eq:leftContinuous}
+     f(c^{-})=\lim_{x\rightarrow c^{-}} f(x) = f(c).
+   \end{equation}
+   $f$ is \emph{right-continuous} at $c$ iff
+   \begin{equation}
+     \label{eq:rightContinuous}
+     f(c^{+})=\lim_{x\rightarrow c^{+}} f(x) = f(c).
+   \end{equation}
+\end{defn}
+
+\begin{thm}
+  \label{thm:OneSidedContinuityAndContinuity}
+  $f:\mathbb{R}\rightarrow \mathbb{R}$ is continuous at $c$
+  if and only if $f(c^{-})=f(c^{+})=f(c)$.
+\end{thm}
+\begin{proof}
+  It follows from Definitions \ref{def:continuousScalarFunc}
+  and \ref{def:leftRightContinuousScalarFunc}, and
+  Theorem \ref{thm:FuncLimitToSeqLimit}.
+\end{proof}
+
+\begin{thm}
+  \label{thm:OneSidedContinuousEquivOneSidedSeqLimit}
+  Let $f:\mathbb{R}\rightarrow \mathbb{R}$
+  and $c\in \mathbb{R}$.
+  Then $f$ is left-continuous (or right-continuous) at $c$ if and only if
+  for any sequence $(a_{n})_{n\in \mathbb{N}^{+}}$ satisfying
+  $a_{n}< c$ (or $a_{n}>c$) for all $n$ and
+  $\lim_{n\rightarrow\infty}a_{n}=c$, the sequence
+  $(f(a_{n}))_{n\in \mathbb{N}^{+}}$ is convergent to $f(c)$.
+\end{thm}
+\begin{proof}
+  It follows from Definition \ref{def:leftRightContinuousScalarFunc}
+  and Theorem \ref{thm:FuncOneSidedLimitToSeqLimit}.
+\end{proof}
+
 \begin{defn}
   \label{def:continuousFuncOnR}
   A scalar function $f$ is \emph{continuous on} $(a,b)$,
      written \mbox{$f\in{\cal C}(a,b)$}, 
-     if (\ref{eq:continuous}) holds  $\forall x\in (a,b)$.
+     if (\ref{eq:continuous}) holds for all $ x\in (a,b)$.
+     $f$ is \emph{continuous on} $[a,b]$,
+     written \mbox{$f\in{\cal C}[a,b]$},
+     if $f\in \mathcal{C}(a,b)$,
+     $f$ is right-continuous at $a$ and $f$ is left-continuous
+     at $b$.
 \end{defn}
-
+   
 % \begin{defn}
 %   $f: \mathbb{R}^n\rightarrow \mathbb{R}$
 %   is \emph{continuous} at $Q$
@@ -1512,12 +1794,125 @@ This idea is packaged in the $\epsilon-\delta$ technique.
 %     if (\ref{eq:continuous}) holds  $\forall Q\in {\cal U}$.
 % \end{defn}
 
+\begin{thm}
+  \label{thm:continuousImpliesBoundedness}
+  A scalar function $f$ is bounded on $[a,b]$
+   if $f\in {\cal C}[a,b]$.
+\end{thm}
+\begin{proof}
+  By Definition \ref{def:continuousFuncOnR},
+  $-f\in \mathcal{C}[a,b]$. Hence
+  it suffices to show that $f$ is bounded above.
+  We prove this by contradiction.
+  Suppose that
+  \begin{displaymath}
+    (*):\quad
+    \forall n\in \mathbb{N}^{+},\ \exists x_{n}\in [a,b],
+    \text{ s.t. } f(x_{n})>n.
+  \end{displaymath}
+  Then the Bolzano-Weierstrass theorem
+  ensures that the sequence $(x_{n})$ has a subsequence $(x_{n_{k}})$
+  which converges to $c\in \mathbb{R}$. Moreover,
+  $a\le x_{n_{k}}\le b$ and Lemma
+  \ref{lem:limitPreserveOrder} imply that $a\le c\le b$.
+  By ($\ast$), there are only finitely many terms in $(x_{n_{k}})$
+  equal to $c$. Hence
+  we may assume that $x_{n_{k}}\neq c$ for all $k\in \mathbb{N}^{+}$.
+  Then Theorem \ref{thm:continuousEquivSeqLimit} yields
+  \begin{displaymath}
+    (**):\quad
+    \lim_{k\rightarrow\infty}f(x_{n_{k}})=f(c).
+  \end{displaymath}
+  However, we have
+  $f(x_{n_{k}})>n_{k}\ge k,\forall k\in \mathbb{N}$.
+  Then there exists $k_{0}>|f(c)|+1$ such that
+  \begin{displaymath}
+    f(x_{n_{k}})>k>k_{0}>|f(c)|+1\ge f(c)+1,\ \forall k>k_{0}.
+  \end{displaymath}
+  Hence Lemmas \ref{lem:limitPreserveOrder} yields
+  \begin{displaymath}
+    \lim_{k\rightarrow\infty}f(x_{n_{k}})
+  \ge f(c)+1>f(c),
+  \end{displaymath}
+  which contradicts ($\ast\ast$).
+\end{proof}
+
 \begin{thm}[Extreme values]
   \label{thm:extremeValues}
   A continuous function $f:[a,b]\rightarrow\mathbb{R}$
   attains its maximum at some point \mbox{$x_{\max}\in [a,b]$}
   and its minimum at some point $x_{\min}\in [a,b]$.
 \end{thm}
+\begin{proof}
+  WLOG, we only prove the first statement.
+  Define $S:=\{f(x):x\in [a,b]\}$, which is a nonempty set.
+  Theorem
+  \ref{thm:continuousImpliesBoundedness} yields the boundedness of $S$,
+  and then Theorem
+  \ref{thm:completenessOfR} yields that $S$ has
+  exactly one least upper bound, denoted by $M$. Then we have
+  \begin{displaymath}
+    M=\sup S=\sup_{x\in[a,b]}f(x)<+\infty.
+  \end{displaymath}
+  Hence Definition \ref{def:SupAndInf} yields
+  \begin{displaymath}
+    \forall n\in \mathbb{N}^{+},\ \exists x_{n}\in [a,b],
+    \text{ s.t. } M-\frac{1}{n}< f(x_{n}) \le M.
+  \end{displaymath}
+  By similar arguments in the proof of Theorem
+  \ref{thm:continuousImpliesBoundedness},
+  we may assume 
+  $\lim_{n\rightarrow\infty}x_{n}=c\in[a,b]$ and
+  $x_{n}\neq c$ for all $n$.
+  Then the squeeze test and
+  Theorem \ref{thm:continuousEquivSeqLimit} yield
+  \begin{displaymath}
+    f(c)=\lim_{n\rightarrow\infty}f(x_{n})=M.
+  \end{displaymath}
+  Hence $f$ attains its maximum at $x_{\max}=c\in[a,b]$.
+\end{proof}
+
+\begin{thm}[Zero value]
+  \label{thm:zeroValue}
+  Let $f\in \mathcal{C}[a,b]$. If $f(a)f(b)<0$, then
+  there exists some $c\in(a,b)$ such that $f(c)=0$.
+\end{thm}
+\begin{proof}
+  WLOG, we assume that $f(a)<0<f(b)$. Define
+  \begin{displaymath}
+    S:=\{x\in[a,b]: f(x)\le 0\},
+  \end{displaymath}
+  which is a nonempty bounded set
+  since $a\in S\subset [a,b]$.
+  Then Theorem \ref{thm:completenessOfR} yields that
+  $S$ has exactly one least upper bound, denoted by $c$.
+  Since $a\in S$, we have $a\le \sup S=c$; since $S\subset[a,b]$,
+  $b$ is an upper bound of $S$ and hence $b\ge\sup S=c$.
+  In summary, $c=\sup S\in [a,b]$.
+  Then Definition \ref{def:SupAndInf} yields
+  \begin{displaymath}
+    \forall n\in \mathbb{N}^{+},\
+    \exists x_{n}\in S, \text{ s.t. }
+    c-\frac{1}{n}< x_{n}\le c.
+  \end{displaymath}
+  The squeeze test implies $\lim_{n\rightarrow\infty}x_{n}=c$,
+  and Theorem \ref{thm:continuousEquivSeqLimit} implies
+  $\lim_{n\rightarrow\infty}f(x_{n})=f(c)$.
+  Since $x_{n}\in S$, we have $f(x_{n})\le 0$ and then
+  Lemma \ref{lem:limitPreserveOrder} yields $f(c)\le 0$.
+  In addition, $f(b)>0$ forces that $c<b$.
+  By similar arguments, we have
+  \begin{displaymath}
+    \forall n\in \mathbb{N},\
+    \exists y_{n}\in \left(c,c+\frac{1}{n}\right)\cap[a,b],
+    \text{ s.t. } y_{n}\not\in S \text{ or } f(y_{n})> 0
+  \end{displaymath}
+  and we get
+  \begin{displaymath}
+    f(c)=\lim_{n\rightarrow\infty}f(y_{n})\ge 0.
+  \end{displaymath}
+  Hence $f(c)=0$, which completes the proof.
+\end{proof}
 
 \begin{thm}[Intermediate value]
   \label{thm:intermediateValue}
@@ -1531,6 +1926,20 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   where  $m=\inf_{x\in[a,b]} f(x)$ and
    $M=\sup_{x\in[a,b]} f(x)$.
 \end{thm}
+\begin{proof}
+  If $m=M$, then $f$ is constant and hence
+  \eqref{eq:intermediateValue} holds clearly.
+  If $m<M$, then by Theorem \ref{thm:extremeValues},
+  there exists $c,d\in[a,b]$ such that
+  $f(c)=m,f(d)=M$. WLOG we assume $c<d$.
+  If $y=m$ or $y=M$, then taking $\xi=c$ or $\xi=d$ completes the proof.
+  Now let $y\in(m,M)$ and
+  define $g(x):=f(x)-y$. Then $g\in \mathcal{C}[a,b]$
+  by Definition \ref{def:continuousFuncOnR}, and we have
+  $g(c)<0,\ g(d)>0$. Theorem \ref{thm:zeroValue} implies
+  that there exists some $\xi\in(c,d)\subset[a,b]$ such that
+  $g(\xi)=0$, i.e., $y=f(\xi)$.
+\end{proof}
 
 \begin{rem}
 Theorem \ref{thm:intermediateValue}
@@ -1545,7 +1954,7 @@ Theorem \ref{thm:intermediateValue}
   is \emph{uniformly continuous} on $I$
   iff
    \begin{equation}
-     \label{eq:uniformlyContinuous}
+     \label{eq:uniformlyContinuousScalar}
      \begin{array}{l}
      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
      \\
@@ -1556,7 +1965,8 @@ Theorem \ref{thm:intermediateValue}
 \end{defn}
 
 \begin{exc}
-  Show that, on $(a,\infty)$,
+  \label{exc:1/xNotUniformlyContinuous}
+  Show that, on $(a,+\infty)$,
   $f(x)=\frac{1}{x}$ is uniformly continuous
    if $a>0$ 
    and is not so if $a=0$.
@@ -1564,23 +1974,31 @@ Theorem \ref{thm:intermediateValue}
 \begin{solution}
   If $a>0$, then
   $|f(x)-f(y)|=\frac{|x-y|}{xy} %< \frac{\delta}{xy}\
-  <\frac{|x-y|}{a^2}$.\\
-  Hence 
-  $\forall \epsilon>0, \exists \delta=a^2 \epsilon$,
-  s.t. \\$|x-y|<\delta \Rightarrow
-  |f(x)-f(y)|<\frac{|x-y|}{a^2}<\frac{a^2 \epsilon}{a^2}=\epsilon$.
+  <\frac{|x-y|}{a^2}$ for all $x,y>a$. Hence
+   \begin{displaymath}
+     \begin{array}{l}
+       \forall \epsilon>0,\exists \delta=a^{2}\epsilon>0,
+      \text{ s.t. }\\
+      \forall x,y>a,|x-y|<\delta \Rightarrow
+      |f(x)-f(y)|<\frac{|x-y|}{a^2}<\frac{a^2 \epsilon}{a^2}=\epsilon.
+     \end{array}
+   \end{displaymath}
 
   If $a=0$, negating the condition
    of uniform continuity,
-   i.e. eq. (\ref{eq:uniformlyContinuous}), yields
-  $\exists \epsilon>0$ s.t. $\forall\delta>0$
-   $\exists x,y>0$ s.t.
-   $(|x-y|<\delta) \wedge (|\frac{1}{x}-\frac{1}{y}|\ge \epsilon)$.
+   i.e., (\ref{eq:uniformlyContinuousScalar}) yields
+   \begin{align*}
+     \exists \epsilon>0, \text{ s.t. } &\forall \delta>0,
+       \exists x,y>0 \text{ s.t. }\\
+       &|x-y|<\delta \Rightarrow |f(x)-f(y)|\ge \epsilon.
+   \end{align*}
 
    We prove a stronger version:
-  $\forall \epsilon>0$, $\forall\delta>0$
-   $\exists x,y>0$ s.t.
-   $(|x-y|<\delta) \wedge (|f(x)-f(y)|\ge \epsilon)$.
+   \begin{align*}
+      \forall \epsilon>0, &\forall \delta>0,
+       \exists x,y>0 \text{ s.t. }\\
+       &|x-y|<\delta \Rightarrow |f(x)-f(y)|\ge \epsilon.
+   \end{align*}
 
 %  Set $\epsilon=\frac{1}{3}$.
   If $\delta\ge \frac{1}{2\epsilon}$,
@@ -1601,7 +2019,7 @@ Theorem \ref{thm:intermediateValue}
 \end{solution}
 
 \begin{exc}
-  On $(a,\infty)$,
+  On $(a,+\infty)$,
   $f(x)=\frac{1}{x^2}$ is uniformly continuous
    if $a>0$ 
    and is not so if $a=0$.
@@ -1652,7 +2070,7 @@ on $(0,\infty)$ iff
 
 We prove a stronger statement:
 \begin{align*}
-  \forall\epsilon>0 & \forall\delta>0,\exists x,y \in (0,\infty)
+  \forall\epsilon>0, & \forall\delta>0,\exists x,y \in (0,\infty)
   \text{ s.t. } \\
   &|x-y|<\delta\Rightarrow |f(x)-f(y)|\geq\epsilon.
 \end{align*}
@@ -1689,11 +2107,29 @@ $a=0$.
 \end{solution}
 
 \begin{thm}
+  \label{thm:UniformCoutinuityImpliesContinuity}
   Uniform continuity implies continuity
    but the converse is not true.
 \end{thm}
 \begin{proof}
-  exercise.
+  Let $f:I\rightarrow \mathbb{R}$ be uniformly continuous function on $I=(a,b)$.
+  Then for each $x\in I$, \eqref{eq:uniformlyContinuousScalar} implies that
+  \begin{align*}
+    &\forall \epsilon>0, \exists \delta>0, \text{ s.t. }\\
+    &\forall y\in I, 0<|y-x|<\delta \Rightarrow |f(y)-f(x)|<\epsilon. 
+  \end{align*}
+  Hence Definition \ref{def:limitOfAScalarFunc} gives that
+  $\lim_{y\rightarrow x}f(y)=f(x)$, and then Definition
+  \ref{def:continuousScalarFunc} shows that
+  $f$ is continuous at $x$. Since $x$ is arbitrary,
+  we conclude $f\in \mathcal{C}(a,b)$
+  by Definition \ref{def:continuousFuncOnR}.
+  
+  Now let $g(x):=\frac{1}{x},x>0$. Similar arguments in
+  Example \ref{exm:limitForShowingEpsDelta} yield that
+  $g\in \mathcal{C}(0,+\infty)$. However, Example
+  \ref{exc:1/xNotUniformlyContinuous} shows that
+  $g$ is not uniformly continuous on $(0,+\infty)$.
 \end{proof}
 
 \begin{lem}
@@ -1703,13 +2139,99 @@ $a=0$.
   iff it can be extended
   to a continuous function $\tilde{f}$ on $[a,b]$.
 \end{lem}
+\begin{proof}
+  First, we show that $f(a^{+})$ and $f(b^{-})$ exist.
+  \eqref{eq:uniformlyContinuousScalar} implies that
+  \begin{displaymath}
+    \begin{array}{l}
+      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }\\
+      \forall x,y\in (a,a+\delta) 
+      \Rightarrow\ |f(x)-f(y)|<\epsilon.
+    \end{array}
+  \end{displaymath}
+  Then Theorem \ref{thm:FuncOneSidedLimitCauchyCriterion} yields the
+  existence of $f(a^{+})$. The existence of $f(b^{-})$ can be shown
+  similarly.
+
+  Second, we define $\tilde{f}:[a,b]\rightarrow \mathbb{R}$ by
+  \begin{displaymath}
+    \tilde{f}(x)=\left\lbrace
+      \begin{array}{l}
+        f(a^{+}),\quad x=a,\\
+        f(x),\quad a<x<b,\\
+        f(b^{-}),\quad x=b.
+      \end{array}
+    \right.
+  \end{displaymath}
+  By Theorem \ref{thm:UniformCoutinuityImpliesContinuity},
+  $f\in \mathcal{C}(a,b)$ and hence $\tilde{f}\in \mathcal{C}(a,b)$.
+  By the definition of $\tilde{f}$,
+  \begin{displaymath}
+    \tilde{f}(a)=f(a^{+})
+    =\lim_{x\rightarrow a^{+}}f(x)
+    =\lim_{x\rightarrow a^{+}}\tilde{f}(x),
+  \end{displaymath}
+  which implies the right-continuity of $\tilde{f}$ at $a$,
+  c.f. Definition \ref{def:leftRightContinuousScalarFunc}.
+  The left-continuity of $\tilde{f}$ at $b$ can be proved similarly.
+  Then Definition \ref{def:continuousFuncOnR} yields that
+  $\tilde{f}\in \mathcal{C}[a,b]$.
+\end{proof}
 
 \begin{thm}[Uniform continuity]
   \label{thm:uniformContinuityScalarFunc}
   A continuous function $f: [a,b]\rightarrow \mathbb{R}$
   is uniformly continuous.
 \end{thm}
-
+\begin{proof}
+  We prove the statement by contradiction.
+  Negating the condition of uniform continuity, i.e.,
+  \eqref{eq:uniformlyContinuousScalar} yields
+  \begin{align*}
+    \exists \epsilon_{0}>0, &\text{ s.t. }
+    \forall n\in \mathbb{N}^{+}, \exists x_{n},y_{n}\in[a,b],
+    |x_{n}-y_{n}|<\frac{1}{n}\\
+    &\Rightarrow |f(x_{n})-f(y_{n})|\ge \epsilon_{0}. 
+  \end{align*}
+  By the Bolzano-Weierstrass theorem,
+  $(x_{n})_{n\in \mathbb{N}^{+}}$ has a subsequence
+  $(x_{n_{k}})_{k\in \mathbb{N}^{+}}$
+  which converges to some $c\in \mathbb{R}$.
+  Hence we have
+  \begin{align*}
+    &(*):\quad|x_{n_{k}}-y_{n_{k}}|<\frac{1}{n_{k}}\le \frac{1}{k},\\
+    &(**):\quad |f(x_{n_{k}})-f(y_{n_{k}})|\ge \epsilon_{0}.
+  \end{align*}
+  Then ($\ast$) gives that
+  \begin{displaymath}
+    0\le|y_{n_{k}}-c|\le |y_{n_{k}}-x_{n_{k}}|+|x_{n_{k}}-c|
+    \le \frac{1}{k}+|x_{n_{k}}-c|, k\in \mathbb{N}^{+}.
+  \end{displaymath}
+  Since Theorem \ref{thm:limitOperation} and
+  Corollary \ref{coro:seqToLIsEquvalentToAbsOfSeqMinusLTo0} imply
+  \begin{displaymath}
+    \lim_{k\rightarrow \infty}\left(\frac{1}{k}+|x_{n_{k}}-c|\right)
+  =\lim_{k\rightarrow \infty}\frac{1}{k}+
+  \lim_{k\rightarrow \infty}|x_{n_{k}}-c|=0,
+  \end{displaymath}
+  the squeeze test gives that
+  $\lim_{k\rightarrow\infty}|y_{n_{k}}-c|=0$ or
+  $\lim_{k\rightarrow\infty}y_{n_{k}}=c$. Then we have
+  \begin{align*}
+    0&=|f(c)-f(c)|\\
+     &=\left|\lim_{k\rightarrow\infty}f(x_{n_{k}})
+       -\lim_{k\rightarrow\infty}f(y_{n_{k}})\right|\\
+     &=\lim_{k\rightarrow\infty}|f(x_{n_{k}})-f(y_{n_{k}})|
+    \ge \epsilon_{0}>0,
+  \end{align*}
+  where the second step follows from the continuity
+  of $f$ and Theorem \ref{thm:continuousEquivSeqLimit},
+  the third step from Theorem \ref{thm:limitOperation} and
+  Lemma \ref{lem:seqCvTo0IsEqulvalentToAbsoluteSeqCvTo0},
+  and the fourth step from ($\ast\ast$) and
+  Lemma \ref{lem:limitPreserveOrder}. This contradiction
+  shows that $f$ must be uniformly continuous on $[a,b]$.
+\end{proof}
 
 \subsection{Differentiation of scalar functions}
 \label{sec:diff-funct}
@@ -1757,12 +2279,6 @@ $a=0$.
    ${\cal C}^k[a,b]$ is the space of functions $f$
    for which $f^{(k)}(x)$ is bounded and uniformly continuous on $(a,b)$.
 \end{defn}
-
-\begin{thm}
-  \label{thm:continuousImpliesBoundedness}
-  A scalar function $f$ is bounded on $[a,b]$
-   if $f\in {\cal C}[a,b]$.
-\end{thm}
 
 \begin{thm}
   \label{thm:Fermat}
@@ -2387,7 +2903,7 @@ By Definition \ref{def:TaylorSeries},
   is \emph{uniformly continuous} in $U\subset \mathbb{F}^m$
   iff
    \begin{equation}
-     \label{eq:uniformlyContinuous}
+     \label{eq:uniformlyContinuousVector}
      \begin{array}{l}
      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
      \\
