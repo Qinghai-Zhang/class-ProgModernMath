@@ -315,8 +315,8 @@
   Show that two norms $\|\cdot\|_A$ and $\|\cdot\|_B$
   on a linear space $V$ are equivalent
   if and only if each sequence converging with respect to
-  $\|\cdot\|_A$
-  also converges with respect to $\|\cdot\|_B$.
+  one norm %$\|\cdot\|_A$
+  also converges with respect to the other. %$\|\cdot\|_B$.
 \end{lem}
 
 \begin{thm}
@@ -436,9 +436,9 @@
 \end{defn}
 
 \begin{exc}
+  \label{exc:ellInftyComplete}
   Show that the sequence space
-  $(\ell^p, \|\cdot\|_p)$ is complete
-  for $p\in[1,+\infty]$.
+  $(\ell^{\infty}, \|\cdot\|_{\infty})$ is complete.
 \end{exc}
 
 \begin{exc}
@@ -458,7 +458,7 @@
     M_{\alpha}(f) := \sup_{x,y\in[a,b]; x\ne y}
     \frac{|f(x)-f(y)|}{|x-y|^{\alpha}} < \infty.
   \end{displaymath}
-  Define $\|f\|_{\alpha} = \|f\|_{\infty}+M_{\alpha}(f)$.
+  Define $\|f\|_{\alpha} := \|f\|_{\infty}+M_{\alpha}(f)$.
   Show that $({\cal C}^{\alpha}[a,b], \|\cdot\|_{\alpha})$
   is a Banach space.
 \end{exc}
@@ -517,6 +517,23 @@
 \section{The space ${\cal CL}(X,Y)$}
 \label{sec:space-CLXY}
 
+\begin{ntn}
+  For normed spaces $X$ and $Y$,
+  the \emph{set of all continuous linear transformations}
+  from $X$ to $Y$ is 
+  \begin{equation}
+    \label{eq:CL-XY}
+    {\cal CL}(X,Y) := {\cal C}(X,Y) \cap {\cal L}(X,Y),
+  \end{equation}
+  where ${\cal C}(X,Y)$ and ${\cal L}(X,Y)$
+  are given by 
+  Notation \ref{ntn:setOfContinuousScalarFuncs}
+  and Notation \ref{ntn:spaceOfLinearMaps}, respectively.
+  We also write ${\cal CL}(X)$ if $Y=X$, 
+\end{ntn}
+
+\subsection{Boundedness = continuity}
+
 \begin{defn}
   \label{def:boundedLinearMap}
   A linear map $T\in {\cal L}(X,Y)$ is \emph{bounded} if
@@ -528,21 +545,6 @@
     \forall x\in X,\ \  \|Tx\|_Y\le M \|x\|_X.
   \end{equation}
 \end{defn}
-
-\begin{ntn}
-  ${\cal C}{\cal L}(X,Y)$ denotes
-  the \emph{set of all continuous linear transformations
-  or bounded linear transformations}
-  from the normed space $X$ to the normed space $Y$,
-  \begin{equation}
-    \label{eq:CL-XY}
-    {\cal CL}(X,Y) := {\cal C}(X,Y) \cap {\cal L}(X,Y),
-  \end{equation}
-  where ${\cal L}(X,Y)$ is given by Notation \ref{ntn:spaceOfLinearMaps}.
-  We also write ${\cal CL}(X)$ if $Y=X$, 
-\end{ntn}
-
-\subsection{Boundedness = continuity}
 
 \begin{thm}
   \label{thm:contLinearOpEquBoundedOp}

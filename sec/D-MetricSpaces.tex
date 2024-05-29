@@ -246,52 +246,6 @@
   show that the metric space $({\cal C}[a,b],d_1)$
   is not complete.
 \end{exc}
-\begin{solution}
-  A Cauchy sequence $(x_n)$
-  that does not converge in $({\cal C}[a,b],d_1)$ is given by
-  \begin{equation*}
-    x_n(t) =
-    \begin{cases}
-      0 & t\in [a, c), \\
-      n(x-c) & t\in [c, c+1/n), \\
-      1 & t\in [c+1/n, b],
-    \end{cases}
-  \end{equation*}
-  where $c = (a+b)/2$.
-  \begin{enumerate}[(i)]
-  \item
-    $(x_n)$ is a Cauchy sequence:
-    for any given $\epsilon > 0$ and
-    $m > n > 1/\epsilon$,
-    \begin{align*}
-      d(x_m, x_n) &= \int_{c+1/m}^{c+1/n}|x_m(t) - x_n(t)| \dif t \le \int_{c+1/m}^{c+1/n} 1 \,\dif t \\
-      &= \frac{1}{n} - \frac{1}{m} < \epsilon.
-    \end{align*}
-  \item
-    $(x_n)$ does not converge:
-    For any $x\in {\cal C}[a, b]$,
-    \begin{align*}
-      d(x_n, x) =& \int_a^b|x_n(t) - x(t)| \dif t \\
-      =& \int_a^c|x(t)|\dif t + \int_c^{{c+1/n}}|x_n(t) - x(t)| \dif t \\
-      &+ \int_{c+1/n}^b|1 - x(t)| \dif t.
-    \end{align*}
-    Since the integrands are nonnegative,
-    so is each integral on the right.
-    Hence $d(x_n, x)\rightarrow 0$ would imply that
-    each integral approaches zero,
-    and since $x$ is continuous,
-    we would have
-    \begin{equation*}
-      x(t) =
-      \begin{cases}
-        0 & t\in [a, c), \\
-        1 & t\in (c, b].
-      \end{cases}
-    \end{equation*}
-    But this is impossible for a continuous function.
-    Hence $(x_n)$ does not have a limit in ${\cal C}[a, b]$.
-  \end{enumerate}
-\end{solution}
 
 \subsection{Dense subsets and separable spaces}
 \label{sec:dense-subsets}
@@ -483,7 +437,7 @@
 
 \begin{thm}
   \label{thm:existenceOfMetricCompletion}
-  Every metric space has a completion.
+  Every metric space has a unique completion.
 \end{thm}
 
 \begin{exm}
@@ -538,61 +492,8 @@
 \begin{exc}
   \label{exc:ellPisComplete}
   Show that the $\ell^p$ space in Definition \ref{def:lpSpace}
-  is complete for $p\ge 1$.
+  is complete for $p\in [1,+\infty)$.
 \end{exc}
-\begin{solution}
-  Let $(x_n)$ be any Cauchy sequence in $\ell^p$,
-  where $x_n = \left( \xi_1^{(n)}, \xi_2^{(n)}, \ldots \right)$.
-  Then $\forall \epsilon > 0$,
-  $\exists N$
-  s.t. $\forall m, n > N$,
-  \begin{equation*}
-    d(x_m, x_n) = \left( \sum_{j=1}^{\infty}\left| \xi_j^{(m)} - \xi_j^{(n)} \right|^p \right)^{1/p}
-    < \epsilon.
-  \end{equation*}
-  It follows that
-  \begin{equation*}
-    \forall j = 1, 2, \ldots, \,
-    \forall m, n > N, \quad
-    \left| \xi_j^{(m)} - \xi_j^{(n)} \right| < \epsilon.
-  \end{equation*}
-  That is,
-  for any fixed $j$,
-  $\left( \xi_j^{(n)} \right)$ is a Cauchy sequence in $\mathbb{C}$.
-  The completeness of $\mathbb{C}$ implies that
-  \begin{equation*}
-    \forall j=1, 2, \ldots,
-    \exists \xi_j \in \mathbb{C}
-    \text{ s.t. }
-    \lim_{n\rightarrow\infty}\xi_j^{(n)} = \xi_j.
-  \end{equation*}
-  We show that $x = (\xi_j)\in \ell^p$ and
-  $\lim_{n\rightarrow\infty}x_n = x$.
-  We have
-  \begin{equation*}
-    \forall k=1, 2, \ldots, \,
-    \forall m, n > N, \quad
-    \sum_{j=1}^k \left| \xi_j^{(n)} - \xi_j^{(m)} \right|^p < \epsilon^p.
-  \end{equation*}
-  Letting $m\rightarrow\infty$,
-  we obtain for any $n > N$,
-  \begin{equation*}
-    \forall k=1, 2, \ldots, \quad
-    \sum_{j=1}^k \left| \xi_j^{(n)} - \xi_j \right|^p \le \epsilon^p.
-  \end{equation*}
-  We may now let $k\rightarrow\infty$,
-  then
-  \begin{equation*}
-    \forall n > N, \quad
-    \sum_{j=1}^{\infty} \left| \xi_j^{(n)} - \xi_j \right|^p \le \epsilon^p.
-  \end{equation*}
-  This shows that
-  $\lim_{n\rightarrow\infty}x_n = x$ and
-  $x_n - x = \left( \xi_j^{(n)} - \xi_j \right)\in \ell^p$.
-  Since $x_n\in \ell^p$,
-  it follows by means of the triangle inequality that
-  $x = x_n + (x - x_n)\in \ell^p$.
-\end{solution}
 
 \begin{ntn}
   \label{ntn:zeroSequenceSpaces}
@@ -676,10 +577,6 @@
   Show that $\emptyset$ and ${\cal X}$
   are both open and closed.
 \end{exc}
-\begin{solution}
-  This follows directly from
-  Definitions \ref{def:openSetInMetricSpace} and \ref{def:closedSets}.
-\end{solution}
 
 \begin{lem}
   \label{lem:intersectionOpenSets}
@@ -694,7 +591,7 @@
 \begin{exc}
   \label{exc:meagerSetComplementIsDense}
   If a closed set $F$ in a metric space ${\cal X}$
-  does not contain any open set,
+  does not contain any nonempty open set,
   then ${\cal X}\setminus F$ is dense in ${\cal X}$.
 \end{exc}
 
@@ -1017,13 +914,6 @@
   in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
 \end{lem}
 
-\begin{defn}
-  \label{def:openMap}
-  A map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces is \emph{open}
-  if its image of any open set is open; 
-  it is \emph{closed} if its image of any closed set is closed. 
-\end{defn}
-
 \subsection{Separation properties of metric spaces}
 \label{sec:separ-prop}
 
@@ -1112,6 +1002,13 @@
 \label{sec:homeomorphisms}
 
 \begin{defn}
+  \label{def:openMap}
+  A map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces is \emph{open}
+  if its image of any open set is open; 
+  it is \emph{closed} if its image of any closed set is closed. 
+\end{defn}
+
+\begin{defn}
   A \emph{homeomorphism} $f:{\cal X}\rightarrow {\cal Y}$
   between metric spaces
   is a bijective map such that both $f$ and $f^{-1}$
@@ -1136,13 +1033,14 @@
 
 \begin{coro}
   A homeomorphism $f:{\cal X}\rightarrow {\cal Y}$
-  preserves all topological properties of ${\cal X}$,
+  preserves all topological properties of ${\cal X}$. 
 \end{coro}
 
 \begin{defn}
+  \label{def:topoEmbedding}
   A \emph{(topological) embedding} of ${\cal X}$ in ${\cal Y}$
   is an injective map $f:{\cal X}\rightarrow{\cal Y}$
-  such that the map $f':{\cal X}\rightarrow f({\cal X})$
+  such that the map $g:{\cal X}\rightarrow f({\cal X})$
   obtained by restricting the codomain of $f$ to $f({\cal X})$
   is a homeomorphism.
 \end{defn}
@@ -1229,129 +1127,6 @@
   on $[0,1]\setminus C_n$ for $n=5$. 
   What are the values of $F(0)$ and $F(1)$?
 \end{exc}
-\begin{solution}
-  By the construction of $f$,
-  it is easily seen that
-  $f: [0, 1]\setminus C\rightarrow [0, 1]$ is monotonically increasing
-  and satisfies
-  \begin{equation*}
-    \forall n\in \mathbb{N}^+,
-    \forall x, y\in [0, 1]\setminus C,
-    |x - y| < 3^{-n},
-    |f(x) - f(y)| \le 2^{-n},
-  \end{equation*}
-  which yields the uniform continuity of $f$.
-  It follows from Theorem \ref{thm:continuousExt} and
-  the fact that $[0, 1]\setminus C$ is dense in $[0, 1]$
-  that $F$ is well defined,
-  and moreover,
-  it is continuous.
-
-  We now show that $F$ is monotonically increasing.
-  Since $[0, 1]\setminus C$ is dense in $[0, 1]$,
-  for any $x, y\in [0, 1]$ satisfying $x < y$,
-  there exist two sequences $(x_n)\subset [0, 1]\setminus C$ and
-  $(y_n)\subset [0, 1]\setminus C$ such that
-  $\lim_{n\rightarrow \infty}x_n = x$ and $\lim_{n\rightarrow \infty}y_n = y$.
-  Then
-  \begin{align*}
-    F(x) &= \lim_{n\rightarrow \infty}F(x_n) = \lim_{n\rightarrow \infty} f(x_n) \\
-           &\le \lim_{n\rightarrow \infty}f(y_n) =  \lim_{n\rightarrow \infty} F(y_n) = F(y),
-  \end{align*}
-  where the first and last steps follow from the continuity of $F$,
-  the second and fourth from the fact that $F|_{[0, 1]\setminus C} = f$,
-  and the third from the monotonically increasing property of $f$
-  on $[0, 1]\setminus C$.
-
-  The graph of $F$ on $[0, 1]\setminus C_n$ for $n=5$ is as below:
-  \begin{center}
-    \begin{tikzpicture}[yscale=4, xscale=8]
-      % Draw the axis
-      \draw[->] (0,0) -- (1.1,0) node[right] {$x$};
-      \draw[->] (0,0) -- (0,1.1) node[above] {$y$};
-
-      \draw[blue, thick] (1/3, 1/2) -- (2/3, 1/2);
-      % \draw [blue] (1/3,1/2) circle [radius=0.2pt];
-      % \draw [blue] (2/3,1/2) circle [radius=0.2pt];
-
-      \draw[blue, thick] (1/9, 1/4) -- (2/9, 1/4);
-      \draw[blue, thick] (7/9, 3/4) -- (8/9, 3/4);
-      % \draw [blue] (1/9,1/4) circle [radius=0.15pt];
-      % \draw [blue] (2/9,1/4) circle [radius=0.15pt];
-      % \draw [blue] (7/9,3/4) circle [radius=0.15pt];
-      % \draw [blue] (8/9,3/4) circle [radius=0.15pt];
-
-      % Labels
-      \draw (0,0) node[below left] {$0$};
-      \draw (1/3,0) node[below] {$\frac{1}{3}$};
-      \draw (2/3,0) node[below] {$\frac{2}{3}$};
-      \draw (1/9,0) node[below] {$\frac{1}{9}$};
-      \draw (2/9,0) node[below] {$\frac{2}{9}$};
-      \draw (7/9,0) node[below] {$\frac{7}{9}$};
-      \draw (8/9,0) node[below] {$\frac{8}{9}$};
-      \draw (0,1) node[left] {$1$};
-
-      \draw (1,0) node[below right] {$1$};
-      \draw (0,1/2) node[left] {$\frac{1}{2}$};
-      \draw (0,1/4) node[left] {$\frac{1}{4}$};
-      \draw (0,3/4) node[left] {$\frac{3}{4}$};
-      % Cantor function jumps
-      \draw[dotted] (1/3,1/2) -- (1/3,0);
-      \draw[dotted] (2/3,1/2) -- (2/3,0);
-      \draw[dotted] (1/9,1/4) -- (1/9,0);
-      \draw[dotted] (2/9,1/4) -- (2/9,0);
-      \draw[dotted] (7/9,3/4) -- (7/9,0);
-      \draw[dotted] (8/9,3/4) -- (8/9,0);
-
-      \draw[blue] (1/27,1/8) -- (2/27,1/8);
-      \draw[blue] (7/27,3/8) -- (8/27,3/8);
-      \draw[blue] (19/27,5/8) -- (20/27,5/8);
-      \draw[blue] (25/27,7/8) -- (26/27,7/8);
-      % \draw [blue] (1/27,1/8) circle [radius=0.1pt];
-      % \draw [blue] (2/27,1/8) circle [radius=0.1pt];
-      % \draw [blue] (7/27,3/8) circle [radius=0.1pt];
-      % \draw [blue] (8/27,3/8) circle [radius=0.1pt];
-      % \draw [blue] (19/27,5/8) circle [radius=0.1pt];
-      % \draw [blue] (20/27,5/8) circle [radius=0.1pt];
-      % \draw [blue] (25/27,7/8) circle [radius=0.1pt];
-      % \draw [blue] (26/27,7/8) circle [radius=0.1pt];
-
-      \draw[blue] (1/27,1/8) -- (2/27,1/8);
-      \draw[blue] (1/27,1/8) -- (2/27,1/8);
-      \draw[blue] (1/27,1/8) -- (2/27,1/8);
-      \draw[blue] (1/27,1/8) -- (2/27,1/8);
-
-      \draw[blue] (1/81,1/16) -- (2/81,1/16);
-      \draw[blue] (7/81,3/16) -- (8/81,3/16);
-      \draw[blue] (19/81,5/16) -- (20/81,5/16);
-      \draw[blue] (25/81,7/16) -- (26/81,7/16);
-      \draw[blue] (55/81,9/16) -- (56/81,9/16);
-      \draw[blue] (61/81,11/16) -- (62/81,11/16);
-      \draw[blue] (73/81,13/16) -- (74/81,13/16);
-      \draw[blue] (79/81,15/16) -- (80/81,15/16);
-
-      \draw[blue] (1/243,1/32) -- (2/243,1/32);
-      \draw[blue] (7/243,3/32) -- (8/243,3/32);
-      \draw[blue] (19/243,5/32) -- (20/243,5/32);
-      \draw[blue] (25/243,7/32) -- (26/243,7/32);
-      \draw[blue] (55/243,9/32) -- (56/243,9/32);
-      \draw[blue] (61/243,11/32) -- (62/243,11/32);
-      \draw[blue] (73/243,13/32) -- (74/243,13/32);
-      \draw[blue] (79/243,15/32) -- (80/243,15/32);
-
-      \draw[blue] (163/243,17/32) -- (164/243,17/32);
-      \draw[blue] (169/243,19/32) -- (170/243,19/32);
-      \draw[blue] (181/243,21/32) -- (182/243,21/32);
-      \draw[blue] (187/243,23/32) -- (188/243,23/32);
-      \draw[blue] (217/243,25/32) -- (218/243,25/32);
-      \draw[blue] (223/243,27/32) -- (224/243,27/32);
-      \draw[blue] (235/243,29/32) -- (236/243,29/32);
-      \draw[blue] (241/243,31/32) -- (242/243,31/32);
-    \end{tikzpicture}
-  \end{center}
-
-  $F(0) = 0$ and $F(1) = 1$.
-\end{solution}
 
 \subsection{Equicontinuity}
 
@@ -1394,31 +1169,6 @@
   in (\ref{eq:uniformlyContinuousMetricSpace})
   and (\ref{eq:LipschitzContinuityMetricSpaces})? 
 \end{exc}
-\begin{solution}
-  (\ref{eq:LipschitzContinuityMetricSpaces}) implies
-  (\ref{eq:uniformlyContinuousMetricSpace}):
-  This is easily seen by
-  setting $\delta = \epsilon / L$ in (\ref{eq:uniformlyContinuousMetricSpace}).
-  However,
-  the reverse implication is not true.
-  To see this,
-  consider the function
-  $f(x) = \sqrt{x}, x\in [0, 1]$ and
-  the metric spaces ${\cal X} = {\cal Y} = [0, 1]$ with
-  $d_{{\cal X}}(x, y) = d_{{\cal Y}}(x, y) = |x - y|$.
-  The uniform continuity of $f$ follows from
-  Theorem \ref{thm:uniformContinuityScalarFunc}.
-  That $f$ is not Lipschitz continuous
-  is because
-  $\forall L > 0$,
-  $\exists x = 0, y = (1+L)^{-2}/4$
-  s.t.
-  \begin{equation*}
-    d_{{\cal Y}}(f(x), f(y)) = f'(\xi)|x - y| > \frac{1}{2\sqrt{y}}|x - y| = (L + 1)|x - y|,
-  \end{equation*}
-  where the first step follows from Theorem \ref{thm:meanValue} and
-  the second from the monotonicity of $f'$.
-\end{solution}
 
 \begin{thm}[Vector mean value]
   \label{thm:vectorMeanValue}
@@ -1571,7 +1321,7 @@
   \label{def:sequentialCompactness}
   A subset $K$ of a metric space $({\cal X},d)$
   is \emph{sequentially compact}
-  if every sequence $(x_n)_{n\in \mathbb{N}^+}\subset K$ has
+  iff every sequence $(x_n)_{n\in \mathbb{N}^+}\subset K$ has
   a convergent subsequence that converges in $K$, i.e., 
   \begin{equation}
     \label{eq:sequentialCompactness}
@@ -1952,14 +1702,15 @@
 
 \begin{ntn}
   \label{ntn:setOfContinuousScalarFuncs}
-  ${\cal C}^{k}(M)$
+  ${\cal C}^{k}(X,Y)$
   denotes the set of $k$-times continuously differentiable functions
-  $M\rightarrow \mathbb{F}$
-  over a subset $M$ of a metric space where $\mathbb{F}=\mathbb{R}$
-  or $\mathbb{F}=\mathbb{C}$.
-  In particular, 
-  ${\cal C}(M):={\cal C}^{0}(M)$
-  contains all continuous functions over $M$.
+  $X\rightarrow Y$.
+  In particular, ${\cal C}^{k}(M)$
+  denotes the subset of ${\cal C}^{k}(X,Y)$
+  where $\mathbb{F}=\mathbb{R}$
+  or $\mathbb{F}=\mathbb{C}$
+  and ${\cal C}(X,Y):={\cal C}^{0}(X,Y)$
+  contains all continuous functions from $X$ to $Y$.
   When necessary, we also write ${\cal C}^k(M,\mathbb{R})$
   or ${\cal C}^k(M,\mathbb{C})$
   to indicate the codomain of the functions. 
@@ -1967,13 +1718,13 @@
 
 \begin{defn}
   \label{def:uniformBoundedSetInFuncMetricSpace}
-  For a metric space ${\cal X}$, 
-  a subset $F$ of ${\cal C}({\cal X})$ is \emph{uniformly bounded}
+  For a subset $E$ of a metric space ${\cal X}$, 
+  a subset $F$ of ${\cal C}(E)$ is \emph{uniformly bounded}
   iff
   \begin{equation}
     \label{eq:uniformBoundedSetInFuncMetricSpace}
     \exists M>0 \text{ s.t. }
-    \forall x\in {\cal X},\ \forall f \in F,\ 
+    \forall x\in E,\ \forall f \in F,\ 
     |f(x)| \le M.
   \end{equation}
 \end{defn}
@@ -2001,7 +1752,7 @@
   show that the set
   \begin{equation}
     \label{eq:equiContInRn2Compact}
-    {\cal F} := \left\{f\in {\cal C}^{(1)}(\overline{\Omega}) :
+    {\cal F} := \left\{f\in {\cal C}^{1}(\overline{\Omega}) :
       \forall x\in \Omega,\ |f(x)|\le M_1;\, 
       \|\nabla f(x)\|\le M_2
     \right\}
@@ -2077,35 +1828,6 @@
   Show that the functions in (\ref{eq:construcRatVsIrrat})
   and (\ref{eq:rationalVsIrr}) are identical. 
 \end{exc}
-\begin{solution}
-  Define
-  \begin{equation*}
-    a_m(x) = \lim_{n\rightarrow \infty}(\cos m!\pi x)^{{2n}}.
-  \end{equation*}
-  If $x$ is rational,
-  then there exists prime numbers $p$ and $q\in \mathbb{N}^+$ such that
-  $x = p/q$.
-  Therefore,
-  \begin{equation*}
-    \forall m \ge q, \,
-    \cos(m! \pi x)^2 = 1 \,
-    \Rightarrow \,
-    a_m(x) = 1 \,
-    \Rightarrow \,
-    \lim_{m\rightarrow \infty} a_m(x) = 1.
-  \end{equation*}
-  If $x$ is irrational,
-  then
-  \begin{equation*}
-    \forall m, \,
-    (\cos m!\pi x)^2 < 1 \,
-    \Rightarrow \,
-    a_m(x) = 0 \,
-    \Rightarrow \,
-    \lim_{m\rightarrow \infty} a_m(x) = 0.
-  \end{equation*}
-  Summarizing these two cases completes the proof.
-\end{solution}
 
 \begin{exm}
   \label{exm:pointwiseConvergencePreservesNoContinuity}
@@ -2366,36 +2088,6 @@
   with the strengthened condition of
   each $f_n$ being \emph{continuously} differentiable. 
 \end{exc}
-\begin{solution}
-  It follows from the uniform convergence of $f_n'$,
-  the continuous differentiability of $f_n$,
-  Corollary \ref{coro:uniformLimitIsCont},
-  and Theorem \ref{thm:uniformConvAndIntegral} that
-  $g = \lim_{n\rightarrow \infty}f_n'$ is continuous and Riemann integrable
-  and satisfies
-  \begin{equation*}
-    \tag{*}
-    \lim_{n\rightarrow \infty}\int_a^b|f_n'(t) - g(t)| \dif t = 0.
-  \end{equation*}
-  Define
-  \begin{equation*}
-    f(x) = c + \int_{x_0}^x g(t) \dif t,
-  \end{equation*}
-  where $c = \lim_{n\rightarrow \infty}f_n(x_0)$.
-  By the first fundamental theorem of calculus
-  (Theorem \ref{thm:fundamentalThmCalculus1}),
-  we have $f'(x) = g(x) = \lim_{n\rightarrow \infty}f_n'(x)$.
-  We now show that $(f_n)$ converges uniformly to $f$ on $[a, b]$
-  by noticing that
-  \begin{align*}
-    |f_n(x) - f(x)| &= \left| f_n(x_0) + \int_{x_0}^xf_n'(t)\dif t - c - \int_{x_0}^xg(t)\dif t \right| \\
-    &\le |f_n(x_0) - c| + \int_a^b|f'_n(t) - g(t)|\dif t.
-  \end{align*}
-  The proof is completed by Theorem \ref{thm:CauchyCriterionUniformConv},
-  Lemma \ref{lem:pointwise2uniformConvergence},
-  the definition of $c$,
-  and (*).
-\end{solution}
 
 \subsubsection{Compactness $\Rightarrow$ equicontinuity}
 
@@ -2410,7 +2102,7 @@
 \subsection{Pointwise and uniform boundedness}
 
 \begin{defn}
-  \label{eq:uniformlyBounded}
+  \label{def:uniformlyBounded}
   Let $E$ be a subset of a metric space ${\cal X}$.
   A sequence of complex-valued functions $(f_n: E\rightarrow\mathbb{C})$  
   is \emph{pointwise bounded} on $E$
@@ -2418,21 +2110,23 @@
   \begin{equation}
     \label{eq:pointwiseBounded}
     \exists \phi:E\rightarrow\mathbb{R}^+,\ \text{ s.t. } \forall x\in E,\
-    \forall n\in\mathbb{N},\ |f_n(x)|<\phi(x);
+    \forall n\in\mathbb{N},\ |f_n(x)|\le \phi(x);
   \end{equation}
   it is \emph{uniformly bounded} on $E$ iff
   \begin{equation}
     \label{eq:uniformlyBounded}
     \exists M\in \mathbb{R}^+,\ \text{ s.t. } \forall x\in E,\
-    \forall n\in\mathbb{N},\ |f_n(x)|<M.
+    \forall n\in\mathbb{N},\ |f_n(x)|\le M.
   \end{equation}
 \end{defn}
 
 \begin{exm}
+  \label{exm:uniformBoundednessNoConvSubsequence}
   The function sequence $(f_n)\subset {\cal C}[0,1]$ given by
-  \begin{displaymath}
+  \begin{equation}
+    \label{eq:FnotEquicontinuous}
     f_n(x)=\frac{x^2}{x^2+(1-nx)^2}
-  \end{displaymath}
+  \end{equation}
   is uniformly bounded because $|f_n(x)|\le 1$.
   Although $(f_n)$ converges pointwise to $\mathbf{0}$,
    no subsequence of $(f_n)$ can converge uniformly
@@ -2621,30 +2315,6 @@
   $\mathbb{S}^1\rightarrow \mathbb{C}$
   that do not belong to the uniform closure of ${\cal A}$. 
 \end{exc}
-\begin{solution}
-  That ${\cal A}$ separates points on $\mathbb{S}^1$ and
-  vanishes at no points of $\mathbb{S}^1$ follows
-  immediately from Definitions \ref{def:separatePoints} and
-  \ref{def:vanishAtNoPoints}
-  by taking $f$ to be the identity function on $\mathbb{S}^1$.
-  We now show that the continuous function $f(z) = \bar{z}$
-  does not belong to the uniform closure of ${\cal A}$.
-  For any $p(z) = \sum_{n=0}^Nc_nz^n$,
-  we have
-  \begin{equation*}
-    \int_0^{2\pi}\overline{f(e^{\mathbf{i}\theta})}p(e^{\mathbf{i}n\theta})\dif\theta =
-    \sum_{n=0}^Nc_n\int_0^{2\pi}e^{\mathbf{i}(n+1)\theta}\dif\theta = 0.
-  \end{equation*}
-  Then $\bar{f}f\equiv 1$ and the triangle inequality imply that
-  \begin{align*}
-    2\pi &= \left| \int_0^{2\pi}\bar{f}f\dif\theta \right| \le
-           \left| \int_0^{2\pi}\bar{f}(f - p)\dif\theta \right| + \left| \int_0^{2\pi}\bar{f}p\dif\theta \right| \\
-    &\le \int_0^{2\pi}|f - p|\dif\theta.
-  \end{align*}
-  Therefore,
-  the function $f(z) = \bar{z}$ cannot be
-  the limit of any uniformly convergent sequences in ${\cal A}$.
-\end{solution}
 
 \begin{coro}
   \label{coro:StoneWeierstrass}
