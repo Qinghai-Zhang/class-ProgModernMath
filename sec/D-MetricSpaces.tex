@@ -369,6 +369,7 @@
 \end{defn}
 
 \begin{lem}
+  \label{lem:totalBoundedImpliesSeparable}
   A totally bounded metric space is separable.
 \end{lem}
 
@@ -921,11 +922,10 @@
   \label{def:distPointAndSet}
   In a metric space $({\cal X},d)$, 
   the \emph{distance between a nonempty set $A\subset {\cal X}$
-    and a point $x\in {\cal X}$}
-  is
+    and a point $x\in {\cal X}$} is
   \begin{equation}
-    \label{eq:distPointAndSet}
-    \rho(x,A) := \inf_{y\in A} d(x,y).
+    \label{eq:distancePoint2Set}
+    \rho(x,A) = \inf\{d(x,a): a\in A\}.
   \end{equation}
 \end{defn}
 
@@ -933,7 +933,8 @@
   \label{lem:distPointAndSetContinuous}
   For any subset $A$ of a metric space ${\cal X}$,
   the function $f: {\cal X}\rightarrow \mathbb{R}$
-  given by $f(x):= \rho(x,A)$ is continuous.
+  given by $f(x):= \rho(x,A)$
+  in (\ref{eq:distancePoint2Set}) is continuous.
 \end{lem}
 
 \begin{coro}
@@ -967,7 +968,7 @@
 \begin{coro}
   \label{coro:metricSpaceIsNormal}
   A metric space ${\cal X}$ is \emph{normal},
-  i.e.
+  i.e., 
   for any two disjoint closed subsets $E,F$ of ${\cal X}$,
   there exist disjoint open sets $U,V$
   such that $E\subset U$ and $F\subset V$.
@@ -1499,9 +1500,9 @@
     \exists a,b\in K \text{ s.t. }
     \left\{
       \begin{array}{l}
-        f(a) = \max\{f(x): x\in K\},
+        f(a) = \sup\{f(x): x\in K\},
         \\
-        f(b) = \min\{f(x): x\in K\}.
+        f(b) = \inf\{f(x): x\in K\}.
       \end{array}
       \right.
   \end{displaymath}
@@ -1528,21 +1529,13 @@
 \label{sec:sequCompIsCompactness}
 
 \begin{defn}
-  A collection $\alpha$ of subsets of a metric space ${\cal X}$
-   is said to \emph{cover} ${\cal X}$,
-   or to be a \emph{covering} of ${\cal X}$,
-   if the union of all elements of $\alpha$
-   equals ${\cal X}$;
-   it is an \emph{open covering} of ${\cal X}$
-   if each element of $\alpha$ is an open subset of ${\cal X}$.
-\end{defn}
-
-\begin{defn}
-  An \emph{(open) cover of a subset $K$ in a metric space} ${\cal X}$
-   is a collection $\alpha$ of (open) subsets in ${\cal X}$
-   such that $K \subset \cup \alpha$.
+  \label{def:coverAndOpenCover}
+  A \emph{cover of a subset $K$ in a metric space} ${\cal X}$
+   is a collection $\alpha$ of subsets in ${\cal X}$
+   such that $K \subseteq \cup \alpha$.
   A \emph{subcover} of $K$ is a subcollection of a cover
-   that also covers $K$.
+  that also covers $K$.
+  An \emph{open cover} is a cover in which each subset is open.
 \end{defn}
 
 \begin{exm}
@@ -1586,17 +1579,6 @@
   \ref{thm:uniformContinuityScalarFunc}}
 \label{sec:gener-unif-cont}
 
-\begin{defn}
-  \label{def:distancePoint2Set}
-  In a metric space $({\cal X},d)$,
-  the \emph{distance from a point $x\in{\cal X}$
-    to a subset $A\subseteq {\cal X}$} is
-  \begin{equation}
-    \label{eq:distancePoint2Set}
-    d(x,A) = \inf\{d(x,a): a\in A\}.
-  \end{equation}
-\end{defn}
-
 \begin{lem}[Lebesgue number]
   \label{lem:lebesgueNumberExists}
   Let ${\cal A}$ be an open covering
@@ -1636,6 +1618,9 @@
   there exists an open set $V$ satisfying
   $L\subset V\subset \overline{V}\subset U$.
 \end{lem}
+
+%%% --------------------
+%%% -------------------
 
 \begin{lem}
   \label{lem:sandwichCompactSequence}
@@ -2143,13 +2128,20 @@
   such that $(f_{n_k}(x))$ converges for any $x\in E$. 
 \end{lem}
 
-\begin{thm}%[Ascoli]
+\begin{thm}[Ascoli]
   \label{thm:AscoliSequence}
   Suppose a scalar function sequence $(f_n)\subset {\cal C}(K)$
   over a compact set $K$ is pointwise bounded and equicontinuous.
   Then $(f_n)$ is uniformly bounded on $K$
   and contains a uniformly convergent subsequence.
 \end{thm}
+
+\begin{coro}
+  \label{coro:boundedPointwiseIsUniform}
+  For an equicontinuous sequence  sequence $(f_n)\subset {\cal C}(K)$
+  of scalar functions over a compact set $K$,
+  pointwise boundedness is equivalent to uniform boundedness.  
+\end{coro}
 
 \subsection{The Stone-Weierstrass theorem}
 
@@ -2227,7 +2219,7 @@
   periodic functions on $[-\pi, \pi]$
   does not separate points, 
   neither does that of complex-valued
-  trinometric polynomials
+  trigonometric polynomials
   $\sum_{n=-N}^{+N} c_n e^{\ii nx}$:
   every function $f$ in question has
   $f(-\pi) = f(\pi)$. 
