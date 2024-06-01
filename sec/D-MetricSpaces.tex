@@ -369,6 +369,7 @@
 \end{defn}
 
 \begin{lem}
+  \label{lem:totalBoundedImpliesSeparable}
   A totally bounded metric space is separable.
 \end{lem}
 
@@ -437,7 +438,7 @@
 
 \begin{thm}
   \label{thm:existenceOfMetricCompletion}
-  Every metric space has a completion.
+  Every metric space has a unique completion.
 \end{thm}
 
 \begin{exm}
@@ -492,7 +493,7 @@
 \begin{exc}
   \label{exc:ellPisComplete}
   Show that the $\ell^p$ space in Definition \ref{def:lpSpace}
-  is complete for $p\ge 1$.
+  is complete for $p\in [1,+\infty)$.
 \end{exc}
 
 \begin{ntn}
@@ -546,6 +547,8 @@
   \label{def:interiorPoint}
   A point $p\in E$ is an \emph{interior point} of $E\subset {\cal X}$
   iff there exists $r>0$ such that $B_r(p)\subset E$.
+  The \emph{interior of a set} $E$
+  is the set of its interior points.
 \end{defn}
 
 \begin{defn}
@@ -589,7 +592,7 @@
 \begin{exc}
   \label{exc:meagerSetComplementIsDense}
   If a closed set $F$ in a metric space ${\cal X}$
-  does not contain any open set,
+  does not contain any nonempty open set,
   then ${\cal X}\setminus F$ is dense in ${\cal X}$.
 \end{exc}
 
@@ -766,14 +769,14 @@
 
 \begin{thm}[Baire category]
   \label{thm:BaireCat}
-  In a complete metric space,
-  the intersection of countably many open dense sets is nonempty.
+  In a complete metric space ${\cal X}$,
+  the intersection of countably many open dense sets is dense in ${\cal X}$.
 \end{thm}
 
 \begin{coro}
   \label{coro:BaireCat}
   A complete metric space ${\cal X}$ is 
-  not the union of countably many closed nowhere dense sets.
+  not the union of countably many nowhere dense sets $(U_n)$.
 \end{coro}
 
 \begin{defn}
@@ -912,13 +915,6 @@
   in the sense of Definition \ref{def:continuousFuncPointMetricSpace}.
 \end{lem}
 
-\begin{defn}
-  \label{def:openMap}
-  A map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces is \emph{open}
-  if its image of any open set is open; 
-  it is \emph{closed} if its image of any closed set is closed. 
-\end{defn}
-
 \subsection{Separation properties of metric spaces}
 \label{sec:separ-prop}
 
@@ -926,11 +922,10 @@
   \label{def:distPointAndSet}
   In a metric space $({\cal X},d)$, 
   the \emph{distance between a nonempty set $A\subset {\cal X}$
-    and a point $x\in {\cal X}$}
-  is
+    and a point $x\in {\cal X}$} is
   \begin{equation}
-    \label{eq:distPointAndSet}
-    \rho(x,A) := \inf_{y\in A} d(x,y).
+    \label{eq:distancePoint2Set}
+    \rho(x,A) = \inf\{d(x,a): a\in A\}.
   \end{equation}
 \end{defn}
 
@@ -938,7 +933,8 @@
   \label{lem:distPointAndSetContinuous}
   For any subset $A$ of a metric space ${\cal X}$,
   the function $f: {\cal X}\rightarrow \mathbb{R}$
-  given by $f(x):= \rho(x,A)$ is continuous.
+  given by $f(x):= \rho(x,A)$
+  in (\ref{eq:distancePoint2Set}) is continuous.
 \end{lem}
 
 \begin{coro}
@@ -972,7 +968,7 @@
 \begin{coro}
   \label{coro:metricSpaceIsNormal}
   A metric space ${\cal X}$ is \emph{normal},
-  i.e.
+  i.e., 
   for any two disjoint closed subsets $E,F$ of ${\cal X}$,
   there exist disjoint open sets $U,V$
   such that $E\subset U$ and $F\subset V$.
@@ -1007,6 +1003,13 @@
 \label{sec:homeomorphisms}
 
 \begin{defn}
+  \label{def:openMap}
+  A map $f:{\cal X}\rightarrow {\cal Y}$ between metric spaces is \emph{open}
+  if its image of any open set is open; 
+  it is \emph{closed} if its image of any closed set is closed. 
+\end{defn}
+
+\begin{defn}
   A \emph{homeomorphism} $f:{\cal X}\rightarrow {\cal Y}$
   between metric spaces
   is a bijective map such that both $f$ and $f^{-1}$
@@ -1031,13 +1034,14 @@
 
 \begin{coro}
   A homeomorphism $f:{\cal X}\rightarrow {\cal Y}$
-  preserves all topological properties of ${\cal X}$,
+  preserves all topological properties of ${\cal X}$. 
 \end{coro}
 
 \begin{defn}
+  \label{def:topoEmbedding}
   A \emph{(topological) embedding} of ${\cal X}$ in ${\cal Y}$
   is an injective map $f:{\cal X}\rightarrow{\cal Y}$
-  such that the map $f':{\cal X}\rightarrow f({\cal X})$
+  such that the map $g:{\cal X}\rightarrow f({\cal X})$
   obtained by restricting the codomain of $f$ to $f({\cal X})$
   is a homeomorphism.
 \end{defn}
@@ -1318,7 +1322,7 @@
   \label{def:sequentialCompactness}
   A subset $K$ of a metric space $({\cal X},d)$
   is \emph{sequentially compact}
-  if every sequence $(x_n)_{n\in \mathbb{N}^+}\subset K$ has
+  iff every sequence $(x_n)_{n\in \mathbb{N}^+}\subset K$ has
   a convergent subsequence that converges in $K$, i.e., 
   \begin{equation}
     \label{eq:sequentialCompactness}
@@ -1496,9 +1500,9 @@
     \exists a,b\in K \text{ s.t. }
     \left\{
       \begin{array}{l}
-        f(a) = \max\{f(x): x\in K\},
+        f(a) = \sup\{f(x): x\in K\},
         \\
-        f(b) = \min\{f(x): x\in K\}.
+        f(b) = \inf\{f(x): x\in K\}.
       \end{array}
       \right.
   \end{displaymath}
@@ -1525,21 +1529,13 @@
 \label{sec:sequCompIsCompactness}
 
 \begin{defn}
-  A collection $\alpha$ of subsets of a metric space ${\cal X}$
-   is said to \emph{cover} ${\cal X}$,
-   or to be a \emph{covering} of ${\cal X}$,
-   if the union of all elements of $\alpha$
-   equals ${\cal X}$;
-   it is an \emph{open covering} of ${\cal X}$
-   if each element of $\alpha$ is an open subset of ${\cal X}$.
-\end{defn}
-
-\begin{defn}
-  An \emph{(open) cover of a subset $K$ in a metric space} ${\cal X}$
-   is a collection $\alpha$ of (open) subsets in ${\cal X}$
-   such that $K \subset \cup \alpha$.
+  \label{def:coverAndOpenCover}
+  A \emph{cover of a subset $K$ in a metric space} ${\cal X}$
+   is a collection $\alpha$ of subsets in ${\cal X}$
+   such that $K \subseteq \cup \alpha$.
   A \emph{subcover} of $K$ is a subcollection of a cover
-   that also covers $K$.
+  that also covers $K$.
+  An \emph{open cover} is a cover in which each subset is open.
 \end{defn}
 
 \begin{exm}
@@ -1583,17 +1579,6 @@
   \ref{thm:uniformContinuityScalarFunc}}
 \label{sec:gener-unif-cont}
 
-\begin{defn}
-  \label{def:distancePoint2Set}
-  In a metric space $({\cal X},d)$,
-  the \emph{distance from a point $x\in{\cal X}$
-    to a subset $A\subseteq {\cal X}$} is
-  \begin{equation}
-    \label{eq:distancePoint2Set}
-    d(x,A) = \inf\{d(x,a): a\in A\}.
-  \end{equation}
-\end{defn}
-
 \begin{lem}[Lebesgue number]
   \label{lem:lebesgueNumberExists}
   Let ${\cal A}$ be an open covering
@@ -1633,6 +1618,9 @@
   there exists an open set $V$ satisfying
   $L\subset V\subset \overline{V}\subset U$.
 \end{lem}
+
+%%% --------------------
+%%% -------------------
 
 \begin{lem}
   \label{lem:sandwichCompactSequence}
@@ -1699,14 +1687,15 @@
 
 \begin{ntn}
   \label{ntn:setOfContinuousScalarFuncs}
-  ${\cal C}^{k}(M)$
+  ${\cal C}^{k}(X,Y)$
   denotes the set of $k$-times continuously differentiable functions
-  $M\rightarrow \mathbb{F}$
-  over a subset $M$ of a metric space where $\mathbb{F}=\mathbb{R}$
-  or $\mathbb{F}=\mathbb{C}$.
-  In particular, 
-  ${\cal C}(M):={\cal C}^{0}(M)$
-  contains all continuous functions over $M$.
+  $X\rightarrow Y$.
+  In particular, ${\cal C}^{k}(M)$
+  denotes the subset of ${\cal C}^{k}(X,Y)$
+  where $\mathbb{F}=\mathbb{R}$
+  or $\mathbb{F}=\mathbb{C}$
+  and ${\cal C}(X,Y):={\cal C}^{0}(X,Y)$
+  contains all continuous functions from $X$ to $Y$.
   When necessary, we also write ${\cal C}^k(M,\mathbb{R})$
   or ${\cal C}^k(M,\mathbb{C})$
   to indicate the codomain of the functions. 
@@ -1714,13 +1703,13 @@
 
 \begin{defn}
   \label{def:uniformBoundedSetInFuncMetricSpace}
-  For a metric space ${\cal X}$, 
-  a subset $F$ of ${\cal C}({\cal X})$ is \emph{uniformly bounded}
+  For a subset $E$ of a metric space ${\cal X}$, 
+  a subset $F$ of ${\cal C}(E)$ is \emph{uniformly bounded}
   iff
   \begin{equation}
     \label{eq:uniformBoundedSetInFuncMetricSpace}
     \exists M>0 \text{ s.t. }
-    \forall x\in {\cal X},\ \forall f \in F,\ 
+    \forall x\in E,\ \forall f \in F,\ 
     |f(x)| \le M.
   \end{equation}
 \end{defn}
@@ -1748,7 +1737,7 @@
   show that the set
   \begin{equation}
     \label{eq:equiContInRn2Compact}
-    {\cal F} := \left\{f\in {\cal C}^{(1)}(\overline{\Omega}) :
+    {\cal F} := \left\{f\in {\cal C}^{1}(\overline{\Omega}) :
       \forall x\in \Omega,\ |f(x)|\le M_1;\, 
       \|\nabla f(x)\|\le M_2
     \right\}
@@ -2098,7 +2087,7 @@
 \subsection{Pointwise and uniform boundedness}
 
 \begin{defn}
-  \label{eq:uniformlyBounded}
+  \label{def:uniformlyBounded}
   Let $E$ be a subset of a metric space ${\cal X}$.
   A sequence of complex-valued functions $(f_n: E\rightarrow\mathbb{C})$  
   is \emph{pointwise bounded} on $E$
@@ -2106,21 +2095,23 @@
   \begin{equation}
     \label{eq:pointwiseBounded}
     \exists \phi:E\rightarrow\mathbb{R}^+,\ \text{ s.t. } \forall x\in E,\
-    \forall n\in\mathbb{N},\ |f_n(x)|<\phi(x);
+    \forall n\in\mathbb{N},\ |f_n(x)|\le \phi(x);
   \end{equation}
   it is \emph{uniformly bounded} on $E$ iff
   \begin{equation}
     \label{eq:uniformlyBounded}
     \exists M\in \mathbb{R}^+,\ \text{ s.t. } \forall x\in E,\
-    \forall n\in\mathbb{N},\ |f_n(x)|<M.
+    \forall n\in\mathbb{N},\ |f_n(x)|\le M.
   \end{equation}
 \end{defn}
 
 \begin{exm}
+  \label{exm:uniformBoundednessNoConvSubsequence}
   The function sequence $(f_n)\subset {\cal C}[0,1]$ given by
-  \begin{displaymath}
+  \begin{equation}
+    \label{eq:FnotEquicontinuous}
     f_n(x)=\frac{x^2}{x^2+(1-nx)^2}
-  \end{displaymath}
+  \end{equation}
   is uniformly bounded because $|f_n(x)|\le 1$.
   Although $(f_n)$ converges pointwise to $\mathbf{0}$,
    no subsequence of $(f_n)$ can converge uniformly
@@ -2137,13 +2128,20 @@
   such that $(f_{n_k}(x))$ converges for any $x\in E$. 
 \end{lem}
 
-\begin{thm}%[Ascoli]
+\begin{thm}[Ascoli]
   \label{thm:AscoliSequence}
   Suppose a scalar function sequence $(f_n)\subset {\cal C}(K)$
   over a compact set $K$ is pointwise bounded and equicontinuous.
   Then $(f_n)$ is uniformly bounded on $K$
   and contains a uniformly convergent subsequence.
 \end{thm}
+
+\begin{coro}
+  \label{coro:boundedPointwiseIsUniform}
+  For an equicontinuous sequence  sequence $(f_n)\subset {\cal C}(K)$
+  of scalar functions over a compact set $K$,
+  pointwise boundedness is equivalent to uniform boundedness.  
+\end{coro}
 
 \subsection{The Stone-Weierstrass theorem}
 
@@ -2221,7 +2219,7 @@
   periodic functions on $[-\pi, \pi]$
   does not separate points, 
   neither does that of complex-valued
-  trinometric polynomials
+  trigonometric polynomials
   $\sum_{n=-N}^{+N} c_n e^{\ii nx}$:
   every function $f$ in question has
   $f(-\pi) = f(\pi)$. 
