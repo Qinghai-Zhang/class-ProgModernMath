@@ -38,7 +38,7 @@
 
 \begin{rem}
   The unique existence of the supremum and infimum of $\mathbb{R}$
-  is guaranteed by Theorem \ref{thm:completenessOfR}.
+  is guaranteed by Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound}.
 \end{rem}
 
 
@@ -548,8 +548,8 @@ This is one of the main motivations of infinite sequence and series.
   and $(b_{n})\subset \mathbb{R}$ converges to $b\in \mathbb{R}$.
   Then
   \begin{enumerate}[(a)]\itemsep0em
-  \item $(a_{n}\pm b_{n})$ converges to $a\pm b$.
-  \item If $a\in \mathbb{R}$, then $(a_{n}b_{n})$ converges to $ab$.
+  \item $(a_{n}\pm b_{n})$ converges to $a\pm b$;
+  \item If $a\in \mathbb{R}$, then $(a_{n}b_{n})$ converges to $ab$;
   \item ($b\ne 0$ and $\forall n$, $b_{n}\ne 0$)\ $\Rightarrow$\ 
     $\lim_{n\rightarrow \infty}\frac{a_{n}}{b_{n}} = \frac{a}{b}$.
   \end{enumerate}
@@ -1155,7 +1155,7 @@ This is one of the main motivations of infinite sequence and series.
   Let $\sum a_n$ be a series where $a_n\ge 0$ for all $n$.
   \begin{enumerate}[(i)]\itemsep0em
   \item If $\sum a_n$ converges and $|b_n|\le a_n$ for all $n$,
-    then $\sum b_n$ converges.
+    then $\sum b_n$ converges;
   \item If $\sum a_n=+\infty$ and $b_n \ge a_n$ for all $n$,
     then \mbox{$\sum b_n=+\infty$}.
   \end{enumerate}
@@ -1407,6 +1407,24 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   is that two functions have the same limit
   if their difference can be shown to be as small as you wish.
 \end{rem}
+
+\begin{thm}
+  \label{thm:funcLimitOperation}
+  Let $f,g$ be scalar functions.
+  Suppose $\lim_{x\rightarrow c}f(x)=L_{1}$ and
+  $\lim_{x\rightarrow c}g(x)=L_{2}$. Then
+  \begin{enumerate}[(a)]
+  \item $\lim_{x\rightarrow c}(f\pm g)(x)=L_{1}\pm L_{2}$;
+  \item $\lim_{x\rightarrow c}(fg)(x)=L_{1}L_{2}$;
+  \item ($L_{2}\neq 0$ and $\forall x,\ g(x)\neq 0$)
+    $\Rightarrow$
+    $\lim_{x\rightarrow c}(\frac{f}{g})(x)=\frac{L_{1}}{L_{2}}$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  It follows from Definition \ref{def:limitOfAScalarFunc}
+  and the proof of Theorem \ref{thm:limitOperation}.
+\end{proof}
 
 \begin{thm}
   \label{thm:FuncLimitToSeqLimit}
@@ -1849,7 +1867,7 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   Theorem
   \ref{thm:continuousImpliesBoundedness} yields the boundedness of $S$,
   and then Theorem
-  \ref{thm:completenessOfR} yields that $S$ has
+  \ref{thm:existenceAndUniquenessOfLeastUpperBound} yields that $S$ has
   exactly one least upper bound, denoted by $M$. Then we have
   \begin{displaymath}
     M=\sup S=\sup_{x\in[a,b]}f(x)<+\infty.
@@ -1884,7 +1902,7 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   \end{displaymath}
   which is a nonempty bounded set
   since $a\in S\subset [a,b]$.
-  Then Theorem \ref{thm:completenessOfR} yields that
+  Then Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound} yields that
   $S$ has exactly one least upper bound, denoted by $c$.
   Since $a\in S$, we have $a\le \sup S=c$; since $S\subset[a,b]$,
   $b$ is an upper bound of $S$ and hence $b\ge\sup S=c$.
@@ -2240,21 +2258,21 @@ $a=0$.
   \label{def:derivative}
   The \emph{derivative}
    of a function $f: \mathbb{R}\rightarrow \mathbb{R}$
-   at $a$ is the limit
+   at $x$ is the limit
    \begin{equation}
      \label{eq:derivative}
-     f'(a)=\lim_{h\rightarrow 0} \frac{f(a+h)-f(a)}{h}.
+     f'(x)=\lim_{h\rightarrow 0} \frac{f(x+h)-f(x)}{h}.
    \end{equation}
-  If the limit exists, $f$ is \emph{differentiable} at $a$.
+  If the limit exists, $f$ is \emph{differentiable} at $x$.
 \end{defn}
 
 \begin{exm}
-  For the power function \mbox{$f(x)=x^{\alpha}$}, 
+  For the power function \mbox{$f(x)=x^{\alpha}$}, $\alpha\neq 0$,
    we have $f'=\alpha x^{\alpha-1}$
    due to
    Newton's generalized binomial theorem, 
   \begin{equation*}
-    (a+h)^{\alpha}=\sum_{n=0}^{\infty}{\alpha \choose n}a^{\alpha-n}h^n.
+    (x+h)^{\alpha}=\sum_{n=0}^{\infty}{\alpha \choose n}x^{\alpha-n}h^n.
   \end{equation*}
 \end{exm}
 
@@ -2268,6 +2286,147 @@ $a=0$.
   its rate of increase also increases.
 \end{rem}
 
+\begin{lem}
+  \label{lem:differentiabilityImplyCoutinuity}
+  If a scalar function $f$ is differentiable at $x$,
+  then $f$ is continuous at $x$.
+\end{lem}
+\begin{proof}
+  Definition \ref{def:derivative} and
+  Theorem \ref{thm:funcLimitOperation} yield
+  \begin{align*}
+    \lim_{h\rightarrow 0} \left( f(x+h)-f(x)  \right)
+    &= \lim_{h\rightarrow0} h\cdot \frac{f(x+h)-f(x)}{h}  \\
+    &=0\cdot f'(x)=0.
+  \end{align*}
+  Then Definition \ref{def:continuousScalarFunc} completes the proof.
+\end{proof}
+
+\begin{thm}
+  \label{thm:derivativeOperation}
+  Let $f$ and $g$ be scalar functions. Suppose $f$ and $g$
+  are both differentiable at $x$. Then $f\pm g$, $fg$ are also
+  differentiable at $x$. If $g(x)\neq 0$, then $\frac{f}{g}$ is
+  differentiable at $x$. To be specific, we have
+  \begin{enumerate}[(a)]
+  \item $(f\pm g)'(x)=f'(x)\pm g'(x)$;
+  \item $(fg)'(x)=f'(x)g(x)+f(x)g'(x)$;
+  \item $g(x)\neq 0$ $\Rightarrow$
+    $(\frac{f}{g})(x)=\frac{f'(x)g(x)-f(x)g'(x)}{g^{2}(x)}$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  Since $f,g$ are differentiable at $x$, then
+  \begin{align*}
+    &\ \frac{(f\pm g)(x+h)-(f\pm g)(x)}{h}\\
+    =&\ \frac{f(x+h)-f(x)}{h}\pm \frac{g(x+h)-g(x)}{h},
+  \end{align*}
+  which, together with
+  Theorem \ref{thm:funcLimitOperation} and Definition \ref{def:derivative},
+  implies (a). From Lemma \ref{lem:differentiabilityImplyCoutinuity},
+  $g$ is continuous at $x$, i.e., $\lim_{h\to 0}g(x+h)=g(x)$. Then
+  \begin{align*}
+    &\ \frac{fg(x+h)-fg(x)}{h}\\
+    =&\ \frac{f(x+h)-f(x)}{h}g(x+h)+f(x)\frac{g(x+h)-g(x)}{h}
+  \end{align*}
+  implies (b).
+  If $g(x)\neq 0$, the continuity of $g$ at $x$ implies that
+  \begin{displaymath}
+    \exists \delta>0,\text{ s.t. } \forall |h|<\delta, g(x+h)\neq 0.
+  \end{displaymath}
+  Then
+  \begin{align*}
+    \forall 0<|h|<\delta&,\ 
+    \frac{1}{h} \left( \frac{f(x+h)}{g(x+h)}
+    -\frac{f(x)}{g(x)} \right)
+    = \frac{1}{g(x+h)g(x)}\cdot\\
+    &\left( \frac{f(x+h)-f(x)}{h}g(x)
+    -f(x)\frac{g(x+h)-g(x)}{h}\right)
+  \end{align*}
+  implies (c).
+\end{proof}
+
+\begin{exm}
+  \label{exm:derivativeOfTangentAndCotangent}
+  Consider the derivative of $\tan x$.
+  Theorem \ref{thm:derivativeOperation}(c) implies
+  \begin{align*}
+    (\tan x)'= \left( \frac{\sin x}{\cos x}  \right)'
+    &=\frac{(\sin x)'\cos x-\sin x(\cos x)'}{\cos^{2}x}\\
+    &=\frac{\cos^{2} x+\sin^{2} x }{\cos^{2} x}
+      =\frac{1}{\cos^{2} x}.
+  \end{align*}
+  Similarly, we have
+  \begin{align*}
+    (\cot x)'= \left( \frac{\cos x}{\sin x}  \right)'
+    &=\frac{(\cos x)'\sin x-\cos x(\sin x)'}{\sin^{2}x}\\
+    &=\frac{-\sin^{2} x-\cos^{2} x }{\sin^{2} x}
+      =-\frac{1}{\sin^{2} x}.
+  \end{align*}
+\end{exm}
+
+\begin{lem}
+  \label{lem:continuousOfCompositeFunc}
+  Let $f$ and $g$ be scalar functions.
+  If $g$ is continuous at $t_{0}$ and
+  $f$ is continuous at $x_{0}:=g(t_{0})$, then
+  $f\circ g$ is continuous at $t_{0}$.
+\end{lem}
+\begin{proof}
+  It follows from Definition \ref{def:continuousScalarFunc}.
+\end{proof}
+
+\begin{thm}[Chain rule for scalar functions]
+  \label{thm:chainRuleOnScalarFunc}
+  Let $f$ and $g$ be scalar functions.
+  If $g$ is differentiable at $t_{0}$ and
+  $f$ is differentiable at $x_{0}:=g(t_{0})$, then
+  $f\circ g$ is differentiable at $t_{0}$, and
+  \begin{equation}
+    \label{eq:chainRuleOnScalarFunc}
+    (f\circ g)'(t_{0})=f'\circ g(t_{0})g'(t_{0}).
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Define
+  \begin{displaymath}
+    h(x):=
+    \left\lbrace
+      \begin{aligned}
+        &\ \frac{f(x)-f(x_{0})}{x-x_{0}},  &x\neq x_{0},\\
+        &\ f'(x_{0}),  &x=x_{0.}
+      \end{aligned}
+    \right.
+  \end{displaymath}
+  By Definitions \ref{def:derivative} and \ref{def:continuousScalarFunc},
+  $h$ is continuous at $x_{0}$. Since
+  \begin{align*}
+    &\ g(t)\neq g(t_{0})=x_{0}  \\
+    \Rightarrow &\
+    \frac{f(g(t))-f(g(t_{0}))}{t-t_{0}}
+                 = h(g(t))\cdot\frac{g(t)-g(t_{0})}{t-t_{0}},\\
+    &\ g(t)=g(t_{0})=x_{0}  \\
+    \Rightarrow &\
+    \frac{f(g(t))-f(g(t_{0}))}{t-t_{0}}=0
+                  =h(g(t))\cdot \frac{g(t)-g(t_{0})}{t-t_{0}},
+  \end{align*}
+  we have
+  \begin{displaymath}
+    \forall t\neq t_{0},\
+    \frac{f(g(t))-f(g(t_{0}))}{t-t_{0}}
+                  =h(g(t))\cdot\frac{g(t)-g(t_{0})}{t-t_{0}}.
+  \end{displaymath}
+  Taking $t\rightarrow t_{0}$ and
+  using Theorem \ref{thm:funcLimitOperation} yield
+  \begin{displaymath}
+    \lim_{t\rightarrow t_{0}}\frac{f\circ g(t)-f\circ g(t_{0})}{t-t_{0}}
+    =h(g(t_{0}))g'(t_{0})=f'(g(t_{0}))g'(t_{0}),
+  \end{displaymath}
+  where $\lim_{t\rightarrow t_{0}}h(g(t))=h(g(t_{0}))$ has been applied
+  by using Lemma \ref{lem:continuousOfCompositeFunc}.
+  Then Definition \ref{def:derivative} completes the proof.
+\end{proof}
+
 \begin{defn}
   A function $f(x)$ is
    $k$ times \emph{continuously differentiable}
@@ -2280,7 +2439,7 @@ $a=0$.
    for which $f^{(k)}(x)$ is bounded and uniformly continuous on $(a,b)$.
 \end{defn}
 
-\begin{thm}
+\begin{thm}[Fermat]
   \label{thm:Fermat}
   If $f:(a,b)\rightarrow\mathbb{R}$
    assumes its maximum or minimum at $x_0\in(a,b)$
@@ -2288,7 +2447,7 @@ $a=0$.
    then $f'(x_0)=0$.
 \end{thm}
 \begin{proof}
-  Suppose $f'(x_0)>0$. Then we have
+  WLOG we suppose $f'(x_0)>0$. Then we have
   \begin{displaymath}
     f'(x_0)=\lim_{x\rightarrow x_0} \frac{f(x)-f(x_0)}{x-x_0}>0.
   \end{displaymath}
@@ -2309,7 +2468,7 @@ $a=0$.
   If a function $f:\mathbb{R}\rightarrow\mathbb{R}$
    satisfies
    \begin{enumerate}[(i)]\itemsep0em
-   \item $f\in {\cal C}[a,b]$ and $f'$ exists on $(a,b)$,
+   \item $f\in {\cal C}[a,b]$ and $f'$ exists on $(a,b)$;
    \item $f(a)=f(b)$,
    \end{enumerate}
   then $\exists x\in (a,b)$ s.t. $f'(x)=0$.
@@ -2351,7 +2510,8 @@ Thus in the proof of Theorem \ref{thm:Rolles}
    then $\forall x\in (a,b)$,
    we have $L'(x)=\frac{f(b)-f(a)}{b-a}$.
   Consider $g(x)=f(x)-L(x)$ on $[a,b]$.
-   $g(a)=0$, $g(b)=0$.
+  Then $g\in \mathcal{C}[a,b]$, $g'$ exists on $(a,b)$,
+  and $g(a)=g(b)=0$.
   By Theorem \ref{thm:Rolles}, $\exists \xi\in[a,b]$
    such that $g'(\xi)=0$,
    which completes the proof.
@@ -2417,7 +2577,7 @@ In the inductive step, we regroup the summation
 
 \begin{defn}
   \label{def:TaylorSeries}
-The \emph{Taylor series} (or Taylor expansion) 
+The \emph{Taylor series} or \emph{Taylor expansion} 
    for $f(x)$ at $c$ is
  \begin{equation}
      \label{eq:TaylorSeries}
@@ -2437,14 +2597,19 @@ The \emph{remainder} of the $n$th \emph{Taylor polynomial}
 
 \begin{thm}
   \label{thm:limitTaylorRemainder}
-  Let $T_n$ be the $n$th Taylor polynomial for $f(x)$ at $c$.
+  Let $T_n$ be the $n$th Taylor polynomial for $f(x)$ at $c$. Then
   \begin{equation}
+    \forall x\in \mathbb{R},\
     \lim_{n\rightarrow\infty} E_n(x) = 0
     \ \Leftrightarrow\
 %    f(x) = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k
     \lim_{n\rightarrow\infty}T_n(x) = f(x).
   \end{equation}
 \end{thm}
+\begin{proof}
+  It follows from \eqref{eq:TaylorSeriesRemainder}
+  and Theorem \ref{thm:limitOperation}(a).
+\end{proof}
 
 \begin{lem}
   \label{lem:remainder}
@@ -2478,10 +2643,10 @@ The \emph{remainder} of the $n$th \emph{Taylor polynomial}
      E_n(x) = f(x) - T_n(x) = \frac{M(x-c)^{n+1}}{(n+1)!}.
    \end{equation*}
    Consider the function
-   \begin{equation}
-     \label{eq:TaylorLagrangianFormProof1}
-     g(t) := E_n(t) - \frac{M(t-c)^{n+1}}{(n+1)!}.
-   \end{equation}
+   \begin{displaymath}
+     (*):\quad
+      g(t) := E_n(t) - \frac{M(t-c)^{n+1}}{(n+1)!}.
+   \end{displaymath}
    Clearly $g(x)=0$.
    By Lemma \ref{lem:remainder},
     $g^{(k)}(c)=0$ for each $k= 0,1,\ldots,n$.
@@ -2495,16 +2660,15 @@ The \emph{remainder} of the $n$th \emph{Taylor polynomial}
    \begin{equation*}
     \exists x_2\in (c, x_1) \text{ s.t. } g^{(2)}(x_2)=0. 
    \end{equation*}
-   Repeatedly using Rolle's theorem,
-   \begin{equation}
-     \label{eq:TaylorLagrangianFormProof2}
-    \exists x_{n+1}\in (c, x_n) \text{ s.t. } g^{(n+1)}(x_{n+1})=0.
-  \end{equation}
+   Repeatedly using Rolle's theorem, we have
+   \begin{displaymath}
+     (**):\quad
+     \exists x_{n+1}\in (c, x_n) \text{ s.t. } g^{(n+1)}(x_{n+1})=0.
+   \end{displaymath}
   Since $T_n$ is a polynomial of degree $n$,
    we have $T_n^{(n+1)}(t)=0$, 
-   which, together with
-   (\ref{eq:TaylorLagrangianFormProof2})
-   and (\ref{eq:TaylorLagrangianFormProof1}),
+   which, together with ($**$),  ($*$),
+   and Theorem \ref{thm:derivativeOperation}(a), 
    yields 
    \begin{equation*}
      f^{(n+1)}(x_{n+1})-M=0.
@@ -2522,15 +2686,15 @@ The \emph{remainder} of the $n$th \emph{Taylor polynomial}
   an accuracy of at least $\epsilon=10^{-5}$.
 By Definition \ref{def:TaylorSeries}, 
    the Taylor series of $e^x$ at $c=0$ is
-  \begin{equation*}
+  $
     e^x = \sum_{n=0}^{+\infty}\frac{x^n}{n!}.
-  \end{equation*}
+  $
   By Theorem \ref{thm:TaylorLagrangianForm}, we have
   \begin{equation*}
     \exists \xi\in [0,2] \text{ s.t. }
-    E_n(2)=e^{\xi}2^{n+1}/(n+1)! < e^22^{n+1}/(n+1)!
+    E_n(2)=\frac{e^{\xi}2^{n+1}}{(n+1)!} \le \frac{e^22^{n+1}}{(n+1)!}.
   \end{equation*}
-  Then $e^22^{n+1}/(n+1)!\le \epsilon$ yields $n\ge 12$, i.e., 13 terms.
+  Then $\frac{e^22^{n+1}}{(n+1)!}\le \epsilon$ yields $n\ge 12$, i.e., 13 terms.
 \end{exm}
 
 
@@ -2552,6 +2716,7 @@ By Definition \ref{def:TaylorSeries},
   The \emph{norm} of the partition
   is the length of the longest subinterval,
   \begin{equation}
+    \label{eq:normOfPartition}
     h_n= h(P_n) = \max(x_i-x_{i-1}),\qquad i=1, 2, \ldots, n.
   \end{equation}
 \end{defn}
@@ -2569,8 +2734,10 @@ By Definition \ref{def:TaylorSeries},
 %  $x_i^*\in [x_{i-1}, x_i]$ 
   is a \emph{sample point} % or a \emph{tag}
   of the $i$th subinterval.
-  In particular, the \emph{upper Riemann sum}
-  and \emph{lower Riemann sum} over $P_n$ are
+  In particular, when $f$ is bounded,
+  by Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound},
+  the \emph{upper Riemann sum}
+  and \emph{lower Riemann sum} over $P_n$ can be defined as
   \begin{align}
     \label{eq:upperRiemannSum}
     M_n(f) = \sum_{i=1}^n (x_{i}-x_{i-1}) \sup f(I_i), 
@@ -2578,6 +2745,7 @@ By Definition \ref{def:TaylorSeries},
     \label{eq:lowerRiemannSum}
     m_n(f) = \sum_{i=1}^n (x_{i}-x_{i-1}) \inf f(I_i). 
   \end{align}
+  From this definition, $m_{n}(f)\le S_{n}(f)\le M_{n}(f)$ always holds.
 \end{defn}
 
 \begin{defn}
@@ -2598,6 +2766,14 @@ By Definition \ref{def:TaylorSeries},
   In this case we write $L=\int_a^b f(x) \dif x$
   and call it the \emph{Riemann integral} of $f$ on $[a,b]$.
 \end{defn}
+
+\begin{exm}
+  $f\equiv 1$ is Riemann integrable on $[a,b]$. Indeed,
+  for any partition $P_{n}(a,b)$ and all $x_{i}^{*}$'s,
+  we always have $S_{n}(f)=b-a$ by \eqref{eq:RiemannSum}. Then
+  Definition \ref{def:RiemannIntegrable} implies that
+  $\int_{a}^{b}f(x)\dif x=b-a$.
+\end{exm}
 
   % Bind each number to the picture that illustrates
   % Riemann integral.
@@ -2626,18 +2802,17 @@ By Definition \ref{def:TaylorSeries},
 \end{rem}
 
 \begin{exm}
-  The following function $f:[a,b]\rightarrow \mathbb{R}$
-   is not Riemann integrable.
-   \begin{equation}
-     \label{eq:rationalVsIrr}
-     f(x)=
-     \begin{cases}
-       1 & \text{if $x$ is rational};
-       \\
-       0 & \text{if $x$ is irrational}.
-     \end{cases}
-   \end{equation}
-
+  \label{exm:DirichletFuncIsNotIntegrable}
+  The Dirichlet function
+  \begin{equation}
+    \label{eq:DirichletFunc}
+    D(x):=
+    \begin{cases}
+      1, & x\in \mathbb{Q},\\
+      0, & x\not \in \mathbb{Q}.
+    \end{cases}
+  \end{equation}
+   is not Riemann integrable on $[a,b]$.
   To see this, we first
    negate the logical statement in (\ref{eq:RiemannIntegrable})
    to get
@@ -2646,22 +2821,22 @@ By Definition \ref{def:TaylorSeries},
       \exists \epsilon>0, \text{ s.t. } \forall \delta>0 
     \\
     & \exists P_n(a,b) \text{ with } h(P_n)<\delta,\ 
-      \text{ s.t. } |S_n(f)-L|\ge \epsilon.
+      \text{ s.t. } |S_n(D)-L|\ge \epsilon.
   \end{align*}
   
   If $|L|< \frac{b-a}{2}$,
   we choose all $x_i^*$'s to be rational
-  so that $f(x_i^*)\equiv 1$;
-  then (\ref{eq:RiemannSum}) yields $S_n(f)=b-a$.
+  so that $D(x_i^*)\equiv 1$;
+  then (\ref{eq:RiemannSum}) yields $S_n(D)=b-a$.
   For $\epsilon=\frac{b-a}{4}$,
-   the formula $|S_n(f)-L|\ge \epsilon$ clearly holds.
+   the formula $|S_n(D)-L|\ge \epsilon$ clearly holds.
   
   If $|L|\ge \frac{b-a}{2}$,
   we choose all $x_i^*$'s to be irrational
-  so that $f(x_i^*)\equiv 0$;
-  then (\ref{eq:RiemannSum}) yields $S_n(f)=0$.
+  so that $D(x_i^*)\equiv 0$;
+  then (\ref{eq:RiemannSum}) yields $S_n(D)=0$.
   For $\epsilon=\frac{b-a}{4}$,
-   the formula $|S_n(f)-L|\ge \epsilon$ clearly holds.
+   the formula $|S_n(D)-L|\ge \epsilon$ clearly holds.
 \end{exm}
 
 \begin{rem}
@@ -2669,6 +2844,155 @@ By Definition \ref{def:TaylorSeries},
   lies in how to classify values of the $\forall$ variables
   for instantiating values of the $\exists$ variables.
 \end{rem}
+
+\begin{thm}
+  \label{thm:integrabilityImpliesBoundedness}
+  If $f$ is integrable on $[a,b]$, then $f$ is bounded on $[a,b]$.
+\end{thm}
+\begin{proof}
+  Let $L:=\int_{a}^{b}f(x)\mathrm{d}x$. Then \eqref{eq:RiemannIntegrable}
+  implies that
+  \begin{align*}
+    \exists \delta>0,\text{ s.t. }
+    \forall P_{n}(a,b)\text{ with } h(P_{n})<\delta,\
+    |S_{n}(f)-L|<1.
+  \end{align*}
+  Let $x_{1}^{*}$ be arbitrary and
+  $x_{i-1}$, $x_{i}^{*}$ be fixed, $i=2,3,\cdots,n$.
+  Then the triangle inequality yields
+  \begin{align*}
+    \forall x\in[x_{0},x_{1}],\quad &\
+    |f(x)|(x_{1}-x_{0})\\
+    \le &\ S_{n}(f)+
+          \left|\sum_{i=2}^{n}f(x_{i}^{*})(x_{i}-x_{i-1})\right|\\
+    < &\ |L|+1+\left|\sum_{i=2}^{n}f(x_{i}^{*})(x_{i}-x_{i-1})\right|,
+  \end{align*}
+  which implies the boundedness of $f$ on $[x_{0},x_{1}]$.
+  By similar arguments,
+  $f$ is bounded on $[x_{i-1},x_{i}]$, $i=2,3,\cdots, n$.
+  Hence $f$ is bounded on $[a,b]$.
+\end{proof}
+
+\begin{defn}
+  \label{def:coarserPartitionAndSum}
+  Let $P_{n}$ and $P'_{n'}$ be two partitions of $[a,b]$.
+  If $P_{n}\subset P'_{n'}$ or $P'_{n'}\supset P_{n}$, we say
+  $P_{n}$ is \emph{coarser} than $P'_{n'}$, or
+  $P'_{n'}$ is \emph{finer} than $P_{n}$. For any $P_{n}$, $P'_{n'}$,
+  define a new partition
+  \begin{equation}
+    \label{eq:sumOfTwoParition}
+    P_{n}\oplus P'_{n'}:=P_{n}\cup P'_{n'}\backslash (P_{n}\cap P'_{n'}),
+  \end{equation}
+  which is called the \emph{sum} of two paritions.
+  In particular, $P_{n}\oplus P'_{n'}$ is always finer than
+  $P_{n}$ and $P'_{n'}$.
+\end{defn}
+
+\begin{thm}
+  \label{thm:coarserPartitionCompare}
+  Let $P_{n}$ and $P'_{n'}$ be two partitions of $[a,b]$.
+  If $f$ is integrable on $[a,b]$ and $P_{n}$ is coarser than $P'_{n'}$,
+  then
+  \begin{align}
+    \label{eq:lowerPartitionCompare}
+    m_{n}(f)\le m'_{n'}(f)\le m_{n}(f)+(n'-n)\omega h_{n},\\
+    \label{eq:upperPartitionCompare}
+    M_{n}(f)\ge M'_{n'}(f)\ge M_{n}(f)-(n'-n)\omega h_{n},
+  \end{align}
+  where $M_{n}(f)$ and $m_{n}(f)$ are the upper Riemann sum and
+  lower Riemann sum over $P_{n}$,
+  $M'_{n'}(f)$ and $m'_{n'}(f)$ are the upper Riemann sum and
+  lower Riemann sum over $P'_{n'}$,
+  $\omega:=\sup f([a,b])-\inf([a,b])$ (which is finite because of
+  Theorem \ref{thm:integrabilityImpliesBoundedness}), and
+  $h_{n}$ is defined in \eqref{eq:normOfPartition}.
+\end{thm}
+\begin{proof}
+  By induction and the finiteness of $n$ and $n'$,
+  it only to consider the case on $n'=n+1$. Let
+  \begin{align*}
+    &\ x_{0}=a<x'<x_{1}<x_{2}<\cdots<x_{n}=b,\\
+    &\ P_{n}=\{x_{0},x_{1},\cdots,x_{n}\},\ P'_{n'}=P_{n}\cup \{x'\}. 
+  \end{align*}
+  On the one hand, we have
+  \begin{align*}
+    &\ (x_{1}-x_{0})\inf f([x_{0},x_{1}])\\
+    = &\ (x_{1}-x')\inf f([x_{0},x_{1}])+(x'-x_{0})\inf f([x_{0},x_{1}])\\
+    \le &\ (x_{1}-x')\inf f([x',x_{1}])+(x'-x_{0})\inf f([x_{0},x']),
+  \end{align*}
+  which, together with \eqref{eq:lowerRiemannSum}, implies
+  $m_{n}(f)\le m'_{n'}(f)$. On the other hand, we have
+  \begin{align*}
+    &\ (x_{1}-x')\inf f([x',x_{1}])+(x'-x_{0})\inf f([x_{0},x'])
+    \\
+    \le &\ (x_{1}-x')\sup f([x_{0},x_{1}])+(x'-x_{0})\sup f([x_{0},x_{1}])
+          \\
+    = &\ (x_{1}-x_{0})(\sup f([x_{0},x_{1}]))\\
+    \le &\  (x_{1}-x_{0})(\omega+\inf f([x_{0},x_{1}]))\\
+    \le &\ h_{n}\omega+(x_{1}-x_{0})\inf f([x_{0},x_{1}]),
+  \end{align*}
+  which, together with \eqref{eq:lowerRiemannSum}, implies
+  $ m'_{n'}(f)\le h_{n}\omega+m_{n}(f). $ Hence
+  \eqref{eq:lowerPartitionCompare} holds.
+  \eqref{eq:upperPartitionCompare} can be proved similarly. 
+\end{proof}
+
+\begin{thm}
+  \label{thm:partitionSumCompare}
+  Let $f$ be integrable on $[a,b]$.
+  Then for any partitions $P_{n}$, $P'_{n'}$ of $[a,b]$, we have
+  \begin{equation}
+    \label{eq:partitionSumCompare}
+    m_{n}(f)\le M'_{n'}(f),
+  \end{equation}
+  where $m_{n}(f)$ and $M'_{n'}(f)$ are defined in
+  Theorem \ref{thm:coarserPartitionCompare}.
+\end{thm}
+\begin{proof}
+  Define $\widetilde{P}_{k}:=P_{n}\oplus P'_{n'}$. Let
+  $\widetilde{M}_{k}(f)$ and $\widetilde{m}_{k}(f)$ be the upper Riemann sum
+  and lower Riemann sum over $\widetilde{P}_{k}$. Then
+  Definition \ref{def:coarserPartitionAndSum},
+  Theorem \ref{thm:coarserPartitionCompare}
+  and Definition \ref{def:RiemannSum} yield
+  \begin{displaymath}
+    m_{n}(f)\le \widetilde{m}_{k}(f)\le
+    \widetilde{M}_{k}(f)\le M'_{n'}(f).
+    \qedhere
+  \end{displaymath}
+\end{proof}
+
+\begin{rem}
+  Theorem \ref{thm:partitionSumCompare} shows that
+  the upper Riemann sum of any partition is not less than
+  the lower Riemann sum of any partition.
+\end{rem}
+
+\begin{coro}
+  \label{coro:existenceOfRiemannIntegrals}
+  Let $f$ be integrable on $[a,b]$. Define the sets
+  \begin{align*}
+    A&:=\{ M_{n}(f): P_{n}\text{ is a partition of }[a,b] \},\\
+    B&:=\{ m_{n}(f): P_{n}\text{ is a partition of }[a,b] \}.
+  \end{align*}
+  Then $A$ has a greatest lower bound and $B$ has
+  a least upper bound. 
+\end{coro}
+\begin{proof}
+  For any partition $P_{n}$ of $[a,b]$,
+  by comparing with the partition $\{a,b\}$,
+  Theorem \ref{thm:partitionSumCompare} yields
+  \begin{align*}
+    M_{n}(f)&\ge (b-a)\inf f([a,b]), \\
+    m_{n}(f)&\le (b-a)\sup f([a,b]),
+  \end{align*}
+  where $\sup f([a,b])$ and $\inf f([a,b])$ are finite because of
+  Theorem \ref{thm:integrabilityImpliesBoundedness}.
+  Then Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound} and
+  Corollary \ref{coro:existenceAndUniquenessOfGreatestLowerBound}
+  complete the proof.
+\end{proof}
 
 \begin{defn}
   \label{def:definiteIntegral}
@@ -2686,28 +3010,229 @@ By Definition \ref{def:TaylorSeries},
    \end{equation}
 \end{defn}
 
-\begin{thm}
-  \label{thm:upperLowerRiemannIntegrals}
-  A bounded function $f:[a,b]\rightarrow\mathbb{R}$
-  is Riemann integrable if and only if
-  the upper and lower Riemann integrals of $f$ are equal: 
-  \begin{equation}
-    \label{eq:upperLowerRiemannIntegrals}
-    \overline{\int}_a^b f \dif x :=
-    \inf_{h_n\rightarrow 0} M_n(f), \quad
-%    \sum_{i=1}^n(x_i-x_{i-1}) \sup f(I_i),
-    \underline{\int}_a^b f \dif x :=
+\begin{defn}
+  \label{def:upperLowerRiemannIntegrals}
+  Let $f$ be a bounded function on $[a,b]$.
+  The \emph{upper} and \emph{lower} Riemann integrals of $f$
+  are defined by
+   \begin{align}
+    \label{eq:upperRiemannIntegrals}
+    \overline{\int}_a^b f(x) \dif x &:=
+    \inf_{h_n\rightarrow 0} M_n(f), \\
+    % \sum_{i=1}^n(x_i-x_{i-1}) \sup f(I_i),
+      \label{eq:lowerRiemannIntegrals}
+    \underline{\int}_a^b f(x) \dif x &:=
     \sup_{h_n\rightarrow 0} m_n(f), 
 %    \sum_{i=1}^n(x_i-x_{i-1}) \inf f(I_i),
-  \end{equation}
-  where $M_n(f)$ and $m_n(f)$ are respectively defined in
-  (\ref{eq:upperRiemannSum}) and (\ref{eq:lowerRiemannSum}). 
+  \end{align}
+  where the existence of $\inf_{h_{n}\rightarrow 0} M_n(f)$ and
+  $\sup_{h_{n}\rightarrow 0} m_n(f)$ is guaranteed by 
+  Corollary \ref{coro:existenceOfRiemannIntegrals}.
+\end{defn}
+
+\begin{thm}[Darboux]
+  \label{thm:DarbouxUpperLowerToLimit}
+  A bounded function $f$ on $[a,b]$ satisfies
+  \begin{align}
+    \label{eq:upperEqualToLimit}
+    \lim_{h_{n}\rightarrow 0}M_{n}(f)=\overline{\int}_a^b f(x) \dif x,\\
+    \label{eq:lowerEqualToLimit}
+    \lim_{h_{n}\rightarrow 0}m_{n}(f)=\underline{\int}_a^b f(x) \dif x.
+  \end{align}
 \end{thm}
+\begin{proof}
+  Denote $\overline{L}:=\overline{\int}_{a}^{b}f(x)\mathrm{d}x$.
+  \eqref{eq:upperRiemannIntegrals} implies that
+  \begin{displaymath}
+    (*):\quad
+    \forall \epsilon>0,\ \exists P'_{n'}(a,b),\text{ s.t. }
+    M'_{n'}(f)<\overline{L}+\frac{\epsilon}{2}. 
+  \end{displaymath}
+  Let $\delta:=\frac{\epsilon}{2n'\omega+1}>0$,
+  where $\omega$ is defined in Theorem \ref{thm:coarserPartitionCompare} .
+  We claim that
+  \begin{displaymath}
+    \forall P_{n}(a,b)\text{ with }h_{n}<\delta,\
+    M_{n}(f)-\overline{L}<\epsilon.
+  \end{displaymath}
+  Indeed, for this $P_{n}$, define
+  $\widetilde{P}_{k}:=P_{n}\oplus P'_{n'}$.
+  Then Definition \ref{def:coarserPartitionAndSum} yields that
+  $P_{n}$ and $P'_{n'}$ are both coarser than $\widetilde{P}_{k}$ and
+  $k-n\le n'$. By Theorem \ref{thm:coarserPartitionCompare}, we have
+  \begin{align*}
+    (**):\
+    M'_{n'}(f)\ge
+    \widetilde{M}_{k}(f)
+    &\ge M_{n}(f)-(k-n)\omega h_{n}\\
+    &\ge M_{n}(f)-n'\omega \delta\\
+    &= M_{n}(f)-\frac{n'\omega\epsilon}{2n'\omega+1}
+      >M_{n}(f)-\frac{\epsilon}{2}.
+  \end{align*}
+  Hence the claim follows from ($*$) and ($**$).
+  Then \eqref{eq:RiemannIntegrable} and
+  the fact $M_{n}(f)\ge \overline{L}$ imply
+  \eqref{eq:upperEqualToLimit}. \eqref{eq:lowerEqualToLimit}
+  can be proved similarly.
+\end{proof}
 
 \begin{thm}
+  \label{thm:theEquivalenceOfIntegrability}
+  For a bounded function $f:[a,b]\rightarrow\mathbb{R}$,
+  the following conditions are equivalent:
+  \begin{enumerate}[(a)]
+  \item $f$ is Riemann integrable;
+  \item $\lim_{h_{n}\rightarrow 0}(M_{n}(f)-m_{n}(f))=0$;
+  \item $\overline{\int}_{a}^{b}f(x)\mathrm{d}x=
+    \underline{\int}_{a}^{b}f(x)\mathrm{d}x$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  (a) $\Rightarrow$ (b):
+  Let $L:=\int_{a}^{b}f(x)\mathrm{d}x$.
+  Then \eqref{eq:definiteIntegral} yields
+  \begin{align*}
+    &\ \forall \epsilon>0,\ \exists \delta>0,\text{ s.t. }\\
+    &\ \forall P_{n}(a,b)\text{ with } h_{n}<\delta,\
+      L-\frac{\epsilon}{4}<S_{n}(f)<L+\frac{\epsilon}{4}.
+  \end{align*}
+  For any $P_{n}(a,b)$ as above,
+  by the definition of $M_{n}(f)$ in \eqref{eq:upperRiemannSum},
+  there exists a Riemann sum $S_{n}(f)$
+  such that $M_{n}(f)-S_{n}(f)<\frac{\epsilon}{4}$.
+  Hence $M_{n}(f)<S_{n}(f)+\frac{\epsilon}{4}<L+\frac{\epsilon}{2}$.
+  Similarly, we can get $m_{n}(f)>L-\frac{\epsilon}{2}$. Then we have
+  \begin{align*}
+    0\le M_{n}(f)-m_{n}(f)
+    < \left( L+\frac{\epsilon}{2} \right)
+    - \left( L-\frac{\epsilon}{2}  \right)=\epsilon,
+  \end{align*}
+  where the first step follows from Definition \ref{def:RiemannSum}.
+  Hence \eqref{eq:RiemannIntegrable} yields (b).
+  
+  (b) $\Rightarrow$ (c):
+  Definition \ref{def:upperLowerRiemannIntegrals} and
+  Theorem \ref{thm:partitionSumCompare} yield that
+  \begin{displaymath}
+    (*):\quad
+    \underline{\int}_{a}^{b}f(x)\mathrm{d}x
+    \le \overline{\int}_{a}^{b}f(x)\mathrm{d}x.
+  \end{displaymath}
+  Since
+  $\lim_{h_{n}\rightarrow 0}(M_{n}(f)-m_{n}(f))=0$, we have
+  \begin{align*}
+     \forall &\epsilon>0,\ \exists\delta>0\text{ s.t. }
+     \forall P_{n}(a,b)\text{ with } h(P_{n})<\delta,\\
+      &|(M_{n}(f)-m_{n}(f))-0|=M_{n}(f)-m_{n}(f)<\epsilon.
+  \end{align*}
+  Fix some $P_{n}$ as above and we have 
+  \begin{align*}
+    0\le
+    \overline{\int}_{a}^{b}f(x)\mathrm{d}x-
+    \underline{\int}_{a}^{b}f(x)\mathrm{d}x
+    &\le M_{n}(f)-m_{n}(f)<\epsilon,
+  \end{align*}
+  where the first step follows from ($*$) and the second step
+  follows from Definition \ref{def:upperLowerRiemannIntegrals}.
+  Since $\epsilon>0$ is arbitrary, we get that
+  $\overline{\int}_{a}^{b}f(x)\mathrm{d}x=
+  \underline{\int}_{a}^{b}f(x)\mathrm{d}x$.
+
+  (c) $\Rightarrow$ (a):
+  Let $L:=\overline{\int}_{a}^{b}f(x)\mathrm{d}x=
+  \underline{\int}_{a}^{b}f(x)\mathrm{d}x$.
+  Since $m_{n}(f)\le S_{n}(f)\le M_{n}(f)$ holds
+  for any partition $P_{n}$ of $[a,b]$,
+  taking $h_{n}\rightarrow 0$ and
+  using Theorem \ref{thm:DarbouxUpperLowerToLimit} yield
+  $\lim_{h_{n}\rightarrow 0}S_{n}(f)=L$.
+  Then Definition \ref{def:RiemannIntegrable} implies (a).
+\end{proof}
+
+\begin{rem}
+  When we prove (c) $\Rightarrow$ (a) in Theorem
+  \ref{thm:theEquivalenceOfIntegrability},
+  we seem to have used the squeeze test.
+  Indeed, $h_{n}\rightarrow 0$ describes a process by which 
+  the number of partition points goes to infinity,
+  not simply the number $n$ going to infinity. However, it is no matter.
+  A closer look at Definitions \ref{def:RiemannIntegrable} and
+  \ref{def:definiteIntegral} justifies
+  a similar squeeze test, so we use it directly in the proof.
+\end{rem}
+
+\begin{rem} 
+  $\lim_{h_{n}\rightarrow 0}(M_{n}(f)-m_{n}(f))=0$ is not the same as
+  $\lim_{h_{n}\rightarrow 0}M_{n}(f)=\lim_{h_{n}\rightarrow 0}m_{n}(f)$
+  in sense of the definition of the sequence limit, since
+  the partition can be arbitrary as long as
+  $h_{n}$ is small enough. However, they are indeed equivalent by
+  Theorems \ref{thm:DarbouxUpperLowerToLimit} and
+  \ref{thm:theEquivalenceOfIntegrability}.
+\end{rem}
+
+\begin{rem}
+  The equivalent condition (b) in
+  Theorem \ref{thm:theEquivalenceOfIntegrability}
+  is powerful when we judge the integrability
+  of a function. See Example \ref{exm:DirichletFuncIsNotIntegrable2},
+  Theorem \ref{thm:continuousFuncIsIntegrable},
+  Theorem \ref{thm:monotonicFuncIsIntegrable} and so on.
+\end{rem}
+
+\begin{exm}
+  \label{exm:DirichletFuncIsNotIntegrable2}
+  In Example \ref{exm:DirichletFuncIsNotIntegrable},
+  we have shown that $D(x)$ is not integrable on $[a,b]$. Now we prove
+  it by another way.
+  
+  By Definition \ref{def:RiemannSum}, for any partition $P_{n}(a,b)$,
+  choosing all $x_{i}^{*}$'s to be irrational yields
+  $m_{n}(D)=0$, and choosing all $x_{i}^{*}$'s to be rational yields
+  $M_{n}(D)=b-a$. Hence Definition
+  \ref{def:upperLowerRiemannIntegrals} yields that
+  $\underline{\int}_{a}^{b}D(x)\dif x=0$ and
+  $\overline{\int}_{a}^{b}D(x)\dif x=b-a>0$. Then Theorem
+  \ref{thm:theEquivalenceOfIntegrability} implies that
+  $D(x)$ is not integrable on $[a,b]$.
+\end{exm}
+
+\begin{thm}
+  \label{thm:continuousFuncIsIntegrable}
   A scalar function $f$ is integrable on $[a, b]$
    if $f\in {\cal C}[a,b]$.
 \end{thm}
+\begin{proof}
+  By Theorem \ref{thm:continuousImpliesBoundedness},
+  $f$ is bounded on $[a,b]$.
+  Theorem \ref{thm:uniformContinuityScalarFunc} yields that $f$ is
+  uniformly continuous on $[a,b]$, i.e.,
+  \begin{align*}
+    (*):\quad
+    &\ \forall \epsilon>0,\ \exists \delta>0,\text{ s.t. }\\
+    &\ \forall s,t\in[a,b],\ |s-t|<\delta
+      \Rightarrow |f(s)-f(t)|<\frac{\epsilon}{b-a}.
+  \end{align*}
+  For any $P_{n}(a,b)\text{ with }h_{n}<\delta$,
+  the extreme values theorem (Theorem \ref{thm:extremeValues}) implies
+  \begin{align*}
+    \exists &s_{i},t_{i}\in[x_{i-1},x_{i}],\text{ s.t. }\\
+            &f(s_{i})=\sup f([x_{i-1},x_{i}]),\\
+            &f(t_{i})=\inf f([x_{i-1},x_{i}]),
+    \quad i=1,2,\cdots,n.
+  \end{align*}
+  Then we have
+  \begin{align*}
+    M_{n}(f)-m_{n}(f)
+    &=\sum_{i=1}^{n}(f(s_{i})-f(t_{i}))(x_{i}-x_{i-1})\\
+    &\le \sum_{i=1}^{n}\frac{\epsilon}{b-a}\cdot (x_{i}-x_{i-1})=\epsilon,
+  \end{align*}
+  where the first step follows from Definition \ref{def:RiemannSum},
+  the second follows from $h_{n}<\delta$ and ($*$).
+  Hence \eqref{eq:RiemannIntegrable} yields
+  $\lim_{h_{n}\rightarrow 0}(M_{n}(f)-m_{n}(f))=0$ and then
+  Theorem \ref{thm:theEquivalenceOfIntegrability} completes the proof.
+\end{proof}
 
 \begin{defn}
   \label{def:monotonicFunctions}
@@ -2729,9 +3254,31 @@ By Definition \ref{def:TaylorSeries},
 \end{rem}
 
 \begin{thm}
+  \label{thm:monotonicFuncIsIntegrable}
   A scalar function is integrable on $[a, b]$
    if it is monotonic on $[a, b]$.
 \end{thm}
+\begin{proof}
+  WLOG, we assume a function $f$ is monotonically increasing on $[a,b]$.
+  If $f(a)=f(b)$, then $f$ is constant on $[a,b]$ and is integrable
+  by Definition \ref{def:RiemannIntegrable}. If $f(a)\neq f(b)$, then
+  $f(b)>f(a)$.
+  For any $\epsilon>0$, set $\delta:=\frac{\epsilon}{f(b)-f(a)}$.
+  For any $P_{n}(a,b)$ with $h_{n}<\delta$, we have
+  \begin{align*}
+    &\ M_{n}(f)-m_{n}(f)\\
+    =&\ \sum_{i=1}^{n}
+      (\sup f([x_{i-1},x_{i}])-\inf f([x_{i-1},x_{i}]))(x_{i}-x_{i-1})\\
+    \le &\ \sum_{i=1}^{n}(f(x_{i})-f(x_{i-1}))(x_{i}-x_{i-1})\\
+    < &\ \sum_{i=1}^{n}(f(x_{i})-f(x_{i-1}))\delta\\
+    = &\ (f(b)-f(a))\delta=\epsilon,
+  \end{align*}
+  where the first step follows from Definition \ref{def:RiemannSum},
+  the second follows from the fact that $f$ is monotonically increasing.
+  Hence \eqref{eq:RiemannIntegrable} yields
+  $\lim_{h_{n}\rightarrow 0}(M_{n}(f)-m_{n}(f))=0$ and then
+  Theorem \ref{thm:theEquivalenceOfIntegrability} completes the proof.
+\end{proof}
 
 \begin{exc}
   True or false:
@@ -2745,6 +3292,72 @@ By Definition \ref{def:TaylorSeries},
     or order-reversing.
 \end{solution}
 
+\begin{thm}
+  \label{thm:integralOperationAndQuality}
+  Let $f,g$ be integrable functions on $[a,b]$, and $c\in \mathbb{R}$.
+  \begin{enumerate}[(a)]
+  \item $cf+g$ is integrable on $[a,b]$, and
+    \begin{equation}
+      \label{eq:linearityOfIntegral}
+      \int_{a}^{b}(cf+g)\dif x=c\int_{a}^{b}f\dif x+\int_{a}^{b}g\dif x;
+    \end{equation}
+  \item $fg$ is integrable on $[a,b]$;
+  \item If $f\le g$ on $[a,b]$, then
+    $\int_{a}^{b}f\dif x\le \int_{a}^{b}g\dif x$.
+  \end{enumerate}
+\end{thm}
+\begin{proof}
+  (a) follows from Definitions \ref{def:RiemannSum}
+  and \ref{def:RiemannIntegrable}.
+  By Theorem \ref{thm:integrabilityImpliesBoundedness}, let
+  $A:=\sup f([a,b]),\ B=\sup g([a,b])$. By Theorem
+  \ref{thm:theEquivalenceOfIntegrability},
+  \begin{align*}
+     \forall &\epsilon>0,\ \exists \delta>0,\text{ s.t }
+     \forall P_{n}(a,b)\text{ with }h_{n}<\delta,\\
+     &M_{n}(f)-m_{n}(f)<\frac{\epsilon}{3B},\
+      M_{n}(g)-m_{n}(g)<\frac{\epsilon}{3A}.
+  \end{align*}
+  Then for any $P_{n}$ as above and any $s_{i},t_{i}\in[x_{i-1},x_{i}]$,
+  define
+  \begin{align*}
+    A_{i}&:=\sup f([x_{i-1},x_{i}])-\inf f([x_{i-1},x_{i}]),\\
+    B_{i}&:=\sup g([x_{i-1},x_{i}])-\inf g([x_{i-1},x_{i}]),
+  \end{align*}
+  and we have
+  \begin{align*}
+%    &\ \sum_{i=1}^{n}
+%      (\sup (fg)([x_{i-1},x_{i}])-\inf (fg)([x_{i},x_{i-1}]))(x_{i}-x_{i-1})\\
+     &\ \sum_{i=1}^{n}
+          |f(s_{i})g(s_{i})-f(t_{i})g(t_{i}))|(x_{i}-x_{i-1})\\
+    \le &\ \sum_{i=1}^{n} (|f(s_{i})||g(s_{i})-g(t_{i})|+
+          |g(t_{i})||f(s_{i})-f(t_{i})|)(x_{i}-x_{i-1})\\
+    \le &\ \sum_{i=1}^{n} (A B_{i}+B A_{i})(x_{i}-x_{i-1})\\
+    = &\ A (M_{n}(g)-m_{n}(g)) + B (M_{n}(f)-m_{n}(f))\\
+    < &\ A\cdot \frac{\epsilon}{3A} + B\cdot \frac{\epsilon}{3B}
+        =\frac{2}{3}\epsilon.
+  \end{align*}
+  Let $s_{i}$ and $t_{i}$ go to the supremum and infimum of $fg$
+  on $[x_{i-1},x_{i}]$, respectively. Then
+  \begin{align*}
+    M_{n}(fg)-m_{n}(fg)\le \frac{2}{3}\epsilon < \epsilon,
+  \end{align*}
+  which implies $\lim_{h_{n}\rightarrow0}(M_{n}(fg)-m_{n}(fg))=0$
+  and hence 
+  Theorem \ref{thm:theEquivalenceOfIntegrability} yields (b).
+  For (c), by (a), it suffices to show that
+  \begin{align*}
+    f\ge 0\text{ on }[a,b]\ \Rightarrow\
+    \int_{a}^{b}f\dif x=0.
+  \end{align*}
+  By Definition \ref{def:RiemannSum}, $m_{n}(f)\ge 0$ for any
+  partition $P_{n}(a,b)$. Taking $h_{n}\rightarrow 0$,
+  together with Theorem \ref{thm:DarbouxUpperLowerToLimit},
+  implies $\underline{\int}_{a}^{b}f\dif x\ge 0$. From the proof
+  of Theorem \ref{thm:theEquivalenceOfIntegrability}, we have
+  $\int_{a}^{b}f\dif x=\underline{\int}_{a}^{b}f\dif x\ge 0$.
+\end{proof}
+
 \begin{thm}[Integral mean value]
   \label{thm:integralMeanValue}
   Let $w:[a,b]\rightarrow \mathbb{R}^+$
@@ -2756,10 +3369,13 @@ By Definition \ref{def:TaylorSeries},
   \end{equation}
 \end{thm}
 \begin{proof}
-%    see page 19 on the text.
-  Denote $m=\inf_{x\in[a,b]} f(x)$, $M=\sup_{x\in[a,b]} f(x)$,
-   and $I=\int_a^b w(x)\dif x$.
-  Then $m w(x)\le f(x)w(x) \le M w(x)$ and
+  % see page 19 on the text.
+  By Theorem \ref{thm:continuousImpliesBoundedness},
+  we denote $m:=\inf_{x\in[a,b]} f(x)$, $M:=\sup_{x\in[a,b]} f(x)$,
+  and $I:=\int_a^b w(x)\dif x$. By Theorem
+  \ref{thm:continuousFuncIsIntegrable}, $f$ is integrable on $[a,b]$.
+  Then Theorem \ref{thm:integralOperationAndQuality} and
+    $m w(x)\le f(x)w(x) \le M w(x)$ yield
   \begin{equation*}
     m I \le \int_a^b w(x) f(x) \dif x \le M I.
   \end{equation*}
@@ -2770,6 +3386,167 @@ By Definition \ref{def:TaylorSeries},
   Applying Theorem \ref{thm:intermediateValue}
    completes the proof.
 \end{proof}
+
+\begin{thm}
+  \label{thm:integrabilityImpliesAbsoluteIntegrability}
+  If $f$ is integrable on $[a,b]$, then so is $|f|$. Moreover,
+  \begin{equation}
+    \label{eq:integralLessAbsoluteIntegral}
+    \left| \int_{a}^{b}f(x)\dif x  \right|
+    \le \int_{a}^{b}|f(x)|\dif x.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  We claim that
+  \begin{align*}
+    (*):\
+    \forall  a\le s<t\le b,\ 
+    \begin{array}{l}
+      \begin{aligned}
+         \sup &\ |f([s,t])|-\inf |f([s,t])|\\
+      \le &\ \sup f([s,t])-\inf f([s,t]).
+      \end{aligned}    
+    \end{array} 
+  \end{align*}
+  Indeed, when $f>0$ on $[s,t]$, $|f|=f$ on $[s,t]$ and ($*$) holds.
+  When $f<0$ on $[s,t]$, we have
+  \begin{align*}
+     &\ \sup |f([s,t])|-\inf |f([s,t])|\\
+    =&\ \sup(-f([s,t]))-\inf(-f([s,t])\\
+    =&\ -\inf(f([s,t]))+\sup(f([s,t]))
+  \end{align*}
+  and ($*$) holds.
+  When $f$ changes its sign on $[s,t]$,
+  denote $M_{0}:=\sup f([s,t])>0$ and $m_{0}:=\inf f([s,t])<0$.
+  Then
+  $ \sup |f([s,t])|=\max\{M_{0},-m_{0}\}$, $\inf |f([s,t])|=0$
+  and
+  \begin{align*}
+    \sup |f([s,t])|-\inf |f([s,t])|=\max\{M_{0},-m_{0}\}<M_{0}-m_{0},
+  \end{align*}
+  which also implies ($*$). Hence the claim holds.
+  Then taking $s=x_{i-1},\ t=x_{i}$ in ($*$), we have
+  \begin{align*}
+    &\ \sup |f([x_{i-1},x_{i}])|-\inf |f([x_{i-1},x_{i}])|\\
+    \le &\ \sup f([x_{i-1},x_{i}])-\inf f([x_{i-1},x_{i}]),
+  \end{align*}
+  which, together with Definition \ref{def:RiemannSum},
+  implies
+  \begin{displaymath}
+    0\le M_{n}(|f|)-m_{n}(|f|)\le M_{n}(f)-m_{n}(f).
+  \end{displaymath}
+  Hence taking $h_{n}\rightarrow 0$ and applying Theorem
+  \ref{thm:theEquivalenceOfIntegrability} get the integrability of $|f|$.
+  Note that $-|f(x)|\le f(x)\le |f(x)|$,
+  we have
+  \begin{displaymath}
+    -\int_{a}^{b}|f(x)|\dif x\le \int_{a}^{b}f(x)\dif x
+    \le \int_{a}^{b}|f(x)|\dif x
+  \end{displaymath}
+  and then \eqref{eq:integralLessAbsoluteIntegral} holds.
+\end{proof}
+
+\begin{thm}
+  \label{thm:integralAdditivity}
+  Let $f:[a,b]\rightarrow \mathbb{R}$ and
+  $c\in(a,b)$. Then $f$ is integrable on $[a,b]$ if and only if
+  $f$ is integrable on both $[a,c]$ and $[c,b]$.
+  Moreover, if $f$ is integrable on $[a,b]$, then
+  \begin{equation}
+    \label{eq:integralAdditivity}
+    \int_{a}^{b}f(x)\dif x=
+    \int_{a}^{c}f(x)\dif x+\int_{c}^{b}f(x)\dif x.
+  \end{equation}
+\end{thm}
+\begin{proof}
+  For the necessity,
+  Theorem \ref{thm:theEquivalenceOfIntegrability} yields
+  \begin{align*}
+    &\ \forall\epsilon>0,\ \exists \delta>0,\text{ s.t. }\\
+    &\ \forall \widetilde{P}_{k}(a,b)\text{ with }
+      h(\widetilde{P}_{k})<\delta,
+      \ \widetilde{M}_{k}(f)-\widetilde{m}_{k}(f)<\epsilon.
+  \end{align*}
+  Then for any partition $P_{n}(a,c)$ with $h(P_{n})<\delta$, there exists
+  $\widetilde{P}_{k}(a,b)\supset P_{n}(a,c)$ with
+  $h(\widetilde{P}_{k})<\delta$
+  such that
+  \begin{displaymath}
+    M_{n}(f)-m_{n}(f)\le \widetilde{M}_{k}(f)-\widetilde{m}_{k}(f)<\epsilon.
+  \end{displaymath}
+  By Theorem \ref{thm:theEquivalenceOfIntegrability},
+  $f$ is integrable on $[a,c]$. Similar arguments can show
+  $f$ is integrable on $[c,b]$.
+  
+  For the sufficiency,
+  Theorem \ref{thm:theEquivalenceOfIntegrability} yields
+  \begin{align*}
+    &\ \forall\epsilon>0,\ \exists \delta>0,\text{ s.t. }\\
+    &\ \forall P_{n}(a,c)\text{ with }h(P_{n})<\delta,
+      \ M_{n}(f)-m_{n}(f)<\frac{\epsilon}{3},\\
+    &\ \forall P'_{n'}(c,b)\text{ with }h(P'_{n'})<\delta,
+      \ M'_{n'}(f)-m'_{n'}(f)<\frac{\epsilon}{3}.
+  \end{align*}
+  Then for any $\widetilde{P}_{k}(a,b)$ with
+  $h(\widetilde{P}_{k})<\delta$,
+  if $c\in \widetilde{P}_{k}$, we have
+  \begin{align*}
+    \widetilde{M}_{k}(f)-\widetilde{m}_{k}(f)
+    &=(M_{n}(f)+M'_{n'}(f))-(m_{n}(f)+m'_{n'}(f))\\
+    &<\frac{\epsilon}{3}+\frac{\epsilon}{3}<\epsilon.
+  \end{align*}
+  If $c\not\in \widetilde{P}_{k}$,
+  consider a new partition
+  $\widetilde{P}'_{k'}:=\widetilde{P}_{k}\cup \{c\}$.
+  Theorem \ref{thm:coarserPartitionCompare} yields
+  \begin{align*}
+    \widetilde{M}_{k}(f)-\widetilde{m}_{k}(f)
+    \le \widetilde{M}'_{k'}(f)-\widetilde{m}'_{k'}(f)
+    +2\omega h(\widetilde{P}_{k}).
+  \end{align*}
+  Taking $\delta':=\min\{\delta,\frac{\epsilon}{6\omega}\}$ yields
+  \begin{align*}
+    \forall
+    \widetilde{P}_{k}(a,b)&\text{ with }
+    h(\widetilde{P}_{k})<\delta',\\
+    &\ \widetilde{M}_{k}(f)-\widetilde{m}_{k}(f)\\
+    \le &\ \widetilde{M}'_{k'}(f)-\widetilde{m}'_{k'}(f)
+          +\frac{\epsilon}{3}\\
+    =&\ (M_{n}(f)+M'_{n'}(f))-(m_{n}(f)+m'_{n'}(f))+\frac{\epsilon}{3}\\
+    <&\ \frac{\epsilon}{3}+\frac{\epsilon}{3}+\frac{\epsilon}{3}
+       =\epsilon.
+  \end{align*}
+  In a word, we have
+  $\lim_{h(\widetilde{P}_{k})\rightarrow0}
+  (\widetilde{M}_{k}(f)-\widetilde{m}_{k}(f))=0.$
+  Hence Theorem \ref{thm:theEquivalenceOfIntegrability} shows that
+  $f$ is integrable on $[a,b]$.
+
+  If $f$ is integrable on $[a,b]$,
+  denote $L_{1}:=\int_{a}^{c}f(x)\dif x$,
+  $L_{2}:=\int_{c}^{b}f(x)\dif x$.
+  Then the triangle inequality
+  \begin{align*}
+    |\widetilde{S}_{k}(f)-L_{1}-L_{2}|
+    &= |S_{n}(f)+S'_{n'}(f)-L_{1}-L_{2}|\\
+    &\le |S_{n}(f)-L_{1}|+|S'_{n'}(f)-L_{2}|
+  \end{align*}
+  and Definition \ref{def:RiemannIntegrable}
+  yield $\int_{a}^{b}f(x)\dif x=L_{1}+L_{2}$.
+\end{proof}
+
+\begin{ntn}
+  \label{ntn:rulesOfRangeOfIntegration}
+  Let $f:[a,b]\rightarrow \mathbb{R}$ be Riemann integrable.
+  For convenience, we define
+  \begin{align*}
+    \int_{a}^{a}f(x)\dif x&:=0,\\
+    \int_{b}^{a}f(x)\dif x&:=-\int_{a}^{b}f(x)\dif x.
+  \end{align*}
+  By adding the two equations, the additivity of integrals can be
+  preserved, i.e., \eqref{eq:integralAdditivity} holds for any
+  $a,b,c\in \mathbb{R}$.
+\end{ntn}
 
 \begin{thm}[First fundamental theorem of calculus]
   \label{thm:fundamentalThmCalculus1}
@@ -2788,6 +3565,45 @@ By Definition \ref{def:TaylorSeries},
     F'(x_0) = f(x_0).
   \end{equation}
 \end{thm}
+\begin{proof}
+  For any $x_{0},x_{0}+h\in [a,b]$,
+  Notation \ref{ntn:rulesOfRangeOfIntegration} and Theorem
+  \ref{thm:integralAdditivity} yield
+  \begin{align*}
+    F(x_{0}+h)-F(x_{0})
+    &=\int_{a}^{x_{0}+h}f(y)\dif y-\int_{a}^{x_{0}}f(y)\dif y\\
+    &=\int_{a}^{x_{0}+h}f(y)\dif y+\int_{x_{0}}^{a}f(y)\dif y\\
+    &=\int_{x_{0}}^{x_{0}+h}f(y)\dif y.
+  \end{align*}
+  Thus Theorem \ref{thm:integralOperationAndQuality} implies
+  \begin{align*}
+    &\ \frac{F(x_{0}+h)-F(x_{0})}{h}-f(x_{0})\\
+    =&\ \frac{1}{h}\int_{x_{0}}^{x_{0}+h}f(y)\dif y
+      -\frac{1}{h}\int_{x_{0}}^{x_{0}+h}f(x_{0})\dif y\\
+    =&\ \frac{1}{h}\int_{x_{0}}^{{x_{0}+h}}(f(y)-f(x_{0}))\dif y.
+  \end{align*}
+  Since $f$ is continuous at $x_{0}$, we have
+  \begin{align*}
+    &\ \forall \epsilon>0,\ \exists \delta>0,\text{ s.t. }\\
+    &\ \forall y\in[a,b]\text{ with }|y-x_{0}|<\delta,\
+      |f(y)-f(x_{0})|<\epsilon.
+  \end{align*}
+  Then Theorem \ref{thm:integrabilityImpliesAbsoluteIntegrability} yields
+  \begin{align*}
+    0<|h|<\delta\ \Rightarrow
+    \quad &\ \left|\frac{F(x_{0}+h)-F(x_{0})}{h}-f(x_{0})\right|\\
+    \le&\ \frac{1}{|h|}\int_{x_{0}}^{x_{0}+|h|}|f(y)-f(x_{0})|\dif y\\
+    <&\ \frac{1}{|h|}\int_{x_{0}}^{x_{0}+|h|}\epsilon\dif y
+    = \epsilon.
+  \end{align*}
+  Then Definition \ref{def:limitOfAScalarFunc} yields that
+  \begin{displaymath}
+    \lim_{h\rightarrow 0}\frac{F(x_{0}+h)-F(x_{0})}{h}=f(x_{0}).
+  \end{displaymath}
+  Then by Definition \ref{def:derivative},
+  $F$ is differentiable at $x_{0}$ and $F'(x_{0})=f(x_{0})$.
+  Since $x_{0}$ is arbitrary, the proof is completed.
+\end{proof}
 
 \begin{thm}[Second fundamental theorem of calculus]
   \label{thm:fundamentalThmCalculus2}
@@ -2799,9 +3615,19 @@ By Definition \ref{def:TaylorSeries},
   then
   \begin{equation}
     \label{eq:fundamentalThmCalculus2}
-    \int_a^b f = F(b) - F(a).
+    \int_a^b f(x)\dif x = F(b) - F(a).
   \end{equation}
 \end{thm}
+\begin{proof}
+  By Theorem \ref{thm:fundamentalThmCalculus1},
+  $\int_{a}^{x}f(y)\dif y$ is an antiderivative of $f$.
+  Hence there exists a constant $C$ such that
+  \begin{displaymath}
+    \int_{a}^{x}f(y)\dif y = F(x)+C.
+  \end{displaymath}
+  Then taking $x=a$ yields $C=-F(a)$.
+  Now taking $x=b$ completes the proof.
+\end{proof}
 
 
 \section{Vector functions
