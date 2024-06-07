@@ -162,6 +162,7 @@
     \label{eq:openBallMetricSpace}
     B_r(x) := \left\{y\in {\cal X}: d(x,y)<r\right\}.
   \end{equation}
+  Sometimes we also write $B(x,r):=B_r(x)$. 
 \end{defn}
 
 \section{Complete metric spaces}
@@ -191,7 +192,7 @@
   \begin{equation}
     \label{eq:CauchySeqMetricSpace}
     \forall \epsilon>0, \exists N\in\mathbb{N} \text{ s.t. }
-    m,n > N\ \Rightarrow\ d(x_m,x_n) <\epsilon.
+    m,n > N \implies d(x_m,x_n) <\epsilon.
   \end{equation}
 \end{defn}
 
@@ -222,7 +223,7 @@
   However, although $(x_n)$ is Cauchy in $\mathbb{Q}$,
   it is not convergent in $\mathbb{Q}$ because
   \begin{displaymath}
-    L = \frac{4+3L}{3+2L} \ \Rightarrow\ 
+    L = \frac{4+3L}{3+2L}  \implies 
     L=\sqrt{2}.
   \end{displaymath}
 \end{exm}
@@ -837,7 +838,7 @@
     & \exists \delta>0\, \text{ s.t. }
     \forall y \in {\cal X},\ \
     \\ \nonumber
-    &d_{\cal X}(x,y)<\delta\ \Rightarrow\ d_{\cal Y}(f(x),f(y))<\epsilon
+    &d_{\cal X}(x,y)<\delta \implies d_{\cal Y}(f(x),f(y))<\epsilon
   \end{align}
 \end{defn}
 
@@ -1060,7 +1061,7 @@
     & \exists \delta>0\, \text{ s.t. }
       \forall x,y \in {\cal X},\ \
     \\ \nonumber
-    &d_{\cal X}(x,y)<\delta\ \Rightarrow\ d_{\cal Y}(f(x),f(y))<\epsilon.
+    &d_{\cal X}(x,y)<\delta \implies d_{\cal Y}(f(x),f(y))<\epsilon.
   \end{align}
 \end{defn}
 
@@ -1144,7 +1145,7 @@
     \begin{array}{{rl}}
     \forall \epsilon>0, &\exists \delta>0 \text{ s.t. }
     \forall f\in{\cal F},\ \forall x,y\in E,\ \\
-      &d_{\cal X}(x,y)<\delta\ \Rightarrow\ |f(x)-f(y)|<\epsilon.
+      &d_{\cal X}(x,y)<\delta \implies |f(x)-f(y)|<\epsilon.
     \end{array}
   \end{equation}
 \end{defn}
@@ -1732,7 +1733,7 @@
 
 \begin{exc}
   \label{exc:equiContInRn2Compact}
-  Denote by $\Omega\subset \mathbb{R}^n$ a bounded open convex set.
+  Denote by $\Omega\subset \mathbb{R}^m$ a bounded open convex set.
   For $M_1,M_2\in\mathbb{R}^+$,
   show that the set
   \begin{equation}
@@ -1742,7 +1743,8 @@
       \|\nabla f(x)\|\le M_2
     \right\}
   \end{equation}
-  is sequentially compact.
+  is totally bounded and equicontinuous,
+  but not sequentially compact.
 \end{exc}
 
 \section{Function sequences}
@@ -1768,7 +1770,7 @@
      \forall x\in E,\ 
      \\      \label{eq:limitingValueOfAfuncCond}
      &\left|x-x_0\right|_{{\cal X}} < \delta
-      \ \Rightarrow\ 
+       \implies 
      \left|f(x)- L\right|_{{\cal Y}} < \epsilon.
    \end{align}
 \end{defn}

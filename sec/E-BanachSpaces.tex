@@ -122,7 +122,7 @@
     \end{array}
     \right.
     \\
-    &\Rightarrow
+    &\implies 
      (a_n)_{n\in \mathbb{N}}+(b_n)_{n\in \mathbb{N}}\in \ell^p,
   \end{align*}
   where the comparison test is applied.
@@ -235,7 +235,7 @@
     &\forall \epsilon>0,\ \exists \delta=\epsilon, \text{ s.t. }\ 
       \forall f,g\in {\cal C}^1[0,1],\ 
       \|f - g\|_{1,\infty}<\delta
-    \ \Rightarrow\ 
+     \implies 
     \\
     &
     \|Df - Dg\|_{\infty}
@@ -666,8 +666,7 @@
   For a vector space $X$ and 
   its subsets $A$, $A_1$, $A_2$, 
   we write
-    \begin{equation}
-    \label{eq:setLinearOpNotation}
+    \begin{displaymath}
       \begin{array}{rl}
         \forall \alpha\in \mathbb{R},
         \quad \alpha A &:= \{\alpha a, a\in A\};
@@ -678,7 +677,7 @@
         \forall A_1, A_2 \subset X,\quad 
         A_1 + A_2 &:= \{a_1+a_2: a_1\in A_1, a_2\in A_2\}.
       \end{array}
-  \end{equation}
+  \end{displaymath}
 \end{ntn}
 
 \begin{lem}
@@ -722,7 +721,7 @@
   $B_0:=B(\mathbf{0}_X,1)$ contains an open ball about $\mathbf{0}_Y$.
 \end{lem}
 
-\begin{thm}[Open mapping]
+\begin{thm}[Banach-Schauder or open mapping]
   \label{thm:openMapping}
   For Banach spaces $X$ and $Y$,
   any surjective map $T\in {\cal CL}(X,Y)$ is open.
@@ -771,7 +770,7 @@
   \begin{equation}
     \label{eq:opNormIsLeastUpperBound}
     \left(\forall x\in X, \|Tx\|\le M \|x\|\right)
-    \ \Rightarrow\ \|T\|\le M.
+     \implies \|T\|\le M.
   \end{equation}
 \end{lem}
 
@@ -844,7 +843,7 @@
   \label{def:invertibleOps}
   For vector spaces $X$ and $Y$,
   a linear map \mbox{$A\in {\cal L}(X,Y)$} is \emph{invertible}
-  if there exists $B\in {\cal L}(Y,X)$
+  iff there exists $B\in {\cal L}(Y,X)$
   such that $AB=I\in {\cal L}(Y)$
   and $BA=I\in {\cal L}(X)$. 
   Then $B$ is called the \emph{inverse} of $A$.
@@ -864,14 +863,14 @@
 
 \begin{lem}
   \label{lem:invertibleCLmapIsLinear}
-  For two vectors spaces $X$ and $Y$, 
+  For two vector spaces $X$ and $Y$, 
   if a map $A\in {\cal L}(X,Y)$ is invertible,
   then its inverse $A^{-1}$ is linear.
 \end{lem}
 
 \begin{lem}
   \label{lem:bijectiveImpliesInvertibleFiniteDim}
-  For two finite-dimensional vector spaces $X$ and $Y$, 
+  For two vector spaces $X$ and $Y$, 
   a linear map $A\in {\cal L}(X,Y)$ is invertible
   provided that it is bijective.
 \end{lem}
@@ -1019,43 +1018,14 @@
   For a family of maps $T_i\in {\cal CL}(X,Y)$, $i\in I$, 
   ``pointwise boundedness''
   implies ``uniform boundedness,'' % i.e., 
-  \begin{displaymath}
+  \begin{equation}
+    \label{eq:uniform-boundedness}
     \forall x\in X,\quad
     \sup_{i\in I} \|T_i x\| < +\infty
-    \ \Rightarrow\ 
+     \implies 
     \sup_{i\in I} \|T_i\| <+\infty.
-  \end{displaymath}
+  \end{equation}
 \end{thm}
-
-\begin{exm}
-  Many PDEs can be written in the form
-  \begin{displaymath}
-    Tx = y,
-  \end{displaymath}
-  where $y$ is a known vector incorporating initial and boundary
-  conditions,
-  $x$ is the unknown, 
-  and $T$ is a continuous linear operator.
-  If the PDE is well-posed, we can often assume
-  that $T$ is a bijection,
-  hence by Theorem
-  \ref{thm:bijectiveCLmapBetweenBanachSpacesIsInvertible}
-  the inverse of $T$ is a bounded linear operator
-  and we write $x=T^{-1}y$.
-  In numerically solving the PDE,
-  we usually approximate $y$ by a grid function $y_n$ 
-  and approximate $T^{-1}$ by a discrete operator $T^{-1}_n$.
-  The convergence usually means
-  \begin{displaymath}
-    \forall y\in {\cal C}^r(\overline{\Omega}),
-    \lim_{n\rightarrow \infty} y_n = y,\ 
-    \lim_{n\rightarrow \infty} T^{-1}_n y_n = x, 
-  \end{displaymath}
-  i.e., $\sup_{n\rightarrow \infty} \|T^{-1}_n y_n\|<\infty$.
-  Theorem \ref{thm:uniform-boundedness} then implies
-  $\sup_{n\in \mathbb{N}}\|T_n^{-1}\|<\infty$,
-  which usually implies some form of numerical stability.
-\end{exm}
 
 \begin{thm}[Banach-Steinhaus]
   \label{thm:Banach-Steinhauss}
@@ -1069,6 +1039,52 @@
   then the map $x\mapsto \lim_{n\rightarrow \infty} T_n x$
   belongs to ${\cal CL}(X,Y)$.
 \end{thm}
+
+\begin{exm}
+  A linear PDE can be written in the form
+  \begin{equation}
+    \label{eq:PDEtoBeSolved}
+    Tx = y
+  \end{equation}
+  where $x$ is the unknown, 
+  $T$ is a continuous linear operator,
+  and $y$ is a known vector incorporating initial and boundary
+  conditions. 
+  If the PDE is well-posed, we can often assume
+  that $T$ is a bijection,
+  hence by Theorem
+  \ref{thm:bijectiveCLmapBetweenBanachSpacesIsInvertible}
+  the inverse of $T$ is a bounded linear operator
+  and we write $x=T^{-1}y$.
+  In numerically solving the PDE,
+  we usually approximate $y$ by a grid function $y_n$ 
+  and approximate $T^{-1}$ by a discrete operator $T^{-1}_n$.
+  Suppose the numerical computation satisfies 
+  \begin{displaymath}
+    \forall y\in {\cal C}^r(\overline{\Omega}),
+    \lim_{n\rightarrow \infty} y_n = y,\
+    \sup_{n\rightarrow \infty} \|T^{-1}_n y_n\|<\infty.
+  \end{displaymath}
+  Then Theorem \ref{thm:Banach-Steinhauss} yields 
+  $\sup_{n\in \mathbb{N}}\|T_n^{-1}\|<\infty$,
+  which usually implies some form of numerical stability
+  and thus the desired convergence
+  $\lim_{n\rightarrow \infty} T^{-1}_n y_n = x$. 
+  The entire process of numerically solving (\ref{eq:PDEtoBeSolved})
+  can be summarized as follows.
+  \begin{displaymath}
+    \begin{tikzcd}[column sep=15em]
+      y \ar{r}{T^{-1}}
+      \ar{d}{\textrm{sampling}} 
+      & x 
+      \\
+      (y_n) %_{n\in\mathbb{N}^+}
+      \ar{r}{T_n^{-1}}
+      & (T_n^{-1}y_n) 
+      \ar{u}{\textrm{The Banach-Steinhaus theorem}}
+    \end{tikzcd}
+  \end{displaymath}
+\end{exm}
 
 %%% Local Variables:
 %%% mode: latex
