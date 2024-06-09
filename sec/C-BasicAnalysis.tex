@@ -1368,6 +1368,7 @@ This is one of the main motivations of infinite sequence and series.
      $\lim_{x\rightarrow c} f(x) = L$,
   iff 
   \begin{equation}
+    \label{eq:limitOfScalarFunc}
  \forall \epsilon>0, \exists \delta>0, \text{ s.t. }
     \forall x\in I(c,\delta),\ |f(x)-L|<\epsilon.
   \end{equation}
@@ -1381,6 +1382,28 @@ How close is close?
 As close as you wish.
 This idea is packaged in the $\epsilon-\delta$ technique.
 \end{rem}
+
+\begin{lem}
+  \label{lem:funcCvTo0IsEqulvalentToAbsoluteFuncCvTo}
+  Let $f:I(c,r)\rightarrow \mathbb{R}$ be a scalar function. Then
+  \begin{displaymath}
+    \lim_{x\rightarrow c}f(x)=0
+    \ \Leftrightarrow \left| \lim_{x\rightarrow c}f(x) \right|=0
+    \ \Leftrightarrow \lim_{x\rightarrow c} |f(x)|=0.
+  \end{displaymath}
+\end{lem}
+\begin{proof}
+  It follows from \eqref{eq:limitOfScalarFunc} with $L=0$.
+\end{proof}
+
+\begin{lem}
+  \label{lem:funcLimitIsUnique}
+  Let $f$ be a scalar function. Then the limit of $f(x)$ at $c$
+  is unique.
+\end{lem}
+\begin{proof}
+  The proof is similar to that of Lemma \ref{lem:seqLimitIsUnique}.
+\end{proof}
 
 \begin{exm}
   \label{exm:limitForShowingEpsDelta}
@@ -2266,6 +2289,19 @@ $a=0$.
   If the limit exists, $f$ is \emph{differentiable} at $x$.
 \end{defn}
 
+\begin{defn}
+  \label{def:oneSidedDerivative}
+  The \emph{left derivative}
+   of a function $f: \mathbb{R}\rightarrow \mathbb{R}$
+   at $x$ is the limit
+   \begin{equation}
+     \label{eq:derivative}
+     f'(x^{-})=\lim_{h\rightarrow 0^{-}} \frac{f(x+h)-f(x)}{h}.
+   \end{equation}
+   The \emph{right derivative} of $f$ at $x$,
+   denoted by $f'(x^{+})$, can be defined similarly.
+\end{defn}
+
 \begin{exm}
   For the power function \mbox{$f(x)=x^{\alpha}$}, $\alpha\neq 0$,
    we have $f'=\alpha x^{\alpha-1}$
@@ -2384,7 +2420,7 @@ $a=0$.
   $f\circ g$ is differentiable at $t_{0}$, and
   \begin{equation}
     \label{eq:chainRuleOnScalarFunc}
-    (f\circ g)'(t_{0})=f'\circ g(t_{0})g'(t_{0}).
+    (f\circ g)'(t_{0})=f'(g(t_{0}))g'(t_{0}).
   \end{equation}
 \end{thm}
 \begin{proof}
@@ -2428,6 +2464,7 @@ $a=0$.
 \end{proof}
 
 \begin{defn}
+  \label{def:continuouslyDifScalarFunc}
   A function $f(x)$ is
    $k$ times \emph{continuously differentiable}
    on $(a,b)$
@@ -3596,7 +3633,7 @@ By Definition \ref{def:TaylorSeries},
     <&\ \frac{1}{|h|}\int_{x_{0}}^{x_{0}+|h|}\epsilon\dif y
     = \epsilon.
   \end{align*}
-  Then Definition \ref{def:limitOfAScalarFunc} yields that
+  Hence Definition \ref{def:limitOfAScalarFunc} yields that
   \begin{displaymath}
     \lim_{h\rightarrow 0}\frac{F(x_{0}+h)-F(x_{0})}{h}=f(x_{0}).
   \end{displaymath}
@@ -3631,7 +3668,7 @@ By Definition \ref{def:TaylorSeries},
 
 
 \section{Vector functions
-  $\mathbb{R}^m\rightarrow\mathbb{R}^n$}
+  $\mathbb{R}^n\rightarrow\mathbb{R}^m$}
 \label{sec:sever-vari-diff}
 
 \begin{rem} 
@@ -3641,7 +3678,7 @@ By Definition \ref{def:TaylorSeries},
   % of connecting new stuff 
   % to things we already know.
   In Definition \ref{def:norm},
-  the concept of norms are defined with respect
+  the concept of norms is defined with respect
   to a vector space ${\cal V}$,
   which is either $\mathbb{R}^n$ or $\mathbb{C}^n$
   in lower-level classes such as linear algebra,
@@ -3650,18 +3687,18 @@ By Definition \ref{def:TaylorSeries},
   functional analysis.
   To transit smoothly from linear algebra
   to functional analysis,
-  in Sections \ref{sec:operator-norm}
+  in Section \ref{sec:operator-norm}
   we rephrase the induced matrix 2-norm
   as an operator norm.
   A careful study of this operator norm
-  and Hilber-Schmidt norm
+  and Hilbert-Schmidt norm
   serves as a stepping stone
   to the more abstract discussion of norms
   in Sections \ref{sec:norm-equivalence}
   and \ref{sec:space-CLXY}.
   Then the norm equivalence is utilized
   to define the matrix exponential
-  in Sections \ref{sec:matrix-exponential}.
+  in Section \ref{sec:matrix-exponential}.
   % Most contents in the first two subsections
   % are taken from \cite{knapp05:_basic_real_analy}.
 \end{rem}
@@ -3697,7 +3734,7 @@ By Definition \ref{def:TaylorSeries},
   \begin{equation}
     \label{eq:linearOperatorBounded}
     \forall T\in {\cal L}(\mathbb{F}^n,\mathbb{F}^m),\ 
-    \exists M\in \mathbb{F} \text{ s.t. }
+    \exists M\ge 0 \text{ s.t. }
     \forall \mathbf{x}\in \mathbb{F}^n,\
     |T\mathbf{x}|\le M|\mathbf{x}|,
   \end{equation}
@@ -3725,15 +3762,15 @@ By Definition \ref{def:TaylorSeries},
 
 \begin{defn}
   \label{def:uniformlyContinuousVector}
-  A function $f: \mathbb{F}^m\rightarrow \mathbb{F}^n$
-  is \emph{uniformly continuous} in $U\subset \mathbb{F}^m$
+  A function $\mathbf{f}: \mathbb{F}^m\rightarrow \mathbb{F}^n$
+  is \emph{uniformly continuous} on $U\subset \mathbb{F}^m$
   iff
    \begin{equation}
      \label{eq:uniformlyContinuousVector}
      \begin{array}{l}
      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
      \\
-     \forall x,y\in I,\ 
+     \forall \mathbf{x},\mathbf{y}\in U,\ 
        |\mathbf{x}-\mathbf{y}|<\delta \Rightarrow
        |\mathbf{f}(\mathbf{x})-\mathbf{f}(\mathbf{y})|<\epsilon.
      \end{array}
@@ -3799,7 +3836,7 @@ By Definition \ref{def:TaylorSeries},
    \end{displaymath}
   is nonempty and bounded from below.
 %  It is also closed: 
-  For any Cauchy sequence $\{M_n\}_{n=1}^{\infty}$ in ${\cal M}$
+  For any sequence $\{M_n\}_{n=1}^{\infty}$ in ${\cal M}$
   that converges to $c$,
   we can take the limit to the sequence of inequalities
   $|T\mathbf{x}|\le M_n |\mathbf{x}|$
@@ -3838,7 +3875,7 @@ By Definition \ref{def:TaylorSeries},
   taking the limit to a sequence of equalities
   $|T\mathbf{x}|\le M_n |\mathbf{x}|$
   with the sequence $\{M_n\}_{n=1}^{\infty}$
-  satisfying $\lim_{n\rightarrow +\infty} M_n = 0$.
+  satisfying $\lim_{n\rightarrow \infty} M_n = 0$.
 
   The absolute homogeneity holds because $\forall a \in \mathbb{F}$, 
   \begin{displaymath}
@@ -3860,11 +3897,14 @@ By Definition \ref{def:TaylorSeries},
       % \\
       \|T + S\| &= \inf\{M: \forall \mathbf{x} \in \mathbb{F}^n,
                   |(T+S)\mathbf{x}| \leq M|\mathbf{x}|\}\\
-      &= \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |T\mathbf{x}+S\mathbf{x}| \leq M|\mathbf{x}|\} \\
-      &\leq \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |T\mathbf{x}|+|S\mathbf{x}| \leq M|\mathbf{x}|\}\\
+        &= \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,
+          |T\mathbf{x}+S\mathbf{x}| \leq M|\mathbf{x}|\} \\
+        &\leq \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,
+          |T\mathbf{x}|+|S\mathbf{x}| \leq M|\mathbf{x}|\}\\
       &\leq \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,
         |T\mathbf{x}| \leq M|\mathbf{x}|\} \\
-      &\ \  + \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n, |S\mathbf{x}| \leq M|\mathbf{x}|\}\\
+        &\ \  + \inf\{M:\forall \mathbf{x} \in \mathbb{F}^n,
+          |S\mathbf{x}| \leq M|\mathbf{x}|\}\\
       &= \|T\| + \|S\|.
     \end{array}
   \end{displaymath}
@@ -3947,7 +3987,7 @@ By Definition \ref{def:TaylorSeries},
   \item[(i)] $\forall T, S \in \mathcal{L}(\mathbb{F}^n,
     \mathbb{F}^m),
     d(T, S) = \|T - S\| \geq 0 $
-    and $d(T, S) = 0 \iff \|T - S\| = 0 \iff T - S = 0 \iff T = s$;
+    and $d(T, S) = 0 \iff \|T - S\| = 0 \iff T - S = 0 \iff T = S$;
   \item[(ii)] $d(T, S) = \|T - S\| = \|S - T\| = d(S, T)$;
   \item[(iii)] $\forall T, S ,V \in \mathcal{L}(\mathbb{F}^n,
     \mathbb{F}^m),
@@ -3983,14 +4023,21 @@ By Definition \ref{def:TaylorSeries},
   \end{equation}
 \end{lem}
 \begin{proof}
-  First, $T(\mathbb{R}^n)$ $\subset \mathbb{R}^m$ is trivial because the matrix of $T$ is a real matrix.
-  Thus, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$. From this fact, we can define an operator norm of $T$ as
-  \begin{equation}\label{equ1}
-    \|T\| = \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|.
+  First, $T(\mathbb{R}^n)$ $\subset \mathbb{R}^m$ is trivial
+  because the matrix of $T$ is a real matrix.
+  Thus, $T \in \mathcal{L}(\mathbb{R}^n, \mathbb{R}^m)$.
+  From this fact, we can define an operator norm of $T$ as
+  \begin{equation}\nonumber
+    (*):\quad
+    \|T\| = \underset{\mathbf{x}\in \mathbb{R}^n;
+      |\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|.
   \end{equation}
   On the one hand, we have
   \begin{equation}\nonumber
-    \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}| \leq \underset{\mathbf{z}\in \mathbb{C}^n;|\mathbf{z}| \leq 1}{\sup}|T\mathbf{z}|
+    \underset{\mathbf{x}\in \mathbb{R}^n;
+      |\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|
+    \leq \underset{\mathbf{z}\in \mathbb{C}^n;
+      |\mathbf{z}| \leq 1}{\sup}|T\mathbf{z}|
   \end{equation}
   since $\mathbb{R}^n \subset \mathbb{C}^n$. 
   On the other hand,
@@ -4000,17 +4047,20 @@ By Definition \ref{def:TaylorSeries},
   s.t. $\mathbf{z} = \mathbf{x} + \ii \mathbf{y}$
   and $|\mathbf{x}|^2 + |\mathbf{y}|^2 \leq 1$, and we have
   \begin{align*}
-    |T\mathbf{z}| &= |T\mathbf{x} + \ii T\mathbf{y}| =
-                    \sqrt{|T\mathbf{x}|^2 + |T\mathbf{y}|^2}
+    |T\mathbf{z}|
+    &= |T\mathbf{x} + \ii T\mathbf{y}| =
+       \sqrt{|T\mathbf{x}|^2 + |T\mathbf{y}|^2}
     \\
-                  &\le \sqrt{\|T\|^2|\mathbf{x}|^2 + \|T\|^2|\mathbf{y}|^2}
+    &\le \sqrt{\|T\|^2|\mathbf{x}|^2 + \|T\|^2|\mathbf{y}|^2}
     \\
-    &= \|T\|\sqrt{|\mathbf{x}|^2 + |\mathbf{y}|^2} \leq \|T\| = \underset{\mathbf{x}\in \mathbb{R}^n;|\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|  
+    &= \|T\|\sqrt{|\mathbf{x}|^2 + |\mathbf{y}|^2} \leq \|T\|
+      = \underset{\mathbf{x}\in \mathbb{R}^n;
+      |\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}|,  
   \end{align*}
   \noindent where the third step follows from Corollary
   \ref{coro:2normLessThanOpNorm}, 
   the fifth step from $|\mathbf{x}|^2 + |\mathbf{y}|^2 \leq 1$, and
-  the last step from (\ref{equ1}). Thus we have
+  the last step from ($*$). Thus we have
   \begin{displaymath}
     \underset{\mathbf{x}\in \mathbb{R}^n;
       |\mathbf{x}| \leq 1}{\sup}|T\mathbf{x}| \geq
@@ -4044,19 +4094,26 @@ By Definition \ref{def:TaylorSeries},
 \begin{solution}
   The real positivity holds trivially.
   For the point separation, we have
-  $|T| = 0 \implies \forall 1 \leq j \leq n,|T\mathbf{e}_j|^2 = 0
-  \implies \forall 1 \leq j \leq n, T\mathbf{e}_j = 0 \implies \forall
-  \nu \in \mathbb{F}^n, T\nu = 0 \implies T = 0$.
+  \begin{align*}
+    |T| = 0 &\implies \forall 1 \leq j \leq n,|T\mathbf{e}_j|^2 = 0\\
+            &\implies \forall 1 \leq j \leq n, T\mathbf{e}_j = 0\\
+            &\implies \forall \mathbf{x} \in \mathbb{F}^n, T\mathbf{x} = 0\\
+    &\implies T = 0.
+  \end{align*}
 
   The absolute homogeneity holds because
-  $\forall a \in \mathbb{F}, \forall T \in \mathcal{L}(\mathbb{F}^n,
-  \mathbb{F}^m), |aT| = (\sum\limits_{j =
-    1}^n|aT\mathbf{e}_j|^2)^{\frac{1}{2}} = |a|(\sum\limits_{j =
-    1}^n|T\mathbf{e}_j|^2)^{\frac{1}{2}} = |a||T|$.
-
+  \begin{align*}
+    \forall &a \in \mathbb{F}, \forall T \in \mathcal{L}(\mathbb{F}^n,
+      \mathbb{F}^m),\\
+            &|aT| = \left(\sum\limits_{j =1}^n|aT\mathbf{e}_j|^2\right)
+              ^{\frac{1}{2}} 
+    = |a|\left(\sum\limits_{j =
+    1}^n|T\mathbf{e}_j|^2\right)^{\frac{1}{2}} = |a||T|.
+  \end{align*}
+  
   Finally, the triangle inequality holds because
-  $\forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m)$, we have
-    \begin{align*}
+  \begin{align*}
+    &\ \forall T, S \in \mathcal{L}(\mathbb{F}^n, \mathbb{F}^m),\\
       &|T + S|^2 = \sum\limits_{j = 1}^n|(T+S)\mathbf{e}_j|^2
       \\ =& \sum\limits_{j = 1}^n|T\mathbf{e}_j + S\mathbf{e}_j|^2
       \\
@@ -4070,14 +4127,15 @@ By Definition \ref{def:TaylorSeries},
       \\
       \le& \sum\limits_{j = 1}^n|T\mathbf{e}_j|^2 %+|S\mathbf{e}_j|^2\right)
            + 2\sqrt{\left(\sum\limits_{j = 1}^n|T\mathbf{e}_j|^2\right)
-           \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2}
+           \left(\sum\limits_{j = 1}^n|S\mathbf{e}_j|^2\right)}
            + \sum\limits_{j = 1}^n|S\mathbf{e}_j|^2
       \\
       =& \left(\sqrt{\sum\limits_{j = 1}^n|T\mathbf{e}_j|^2} +
          \sqrt{\sum\limits_{j = 1}^n|S\mathbf{e}_j|^2}\right)^2 = (|T|
          + |S|)^2, 
     \end{align*}
-  where the fifth step follows from Cauchy inequality.  
+    where the fifth step follows from the Cauchy-Schwarz inequality
+    (\ref{eq:CauchySchwarz}).  
 \end{solution}
 
 \begin{coro}
@@ -4243,7 +4301,7 @@ By Definition \ref{def:TaylorSeries},
         = \beta |\mathbf{x}| + |B\mathbf{x}|, 
     \end{array}
   \end{displaymath}
-  which implies $0< (\alpha-\beta)|\mathbf{x}|\le |B\mathbf{x}|$.
+  which implies $0\le (\alpha-\beta)|\mathbf{x}|\le |B\mathbf{x}|$.
   Theorem \ref{thm:injectiveIsNull0} implies that
   $B$ is injective and
   Theorem \ref{thm:finiteDimVecSpaceInjecSurjecInvert}
@@ -4269,14 +4327,17 @@ By Definition \ref{def:TaylorSeries},
   \begin{displaymath}
     f'(x_0)=\lim_{x\rightarrow x_0, x\ne x_0} \frac{f(x)-f(x_0)}{x-x_0}.
   \end{displaymath}
-  In the several variable case $f: E\rightarrow \mathbb{R}^m$
+  In the several variable case $\mathbf{f}: E\rightarrow \mathbb{R}^m$
   where $E$ is now a subset of $\mathbb{R}^n$,
-  the nominator $f(x)-f(x_0)$ is a vector in $\mathbb{R}^m$
-  and the denominator $x-x_0$ a vector in $\mathbb{R}^n$.
+  the nominator $\mathbf{f}(\mathbf{x})-\mathbf{f}(\mathbf{x}_0)$
+  is a vector in $\mathbb{R}^m$
+  and the denominator $\mathbf{x}-\mathbf{x}_0$
+  is a vector in $\mathbb{R}^n$.
   It does not make sense to divide the two vectors and
    taking norms of the two vectors would also be pointless.
   Therefore a straightforward generalization
-  of the above definition of $f'(x_0)$ would not work.
+  of the above definition of $\mathbf{f}'(\mathbf{x}_0)$
+  would not work.
 
   The solution is to rewrite the concept of derivative
   in one dimension so that generalization to multiple dimensions
@@ -4300,6 +4361,21 @@ By Definition \ref{def:TaylorSeries},
   Prove Lemma \ref{lem:derivativeEquiv}.
 \end{exc}
 
+\begin{solution}
+  Lemma \ref{lem:funcCvTo0IsEqulvalentToAbsoluteFuncCvTo}
+  and Theorem \ref{thm:funcLimitOperation} imply
+  \begin{align*}
+    \text{(a)}
+    &\Leftrightarrow \lim_{x\rightarrow x_{0},x\in E\setminus\{x_{0}\}}
+      \frac{f(x)-f(x_{0})}{x-x_{0}}=L\\
+    &\Leftrightarrow \lim_{x\rightarrow x_{0},x\in E\setminus\{x_{0}\}}
+      \left(\frac{f(x)-f(x_{0})}{x-x_{0}}-L\right)=0\\
+    &\Leftrightarrow \lim_{x\rightarrow x_{0},x\in E\setminus\{x_{0}\}}
+      \frac{f(x)-f(x_{0})-L(x-x_{0})}{x-x_{0}}=0
+     \Leftrightarrow \text{(b)}.
+  \end{align*}
+\end{solution}
+
 \begin{rem}
   By Lemma \ref{lem:derivativeEquiv},
   the derivative can be interpreted as the number $L$
@@ -4310,19 +4386,78 @@ By Definition \ref{def:TaylorSeries},
   very accurate.
 \end{rem}
 
+\begin{defn}
+  \label{def:limitOfFuncNDim}
+  Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^m$ with
+  $E\subset \mathbb{R}^n$.
+  The \emph{limit} of $\mathbf{f}(\mathbf{x})$ exists as
+  $\mathbf{x}$ approaches $\mathbf{x}_{0}\in E$, written
+  $\lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},\mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+  \mathbf{f}(\mathbf{x})=\mathbf{l}$, iff
+  \begin{equation}
+    \label{eq:limitOfFuncNDim}
+    \begin{array}{l}
+      \forall \epsilon>0,\exists \delta>0,\text{ s.t. }\\
+      \forall \mathbf{x}\in E
+      \text{ with }0<|\mathbf{x}-\mathbf{x}_{0}|<\delta,\
+      |\mathbf{f}(\mathbf{x})-\mathbf{l}|<\epsilon.
+    \end{array}
+  \end{equation}
+\end{defn}
+
+\begin{lem}
+  \label{lem:NDimLimitEquivToZeroVector}
+  For $E\subset \mathbb{R}^{n},\ \mathbf{f}: E\rightarrow \mathbb{R}^{m},
+  \mathbf{x}_{0}\in E$, we have
+  \begin{displaymath}
+    \lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},\mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+    \mathbf{f}(\mathbf{x})=\mathbf{l}
+    \ \Leftrightarrow
+    \lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},\mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+    |\mathbf{f}(\mathbf{x})-\mathbf{l}|=0.
+  \end{displaymath}
+\end{lem}
+\begin{proof}
+  It follows from Definition \ref{def:limitOfFuncNDim} directly.
+\end{proof}
+
+\begin{lem}
+  \label{lem:funcNdimLimitIsUnique}
+  For $E\subset \mathbb{R}^{n},\ \mathbf{f}: E\rightarrow \mathbb{R}^{m},
+  \mathbf{x}_{0}\in E$, the limit of $\mathbf{f}$ at $\mathbf{x}_{0}$
+  is unique.
+\end{lem}
+\begin{proof}
+  The proof is similar to that of Lemma \ref{lem:seqLimitIsUnique}.
+\end{proof}
+
+\begin{defn}
+  \label{def:continuousNdim}
+  For $E\subset \mathbb{R}^n$, $\mathbf{f}: E\rightarrow \mathbb{R}^m$,
+  $\mathbf{x}_0\in E$, $\mathbf{f}$ is \emph{continuous} at $\mathbf{x}_0$
+  iff
+  \begin{equation}
+    \label{eq:continuousNdim}
+    \lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},\mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+    \mathbf{f}(\mathbf{x})=\mathbf{f}(\mathbf{x}_{0}).
+  \end{equation}
+\end{defn}
+
 \begin{defn}[Total derivative]
   \label{def:derivativeNdim}
-  For $E\subset \mathbb{R}^n$, $f: E\rightarrow \mathbb{R}^m$,
-  $x_0\in E$, $f$ is \emph{differentiable at $x_0$ with derivative}
+  For $E\subset \mathbb{R}^n$, $\mathbf{f}: E\rightarrow \mathbb{R}^m$,
+  $\mathbf{x}_0\in E$, $\mathbf{f}$ is
+  \emph{differentiable at $\mathbf{x}_0$ with derivative}
   $L\in{\cal L}(\mathbb{R}^n,\mathbb{R}^m)$
   iff 
   \begin{equation}
     \label{eq:derivativeNdim}
-    \lim_{x\rightarrow x_0, x\in E\setminus\{x_0\}}
-    \frac{|f(x)- f(x_0) - L(x-x_0)|}{|x-x_0|}=0. 
+    \lim_{\mathbf{x}\rightarrow \mathbf{x}_0, \mathbf{x}\in E\setminus\{\mathbf{x}_0\}}
+    \frac{|\mathbf{f}(\mathbf{x})- \mathbf{f}(\mathbf{x}_0)
+      - L(\mathbf{x}-\mathbf{x}_0)|}{|\mathbf{x}-\mathbf{x}_0|}=0. 
   \end{equation}
-  We write $f'(x_0)=L$
-  and call it the \emph{total derivative of $f$}.
+  We write $\mathbf{f}'(\mathbf{x}_0)=L$
+  and call it the \emph{total derivative of $\mathbf{f}$}.
 \end{defn}
 
 \begin{rem}
@@ -4335,22 +4470,23 @@ By Definition \ref{def:TaylorSeries},
 \end{rem}
 
 \begin{exm}
-  For $f: \mathbb{R}^2\rightarrow \mathbb{R}^2$
+  For $\mathbf{f}: \mathbb{R}^2\rightarrow \mathbb{R}^2$
   and $L: \mathbb{R}^2\rightarrow \mathbb{R}^2$,
   \begin{equation}
     \label{eq:fSqaureComp}
-    f(x,y):=(x^2, y^2), \ \ L(x,y):=(2x, 4y), 
+    \mathbf{f}(x,y):=(x^2, y^2), \ \ L(x,y):=(2x, 4y), 
   \end{equation}
-  we claim that $f$ is differentiable at $(1,2)$
-  with \mbox{$f'(x_0)=L$} by computing
+  we claim that $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}:=(1,2)$
+  with \mbox{$\mathbf{f}'(\mathbf{x}_0)=L(\mathbf{x}_{0})$} by computing
   \begin{displaymath}
     \renewcommand{\arraystretch}{1.5}
     \begin{array}{rl}
     &\lim_{\stackrel{(x,y)\rightarrow (1,2)}{(x,y)\ne(1,2)}}
-    \frac{|f(x,y)- f(1,2) - L((x,y)-(1,2))|}{|(x,y)-(1,2)|}
+      \frac{|\mathbf{f}(x,y)- \mathbf{f}(1,2)
+      - L((x,y)-(1,2))|}{|(x,y)-(1,2)|}
       \\
     =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
-    \frac{|f(1+a,2+b)- f(1,2) - L(a,b)|}{|(a,b)|}
+    \frac{|\mathbf{f}(1+a,2+b)- \mathbf{f}(1,2) - L(a,b)|}{|(a,b)|}
       \\
     =&\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
     \frac{|\left((1+a)^2,(2+b)^2\right)- (1,4) - (2a,4b)|}{|(a,b)|}
@@ -4371,10 +4507,11 @@ By Definition \ref{def:TaylorSeries},
 \begin{lem}
   \label{lem:uniquenessOfDerivatives}
   Let $E$ be a subset of $\mathbb{R}^n$,
-  $f: E\rightarrow \mathbb{R}^m$ a function,
-  and $x_0\in E$ an interior point of $E$.
-  Suppose $f$ is differentiable at $x_0$ with derivative $L_1$
-  and also differentiable at $x_0$ with derivative $L_2$.
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$ a function,
+  and $\mathbf{x}_0\in E$ an interior point of $E$.
+  Suppose $\mathbf{f}$ is differentiable at $\mathbf{x}_0$
+  with derivative $L_1$
+  and also differentiable at $\mathbf{x}_0$ with derivative $L_2$.
   Then $L_1=L_2$.
 \end{lem}
 
@@ -4382,45 +4519,89 @@ By Definition \ref{def:TaylorSeries},
   Prove Lemma \ref{lem:uniquenessOfDerivatives}.
 \end{exc}
 
+\begin{solution}
+  Suppose that $L_{1}\neq L_{2}$,
+  and WLOG we assume $\mathbf{x}_{0}=\mathbf{0}$.
+  Then for
+  $\epsilon=\frac{||L_{1}-L_{2}||}{4}>0$, Definitions
+  \ref{def:limitOfFuncNDim} and
+  \ref{def:derivativeNdim} yield
+  \begin{align*}
+    \exists \delta>0,\text{ s.t. }
+    \forall &\mathbf{x}\in E,\ 0<|\mathbf{x}|<\delta, \\
+    (*):\quad
+            &\frac{|\mathbf{f}(\mathbf{x})-\mathbf{f}(\mathbf{0})
+              -L_{i}\mathbf{x}|}{|\mathbf{x}|}<\epsilon,\
+    i=1,2.
+  \end{align*}
+  By Definition \ref{def:operatorNorm} and the proof of
+  Corollary \ref{coro:operatorNormAsSupOf2norm}, there exists
+  $\mathbf{y}\in \mathbb{R}^{n}, 0<|\mathbf{y}|<\delta$ such that
+  $\frac{|(L_{1}-L_{2})\mathbf{y}|}{|\mathbf{y}|}
+  >\frac{||L_{1}-L_{2}||}{2}$. Then
+  \begin{align*}
+    &\ \frac{||L_{1}-L_{2}||}{2}|\mathbf{y}|\\
+    < &\ |(L_{1}-L_{2})\mathbf{y}| \\
+    = &\ |(\mathbf{f}(\mathbf{y})-\mathbf{f}(\mathbf{0})-L_{2}\mathbf{y})
+        -(\mathbf{f}(\mathbf{y})-\mathbf{f}(\mathbf{0})-L_{1}\mathbf{y})|\\
+    \le &\ |\mathbf{f}(\mathbf{y})-\mathbf{f}(\mathbf{0})-L_{2}\mathbf{y}|
+          +|\mathbf{f}(\mathbf{y})-\mathbf{f}(\mathbf{0})-L_{1}\mathbf{y}| \\
+    < &\ \epsilon |\mathbf{y}|+\epsilon |\mathbf{y}|
+    =\frac{||L_{1}-L_{2}||}{2}|\mathbf{y}|,
+  \end{align*}
+  where the second inequality follows from the triangle inequality
+  in Definition \ref{def:norm} and
+  the last inequality follows from ($*$).
+  Hence this contradiction completes the proof.
+\end{solution}
+
 \begin{rem}
   Thanks to Lemma \ref{lem:uniquenessOfDerivatives},
-  we have \emph{the} derivative of $f$ at an interior point $x_0$.
+  we have the derivative of $\mathbf{f}$ at an interior point
+  $\mathbf{x}_0$.
   As another consequence of Lemma \ref{lem:uniquenessOfDerivatives},
-  if $f(x)=g(x)$ for all $x\in E$
-  and $f,g$ are both differentiable at an interior point $x_0$ of $E$,
-  then $f'(x_0)=g'(x_0)$.
+  if $\mathbf{f}(\mathbf{x})=\mathbf{g}(\mathbf{x})$
+  for all $\mathbf{x}\in E$ and $\mathbf{f},\mathbf{g}$
+  are both differentiable at an interior point $\mathbf{x}_0$ of $E$,
+  then $\mathbf{f}'(\mathbf{x}_0)=\mathbf{g}'(\mathbf{x}_0)$.
 \end{rem}
 
 \begin{defn}[Directional derivative]
   \label{def:directionalDerivative}
   Let $E$ be a subset of $\mathbb{R}^n$,
-  $f: E\rightarrow \mathbb{R}^m$ a function,
-  $x_0\in E$ an interior point of $E$,
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$ a function,
+  $\mathbf{x}_0\in E$ an interior point of $E$,
   and $\mathbf{v}\in \mathbb{R}^n$ a vector.
   If the limit
   \begin{displaymath}
-    \lim_{t\rightarrow 0; t>0, x_0+t\mathbf{v}\in E} \frac{f(x_0+t\mathbf{v}) - f(x_0)}{t}
+    \lim_{t\rightarrow 0;t\neq 0, \mathbf{x}_0+t\mathbf{v}\in E}
+    \frac{\mathbf{f}(\mathbf{x}_0+t\mathbf{v})
+      - \mathbf{f}(\mathbf{x}_0)}{t}
   \end{displaymath}
-  exists, we say that $f$ is \emph{differentiable in the direction $\mathbf{v}$
-    at $x_0$},
+  exists, we say that $\mathbf{f}$ is
+  \emph{differentiable in the direction $\mathbf{v}$ at $\mathbf{x}_0$},
   and we denote this limit as
   \begin{equation}
     \label{eq:directionalDerivative}
-    D_\mathbf{v} f(x_0) := \lim_{t\rightarrow 0; t>0, x_0+t\mathbf{v}\in E}
-    \frac{f(x_0+t\mathbf{v}) - f(x_0)}{t}.
+    D_\mathbf{v} \mathbf{f}(\mathbf{x}_0) :=
+    \lim_{t\rightarrow0;t\neq 0, \mathbf{x}_0+t\mathbf{v}\in E}
+    \frac{\mathbf{f}(\mathbf{x}_0+t\mathbf{v})
+      - \mathbf{f}(\mathbf{x}_0)}{t}.
   \end{equation}
 \end{defn}
 
 \begin{exm}
-  For $\mathbf{v}=(3,4)$ and $f: \mathbb{R}^2\rightarrow\mathbb{R}^2$ defined in
+  For $\mathbf{v}=(3,4)$ and
+  $\mathbf{f}: \mathbb{R}^2\rightarrow\mathbb{R}^2$ defined in
   (\ref{eq:fSqaureComp}),
-  we have $D_{\mathbf{v}}f(1,2)=(6,16)$.
+  we have $D_{\mathbf{v}}\mathbf{f}(1,2)=(6,16)$.
 \end{exm}
 
 \begin{exm}
   For $f: \mathbb{R}\rightarrow\mathbb{R}$,
   $D_{+1} f(x)$ is the right derivative of $f$ at $x$ (if it exists),
-  and similarly $D_{-1}f(x)$ is the left derivative of $f$ at $x$ (if it exists).
+  and similarly $D_{-1}f(x)$ is the left derivative of $f$ at $x$
+  (if it exists), c.f. Definition \ref{def:oneSidedDerivative}.
 \end{exm}
 
 \begin{rem}
@@ -4430,16 +4611,46 @@ By Definition \ref{def:TaylorSeries},
 \begin{lem}
   \label{lem:totalDiffImpliesDirectionalDiff}
   Let $E$ be a subset of $\mathbb{R}^n$,
-  $f: E\rightarrow \mathbb{R}^m$ a function,
-  $x_0\in E$ an interior point of $E$,
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$ a function,
+  $\mathbf{x}_0\in E$ an interior point of $E$,
   and $\mathbf{v}\in \mathbb{R}^n$ a vector.
-  If $f$ is differentiable at $x_0$,
-  then $f$ is also differentiable in the direction $\mathbf{v}$ at $x_0$, and
+  If $\mathbf{f}$ is differentiable at $\mathbf{x}_0$,
+  then $\mathbf{f}$ is also differentiable in the direction $\mathbf{v}$
+  at $\mathbf{x}_0$, and
   \begin{equation}
     \label{eq:totalDiffImpliesDirectionalDiff}
-    D_\mathbf{v} f(x_0) = f'(x_0) \mathbf{v}.
+    D_\mathbf{v} \mathbf{f}(\mathbf{x}_0)
+    = \mathbf{f}'(\mathbf{x}_0) \mathbf{v}.
   \end{equation}
 \end{lem}
+\begin{proof}
+  Since $\mathbf{f}$ is diffentiable at $\mathbf{x}_{0}$, then
+  Definitions \ref{def:limitOfFuncNDim} and \ref{def:derivativeNdim}
+  yield
+  \begin{align*}
+    \forall \epsilon>0, \exists
+    &\delta>0,\text{ s.t. }
+    \forall 0<t<\frac{\delta}{|\mathbf{v}|}
+    \text{ with }\mathbf{x}_{0}+t\mathbf{v}\in E, \\
+    &\frac{|\mathbf{f}(\mathbf{x}_{0}+t\mathbf{v})
+      -\mathbf{f}(\mathbf{x}_{0})-\mathbf{f}'(\mathbf{x}_{0})
+      (\mathbf{x}_{0}+t\mathbf{v}-\mathbf{x}_{0})|}
+      {|\mathbf{x}_{0}+t\mathbf{v}-\mathbf{x}_{0}|}
+      <\frac{\epsilon}{|\mathbf{v}|},\\
+    \text{i.e., } &\frac{|\mathbf{f}(\mathbf{x}_{0}+t\mathbf{v})
+                    -\mathbf{f}(\mathbf{x}_{0})
+      -t\mathbf{f}'(\mathbf{x}_{0})\mathbf{v}|}{|t|}
+      <\epsilon.
+  \end{align*}
+  Hence by Definition \ref{def:limitOfFuncNDim} again,
+  we have
+  \begin{displaymath}
+    \lim_{t\rightarrow0;t\neq 0,\mathbf{x}_{0}+t\mathbf{v}\in E}
+    \frac{\mathbf{f}(\mathbf{x}_{0}+t\mathbf{v})
+      -\mathbf{f}(\mathbf{x}_{0})}{t}=\mathbf{f}'(\mathbf{x}_{0})\mathbf{v}.
+  \end{displaymath}
+  Then Definition \ref{def:directionalDerivative} completes the proof.
+\end{proof}
 
 \begin{rem}
   The converse of Lemma \ref{lem:totalDiffImpliesDirectionalDiff} is
@@ -4449,22 +4660,26 @@ By Definition \ref{def:TaylorSeries},
 \begin{defn}[Partial derivative]
   \label{def:partialDerivative}
   Let $E$ be a subset of $\mathbb{R}^n$,
-  $f: E\rightarrow \mathbb{R}^m$ a function,
-  $x_0\in E$ an interior point of $E$,
+  $\mathbf{f}: E\rightarrow \mathbb{R}^m$ a function,
+  $\mathbf{x}_0\in E$ an interior point of $E$,
   and $1\le j \le n$.
-  The \emph{partial derivative of $f$ with respect to the $x_j$
-    variable at} $x_0$ is defined by
+  The \emph{partial derivative of $\mathbf{f}$ with respect to
+    the $x_{j}$ variable at} $\mathbf{x}_0$ is defined by
   \begin{equation}
     \label{eq:partialDerivative}
     \begin{array}{ll}
-    \frac{\partial f}{\partial x_j}(x_0) &:=
-    \lim_{t\rightarrow 0; t>0, x_0+te_j\in E} \frac{f(x_0+te_j) -
-      f(x_0)}{t} \\
-      &= \frac{\dif}{\dif t} \left. f(x_0+te_j)\right|_{t=0}
+      \frac{\partial \mathbf{f}}{\partial x_j}(\mathbf{x}_0)
+      &:=
+    \lim_{t\rightarrow0;t\neq 0,\mathbf{x}_0+t\mathbf{e}_j\in E} 
+      \frac{\mathbf{f}(\mathbf{x}_0+t\mathbf{e}_j) 
+      -\mathbf{f}(\mathbf{x}_0)}{t}\\
+      &= \frac{\dif}{\dif t}
+        \left. \mathbf{f}(\mathbf{x}_0+t\mathbf{e}_j)\right|_{t=0}
     \end{array}
   \end{equation}
   provided that the limit exists.
-  Here $e_j$ is the $j$th standard basis vector of $\mathbb{R}^n$.
+  Here $\mathbf{e}_j$ is the $j$th standard basis vector of
+  $\mathbb{R}^n$.
 \end{defn}
 
 \begin{defn}
@@ -4483,20 +4698,26 @@ By Definition \ref{def:TaylorSeries},
 \end{defn}
 
 \begin{rem}
+  \label{rem:directionalDerivativeToPartialDerivative}
   By Lemma \ref{lem:totalDiffImpliesDirectionalDiff},
   one can write directional derivatives
   in terms of partial derivatives
   if the function is actually differentiable at that point.
   More precisely, for the vector
-  $\mathbf{v}=(v_1, v_2, \ldots, v_n)^T=\sum_j v_j e_j$,
+  $\mathbf{v}=(v_1, v_2, \ldots, v_n)^T=\sum_j v_j \mathbf{e}_j$,
   we have
-  \begin{displaymath}
-    D_{\mathbf{v}} f(x_0) = f'(x_0) \sum_j v_j e_j = \sum_j v_j
-    f'(x_0) e_j = \sum_j v_j \frac{\partial f}{\partial x_j}(x_0), 
-  \end{displaymath}
+  \begin{align*}
+    D_{\mathbf{v}} \mathbf{f}(\mathbf{x}_0)
+    &= \mathbf{f}'(\mathbf{x}_0) \sum_j v_j \mathbf{e}_j\\
+    &= \sum_j v_j
+      \mathbf{f}'(\mathbf{x}_0) \mathbf{e}_j
+      = \sum_j v_j
+      \frac{\partial \mathbf{f}}{\partial x_j}(\mathbf{x}_0), 
+  \end{align*}
   where the first step follows from Lemma
   \ref{lem:totalDiffImpliesDirectionalDiff},
-  the second step from $f'(x_0)$ being a linear transformation,
+  the second step from $\mathbf{f}'(\mathbf{x}_0)$
+  being a linear transformation,
   and the last step from (\ref{eq:partialDerivative}),
   (\ref{eq:totalDiffImpliesDirectionalDiff}), and
   (\ref{eq:directionalDerivative}).
@@ -4504,18 +4725,39 @@ By Definition \ref{def:TaylorSeries},
 \end{rem}
 
 \begin{coro}
+  \label{coro:directionalDiffInRange1D}
   For a differentiable function
   $f: \mathbb{R}^n\rightarrow \mathbb{R}$,
   we have
-  $D_{\mathbf{v}} f(x_0) = \mathbf{v}\cdot \nabla f(x_0)$.
+  $D_{\mathbf{v}} f(\mathbf{x}_0) = \mathbf{v}\cdot \nabla f(\mathbf{x}_0)$.
 \end{coro}
+\begin{proof}
+  Write $\mathbf{v}=(v_1, v_2, \ldots, v_n)^T=\sum_{j=1}^{n}
+  v_j \mathbf{e}_j$. Then
+  \begin{align*}
+    D_{\mathbf{v}}f(\mathbf{x}_{0})
+    &=f'(\mathbf{x}_{0})\mathbf{v}\\
+    &=f'(\mathbf{x}_{0})\sum_{j=1}^{n}v_{j}\mathbf{e}_{j}\\
+    &=\sum_{j=1}^{n}v_{j}f'(\mathbf{x}_{0})\mathbf{e}_{j}
+      =\sum_{j=1}^{n}v_{j}
+      \frac{\partial f}{\partial x_{j}}(\mathbf{x}_{0})
+      =\mathbf{v}\cdot \nabla f(\mathbf{x}_{0}),
+  \end{align*}
+  where the first step follows from Lemma
+  \ref{lem:totalDiffImpliesDirectionalDiff},
+  the third step from $f'(\mathbf{x}_0)$
+  being a linear transformation,
+  and the fourth step from (\ref{eq:partialDerivative}),
+  (\ref{eq:totalDiffImpliesDirectionalDiff}), and
+  (\ref{eq:directionalDerivative}).
+\end{proof}
 
 \begin{exc}
-  Show that the existence of partial derivatives at $x_0$
-  does not imply that the function is differentiable at $x_0$
+  Show that the existence of partial derivatives at $\mathbf{x}_0$
+  does not imply that the function is differentiable at $\mathbf{x}_0$
   by considering the differentiability of
   the following function $f: \mathbb{R}^2\rightarrow \mathbb{R}$
-  at (0,0). 
+  at $(0,0)$. 
   \begin{displaymath}
     f(x,y) =
     \begin{cases}
@@ -4526,30 +4768,48 @@ By Definition \ref{def:TaylorSeries},
   \end{displaymath}
 \end{exc}
 \begin{solution}
-The function is not differentiable at (0,0),
+  The function is not differentiable at $(0,0)$,
   although it is differentiable in every direction $\mathbf{v}\in
   \mathbb{R}^2$ at $(0,0)$.
   Indeed, for $\mathbf{v}=(1,0)$, we have
   \begin{displaymath}
-    D_{\mathbf{v}} f (0,0) = \lim \frac{f(t,0)-f(0,0)}{t}
-    = 1
+    D_{\mathbf{v}} f (0,0) = \lim_{t\rightarrow0;t\neq 0} \frac{f(t,0)-f(0,0)}{t}
+    = 1,
   \end{displaymath}
-  while for $\mathbf{u}=(0,1)$, we have
+  and for $\mathbf{u}=(0,1)$, we have
   \begin{displaymath}
-    D_{\mathbf{u}} f (0,1) = \lim \frac{f(0,t)-f(0,0)}{t}
+    D_{\mathbf{u}} f (0,0) = \lim_{t\rightarrow0;t\neq 0} \frac{f(0,t)-f(0,0)}{t}
     = 0.
   \end{displaymath}
-  Hence the limit in (\ref{eq:derivativeNdim}) does not exist.
+  If $f$ is differentiable at $(0,0)$, then Lemma
+  \ref{lem:totalDiffImpliesDirectionalDiff} implies that
+  $f'(0,0)=(1,0)$. Hence
+  \begin{align*}
+    \frac{|f(x,y)-f(0,0)-f'(0,0)\cdot (x,y)|}{|(x,y)|}
+    =\frac{xy^{2}}{(x^{2}+y^{2})^{\frac{3}{2}}},
+  \end{align*}
+  % Hence the limit in (\ref{eq:derivativeNdim}) does not exist.
+  whose limit at $(0,0)$ does not exist because
+  \begin{align*}
+    \lim_{x=0,y\rightarrow0}\frac{xy^{2}}{(x^{2}+y^{2})^{\frac{3}{2}}}=0
+  \end{align*}
+  while
+  \begin{align*}
+    \lim_{x=y\rightarrow0}\frac{xy^{2}}{(x^{2}+y^{2})^{\frac{3}{2}}}
+    =\lim_{y\rightarrow0}\frac{y^{3}}{(2y^{2})^{\frac{3}{2}}}
+    =2^{-\frac{3}{2}}\neq 0,
+  \end{align*}
+  which contradicts Lemma \ref{lem:funcNdimLimitIsUnique}.
 \end{solution}
 
 \begin{defn}
   The \emph{derivative matrix} or \emph{differential matrix}
   or \emph{Jacobian matrix} of a differentiable function
-  \mbox{$f: \mathbb{R}^n\rightarrow\mathbb{R}^m$}
+  \mbox{$\mathbf{f}: \mathbb{R}^n\rightarrow\mathbb{R}^m$}
   is a $m\times n$ matrix,
   \begin{equation}
     \label{eq:JacobianMatrix}
-    Df :=
+    D\mathbf{f} :=
     \begin{pmatrix}
       \frac{\partial f_1}{\partial x_1}
       &
@@ -4575,31 +4835,36 @@ The function is not differentiable at (0,0),
 \end{defn}
 
 \begin{rem}
-  For a row vector $\mathbf{v}\in \mathbb{R}^n$,
-  we have
+  For $\mathbf{x}_{0},\mathbf{v}\in \mathbb{R}^{n}$,
+  Remark \ref{rem:directionalDerivativeToPartialDerivative} yields
   \begin{displaymath}
 %    \label{eq:relationsOfMatrixAndDerivatives}
-    (D_{\mathbf{v}} f(x_0))^T = (f'(x_0)\mathbf{v})^T = D f(x_0) \mathbf{v}^T.
+%    (D_{\mathbf{v}} f(x_0))^T = (f'(x_0)\mathbf{v})^T = D f(x_0) \mathbf{v}^T.
+    D_{\mathbf{v}}\mathbf{f}(\mathbf{x}_{0})
+    =\mathbf{f}'(\mathbf{x}_{0})\mathbf{v}
+    =D\mathbf{f}(\mathbf{x}_{0})\mathbf{v}.
   \end{displaymath}
-  We can also write $D f$ as
+  We can also write $D \mathbf{f}$ as
   \begin{align*}
-    Df(x_0) &= \left(
-      \frac{\partial f_1}{\partial x_1},
-      \frac{\partial f_1}{\partial x_2},
+    D\mathbf{f}(\mathbf{x}_0) &= \left(
+      \frac{\partial \mathbf{f}}{\partial x_1}(\mathbf{x}_{0}),
+      \frac{\partial \mathbf{f}}{\partial x_2}(\mathbf{x}_{0}),
       \ldots, 
-      \frac{\partial f_1}{\partial x_n}\right)
+      \frac{\partial \mathbf{f}}{\partial x_n}(\mathbf{x}_{0})\right)
     \\
     &=
       \begin{pmatrix}
-        \nabla f_1(x_0)
+        \nabla f_1(\mathbf{x}_0)
         \\
-        \nabla f_2(x_0)
+        \nabla f_2(\mathbf{x}_0)
         \\
         \vdots
         \\
-        \nabla f_m(x_0)
+        \nabla f_m(\mathbf{x}_0)
       \end{pmatrix}.
   \end{align*}
+  For the convenience, we still use the notation
+  $\mathbf{f}'(\mathbf{x}_{0})$ instead of $D\mathbf{f}(\mathbf{x}_{0})$.
 \end{rem}
 
 \begin{defn}
@@ -4612,6 +4877,93 @@ The function is not differentiable at (0,0),
   into ${\cal L}(\mathbb{R}^n,\mathbb{R}^m)$.
 \end{defn}
 
+\begin{lem}
+  \label{lem:FuncEquvItsComponent}
+  Consider a function $\mathbf{f}:E\rightarrow \mathbb{R}^{m}$ with
+  $E\subset \mathbb{R}^{n}$. Then $\mathbf{f}$ is
+  continuous (or differentiable) at $\mathbf{x}_{0}$ if and only if
+  $f_{i}$, $i=1,2,\cdots,m$ is continuous (or differentiable)
+  at $\mathbf{x}_{0}$.
+\end{lem}
+\begin{proof}
+  It follows directly from Definitions
+  \ref{def:continuousNdim}, \ref{def:derivativeNdim} and
+  \begin{displaymath}
+    \forall 1\le j\le m,\
+    |f_{j}(\mathbf{x})|\le|\mathbf{f}(\mathbf{x})|
+    =\left(\sum_{i=1}^{m}|f_{i}(\mathbf{x})|^{2}\right)^{\frac{1}{2}}
+    .\qedhere
+  \end{displaymath}
+\end{proof}
+
+\begin{thm}
+  \label{thm:equivDefOfDifferentiability}
+  Let $E$ be a subset of $\mathbb{R}^{n}$,
+  $\mathbf{f}:E\rightarrow \mathbb{R}^{m}$ a function 
+  and $\mathbf{x}_{0}\in E$ an interior point of $E$.
+  Then $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}$
+  if and only if
+  \begin{equation}
+    \label{eq:equivDefOfDifferentiability}
+    \begin{array}{l}
+      \exists L\in \mathcal{L}(\mathbb{R}^{n},\mathbb{R}^{m})
+      \text{ s.t. }\\
+      \forall \mathbf{h}\in \mathbb{R}^{n},
+      \mathbf{f}(\mathbf{x}_{0}+\mathbf{h})-\mathbf{f}(\mathbf{x}_{0})
+      =L\mathbf{h}
+      +\sum_{j=1}^{n}\mathbf{b}_{j}(\mathbf{h})h_{j},
+    \end{array}
+  \end{equation}
+  where $\mathbf{b}_{j}: \mathbb{R}^{n}\rightarrow \mathbb{R}^{m}$
+  is a function satisfying
+  $\mathbf{b}_{j}(\mathbf{h})\rightarrow \mathbf{0}$ as
+  $\mathbf{h}\rightarrow \mathbf{0}$, $j=1,2,\cdots,n$.
+  In this case, we have $L=\mathbf{f}'(\mathbf{x}_{0})$.
+\end{thm}
+
+\begin{proof}
+  For the necessity, define
+  \begin{displaymath}
+    \mathbf{E}(\mathbf{h}):=\mathbf{f}(\mathbf{x}_{0}+\mathbf{h})
+    -\mathbf{f}(\mathbf{x}_{0})-\mathbf{f}'(\mathbf{x}_{0})\mathbf{h},
+    \ \mathbf{h}\in \mathbb{R}^{n}
+  \end{displaymath}
+  and
+  \begin{displaymath}
+    \mathbf{b}_{j}(\mathbf{h})
+    :=\frac{h_{j}}{|\mathbf{h}|^{2}}\mathbf{E}(\mathbf{h}),\
+    j=1,2,\cdots,n.
+  \end{displaymath}
+  Then setting $L=\mathbf{f}'(\mathbf{x}_{0})$ yields
+  \eqref{eq:equivDefOfDifferentiability}, and
+  it suffices to show
+  $\mathbf{b}_{j}(\mathbf{h})\rightarrow \mathbf{0}$ as
+  $\mathbf{h}\rightarrow \mathbf{0}$. Indeed, it follows from
+  \eqref{eq:derivativeNdim} and
+  \begin{align*}
+    |\mathbf{b}_{j}(\mathbf{h})|=\frac{|h_{j}|}{|\mathbf{h}|}
+    \cdot \frac{|\mathbf{E}(\mathbf{h})|}{|\mathbf{h}|}
+    \le \frac{|\mathbf{E}(\mathbf{h})|}{|\mathbf{h}|}.
+  \end{align*}
+
+  For the sufficiency, \eqref{eq:equivDefOfDifferentiability} implies
+  that
+  \begin{align*}
+    \frac{|\mathbf{f}(\mathbf{x}_{0}+\mathbf{h})
+    -\mathbf{f}(\mathbf{x}_{0})-L\mathbf{h})|}{|\mathbf{h}|}
+    &=\frac{1}{|\mathbf{h}|}
+    \left|\sum_{j=1}^{n}\mathbf{b}_{j}(\mathbf{h})h_{j}\right|\\
+    &\le  \sum_{j=1}^{n}|\mathbf{b}_{j}(\mathbf{h})|
+      \frac{|h_{j}|}{|\mathbf{h}|}
+     \le \sum_{j=1}^{n}|\mathbf{b}_{j}(\mathbf{h})|,
+  \end{align*}
+  where the first inequality follows from
+  (NRM-3,4) in Definition \ref{def:norm}.
+  Hence by Definition \ref{def:limitOfFuncNDim},
+  $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}$ and
+  $L=\mathbf{f}'(\mathbf{x}_{0})$.
+\end{proof}
+
 \begin{thm}
   \label{thm:continuousParitialDerivativesImplyDifferentiability}
   Consider a function $\mathbf{f}: E\rightarrow \mathbb{R}^m$
@@ -4620,15 +4972,222 @@ The function is not differentiable at (0,0),
   if and only if the partial derivatives $\frac{\partial f_i}{\partial x_j}$
   exist and are continuous on $E$ for all $i=1,\ldots,m$ and $j=1,\ldots,n$.
   In this case, the linear transformation
-  $\mathbf{f}'(x_0): \mathbb{R}^n \rightarrow \mathbb{R}^m$ is given by
+  $\mathbf{f}'(\mathbf{x}_0): \mathbb{R}^n \rightarrow \mathbb{R}^m$ is given by
   \begin{equation}
     \label{eq:continuousParitialDerivativesImplyDifferentiability}
-    \mathbf{f}'(x_0) (\mathbf{v})
-    = \sum_{j=1}^n v_j \frac{\partial \mathbf{f}}{\partial x_j} (x_0).
+    \mathbf{f}'(\mathbf{x}_0) \mathbf{v}
+    = \sum_{j=1}^n v_j \frac{\partial \mathbf{f}}{\partial x_j} (\mathbf{x}_0).
   \end{equation}
 \end{thm}
+\begin{proof}
+  Let $\mathbf{x}_{0}\in E$.
+  For the necessity,
+  let $i\in\{1,\cdots,m\}$ and $j\in\{1,\cdots,n\}$ fixed.
+  Then the existence of
+  $\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})$ is guaranteed by
+  Definitions \ref{def:partialDerivative}, \ref{def:C1VecFunc} and
+  Lemma \ref{lem:totalDiffImpliesDirectionalDiff}. 
+  Using the Hilbert-Schmidt norm gives that
+  \begin{align*}
+    \forall &\mathbf{h}\in \mathbb{R}^{n}\text{ with }
+    \mathbf{x}_{0}+\mathbf{h}\in E,\\
+    &\left|\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0}+\mathbf{h})
+    -\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})\right|
+    \le |\mathbf{f}'(\mathbf{x}_{0}+\mathbf{h})-\mathbf{f}'(\mathbf{x}_{0})|.
+  \end{align*}
+  Hence the continuity of $\mathbf{f}'$ at $\mathbf{x}_{0}$,
+  c.f. Definition \ref{def:C1VecFunc}, implies
+  that of $\frac{\partial f_{i}}{\partial x_{j}}$ at $\mathbf{x}_{0}$.
 
+  For the sufficiency,
+  we claim that $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}$ and
+  prove it by induction on $n$. By Lemma \ref{lem:FuncEquvItsComponent},
+  we may assume that $m=1$.
+  For $n=1$, it is clearly Definition \ref{def:derivative}.
+  Suppose the claim holds for $n-1$. Then for $n$, we have
+  \begin{align*}
+    \forall &\mathbf{h}\in \mathbb{R}^{n}\text{ with }
+              \mathbf{x}_{0}+\mathbf{h}\in E,\\
+    &(\triangle):\quad
+    f(\mathbf{x}_{0}+\mathbf{h})-f(\mathbf{x}_{0})
+    =K_{1}+K_{2},
+  \end{align*}
+  where
+  \begin{displaymath}
+    \begin{array}{l}
+      K_{1}:=
+      \begin{array}{ll}
+        &f(x_{1}+h_{1},\cdots,x_{n-1}+h_{n-1},x_{n}+h_{n})-\\
+        &f(x_{1}+h_{1},\cdots,x_{n-1}+h_{n-1},x_{n}),
+      \end{array}\\
+       K_{2}:=f(x_{1}+h_{1},\cdots,x_{n-1}+h_{n-1},x_{n})-
+           f(x_{1},x_{2},\cdots,x_{n}),
+    \end{array}
+  \end{displaymath}
+  and for the convenience, $\mathbf{x}_{0}:=(x_{1},\cdots, x_{n})$.
+  The mean value theorem (Theorem \ref{thm:meanValue}) implies
+  \begin{align*}
+    &\ \exists \theta\in (0,1)\text{ s.t. }\\
+    &\ (*):\
+    \begin{array}{ll}
+       K_{1}
+    &=\frac{\partial f}{\partial x_{n}}(x_{1}+h_{1},\cdots,
+      x_{n-1}+h_{n-1},x_{n}+\theta h_{n})h_{n}\\
+    &=\frac{\partial f}{\partial x_{n}}(\mathbf{x}_{0})h_{n}
+      +b_{n}(\mathbf{h})h_{n},
+    \end{array}
+  \end{align*}
+  where
+  \begin{align*}
+    &\ b_{n}(\mathbf{h})\\
+    :=&\ \frac{\partial f}{\partial x_{n}}(x_{1}+h_{1},\cdots,
+    x_{n-1}+h_{n-1},x_{n}+\theta h_{n})-
+    \frac{\partial f}{\partial x_{n}}(\mathbf{x}_{0}).
+  \end{align*}
+  Then the continuity of $\frac{\partial f}{\partial x_{n}}$ implies
+  $b_{n}(\mathbf{h})\rightarrow 0$ as $\mathbf{h}\rightarrow \mathbf{0}$.   
+  The induction hypothesis, together with Definition
+  \ref{def:derivativeNdim} and Theorem \ref{thm:equivDefOfDifferentiability},
+  yields
+  \begin{align*}
+    (**):\quad
+    K_{2}=\sum_{j=1}^{n-1}h_{j}\frac{\partial f}{\partial x_j}(\mathbf{x}_{0})
+    +\sum_{j=1}^{n-1}b_{j}(\mathbf{h})h_{j},
+  \end{align*}
+  where $b_{j}(\mathbf{h})=b_{j}(h_{1},\cdots, h_{n-1})
+  \rightarrow 0$ as $\mathbf{h}\rightarrow \mathbf{0}$,
+  $j=1,2,\cdots, n-1$. Then ($*$), ($**$), ($\triangle$) and
+  Theorem \ref{thm:equivDefOfDifferentiability} imply
+  the differentiability of $f$ at $\mathbf{x}_{0}$.
+  Hence the claim holds for $n$.
+  To show $\mathbf{f}\in \mathcal{C}^{1}(E)$,
+  using the Hilbert-Schmidt norm gives that
+  \begin{align*}
+    \forall &\mathbf{h}\in \mathbb{R}^{n}\text{ with }
+    \mathbf{x}_{0}+\mathbf{h}\in E,\\
+    &|\mathbf{f}'(\mathbf{x}_{0}+\mathbf{h})
+    -\mathbf{f}'(\mathbf{x}_{0})|^{2}
+    = \sum_{i=1}^{n}\sum_{j=1}^{m} \left|
+    \frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0}+h)
+    -\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})\right|^{2}.
+  \end{align*}
+  Hence the continuity of $\frac{\partial f_{i}}{\partial x_{j}}$,
+  $i=1,\cdots m,\ j=1,\cdots, n$ at $\mathbf{x}_{0}$
+  implies that of $\mathbf{f}'$ at $\mathbf{x}_{0}$.
+  Then since $\mathbf{x}_{0}$ is arbitrary,
+  Definition \ref{def:C1VecFunc} yields that
+  $\mathbf{f}'\in \mathcal{C}^{1}(E).$
 
+  For the rest part,
+  \eqref{eq:continuousParitialDerivativesImplyDifferentiability}
+  can be induced from the proof of
+  Corollary \ref{coro:directionalDiffInRange1D}.
+  To be specific, for the vector
+  $\mathbf{v}=(v_{1},v_{2},\cdots,v_{n})^{T}
+  =\sum_{j=1}^{n}v_{j}\mathbf{e}_{j}$, we have
+  \begin{align*}
+    \mathbf{f}'(\mathbf{x}_{0})\mathbf{v}
+    &=\mathbf{f}'(\mathbf{x}_{0})\sum_{j=1}^{n}v_{j}\mathbf{e}_{j}\\
+    &=\sum_{j=1}^{n}v_{j}\mathbf{f}'(\mathbf{x}_{0})\mathbf{e}_{j}
+    =\sum_{j=1}^{n}v_{j}\frac{\partial \mathbf{f}}{\partial x_{j}}
+    (\mathbf{x}_{0}).\qedhere
+  \end{align*}
+\end{proof}
+
+\begin{rem}
+  The chain rule for scalar functions can be generalized directly to that
+  for vector functions. See the following theorem.
+\end{rem}
+
+\begin{thm}[Chain rule for vector functions]
+  \label{thm:chainRuleOnFuncNdim}
+  Let $\mathbf{g}:E\rightarrow \mathbb{R}^{p}$ with
+  $E\subset \mathbb{R}^{n}$ open, and
+  $\mathbf{f}:F\rightarrow \mathbb{R}^{m}$ with
+  $F\supset \mathbf{g}(E)$ open. If $\mathbf{g}$ is differentiable
+  at $\mathbf{x}_0\in E$ and $\mathbf{f}$ is differentiable at
+  $\mathbf{g}(\mathbf{x}_0)$,
+  then $\mathbf{f}\circ \mathbf{g}: E\rightarrow \mathbb{R}^{m}$
+  is differentiable at
+  $\mathbf{x}_0$, and
+  \begin{equation}
+    \label{eq:chainRuleOnFuncNdim}
+    (\mathbf{f}\circ \mathbf{g})'(\mathbf{x}_0)
+    =\mathbf{f}'(\mathbf{g}(\mathbf{x}_0))\mathbf{g}'(\mathbf{x}_0).
+  \end{equation}
+\end{thm}
+\begin{proof}
+  Let $\mathbf{y}_{0}:=\mathbf{g}(\mathbf{x}_{0})\in \mathbb{R}^{p},\
+  A:=\mathbf{f}'(\mathbf{y}_{0})\in
+  \mathcal{L}(\mathbb{R}^{p},\mathbb{R}^{m})$ and
+  $B:=\mathbf{g}'(\mathbf{x}_{0})\in
+  \mathcal{L}(\mathbb{R}^{n},\mathbb{R}^{p})$.
+  Definition \ref{def:derivativeNdim} yields that
+  \begin{align*}
+    (*):\quad
+    \mathbf{g}(\mathbf{x}_{0}+\mathbf{h})-\mathbf{g}(\mathbf{x}_{0})
+      &=(B+\mathbf{b}(\mathbf{h}))\mathbf{h},
+      \ \mathbf{h}\in \mathbb{R}^{n},\\
+    (**):\quad
+    \mathbf{f}(\mathbf{y}_{0}+\mathbf{k})-\mathbf{f}(\mathbf{y}_{0})
+      &=(A+\mathbf{a}(\mathbf{k}))\mathbf{k},
+      \ \mathbf{k}\in \mathbb{R}^{p},
+  \end{align*}
+  where  
+  \begin{align*}
+    (\triangle):\quad
+    \mathbf{a}:\mathbb{R}^{p}\rightarrow \mathbb{R}^{m},\
+    &\mathbf{a}(\mathbf{k})\rightarrow \mathbf{0}
+      (\mathbf{k}\rightarrow \mathbf{0}),\\
+    (\square):\quad
+      \mathbf{b}:\mathbb{R}^{n}\rightarrow \mathbb{R}^{p},\ 
+    &\mathbf{b}(\mathbf{h})\rightarrow \mathbf{0}
+      (\mathbf{h}\rightarrow \mathbf{0}).
+  \end{align*}
+  For each $\mathbf{h}$,
+  let $\mathbf{k}=\mathbf{g}(\mathbf{x}_{0}+\mathbf{h})
+  -\mathbf{g}(\mathbf{x}_{0})$.
+  Then ($*$) gives that
+  \begin{displaymath}
+    (\diamond):\quad
+    |\mathbf{k}|\le |B+\mathbf{b}(\mathbf{h})||\mathbf{h}|
+    \le (|B|+|\mathbf{b}(\mathbf{h})|)|\mathbf{h}|,
+  \end{displaymath}
+  where the first step follows from
+  Corollary \ref{coro:2normLessThanOpNorm} and the second from
+  the triangle inequality in Definition \ref{def:norm}.
+  Hence
+  \begin{align*}
+    &\ |\mathbf{f}\circ \mathbf{g}(\mathbf{x}_{0}+\mathbf{h})
+      -\mathbf{f}\circ \mathbf{g}(\mathbf{x}_{0})-AB\mathbf{h}|\\
+    =
+    &\ |\mathbf{f}(\mathbf{y}_{0}+\mathbf{k})-
+      \mathbf{f}(\mathbf{y}_{0})-AB\mathbf{h}| \\
+    =
+    &\ |(A+\mathbf{a}(\mathbf{k}))\mathbf{k}-AB\mathbf{h}|
+      = |A(\mathbf{k}-B\mathbf{h})+\mathbf{a}(\mathbf{k})\mathbf{k}|\\
+    =
+    &\ |A\mathbf{b}(\mathbf{h})\mathbf{h}
+      +\mathbf{a}(\mathbf{k})\mathbf{k}|\\
+    \le
+    &\ |A||\mathbf{b}(\mathbf{h})||\mathbf{h}|
+      +|\mathbf{a}(\mathbf{k})||\mathbf{k}|\\
+    \le
+    &\ |A||\mathbf{b}(\mathbf{h})||\mathbf{h}|
+      +|\mathbf{a}(\mathbf{k})|(|B|+|\mathbf{b}(\mathbf{h})|)|\mathbf{h}|
+    \\ =
+    &\ (|A||\mathbf{b}(\mathbf{h})|+|\mathbf{a}(\mathbf{k})|
+       (|B|+|\mathbf{b}(\mathbf{h})|))|\mathbf{h}|,
+  \end{align*}
+  where the first step follows from
+  $\mathbf{y}_{0}+\mathbf{k}=\mathbf{g}(\mathbf{x}_{0}+\mathbf{h})$,
+  the second from ($**$), the fourth from ($*$), the fifth from
+  Corollary \ref{coro:2normLessThanOpNorm} and
+  the triangle inequality in Definition \ref{def:norm},
+  and the sixth from
+  ($\diamond$). Then Definition \ref{def:derivativeNdim}, together with
+  ($\triangle$) and ($\square$), completes the proof.
+\end{proof}
 
 \subsection{Matrix exponential}
 \label{sec:matrix-exponential}
@@ -4710,19 +5269,20 @@ The function is not differentiable at (0,0),
   \end{displaymath}
   By (\ref{eq:matrixExponential}) and Definition \ref{def:seriesFromSequence},
   the sequence associated with the series $f(A)$ is
-  $\left\{\frac{1}{N!}A^N\right\}$.
+  $(\frac{1}{N!}A^N)_{N\in \mathbb{N}}$.
 %  $g_1(A)g_2(A)\cdots g_N(A)$
 %  where each $g_j(A)$ equal to $A$ or a constant.
   Hence 
   $\frac{\partial f}{\partial E_j}(A)$ is the sum
   of derivatives of all terms in the sequence; 
-  by the chain rule, 
+  % by the chain rule,
+  by the derivative operation as in Theorem \ref{thm:derivativeOperation},
   each derivative is of the form
-  \begin{displaymath}
-    \frac{1}{N!}\sum_{i=1}^N g_1(A)\cdots g_{i-1}(A)
-    \left. \frac{\dif }{\dif t} g_i(A+tE_j)\right|_{t=0}
-    g_{i+1}(A)\cdots g_N(A),
-  \end{displaymath}
+  \begin{align*}
+    \frac{1}{N!}\sum_{i=1}^N &g_1(A)\cdots g_{i-1}(A)\cdot\\
+    &\left. \frac{\dif }{\dif t} g_i(A+tE_j)\right|_{t=0}
+    \cdot g_{i+1}(A)\cdots g_N(A),
+  \end{align*}
   where each $g_i$ is $A$. % or $E_j$. % or a constant.
   Taking further partial derivatives preserves this general form,
   except that $g_i$ is either $A$ or $E_j$
@@ -4746,7 +5306,7 @@ The function is not differentiable at (0,0),
     \right|
     \le \frac{N^k M^N}{N!}.
   \end{displaymath}
-  By the ratio test, 
+  By the ratio test and Theorem \ref{thm:WeierstrassMtest}, 
   the series $\frac{\partial^k f}{\partial E_{j_1}\cdots
     \partial E_{j_k}}(A)$
   uniformly converges entry-by-entry to some function. 
