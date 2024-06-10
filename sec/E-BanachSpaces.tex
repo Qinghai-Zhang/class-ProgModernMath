@@ -440,6 +440,43 @@
   Show that the sequence space
   $(\ell^{\infty}, \|\cdot\|_{\infty})$ is complete.
 \end{exc}
+\begin{solution}
+  Let $(x_n)$ be any Cauchy sequence in $\ell^{\infty}$,
+  where $x_n = \left( \xi_1^{(n)}, \xi_2^{(n)}, \ldots \right)$.
+  Then $\forall \epsilon > 0$,
+  $\exists N$
+  s.t. $\forall m, n > N$,
+  \begin{equation*}
+    \|x_m - x_n\|_{\infty} = \sup_i \left| \xi_i^{(m)} - \xi_i^{(n)} \right| < \epsilon.
+  \end{equation*}
+  It follows that
+  \begin{equation*}
+    \tag{*}
+    \forall i = 1, 2, \ldots, \,
+    \forall m, n > N, \quad
+    \left| \xi_i^{(m)} - \xi_i^{(n)} \right| < \epsilon.
+  \end{equation*}
+  That is,
+  for any fixed $i$,
+  $\left( \xi_i^{(n)} \right)$ is a Cauchy sequence in $\mathbb{C}$.
+  The completeness of $\mathbb{C}$ implies that
+  \begin{equation*}
+    \forall i = 1, 2, \ldots,
+    \exists \xi_i \in \mathbb{C}
+    \text{ s.t. }
+    \lim_{n\rightarrow\infty}\xi_i^{(n)} = \xi_i.
+  \end{equation*}
+  Letting $m\rightarrow\infty$ in (*),
+  we obtain
+  \begin{equation*}
+    \forall i=1, 2, \ldots, \,
+    \forall n > N, \quad
+    \left| \xi_i - \xi_i^{(n)} \right| \le \epsilon,
+  \end{equation*}
+  which implies that
+  $\lim_{n\rightarrow\infty}x_n = x$,
+  where $x = (\xi_i) = x_n + (x - x_n)\in \ell^{\infty}$.
+\end{solution}
 
 \begin{exc}
   Define ${\cal C}_b[0,\infty)$ as the set of all functions
@@ -495,6 +532,27 @@
   i.e., a normed space $X$ is complete
   if every absolutely convergent series converges in $X$.
 \end{exc}
+\begin{solution}
+  Let $(x_n)_{n\in \mathbb{N}}$ be a Cauchy sequence in $(X, \|\cdot\|)$.
+  Then there exists a subsequence $\left( x_{n_k} \right)_{k\in \mathbb{N}}$ of
+  $(x_n)_{n\in \mathbb{N}}$ such that
+  \begin{equation*}
+    \tag{*}
+    \forall k\in \mathbb{N},
+    \forall n > n_k,
+    \left\| x_n - x_{n_k} \right\| < 2^{-k}.
+  \end{equation*}
+  Define $u_1 = x_{n_1}$ and
+  $u_{k+1} = x_{n_{k+1}} - x_{n_k}$ for $k \in \mathbb{N}^+$.
+  Then the series $\sum_{j=1}^ku_j$ is absolutely convergent because
+  \begin{equation*}
+    \sum_{j = m}^{\infty}\|u_j\| = \sum_{j=m}^{\infty}\left\| x_{n_{j+1}} - x_{n_j} \right\|
+    < \sum_{j=m}^{\infty}2^{-j} = 2^{1-m},
+  \end{equation*}
+  where the second step follows from (*).
+  Thus the series $\sum_{j=1}^ku_j = x_{n_k}$ converges in $X$.
+  The proof is completed by Lemma \ref{lem:CauchySubseqConvergence}.
+\end{solution}
 
 \begin{thm}[Weierstrass M-test]
   \label{thm:WeierstrassMtest}
@@ -513,6 +571,25 @@
   Prove Theorem \ref{thm:WeierstrassMtest}
   via Theorem \ref{thm:CauchyCriterionUniformConv}. 
 \end{exc}
+\begin{solution}
+  By Lemma \ref{lem:seriesConvergeCauchy},
+  the convergence of $\sum_{i=1}^nM_i$ implies that
+  \begin{equation*}
+    \forall \epsilon > 0,
+    \exists N\in \mathbb{N}
+    \text{ s.t. }
+    \forall p, q \ge N, \,
+    \sum_{n=p}^q M_n \le \epsilon.
+  \end{equation*}
+  Then it follows from the triangle inequality and (\ref{eq:WeierstrassMtest}) that
+  \begin{equation*}
+    \forall x\in {\cal X}, \quad
+    \left\| \sum_{n=p}^q f_n(x) \right\| \le \sum_{n=p}^q \|f_n(x)\| \le
+    \sum_{n=p}^q M_n \le \epsilon,
+  \end{equation*}
+  which, together with Theorem \ref{thm:CauchyCriterionUniformConv},
+  completes the proof.
+\end{solution}
 
 \section{The space ${\cal CL}(X,Y)$}
 \label{sec:space-CLXY}
