@@ -175,7 +175,7 @@ This is one of the main motivations of infinite sequence and series.
   \begin{equation}
     \label{eq:CauchySequence}
     \forall \epsilon>0, \exists N\in \mathbb{N}
-    \text{ s.t. } m,n>N\ \Rightarrow\ |a_n-a_m| < \epsilon.
+    \text{ s.t. } m,n>N \implies |a_n-a_m| < \epsilon.
   \end{equation}
 \end{defn}
 
@@ -310,7 +310,7 @@ This is one of the main motivations of infinite sequence and series.
   Then for any $\epsilon>0$, there exists $N\in \mathbb{N}$ such that
   $a_{N}>L-\epsilon$. Hence for all $n\ge N,$ we have
   \begin{displaymath}
-    L-\epsilon<a_{N}\le a_{n}\le L\ \Rightarrow\ |a_{n}-L|<\epsilon,
+    L-\epsilon<a_{N}\le a_{n}\le L \implies |a_{n}-L|<\epsilon,
   \end{displaymath}
   which implies the convergence of $(a_{n})$ to $L$.
 \end{proof}
@@ -1015,6 +1015,23 @@ This is one of the main motivations of infinite sequence and series.
   we have $\lim_{n\rightarrow \infty}b_{n}=L$.
 \end{proof}
 
+\begin{rem}
+  Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
+  be two convergent sequences of real numbers
+  that satisfy
+  \begin{displaymath}
+    \exists M\in \mathbb{N} \text{ s.t. }
+    \forall n\ge M, a_n< b_n.
+  \end{displaymath}
+  Then we have
+  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
+  where ``$\le$'' cannot be strengthened to ``$<$''.
+  In addition, replace ``$a_n< b_n$''
+  with ``$a_n\le b_n$'' and we get the same conclusions.
+  This is deeply connected to the difference between
+  open and closed sets.
+\end{rem}
+
 \begin{ntn}[Asymptotic notation]
   \label{ntn:asymptoticNtn}
   For $g:\mathbb{R}^+\rightarrow\mathbb{R}^+$, 
@@ -1049,6 +1066,12 @@ This is one of the main motivations of infinite sequence and series.
   $f(x)=o(g(x))$, and $f(x)=\Theta(g(x))$
   without the conditional $x \rightarrow a$
   in the above equations.
+
+  The notations $\mathbf{f}=O(g(k))$ and $\mathbf{f}=\Theta(g(k))$
+  for a function $\mathbf{f}:\mathbb{R} \rightarrow\mathbb{R}^n$
+  mean that each component $f_i$ of $\mathbf{f}$
+  satisfies ${f}_i=O(g(k))$ and ${f}_i=\Theta(g(k))$,
+  respectively.
 \end{ntn}
 
 \begin{rem}
@@ -2092,7 +2115,7 @@ Then we have
 
 It follows that
 \[
- |x-y|<\delta \ \Rightarrow\ 
+ |x-y|<\delta  \implies 
 |f(x)-f(y)|
 <\delta\left(\frac{1}{a^3}+\frac{1}{a^3}\right)
 =\frac{2\delta}{a^3}=\epsilon.
