@@ -38,7 +38,8 @@
 
 \begin{rem}
   The unique existence of the supremum and infimum of $\mathbb{R}$
-  is guaranteed by Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound}.
+  is guaranteed by Theorem \ref{thm:existenceAndUniquenessOfLeastUpperBound}
+  and Corollary \ref{coro:existenceAndUniquenessOfGreatestLowerBound}.
 \end{rem}
 
 
@@ -59,7 +60,7 @@
   written $\lim_{n\rightarrow \infty} a_n = L$
   or 
   \mbox{$a_n\rightarrow L \text{ as } n\rightarrow\infty$}, 
-  and $(a_n)$ is said to \emph{converges} to $L$.
+  and $(a_n)$ is said to \emph{converge} to $L$.
   The sequence $(a_n)$ is said to \emph{diverge}
   iff it does not converge.
 \end{defn}
@@ -124,10 +125,10 @@ This is one of the main motivations of infinite sequence and series.
   \label{lem:seqCvTo0IsEqulvalentToAbsoluteSeqCvTo0}
   Let $(a_{n})$ be a sequence. Then
   \begin{displaymath}
-    \lim_{n\rightarrow \infty}a_{n}=0\
-    \Leftrightarrow\
-    \left|\lim_{n\rightarrow \infty}a_{n}\right|=0\
-    \Leftrightarrow\
+    \lim_{n\rightarrow \infty}a_{n}=0
+    \iff
+    \left|\lim_{n\rightarrow \infty}a_{n}\right|=0
+    \iff
     \lim_{n\rightarrow\infty}|a_{n}|=0.
   \end{displaymath}
 \end{lem}
@@ -305,13 +306,19 @@ This is one of the main motivations of infinite sequence and series.
 \begin{proof}
   Let $(a_{n})$ be a bounded monotone sequence.
   WLOG, we assume that $(a_{n})$ is monotonically increasing.
-  Let $L:=\sup(a_{n})_{n=1}^{\infty}$, which is finite because of
-  the boundedness of $(a_{n})$.
-  Then for any $\epsilon>0$, there exists $N\in \mathbb{N}$ such that
-  $a_{N}>L-\epsilon$. Hence for all $n\ge N,$ we have
+  Denote $L:=\sup(a_{n})_{n=1}^{\infty}$, which is finite because of
+  the boundedness of $(a_{n})$ and Definition \eqref{eq:supSequence}.
+  Then we have
   \begin{displaymath}
-    L-\epsilon<a_{N}\le a_{n}\le L \implies |a_{n}-L|<\epsilon,
+    \forall \epsilon>0,\ \exists N\in \mathbb{N}
+    \text{ s.t. } a_{N}>L-\epsilon.
   \end{displaymath}
+  Hence the monotonicity of $(a_{n})$ yields
+  \begin{align*}
+    &\ \forall n\ge N,\
+    L-\epsilon<a_{N}\le a_{n}\le L\\
+    \implies &\ \forall n\ge N,\ |a_{n}-L|<\epsilon,
+  \end{align*}
   which implies the convergence of $(a_{n})$ to $L$.
 \end{proof}
 
@@ -347,7 +354,7 @@ This is one of the main motivations of infinite sequence and series.
   the Cauchy sequence $(a_n)$ is bounded.
   Theorem \ref{thm:Bolzano-Weierstrass}
   implies that $(a_n)_{n\in \mathbb{N}}$ has a convergent
-  subsequence $(a_{n_k})_{k\in \mathbb{N}}$.
+  subsequence $(a_{n_j})_{j\in \mathbb{N}}$.
   Then Lemma \ref{lem:CauchySubseqConvergence}
   completes the proof.
 \end{proof}
@@ -437,7 +444,7 @@ This is one of the main motivations of infinite sequence and series.
   the divergence of $(a_n)$ to $\pm \infty$
   is a special case of the more general divergence
   in Definition \ref{def:limitOfSequence}. 
-  Sometimes a sequence $(a_n)$ neither diverge to $\pm \infty$
+  Sometimes a sequence $(a_n)$ neither diverges to $\pm \infty$
   nor converges to any number.  
 \end{rem}
 
@@ -507,17 +514,23 @@ This is one of the main motivations of infinite sequence and series.
   Corollary \ref{coro:theEquivalenceOfMonotoneSequenceLimit}
   implies $a_{i}=\sup(b_{ij})_{j=0}^{\infty}$ for each $i\ge 0$.
   Similarly we have $c_{i}=\sup(b_{ij})_{i=0}^{\infty}$ for each $j\ge 0$.
-  Since for any $i_{1}<i_{2}$, we have
-  $b_{i_{1},j}\le b_{i_{2},j}$ for all $j\ge 0$, and hence
+  For $i_{1}<i_{2}$, since
+  \begin{displaymath}
+    \forall j\ge 0,\
+    b_{i_{1},j}\le b_{i_{2},j},
+  \end{displaymath}
+  %Since for any $i_{1}<i_{2}$, we have
+  %$b_{i_{1},j}\le b_{i_{2},j}$ for all $j\ge 0$, and hence
+  we have
   \begin{displaymath}
     a_{i_{1}}=\sup(b_{i_{1},j})_{j=0}^{\infty}
-    \le \sup(b_{i_{2},j})_{j=0}^{\infty} =a_{i_{2}},
+    \le \sup(b_{i_{2},j})_{j=0}^{\infty} =a_{i_{2}}.
   \end{displaymath}
-  which implies that
-  $(a_{i})_{i=0}^{\infty}$ is monotonically increasing. It follows that
+  It follows that
+  $(a_{i})_{i=0}^{\infty}$ is monotonically increasing, and we have
   $\lim_{i\rightarrow\infty}a_{i}=\sup(a_{i})_{i=0}^{\infty}$
   from Corollary \ref{coro:theEquivalenceOfMonotoneSequenceLimit}.
-  Similarly, we have
+  Similar arguments show that
   $\lim_{j\rightarrow\infty}c_{j}=\sup(c_{j})_{j=0}^{\infty}.$
   Hence
   \begin{align*}
@@ -550,8 +563,8 @@ This is one of the main motivations of infinite sequence and series.
   \begin{enumerate}[(a)]\itemsep0em
   \item $(a_{n}\pm b_{n})$ converges to $a\pm b$;
   \item If $a\in \mathbb{R}$, then $(a_{n}b_{n})$ converges to $ab$;
-  \item ($b\ne 0$ and $\forall n$, $b_{n}\ne 0$)\ $\Rightarrow$\ 
-    $\lim_{n\rightarrow \infty}\frac{a_{n}}{b_{n}} = \frac{a}{b}$.
+  \item $(b\ne 0\text{ and }\forall n,\ b_{n}\ne 0)\implies 
+    \lim_{n\rightarrow \infty}\frac{a_{n}}{b_{n}} = \frac{a}{b}$.
   \end{enumerate}
 \end{thm}
 \begin{proof}
@@ -601,9 +614,9 @@ This is one of the main motivations of infinite sequence and series.
   \ref{lem:seqCvTo0IsEqulvalentToAbsoluteSeqCvTo0},
   \begin{align*}
     \lim_{n\rightarrow\infty}a_{n}=L
-    &\Leftrightarrow
+    &\iff
       \lim_{n\rightarrow\infty}(a_{n}-L)=0\\
-    &\Leftrightarrow
+    &\iff
       \lim_{n\rightarrow\infty}|a_{n}-L|=0.\qedhere
   \end{align*}
 \end{proof}
@@ -779,10 +792,10 @@ This is one of the main motivations of infinite sequence and series.
   For any $k\in\mathbb{N}$, 
   \begin{align*}
      a_{N}^{+}\ge a_{N+k}
-    \Rightarrow
+    \implies
     & \inf(a_{N}^{+})_{N=m}^{\infty}
       \ge \inf(a_{N+k})_{N=m}^{\infty}
-    \\ \Rightarrow
+    \\ \implies
     & L^{+} \ge \inf(a_{N})_{N=m+k}^{\infty} = a_{m+k}^{-}.
   \end{align*}
   Hence $a_{N}^{-} \le L^{+}$ for all $N\ge m$ and
@@ -1000,11 +1013,11 @@ This is one of the main motivations of infinite sequence and series.
   We have
   \begin{align*}
     &\ \forall n\ge M,\ a_{n} \le b_{n}\le c_{n}
-    \\ \Rightarrow
+    \\ \implies
     &\ \lim\sup a_{n}\le \lim\sup b_{n}\le \lim\sup c_{n}
-    \\ \Rightarrow
+    \\ \implies
     &\ L\le \lim\sup b_{n}\le L
-    \\ \Rightarrow
+    \\ \implies
     &\ \lim\sup b_{n} =L,
   \end{align*}
   where the first step follows from
@@ -1015,22 +1028,22 @@ This is one of the main motivations of infinite sequence and series.
   we have $\lim_{n\rightarrow \infty}b_{n}=L$.
 \end{proof}
 
-\begin{rem}
-  Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
-  be two convergent sequences of real numbers
-  that satisfy
-  \begin{displaymath}
-    \exists M\in \mathbb{N} \text{ s.t. }
-    \forall n\ge M, a_n< b_n.
-  \end{displaymath}
-  Then we have
-  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
-  where ``$\le$'' cannot be strengthened to ``$<$''.
-  In addition, replace ``$a_n< b_n$''
-  with ``$a_n\le b_n$'' and we get the same conclusions.
-  This is deeply connected to the difference between
-  open and closed sets.
-\end{rem}
+%\begin{rem}
+%  Let $(a_n)_{n=m}^{\infty}$ and $(b_n)_{n=m}^{\infty}$
+%  be two convergent sequences of real numbers
+%  that satisfy
+%  \begin{displaymath}
+%    \exists M\in \mathbb{N} \text{ s.t. }
+%    \forall n\ge M, a_n< b_n.
+%  \end{displaymath}
+%  Then we have
+%  $\lim_{n\rightarrow \infty} a_n\le \lim_{n\rightarrow  \infty} b_n$, 
+%  where ``$\le$'' cannot be strengthened to ``$<$''.
+%  In addition, replace ``$a_n< b_n$''
+%  with ``$a_n\le b_n$'' and we get the same conclusions.
+%  This is deeply connected to the difference between
+%  open and closed sets.
+%\end{rem}
 
 \begin{ntn}[Asymptotic notation]
   \label{ntn:asymptoticNtn}
@@ -1136,7 +1149,7 @@ This is one of the main motivations of infinite sequence and series.
   Assume that the series converges to $L\in \mathbb{R}$.
   For $S_{n}$ in \eqref{eq:sequenceOfPartialSums}, 
   we have $a_{n}=S_{n}-S_{n-1}$ for all $n$. 
-  Then Theorem \ref{thm:limitOperation} yields
+  Then Theorem \ref{thm:limitOperation}(a) yields
   $\lim_{n\rightarrow \infty}a_{n}=L-L=0$.
 \end{proof}
 
@@ -1231,7 +1244,7 @@ This is one of the main motivations of infinite sequence and series.
 \begin{proof}
   Since $|a_{n}|\ge 0$,  $\sum |a_{n}|$ converges and
   $|a_{n}|\le |a_{n}|$ for all $n$, the proof is completed by
-  (i) in Theorem \ref{thm:comparisonTest}.
+  Theorem \ref{thm:comparisonTest}(i).
 \end{proof}
 
 \begin{thm}[Ratio test]
@@ -1411,8 +1424,8 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   Let $f:I(c,r)\rightarrow \mathbb{R}$ be a scalar function. Then
   \begin{displaymath}
     \lim_{x\rightarrow c}f(x)=0
-    \ \Leftrightarrow \left| \lim_{x\rightarrow c}f(x) \right|=0
-    \ \Leftrightarrow \lim_{x\rightarrow c} |f(x)|=0.
+    \iff \left| \lim_{x\rightarrow c}f(x) \right|=0
+    \iff \lim_{x\rightarrow c} |f(x)|=0.
   \end{displaymath}
 \end{lem}
 \begin{proof}
@@ -1462,9 +1475,9 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   \begin{enumerate}[(a)]
   \item $\lim_{x\rightarrow c}(f\pm g)(x)=L_{1}\pm L_{2}$;
   \item $\lim_{x\rightarrow c}(fg)(x)=L_{1}L_{2}$;
-  \item ($L_{2}\neq 0$ and $\forall x,\ g(x)\neq 0$)
-    $\Rightarrow$
-    $\lim_{x\rightarrow c}(\frac{f}{g})(x)=\frac{L_{1}}{L_{2}}$.
+  \item $(L_{2}\neq 0\text{ and }\forall x,\ g(x)\neq 0)
+    \implies
+    \lim_{x\rightarrow c}(\frac{f}{g})(x)=\frac{L_{1}}{L_{2}}$.
   \end{enumerate}
 \end{thm}
 \begin{proof}
@@ -1524,14 +1537,14 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   Since $\lim_{n\rightarrow\infty}a_{n}=\lim_{n\rightarrow\infty}b_{n}=0$,
   Theorem \ref{thm:FuncLimitToSeqLimit} implies
   that $\lim_{n\rightarrow\infty}f(a_{n})=\lim_{n\rightarrow\infty}f(b_{n})$.
-  However,
+  It contradicts the fact
   \begin{displaymath}
+    \forall n\ge 1,\
     \begin{array}{l}
       f(a_{n})=\sin \frac{1}{a_{n}}=\sin(\frac{\pi}{2}+2n\pi)=1,\\
-      f(b_{n})=\sin \frac{1}{b_{n}}=\sin(2n\pi)=0,\quad n\ge 1,
+      f(b_{n})=\sin \frac{1}{b_{n}}=\sin(2n\pi)=0.
     \end{array}
   \end{displaymath}
-  contradiction!
 \end{exm}
 
 \begin{thm}[Cauchy criterion for limit of a scalar function]
@@ -1559,17 +1572,18 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   \begin{displaymath}
     \begin{array}{l}
       \forall x,y\in I(c,\delta),\\
-      |f(x)-f(y)|\le |f(x)-L|+|f(y)-L|
+      \ |f(x)-f(y)|\le |f(x)-L|+|f(y)-L|
       <\frac{\epsilon}{2}+\frac{\epsilon}{2}=\epsilon.
     \end{array}
   \end{displaymath}
   For the sufficiency, for any sequence $(a_{n})$
   satisfying $a_{n}\neq c$ and $\lim a_{n}=c$, we have
   \begin{align*}
-    &\ \exists N\in \mathbb{N}^{+}, \text{ s.t. }
-      0<|a_{n}-c|<\delta,\forall n>N\\
-    \Rightarrow &\ a_{m},a_{n}\in I(c,\delta), \forall m,n>N\\
-    \Rightarrow &\ \forall \epsilon>0, \exists N\in \mathbb{N}^{+},
+    &\ \exists N\in \mathbb{N}^{+}, \text{ s.t. }\forall n>N,\
+      0<|a_{n}-c|<\delta\\
+    \implies &\ \exists N\in \mathbb{N}^{+},
+                  \text{ s.t. }\forall m,n>N,\ a_{m},a_{n}\in I(c,\delta)\\
+    \implies &\ \exists N\in \mathbb{N}^{+},
                   \text{ s.t. } |f(a_{m})-f(a_{n})|<\epsilon,\
                   \forall m,n>N.
   \end{align*}
@@ -1814,8 +1828,8 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   if and only if $f(c^{-})=f(c^{+})=f(c)$.
 \end{thm}
 \begin{proof}
-  It follows from Definitions \ref{def:continuousScalarFunc}
-  and \ref{def:leftRightContinuousScalarFunc}, and
+  It follows from Definition \ref{def:continuousScalarFunc},
+  Definition \ref{def:leftRightContinuousScalarFunc} and
   Theorem \ref{thm:FuncLimitToSeqLimit}.
 \end{proof}
 
@@ -1888,12 +1902,17 @@ This idea is packaged in the $\epsilon-\delta$ technique.
     \lim_{k\rightarrow\infty}f(x_{n_{k}})=f(c).
   \end{displaymath}
   However, we have
-  $f(x_{n_{k}})>n_{k}\ge k,\forall k\in \mathbb{N}$.
-  Then there exists $k_{0}>|f(c)|+1$ such that
-  \begin{displaymath}
-    f(x_{n_{k}})>k>k_{0}>|f(c)|+1\ge f(c)+1,\ \forall k>k_{0}.
-  \end{displaymath}
-  Hence Lemmas \ref{lem:limitPreserveOrder} yields
+  $f(x_{n_{k}})>n_{k}\ge k$ for all $k$.
+  Then
+  \begin{align*}
+    &\exists k_{0}>|f(c)|+1,\text{ s.t. }\\
+    &\forall k>k_{0},\ f(x_{n_{k}})>k>k_{0}>|f(c)|+1\ge f(c)+1.
+  \end{align*}
+%  Then there exists $k_{0}>|f(c)|+1$ such that
+%  \begin{displaymath}
+%    f(x_{n_{k}})>k>k_{0}>|f(c)|+1\ge f(c)+1,\ \forall k>k_{0}.
+%  \end{displaymath}
+  Hence Lemma \ref{lem:limitPreserveOrder} yields
   \begin{displaymath}
     \lim_{k\rightarrow\infty}f(x_{n_{k}})
   \ge f(c)+1>f(c),
@@ -1962,16 +1981,16 @@ This idea is packaged in the $\epsilon-\delta$ technique.
   The squeeze test implies $\lim_{n\rightarrow\infty}x_{n}=c$,
   and Theorem \ref{thm:continuousEquivSeqLimit} implies
   $\lim_{n\rightarrow\infty}f(x_{n})=f(c)$.
-  Since $x_{n}\in S$, we have $f(x_{n})\le 0$ and then
+  Since $x_{n}\in S$, we have $f(x_{n})\le 0$ for all $n$ and then
   Lemma \ref{lem:limitPreserveOrder} yields $f(c)\le 0$.
   In addition, $f(b)>0$ forces that $c<b$.
   By similar arguments, we have
   \begin{displaymath}
-    \forall n\in \mathbb{N},\
+    \forall n\in \mathbb{N},
     \exists y_{n}\in \left(c,c+\frac{1}{n}\right)\cap[a,b],
-    \text{ s.t. } y_{n}\not\in S \text{ or } f(y_{n})> 0
+    \text{ s.t. } y_{n}\not\in S, \text{ i.e., }f(y_{n})>0
   \end{displaymath}
-  and we get
+  and 
   \begin{displaymath}
     f(c)=\lim_{n\rightarrow\infty}f(y_{n})\ge 0.
   \end{displaymath}
@@ -2023,7 +2042,7 @@ Theorem \ref{thm:intermediateValue}
      \forall \epsilon>0, \exists \delta>0,\text{ s.t. }
      \\
      \forall x,y\in I,\ 
-     |x-y|<\delta \Rightarrow |f(x)-f(y)|<\epsilon.
+     |x-y|<\delta \implies |f(x)-f(y)|<\epsilon.
      \end{array}
    \end{equation}
 \end{defn}
@@ -2661,7 +2680,7 @@ The \emph{remainder} of the $n$th \emph{Taylor polynomial}
   \begin{equation}
     \forall x\in \mathbb{R},\
     \lim_{n\rightarrow\infty} E_n(x) = 0
-    \ \Leftrightarrow\
+    \iff
 %    f(x) = \sum_{k=0}^{\infty}\frac{f^{(k)}(a)}{k!}(x-a)^k
     \lim_{n\rightarrow\infty}T_n(x) = f(x).
   \end{equation}
@@ -4454,6 +4473,40 @@ By Definition \ref{def:TaylorSeries},
   The proof is similar to that of Lemma \ref{lem:seqLimitIsUnique}.
 \end{proof}
 
+\begin{lem}
+  \label{lem:squeezeTestOnVectorFunc}
+  For $E\subset \mathbb{R}^{n},\ \mathbf{f},\mathbf{g}:
+  E\rightarrow \mathbb{R}^{m},\ \mathbf{x}_{0}\in E$, if
+  \begin{displaymath}
+     \lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},
+    \mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+    \mathbf{f}(\mathbf{x})=\mathbf{0},
+  \end{displaymath}
+  and
+  \begin{align*}
+    &\exists r>0, \text{ s.t. }\\
+    &\forall \mathbf{x}\in E\text{ with }0<|\mathbf{x}-\mathbf{x}_{0}|<r,
+    \ |\mathbf{g}(\mathbf{x})|\le|\mathbf{f}(\mathbf{x})|.
+  \end{align*}
+  Then the limit of $\mathbf{g}(\mathbf{x})$ exists at $\mathbf{x}_{0}$,
+  and
+  \begin{align*}
+    \lim_{\mathbf{x}\rightarrow \mathbf{x}_{0},
+    \mathbf{x}\in E\setminus\{\mathbf{x}_{0}\}}
+    \mathbf{g}(\mathbf{x})=\mathbf{0}.
+  \end{align*}
+\end{lem}
+\begin{proof}
+  From \eqref{eq:limitOfFuncNDim},
+  setting $\delta'=\min\{r,\delta\}$ yields
+  \begin{align*}
+    \forall \mathbf{x}\in E\text{ with }
+    0<|\mathbf{x}-\mathbf{x}_{0}|<\delta',
+    \ |\mathbf{g}(\mathbf{x})|\le|\mathbf{f}(\mathbf{x})|<\epsilon,
+  \end{align*}
+  which, together with \ref{def:limitOfFuncNDim}, completes the proof.
+\end{proof} 
+
 \begin{defn}
   \label{def:continuousNdim}
   For $E\subset \mathbb{R}^n$, $\mathbf{f}: E\rightarrow \mathbb{R}^m$,
@@ -4522,9 +4575,11 @@ By Definition \ref{def:TaylorSeries},
       \\
     = &\lim_{\stackrel{(a,b)\rightarrow (0,0)}{(a,b)\ne(0,0)}}
         \sqrt{a^2 + b^2}
-    = 0.
+    = 0,
     \end{array}
   \end{displaymath}
+  where the inequality follows from
+  Lemma \ref{lem:squeezeTestOnVectorFunc}. 
 \end{exm}
 
 \begin{lem}
@@ -4903,13 +4958,15 @@ By Definition \ref{def:TaylorSeries},
 \begin{lem}
   \label{lem:FuncEquvItsComponent}
   Consider a function $\mathbf{f}:E\rightarrow \mathbb{R}^{m}$ with
-  $E\subset \mathbb{R}^{n}$. Then $\mathbf{f}$ is
-  continuous (or differentiable) at $\mathbf{x}_{0}$ if and only if
-  $f_{i}$, $i=1,2,\cdots,m$ is continuous (or differentiable)
+  $E\subset \mathbb{R}^{n}$. Then $\mathbf{f}$ has a limit 
+  (or is continuous/differentiable) at $\mathbf{x}_{0}\in E$
+  if and only if
+  $f_{i}$, $i=1,2,\cdots,m$ has a limit (or is continuous/differentiable)
   at $\mathbf{x}_{0}$.
 \end{lem}
 \begin{proof}
-  It follows directly from Definitions
+  It can be verified by Lemma \ref{lem:squeezeTestOnVectorFunc},
+  Definitions \ref{def:limitOfFuncNDim},
   \ref{def:continuousNdim}, \ref{def:derivativeNdim} and
   \begin{displaymath}
     \forall 1\le j\le m,\
@@ -4943,7 +5000,6 @@ By Definition \ref{def:TaylorSeries},
   $\mathbf{h}\rightarrow \mathbf{0}$, $j=1,2,\cdots,n$.
   In this case, we have $L=\mathbf{f}'(\mathbf{x}_{0})$.
 \end{thm}
-
 \begin{proof}
   For the necessity, define
   \begin{displaymath}
@@ -4962,12 +5018,13 @@ By Definition \ref{def:TaylorSeries},
   it suffices to show
   $\mathbf{b}_{j}(\mathbf{h})\rightarrow \mathbf{0}$ as
   $\mathbf{h}\rightarrow \mathbf{0}$. Indeed, it follows from
-  \eqref{eq:derivativeNdim} and
+  \eqref{eq:derivativeNdim}, the fact
   \begin{align*}
     |\mathbf{b}_{j}(\mathbf{h})|=\frac{|h_{j}|}{|\mathbf{h}|}
     \cdot \frac{|\mathbf{E}(\mathbf{h})|}{|\mathbf{h}|}
-    \le \frac{|\mathbf{E}(\mathbf{h})|}{|\mathbf{h}|}.
+    \le \frac{|\mathbf{E}(\mathbf{h})|}{|\mathbf{h}|}
   \end{align*}
+  and Lemma \ref{lem:squeezeTestOnVectorFunc}.
 
   For the sufficiency, \eqref{eq:equivDefOfDifferentiability} implies
   that
@@ -4982,7 +5039,8 @@ By Definition \ref{def:TaylorSeries},
   \end{align*}
   where the first inequality follows from
   (NRM-3,4) in Definition \ref{def:norm}.
-  Hence by Definition \ref{def:limitOfFuncNDim},
+  Hence Lemma \ref{lem:squeezeTestOnVectorFunc} and
+  Definition \ref{def:limitOfFuncNDim} yield that
   $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}$ and
   $L=\mathbf{f}'(\mathbf{x}_{0})$.
 \end{proof}
@@ -5005,7 +5063,7 @@ By Definition \ref{def:TaylorSeries},
 \begin{proof}
   Let $\mathbf{x}_{0}\in E$.
   For the necessity,
-  let $i\in\{1,\cdots,m\}$ and $j\in\{1,\cdots,n\}$ fixed.
+  let $i\in\{1,\cdots,m\}$ and $j\in\{1,\cdots,n\}$ be fixed.
   Then the existence of
   $\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})$ is guaranteed by
   Definitions \ref{def:partialDerivative}, \ref{def:C1VecFunc} and
@@ -5018,9 +5076,11 @@ By Definition \ref{def:TaylorSeries},
     -\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})\right|
     \le |\mathbf{f}'(\mathbf{x}_{0}+\mathbf{h})-\mathbf{f}'(\mathbf{x}_{0})|.
   \end{align*}
-  Hence the continuity of $\mathbf{f}'$ at $\mathbf{x}_{0}$,
-  c.f. Definition \ref{def:C1VecFunc}, implies
-  that of $\frac{\partial f_{i}}{\partial x_{j}}$ at $\mathbf{x}_{0}$.
+  Hence 
+  the continuity of $\mathbf{f}'$ at $\mathbf{x}_{0}$,
+  together with Lemma \ref{lem:squeezeTestOnVectorFunc}, implies
+  that of $\frac{\partial f_{i}}{\partial x_{j}}$ at $\mathbf{x}_{0}$,
+  c.f. Definition \ref{def:continuousNdim}.
 
   For the sufficiency,
   we claim that $\mathbf{f}$ is differentiable at $\mathbf{x}_{0}$ and
@@ -5067,7 +5127,8 @@ By Definition \ref{def:TaylorSeries},
     x_{n-1}+h_{n-1},x_{n}+\theta h_{n})-
     \frac{\partial f}{\partial x_{n}}(\mathbf{x}_{0}).
   \end{align*}
-  Then the continuity of $\frac{\partial f}{\partial x_{n}}$ implies
+  Then the continuity of $\frac{\partial f}{\partial x_{n}}$
+  at $\mathbf{x}_{0}$, c.f. Definition \ref{def:continuousNdim}, implies
   $b_{n}(\mathbf{h})\rightarrow 0$ as $\mathbf{h}\rightarrow \mathbf{0}$.   
   The induction hypothesis, together with Definition
   \ref{def:derivativeNdim} and Theorem \ref{thm:equivDefOfDifferentiability},
@@ -5091,11 +5152,12 @@ By Definition \ref{def:TaylorSeries},
     &|\mathbf{f}'(\mathbf{x}_{0}+\mathbf{h})
     -\mathbf{f}'(\mathbf{x}_{0})|^{2}
     = \sum_{i=1}^{n}\sum_{j=1}^{m} \left|
-    \frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0}+h)
+    \frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0}+\mathbf{h})
     -\frac{\partial f_{i}}{\partial x_{j}}(\mathbf{x}_{0})\right|^{2}.
   \end{align*}
   Hence the continuity of $\frac{\partial f_{i}}{\partial x_{j}}$,
-  $i=1,\cdots m,\ j=1,\cdots, n$ at $\mathbf{x}_{0}$
+  $i=1,\cdots m,\ j=1,\cdots, n$ at $\mathbf{x}_{0}$,
+  c.f. Definition \ref{def:continuousNdim},
   implies that of $\mathbf{f}'$ at $\mathbf{x}_{0}$.
   Then since $\mathbf{x}_{0}$ is arbitrary,
   Definition \ref{def:C1VecFunc} yields that
@@ -5147,14 +5209,21 @@ By Definition \ref{def:TaylorSeries},
   \mathcal{L}(\mathbb{R}^{n},\mathbb{R}^{p})$.
   Definition \ref{def:derivativeNdim} yields that
   \begin{align*}
-    (*):\quad
-    \mathbf{g}(\mathbf{x}_{0}+\mathbf{h})-\mathbf{g}(\mathbf{x}_{0})
-      &=(B+\mathbf{b}(\mathbf{h}))\mathbf{h},
-      \ \mathbf{h}\in \mathbb{R}^{n},\\
-    (**):\quad
-    \mathbf{f}(\mathbf{y}_{0}+\mathbf{k})-\mathbf{f}(\mathbf{y}_{0})
-      &=(A+\mathbf{a}(\mathbf{k}))\mathbf{k},
-      \ \mathbf{k}\in \mathbb{R}^{p},
+    (*)&:\quad
+    \begin{array}{ll}
+      \forall\mathbf{h}\in \mathbb{R}^{n}
+               \text{ with }\mathbf{x}_{0}+\mathbf{h}\in E,\\
+      \ \ \mathbf{g}(\mathbf{x}_{0}+\mathbf{h})-\mathbf{g}(\mathbf{x}_{0})
+      =(B+\mathbf{b}(\mathbf{h}))\mathbf{h},
+    \end{array}
+    \\
+    (**)&:\quad
+    \begin{array}{l}
+       \forall\mathbf{k}\in \mathbb{R}^{p}
+                \text{ with }\mathbf{y}_{0}+\mathbf{k}\in F,\\
+      \ \ \mathbf{f}(\mathbf{y}_{0}+\mathbf{k})-\mathbf{f}(\mathbf{y}_{0})
+      =(A+\mathbf{a}(\mathbf{k}))\mathbf{k},
+    \end{array}
   \end{align*}
   where  
   \begin{align*}
@@ -5208,9 +5277,17 @@ By Definition \ref{def:TaylorSeries},
   Corollary \ref{coro:2normLessThanOpNorm} and
   the triangle inequality in Definition \ref{def:norm},
   and the sixth from
-  ($\diamond$). Then Definition \ref{def:derivativeNdim}, together with
-  ($\triangle$) and ($\square$), completes the proof.
+  ($\diamond$). Then ($\triangle$), ($\square$) and
+  Lemma \ref{lem:squeezeTestOnVectorFunc} imply
+  \begin{displaymath}
+    \lim_{\mathbf{h}\rightarrow \mathbf{0},\mathbf{x}_{0}+\mathbf{h}\in E}
+    \frac{|\mathbf{f}\circ \mathbf{g}(\mathbf{x}_{0}+\mathbf{h})
+      -\mathbf{f}\circ \mathbf{g}
+      (\mathbf{x}_{0})-AB\mathbf{h}|}{|\mathbf{h}|}=0.
+  \end{displaymath}
+  Hence Definition \ref{def:derivativeNdim} completes the proof.
 \end{proof}
+
 
 \subsection{Matrix exponential}
 \label{sec:matrix-exponential}
